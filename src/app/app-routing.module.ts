@@ -10,6 +10,12 @@ const routes: Routes = [
     {
         path: '', component: AppLayoutComponent,
         children: [
+            { path: 'admin', data: { breadcrumb: 'Admin' }, loadChildren: () => import('./+admin/components/admin.module').then(m => m.AdminModule) },
+            { path: 'fiscal', data: { breadcrumb: 'Fiscal' }, loadChildren: () => import('./+fiscal/components/fiscal.module').then(m => m.FiscalModule) },
+            { path: 'pms', data: { breadcrumb: 'PMS' }, loadChildren: () => import('./+pms/components/pms.module').then(m => m.PmsModule) },
+            { path: 'students', data: { breadcrumb: 'Students' }, loadChildren: () => import('./+school/+students/components/students.module').then(m => m.StudentsModule) },
+
+
             { path: '', loadChildren: () => import('./demo/components/dashboards/dashboards.module').then(m => m.DashboardsModule) },
             { path: 'uikit', data: { breadcrumb: 'UI Kit' }, loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
             { path: 'utilities', data: { breadcrumb: 'Utilities' }, loadChildren: () => import('./demo/components/utilities/utilities.module').then(m => m.UtilitiesModule) },
@@ -21,7 +27,7 @@ const routes: Routes = [
             { path: 'apps', data: { breadcrumb: 'Apps' }, loadChildren: () => import('./demo/components/apps/apps.module').then(m => m.AppsModule) }
         ]
     },
-    { path: 'auth', data: { breadcrumb: 'Auth' }, loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },
+    { path: 'auth', data: { breadcrumb: 'Auth' }, loadChildren: () => import('./+auth/auth.module').then(m => m.AuthModule) },
     { path: 'wizard', data: { breadcrumb: 'Wizard' }, loadChildren: () => import('./demo/components/pages/wizard/wizard.module').then(m => m.WizardModule) },
     { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
     { path: 'notfound', loadChildren: () => import('./demo/components/notfound/notfound.module').then(m => m.NotfoundModule) },

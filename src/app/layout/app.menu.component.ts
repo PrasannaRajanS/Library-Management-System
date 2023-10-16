@@ -12,6 +12,103 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
+                label: 'Admin',
+                icon: 'pi pi-fw pi-user',
+                items: [
+                    {
+                        label: 'Application Creation',
+                        icon: 'pi pi-fw pi-globe',
+                        routerLink: ['/admin/application-creation']
+                    },
+                    {
+                        label: 'Module Creation',
+                        icon: 'pi pi-fw pi-box',
+                        routerLink: ['/admin/module-creation']
+                    },
+                    {
+                        label: 'Role Creation',
+                        icon: 'pi pi-fw pi-user',
+                        routerLink: ['/admin/role-creation']
+                    },
+                    {
+                        label: 'Page Creation',
+                        icon: 'pi pi-fw pi-book',
+                        routerLink: ['/admin/page-creation']
+                    },
+                    {
+                        label: 'Role & Page Associate',
+                        icon: 'pi pi-fw pi-tablet',
+                        routerLink: ['/admin/role-page-associate']
+                    },
+                    {
+                        label: 'User Creation',
+                        icon: 'pi pi-fw pi-user-plus',
+                        routerLink: ['/admin/user-creation']
+                    },
+                    {
+                        label: 'Form Field & Button Associate',
+                        icon: 'pi pi-fw pi-file-edit',
+                        routerLink: ['/admin/form-field-button-permission']
+                    },
+                    
+                   
+                    
+                ]
+            },
+            {
+                label: 'Fiscal',
+                icon: 'pi pi-home',
+                items: [
+                    {
+                        label: 'Organization',
+                        icon: 'pi pi-fw pi-home',
+                        routerLink: ['/fiscal/organization']
+                    },
+                    {
+                        label: 'Institution',
+                        icon: 'pi pi-fw pi-chart-pie',
+                        routerLink: ['/fiscal/institution']
+                    },
+                    {
+                        label: 'Academic Year',
+                        icon: 'pi pi-fw pi-chart-pie',
+                        routerLink: ['/fiscal/fiscal-year']
+                    },
+                ]
+            },
+            {
+                label: 'PMS',
+                icon: 'pi pi-home',
+                items: [
+                    {
+                        label: 'Add Employee',
+                        icon: 'pi pi-fw pi-home',
+                        routerLink: ['/pms/master/employee-add']
+                    },
+                    {
+                        label: 'Employee List',
+                        icon: 'pi pi-fw pi-chart-pie',
+                        routerLink: ['/pms/master/employee-list']
+                    }
+                ]
+            },
+            {
+                label: 'Students',
+                icon: 'pi pi-home',
+                items: [
+                    {
+                        label: 'Add Student',
+                        icon: 'pi pi-fw pi-home',
+                        routerLink: ['/students/student-add']
+                    },
+                    {
+                        label: 'Student List',
+                        icon: 'pi pi-fw pi-chart-pie',
+                        routerLink: ['/students/student-list']
+                    }
+                ]
+            },
+            {
                 label: 'Dashboards',
                 icon: 'pi pi-home',
                 items: [
@@ -254,11 +351,6 @@ export class AppMenuComponent implements OnInit {
                                 label: 'Login',
                                 icon: 'pi pi-fw pi-sign-in',
                                 routerLink: ['/auth/login']
-                            },
-                            {
-                                label: 'Login 2',
-                                icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/auth/login2']
                             },
                             {
                                 label: 'Error',
