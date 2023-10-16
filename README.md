@@ -1,4 +1,4 @@
-## Ultima PrimeNG
+## School Management System
 
 ## Development server
 
