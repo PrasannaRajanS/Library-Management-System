@@ -17,3 +17,13 @@ $gutter: 1rem; //for primeflex grid system
 @import "assets/demo/styles/flags/flags.css";
 @import "assets/demo/styles/badges.scss";
 @import "assets/demo/styles/code.scss";
+
+.bg-autocomplete {
+    background-color: blue-200;
+}
+.mandatory
+{
+   color: red; 
+   font-style: oblique;
+   padding-left: 1px;
+}

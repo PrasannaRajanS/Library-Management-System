@@ -13,41 +13,41 @@ export class AppMenuComponent implements OnInit {
         this.model = [
             {
                 label: 'Admin',
-                icon: 'pi pi-home',
+                icon: 'pi pi-fw pi-user',
                 items: [
                     {
                         label: 'Application Creation',
-                        icon: 'pi pi-fw pi-home',
+                        icon: 'pi pi-fw pi-globe',
                         routerLink: ['/admin/application-creation']
                     },
                     {
                         label: 'Module Creation',
-                        icon: 'pi pi-fw pi-chart-pie',
+                        icon: 'pi pi-fw pi-box',
                         routerLink: ['/admin/module-creation']
                     },
                     {
                         label: 'Role Creation',
-                        icon: 'pi pi-fw pi-chart-pie',
+                        icon: 'pi pi-fw pi-user',
                         routerLink: ['/admin/role-creation']
                     },
                     {
                         label: 'Page Creation',
-                        icon: 'pi pi-fw pi-chart-pie',
+                        icon: 'pi pi-fw pi-book',
                         routerLink: ['/admin/page-creation']
                     },
                     {
                         label: 'Role & Page Associate',
-                        icon: 'pi pi-fw pi-chart-pie',
+                        icon: 'pi pi-fw pi-tablet',
                         routerLink: ['/admin/role-page-associate']
                     },
                     {
                         label: 'User Creation',
-                        icon: 'pi pi-fw pi-chart-pie',
+                        icon: 'pi pi-fw pi-user-plus',
                         routerLink: ['/admin/user-creation']
                     },
                     {
                         label: 'Form Field & Button Associate',
-                        icon: 'pi pi-fw pi-chart-pie',
+                        icon: 'pi pi-fw pi-file-edit',
                         routerLink: ['/admin/form-field-button-permission']
                     },
                     

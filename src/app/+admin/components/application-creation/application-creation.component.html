@@ -88,7 +88,7 @@
                 <div class="field pt-2">
                     <span class="p-float-label">
                         <input type="text" id="inputtext" pInputText [(ngModel)]="product.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.name}">
-                        <label for="inputtext">Application Name <span style="color: red;font-style: bold;">*</span> </label>
+                        <label for="inputtext">Application Name <span class="mandatory">*</span></label>
                     </span>
                     <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.name">Name is required.</small>
                 </div>

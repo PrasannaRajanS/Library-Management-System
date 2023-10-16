@@ -1,1 +1,99 @@
-<p>user-creation works!</p>
+<div class="card">
+    <h5>USER CREATION</h5>
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <div class="my-2">
+                <button pButton pRipple label="Save" icon="pi pi-plus" class="p-button-success mr-2"
+                    (click)="saveUsers()"></button>
+                <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger"></button>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <div class="grid p-fluid mt-3">
+
+        <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+                <p-autoComplete inputId="txtApplication" [(ngModel)]="value2" [suggestions]="filteredCountries"
+                    (completeMethod)="searchCountry($event)" field="name" 
+                    [ngClass]="{'ng-invalid ng-dirty' : submitted && !value2}"></p-autoComplete>
+                <label for="txtApplication">Application<span class="mandatory">*</span></label>
+            </span>
+            <!-- <small class="ng-dirty ng-invalid" *ngIf="submitted && !value2">Name is required.</small> -->
+        </div>
+
+        <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+                <p-autoComplete inputId="txtEmployee" [(ngModel)]="value2" [suggestions]="filteredCountries"
+                    (completeMethod)="searchCountry($event)" field="name"></p-autoComplete>
+                <label for="txtEmployee">Employee</label>
+            </span>
+        </div>
+
+        <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+                <input type="text" id="txtUsername" pInputText [(ngModel)]="value1">
+                <label for="txtUsername">Username</label>
+            </span>
+        </div>
+
+        <div class="field col-12 md:col-4">
+            <span class="p-float-label p-input-icon-right">
+                <input type="text" id="txtPassword" pInputText [(ngModel)]="value4">
+                <label for="txtPassword">Password</label>
+                <i class="pi" [ngClass]="{
+                    'pi-eye-slash': !fieldTextType,
+                    'pi-eye': fieldTextType
+                  }" (click)="toggleFieldTextType()"></i>
+            </span>
+        </div>
+
+        <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+                <p-autoComplete inputId="txtRole" [(ngModel)]="value2" [suggestions]="filteredCountries"
+                    (completeMethod)="searchCountry($event)" field="name"></p-autoComplete>
+                <label for="txtRole">Role</label>
+            </span>
+        </div>
+
+        <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+                <p-multiSelect inputId="multiselect" [options]="cities" [(ngModel)]="value11" optionLabel="name"
+                    [filter]="false"></p-multiSelect>
+                <label for="multiselect">Unit</label>
+            </span>
+        </div>
+
+        <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+                <p-autoComplete inputId="txtDefaultPage" [(ngModel)]="value2" [suggestions]="filteredCountries"
+                    (completeMethod)="searchCountry($event)" field="name"></p-autoComplete>
+                <label for="txtDefaultPage">Default Page</label>
+            </span>
+        </div>
+
+
+        <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+                <input type="text" id="txtEmail" pInputText [(ngModel)]="value1">
+                <label for="txtEmail">Email</label>
+            </span>
+        </div>
+
+
+
+        <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+                <input type="text" id="txtMobileNo" pInputText [(ngModel)]="value1">
+                <label for="txtMobileNo">MobileNo</label>
+            </span>
+        </div>
+
+
+
+    </div>
+</div>
