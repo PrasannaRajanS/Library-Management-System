@@ -78,18 +78,66 @@ export class AppMenuComponent implements OnInit {
             },
             {
                 label: 'PMS',
-                icon: 'pi pi-home',
+                icon: 'pi pi-fw pi-align-left',
                 items: [
                     {
-                        label: 'Add Employee',
-                        icon: 'pi pi-fw pi-home',
-                        routerLink: ['/pms/master/employee-add']
+                        label: 'Master',
+                        icon: 'pi pi-fw pi-align-left',
+                        items: [
+                            {
+                                label: 'Misc',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/pms/master/misc']
+                            },
+                            {
+                                label: 'Misc Detail',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/pms/master/misc-detail']
+                            },
+                        ]
                     },
                     {
-                        label: 'Employee List',
-                        icon: 'pi pi-fw pi-chart-pie',
-                        routerLink: ['/pms/master/employee-list']
-                    }
+                        label: 'Talent Acquire',
+                        icon: 'pi pi-fw pi-align-left',
+                        items: [
+                            {
+                                label: 'Position Request',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/pms/talent-acquire/position-request']
+                            },
+                            {
+                                label: 'Shortlist CV',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/pms/talent-acquire/shortlist-cv']
+                            },
+                            {
+                                label: 'Select Candidate',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/pms/talent-acquire/select-candidate']
+                            },
+                            {
+                                label: 'Offer',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/pms/talent-acquire/offer']
+                            },
+                        ]
+                    },
+                    {
+                        label: 'Join / Onboarding',
+                        icon: 'pi pi-fw pi-align-left',
+                        items: [
+                            {
+                                label: 'Add Employee',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/pms/employee/employee-add']
+                            },
+                            {
+                                label: 'Employee List',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/pms/employee/employee-list']
+                            },
+                        ]
+                    },
                 ]
             },
             {
