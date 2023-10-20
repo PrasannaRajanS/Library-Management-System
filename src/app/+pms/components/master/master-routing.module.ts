@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'employee-add', data: { breadcrumb: 'Add Employee' }, loadChildren: () => import('./employee-add/employee-add.module').then(m => m.EmployeeAddModule) },
-  { path: 'employee-list', data: { breadcrumb: 'Employee List' }, loadChildren: () => import('./employee-list/employee-list.module').then(m => m.EmployeeListModule) },
+  { path: 'misc', data: { breadcrumb: 'Misc' }, loadChildren: () => import('./misc/misc.module').then(m => m.MiscModule) },
+  { path: 'misc-detail', data: { breadcrumb: 'Misc Detail' }, loadChildren: () => import('./misc-detail/misc-detail.module').then(m => m.MiscDetailModule) },
 ];
 
 @NgModule({
