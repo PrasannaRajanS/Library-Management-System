@@ -85,20 +85,30 @@
         <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Add" [modal]="true" class="p-fluid">
             <ng-template pTemplate="content">
 
-                <div class="field pt-2">
-                    <span class="p-float-label">
-                        <input type="text" id="inputtext" pInputText [(ngModel)]="product.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.name}">
-                        <label for="inputtext">Application Name <span class="mandatory">*</span></label>
-                    </span>
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.name">Name is required.</small>
-                </div>
-
-                <div class="field">
-                    <span class="p-float-label">
-                        <textarea id="description" pInputTextarea [(ngModel)]="product.description" required rows="3" cols="20"></textarea>
-                        <label for="description">Description  </label>
-                    </span>
-                </div>
+                <form [formGroup]="PageCreationInfoForm" (ngSubmit)="onSubmitCompanyInfo()">
+                    <div class="grid nested-grid">
+                        <div class="md:col-4 col-12">
+                            <div class="flex flex-column align-items-center border-bottom-1 surface-border ">
+                                <img [src]="imageSrc || 'assets/images/upload.svg'"
+                                    class="w-6rem h-6rem border-circle shadow-4">
+                                
+                
+                            </div>
+                        </div>
+                        <div class="md:col-8 col-12  ">
+                            <div class=" grid  grid-row-split">
+                                <div class="field col-12 md:col-6">
+                                    <span class="p-float-label">
+                                        <input type="text" id="companyName" pInputText formControlName="companyName">
+                                        <label for="companyName">Comapny Name</label>
+                                    </span>
+                                    <small id="companyName-help">{{ formError("companyName" ,companyInfoForm) }}</small>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>   
+                </form>
 
             </ng-template>
 
@@ -131,3 +141,5 @@
         </p-dialog>
     </div>
 </div>
+
+
