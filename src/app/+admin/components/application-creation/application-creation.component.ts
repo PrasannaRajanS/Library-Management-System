@@ -7,6 +7,7 @@ import { Table } from 'primeng/table';
 import { Application } from '../../api/application';
 import { ApplicationService } from '../../services/application.service';
 
+
 @Component({
     selector: 'app-application-creation',
     templateUrl: './application-creation.component.html',
