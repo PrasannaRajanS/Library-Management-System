@@ -27,3 +27,8 @@ $gutter: 1rem; //for primeflex grid system
    font-style: oblique;
    padding-left: 1px;
 }
+.field > small {   
+    color: red; 
+   font-style: normal;
+   padding-left: 0px;
+}

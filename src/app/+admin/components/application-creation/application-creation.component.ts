@@ -3,17 +3,7 @@ import { Product } from 'src/app/demo/api/product';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import * as yup from "yup";
-import { YupFormControls, FormHandler } from '../../../shared/form-handler';
-import { MessagesService } from "../../../shared/messages.service";
-import { IPageCreation } from "../../../shared/interfaces/Ipage-creation";
-import { YupPageCreation } from 'src/app/shared/validationSchemas/yup-page-creation';
-import { UtilService } from "../../../shared/util.service";
-interface AutoCompleteCompleteEvent {
-    originalEvent: Event;
-    query: string;
-}
+
 
 @Component({
   selector: 'app-application-creation',
@@ -45,29 +35,10 @@ export class ApplicationCreationComponent {
   rowsPerPageOptions = [5, 10, 20];
   imageSrc:any;
  
-  PageCreationInfoForm: FormGroup<YupFormControls<IPageCreation>>;
- 
-    
-initialValues: IPageCreation = {
-  companyName : ''  
-}
-
-validationSchema: yup.ObjectSchema<IPageCreation> = YupPageCreation.COMPANY_INFO;
-
-formError = (controlName: string, formName : any) => {
- return this.UtilService.formError(controlName,formName);
-};
-
-public isAgreement: boolean = false;
-public Locations:any[]=[];
-
   constructor(private productService: ProductService, private messageService: MessageService,
-     private confirmationService: ConfirmationService,
-     private UtilService : UtilService) { 
-        this.PageCreationInfoForm = FormHandler.controls<IPageCreation>(this.initialValues);
-        this.PageCreationInfoForm.setValidators(
-          FormHandler.validate<IPageCreation>(this.validationSchema)
-        );
+     private confirmationService: ConfirmationService
+     ) { 
+       
      }
 
   ngOnInit() {
