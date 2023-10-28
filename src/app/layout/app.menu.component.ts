@@ -26,14 +26,14 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/admin/module-creation']
                     },
                     {
-                        label: 'Role Creation',
-                        icon: 'pi pi-fw pi-user',
-                        routerLink: ['/admin/role-creation']
-                    },
-                    {
                         label: 'Page Creation',
                         icon: 'pi pi-fw pi-book',
                         routerLink: ['/admin/page-creation']
+                    },
+                    {
+                        label: 'Role Creation',
+                        icon: 'pi pi-fw pi-user',
+                        routerLink: ['/admin/role-creation']
                     },
                     {
                         label: 'Role & Page Associate',
@@ -46,7 +46,7 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/admin/user-creation']
                     },
                     {
-                        label: 'Form Field & Button Associate',
+                        label: 'Field & Button Associate',
                         icon: 'pi pi-fw pi-file-edit',
                         routerLink: ['/admin/form-field-button-permission']
                     },
