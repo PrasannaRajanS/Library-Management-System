@@ -8,6 +8,7 @@ node_modules
 .DS_Store
 .idea
 sassdoc
+package-lock.json
 
 
 
