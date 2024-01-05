@@ -18,41 +18,38 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Application Creation',
                         icon: 'pi pi-fw pi-globe',
-                        routerLink: ['/admin/application-creation']
+                        routerLink: ['/apps/admin/application-creation']
                     },
                     {
                         label: 'Module Creation',
                         icon: 'pi pi-fw pi-box',
-                        routerLink: ['/admin/module-creation']
+                        routerLink: ['/apps/admin/module-creation']
                     },
                     {
                         label: 'Page Creation',
                         icon: 'pi pi-fw pi-book',
-                        routerLink: ['/admin/page-creation']
+                        routerLink: ['/apps/admin/page-creation']
                     },
                     {
                         label: 'Role Creation',
                         icon: 'pi pi-fw pi-user',
-                        routerLink: ['/admin/role-creation']
+                        routerLink: ['/apps/admin/role-creation']
                     },
                     {
                         label: 'Role & Page Associate',
                         icon: 'pi pi-fw pi-tablet',
-                        routerLink: ['/admin/role-page-associate']
+                        routerLink: ['/apps/admin/role-page-associate']
                     },
                     {
                         label: 'User Creation',
                         icon: 'pi pi-fw pi-user-plus',
-                        routerLink: ['/admin/user-creation']
+                        routerLink: ['/apps/admin/user-creation']
                     },
                     {
                         label: 'Field & Button Associate',
                         icon: 'pi pi-fw pi-file-edit',
-                        routerLink: ['/admin/form-field-button-permission']
+                        routerLink: ['/apps/admin/form-field-button-permission']
                     },
-                    
-                   
-                    
                 ]
             },
             {
@@ -62,17 +59,17 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Organization',
                         icon: 'pi pi-fw pi-home',
-                        routerLink: ['/fiscal/organization']
+                        routerLink: ['/apps/fiscal/organization']
                     },
                     {
                         label: 'Institution',
                         icon: 'pi pi-fw pi-chart-pie',
-                        routerLink: ['/fiscal/institution']
+                        routerLink: ['/apps/fiscal/institution']
                     },
                     {
                         label: 'Academic Year',
                         icon: 'pi pi-fw pi-chart-pie',
-                        routerLink: ['/fiscal/fiscal-year']
+                        routerLink: ['/apps/fiscal/fiscal-year']
                     },
                 ]
             },
@@ -87,12 +84,12 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Misc',
                                 icon: 'pi pi-fw pi-align-left',
-                                routerLink: ['/pms/master/misc']
+                                routerLink: ['/apps/pms/master/misc']
                             },
                             {
                                 label: 'Misc Detail',
                                 icon: 'pi pi-fw pi-align-left',
-                                routerLink: ['/pms/master/misc-detail']
+                                routerLink: ['/apps/pms/master/misc-detail']
                             },
                         ]
                     },
@@ -103,22 +100,22 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Position Request',
                                 icon: 'pi pi-fw pi-align-left',
-                                routerLink: ['/pms/talent-acquire/position-request']
+                                routerLink: ['/apps/pms/talent-acquire/position-request']
                             },
                             {
                                 label: 'Shortlist CV',
                                 icon: 'pi pi-fw pi-align-left',
-                                routerLink: ['/pms/talent-acquire/shortlist-cv']
+                                routerLink: ['/apps/pms/talent-acquire/shortlist-cv']
                             },
                             {
                                 label: 'Select Candidate',
                                 icon: 'pi pi-fw pi-align-left',
-                                routerLink: ['/pms/talent-acquire/select-candidate']
+                                routerLink: ['/apps/pms/talent-acquire/select-candidate']
                             },
                             {
                                 label: 'Offer',
                                 icon: 'pi pi-fw pi-align-left',
-                                routerLink: ['/pms/talent-acquire/offer']
+                                routerLink: ['/apps/pms/talent-acquire/offer']
                             },
                         ]
                     },
@@ -129,12 +126,12 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Add Employee',
                                 icon: 'pi pi-fw pi-align-left',
-                                routerLink: ['/pms/employee/employee-add']
+                                routerLink: ['/apps/pms/employee/employee-add']
                             },
                             {
                                 label: 'Employee List',
                                 icon: 'pi pi-fw pi-align-left',
-                                routerLink: ['/pms/employee/employee-list']
+                                routerLink: ['/apps/pms/employee/employee-list']
                             },
                         ]
                     },
@@ -147,12 +144,12 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Add Student',
                         icon: 'pi pi-fw pi-home',
-                        routerLink: ['/students/student-add']
+                        routerLink: ['/apps/students/student-add']
                     },
                     {
                         label: 'Student List',
                         icon: 'pi pi-fw pi-chart-pie',
-                        routerLink: ['/students/student-list']
+                        routerLink: ['/apps/students/student-list']
                     }
                 ]
             },
@@ -161,19 +158,19 @@ export class AppMenuComponent implements OnInit {
                 icon: 'pi pi-home',
                 items: [
                     {
-                        label: 'Sales Dashboard',
+                        label: 'Dashboard',
                         icon: 'pi pi-fw pi-home',
-                        routerLink: ['/']
+                        routerLink: ['/apps/apps/dashboard-sales']
                     },
                     {
                         label: 'Analytics Dashboard',
                         icon: 'pi pi-fw pi-chart-pie',
-                        routerLink: ['/dashboard-analytics']
+                        routerLink: ['/apps/apps/dashboard-analytics']
                     },
                     {
                         label: 'SaaS Dashboard',
                         icon: 'pi pi-fw pi-bolt',
-                        routerLink: ['/dashboard-saas']
+                        routerLink: ['/apps/apps/dashboard-saas']
                     },
                 ]
             },
@@ -188,39 +185,39 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'List',
                                 icon: 'pi pi-fw pi-image',
-                                routerLink: ['/apps/blog/list']
+                                routerLink: ['/apps/apps/blog/list']
                             },
                             {
                                 label: 'Detail',
                                 icon: 'pi pi-fw pi-list',
-                                routerLink: ['/apps/blog/detail']
+                                routerLink: ['/apps/apps/blog/detail']
                             },
                             {
                                 label: 'Edit',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit']
+                                routerLink: ['/apps/apps/blog/edit']
                             }
                         ]
                     },
                     {
                         label: 'Calendar',
                         icon: 'pi pi-fw pi-calendar',
-                        routerLink: ['/apps/calendar']
+                        routerLink: ['/apps/apps/calendar']
                     },
                     {
                         label: 'Chat',
                         icon: 'pi pi-fw pi-comments',
-                        routerLink: ['/apps/chat']
+                        routerLink: ['/apps/apps/chat']
                     },
                     {
                         label: 'Files',
                         icon: 'pi pi-fw pi-folder',
-                        routerLink: ['/apps/files']
+                        routerLink: ['/apps/apps/files']
                     },
                     {
                         label: 'Kanban',
                         icon: 'pi pi-fw pi-sliders-v',
-                        routerLink: ['/apps/kanban']
+                        routerLink: ['/apps/apps/kanban']
                     },
                     {
                         label: 'Mail',
@@ -229,24 +226,24 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Inbox',
                                 icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/apps/mail/inbox']
+                                routerLink: ['/apps/apps/mail/inbox']
                             },
                             {
                                 label: 'Compose',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/mail/compose']
+                                routerLink: ['/apps/apps/mail/compose']
                             },
                             {
                                 label: 'Detail',
                                 icon: 'pi pi-fw pi-comment',
-                                routerLink: ['/apps/mail/detail/1000']
+                                routerLink: ['/apps/apps/mail/detail/1000']
                             }
                         ]
                     },
                     {
                         label: 'Task List',
                         icon: 'pi pi-fw pi-check-square',
-                        routerLink: ['/apps/tasklist']
+                        routerLink: ['/apps/apps/tasklist']
                     }
                 ]
             },
@@ -257,83 +254,83 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Form Layout',
                         icon: 'pi pi-fw pi-id-card',
-                        routerLink: ['/uikit/formlayout']
+                        routerLink: ['/apps/uikit/formlayout']
                     },
                     {
                         label: 'Input',
                         icon: 'pi pi-fw pi-check-square',
-                        routerLink: ['/uikit/input']
+                        routerLink: ['/apps/uikit/input']
                     },
                     {
                         label: 'Float Label',
                         icon: 'pi pi-fw pi-bookmark',
-                        routerLink: ['/uikit/floatlabel']
+                        routerLink: ['/apps/uikit/floatlabel']
                     },
                     {
                         label: 'Invalid State',
                         icon: 'pi pi-fw pi-exclamation-circle',
-                        routerLink: ['/uikit/invalidstate']
+                        routerLink: ['/apps/uikit/invalidstate']
                     },
                     {
                         label: 'Button',
                         icon: 'pi pi-fw pi-box',
-                        routerLink: ['/uikit/button']
+                        routerLink: ['/apps/uikit/button']
                     },
                     {
                         label: 'Table',
                         icon: 'pi pi-fw pi-table',
-                        routerLink: ['/uikit/table']
+                        routerLink: ['/apps/uikit/table']
                     },
                     {
                         label: 'List',
                         icon: 'pi pi-fw pi-list',
-                        routerLink: ['/uikit/list']
+                        routerLink: ['/apps/uikit/list']
                     },
                     {
                         label: 'Tree',
                         icon: 'pi pi-fw pi-share-alt',
-                        routerLink: ['/uikit/tree']
+                        routerLink: ['/apps/uikit/tree']
                     },
                     {
                         label: 'Panel',
                         icon: 'pi pi-fw pi-tablet',
-                        routerLink: ['/uikit/panel']
+                        routerLink: ['/apps/uikit/panel']
                     },
                     {
                         label: 'Overlay',
                         icon: 'pi pi-fw pi-clone',
-                        routerLink: ['/uikit/overlay']
+                        routerLink: ['/apps/uikit/overlay']
                     },
                     {
                         label: 'Media',
                         icon: 'pi pi-fw pi-image',
-                        routerLink: ['/uikit/media']
+                        routerLink: ['/apps/uikit/media']
                     },
                     {
                         label: 'Menu',
                         icon: 'pi pi-fw pi-bars',
-                        routerLink: ['/uikit/menu'],
+                        routerLink: ['/apps/uikit/menu'],
                         routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }
                     },
                     {
                         label: 'Message',
                         icon: 'pi pi-fw pi-comment',
-                        routerLink: ['/uikit/message']
+                        routerLink: ['/apps/uikit/message']
                     },
                     {
                         label: 'File',
                         icon: 'pi pi-fw pi-file',
-                        routerLink: ['/uikit/file']
+                        routerLink: ['/apps/uikit/file']
                     },
                     {
                         label: 'Chart',
                         icon: 'pi pi-fw pi-chart-bar',
-                        routerLink: ['/uikit/charts']
+                        routerLink: ['/apps/uikit/charts']
                     },
                     {
                         label: 'Misc',
                         icon: 'pi pi-fw pi-circle-off',
-                        routerLink: ['/uikit/misc']
+                        routerLink: ['/apps/uikit/misc']
                     }
                 ]
             },
@@ -344,7 +341,7 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Free Blocks',
                         icon: 'pi pi-fw pi-eye',
-                        routerLink: ['/blocks']
+                        routerLink: ['/apps/blocks']
                     },
                     {
                         label: 'All Blocks',
@@ -450,7 +447,7 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Crud',
                         icon: 'pi pi-fw pi-pencil',
-                        routerLink: ['/pages/crud']
+                        routerLink: ['/apps/pages/crud']
                     },
                     {
                         label: 'Timeline',

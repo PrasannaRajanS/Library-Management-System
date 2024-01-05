@@ -1,0 +1,19 @@
+{
+    "data": [
+        {
+            "applicationId": "1",
+            "applicationName": "HRMS",
+            "description": "This is HRMS Application"
+        },
+        {
+            "applicationId": "2",
+            "applicationName": "School Management System",
+            "description": "This is School Management System Application"
+        },
+        {
+            "applicationId": "3",
+            "applicationName": "Warranty Vault",
+            "description": "This is Warranty Vault Application"
+        }
+    ]
+}

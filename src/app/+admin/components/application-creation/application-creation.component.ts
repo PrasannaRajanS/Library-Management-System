@@ -1,140 +1,229 @@
 import { Component } from '@angular/core';
-import { Product } from 'src/app/demo/api/product';
-import { ProductService } from 'src/app/demo/service/product.service';
+import { FormGroup } from '@angular/forms';
 
-import { ConfirmationService, MessageService } from 'primeng/api';
+//#region Interfaces
+import { IApplication } from '../../api/application';
+//#endregion
+//#region Services
+import { UtilService } from 'src/app/shared/util.service';
+import { HttpService } from '../../services/http.service';
+import { MessageService } from 'primeng/api';
+//#endregion
+
+//#region Validation
+import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
+import * as yup from "yup";
+import { YupAdminValidation } from '../../services/validation-schemas/yup-page-creation';
+//#endregion
+
 import { Table } from 'primeng/table';
-import { Application } from '../../api/application';
-import { ApplicationService } from '../../services/application.service';
+import { AdminAPIConfig } from '../../services/admin-api-config';
+import { AdminValidation } from '../../services/admin-validation';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
     selector: 'app-application-creation',
     templateUrl: './application-creation.component.html',
-    styleUrls: ['./application-creation.component.scss'],
-    providers: [MessageService, ConfirmationService]
+    styleUrls: ['./application-creation.component.scss']
 })
 export class ApplicationCreationComponent {
 
-    applicationDialog: boolean = false;
-    deleteApplicationDialog: boolean = false;
-    deleteApplicationsDialog: boolean = false;
+    ApplicationId: number = 0;
+    public buttonText: string = "Save";
+    private IsUpdate: boolean = false;
+    public userDetails: any;
 
-    applications: Application[] = [];
-    application: Application = {};
-    selectedApplications: Application[] = [];
+    //#region UI Validation Variables
+    ApplicationCreationForm: FormGroup<YupFormControls<IApplication>>;  //  Step 1
 
-    submitted: boolean = false;
+    initialValues: IApplication = {   //  Step 2
+        applicationId: null,
+        applicationName: null,
+        description: null,
+    }
+
+    validationSchema: yup.ObjectSchema<IApplication> = YupAdminValidation.APPLICATION_CREATION;  //  Step 3
+
+    formError = (controlName: string, formName: any) => {   //  Step 4
+        return this.utilService.formError(controlName, formName);
+    };
+    //#endregion
+
+    //#region List Variables
     cols: any[] = [];
-    statuses: any[] = [];
-    rowsPerPageOptions = [5, 10, 20];
+
+    selectedItems: IApplication[] = [];
+    item: IApplication = {};
+    items: IApplication[] = [];
+
+    deleteDialog: boolean = false;
+    //#endregion
 
     constructor(
-        private productService: ProductService,
-        private messageService: MessageService,
-        private confirmationService: ConfirmationService,
-        private applicationService : ApplicationService
+        private utilService: UtilService,
+        private httpService: HttpService,
+        private messageService: MessageService
     ) {
-
+        this.ApplicationCreationForm = FormHandler.controls<IApplication>(this.initialValues);  //  Step 5
+        this.ApplicationCreationForm.setValidators(FormHandler.validate<IApplication>(this.validationSchema));
     }
 
     ngOnInit() {
-        
-        this.productService.getProducts().then(data => this.applications = data);
 
-        this.cols = [
-            { field: 'applicationName', header: 'Application Name' },
-            { field: 'description', header: 'Description' },
-        ];
-
+        this.GetAll();
 
     }
 
-    openNew() {
-        this.application = {};
-        this.submitted = false;
-        this.applicationDialog = true;
+
+    public GetAll() {
+
+        try {
+
+            this.httpService.globalGet(AdminAPIConfig.API_CONFIG.API_URL.ADMIN.APPLICATION.LIST)
+                .subscribe({
+                    next: (result: any) => {
+                        this.items = result.applications;
+                          console.log('GetAll', this.items);
+                    },
+                    error: (err: HttpErrorResponse) => console.log(err)
+                });
+
+        } catch (error) {
+
+        }
     }
 
-    deleteSelectedProducts() {
-        this.deleteApplicationsDialog = true;
-    }
 
-    Edit(product: Product) {
-        this.application = { ...product };
-        this.applicationDialog = true;
-    }
-
-    Delete(product: Product) {
-        this.deleteApplicationDialog = true;
-        this.application = { ...product };
-    }
-
-    confirmDeleteSelected() {
-        this.deleteApplicationsDialog = false;
-        this.applications = this.applications.filter(val => !this.selectedApplications.includes(val));
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application Deleted', life: 3000 });
-        this.selectedApplications = [];
-    }
-
-    confirmDelete() {
-        this.deleteApplicationDialog = false;
-        this.applications = this.applications.filter(val => val.applicationId !== this.application.applicationId);
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application Deleted', life: 3000 });
-        this.application = {};
-    }
-
-    hideDialog() {
-        this.applicationDialog = false;
-        this.submitted = false;
-    }
 
     Save() {
-        this.submitted = true;
+        console.log(this.ApplicationCreationForm.value);
 
-        if (this.application.applicationName?.trim()) {
-            if (this.application.applicationId) {
-                
-                // @ts-ignore
-                
-                this.applications[this.findIndexById(this.application.applicationId)] = this.application;
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application Updated', life: 3000 });
+        try {
+            let _apiUrl: string = '';
 
-            } else {
-                this.application.applicationId = 0;
 
-                // @ts-ignore
-                this.applications.push(this.application);
-                console.log(this.applications);
+            let passSaveParams: any = {};
 
-                let PassParams: any = {};
+            if (this.IsUpdate) {  //  UPDATE
 
-                this.applicationService.SaveApplication(PassParams).subscribe(res => {
-                    
+                passSaveParams.applicationId = this.ApplicationId;
+                passSaveParams.applicationName = this.ApplicationCreationForm.value['applicationName'];
+                passSaveParams.description = this.ApplicationCreationForm.value['description'];
+
+                passSaveParams.isActive = true;
+                passSaveParams.userId = this.userDetails ? this.userDetails.UserId : 0;
+                passSaveParams.ipAddress = "192.168.1.1";
+
+                _apiUrl = AdminAPIConfig.API_CONFIG.API_URL.ADMIN.APPLICATION.UPDATE;
+
+            }
+            else {  //  SAVE
+
+
+                passSaveParams.applicationId = 0;
+                passSaveParams.applicationName = this.ApplicationCreationForm.value['applicationName'];
+                passSaveParams.description = (this.ApplicationCreationForm.value['description'] == null ? '' : this.ApplicationCreationForm.value['description']);
+
+                passSaveParams.isActive = true;
+                passSaveParams.userId = this.userDetails ? this.userDetails.UserId : 0;
+                passSaveParams.ipAddress = "192.168.1.1";
+
+                _apiUrl = AdminAPIConfig.API_CONFIG.API_URL.ADMIN.APPLICATION.SAVE;
+
+            }
+
+
+            console.log("Save / Update Click", JSON.stringify(passSaveParams))
+
+            this.httpService.globalPost(_apiUrl,
+                JSON.stringify(passSaveParams))
+                .subscribe({
+                    next: (result: any) => {
+
+                        this.notificationsService(AdminValidation.NOTIFICATION_SUCCESS, 'Success Message', result.message);
+                        this.Clear();
+                    },
+                    error: (err: HttpErrorResponse) => console.log(err)
                 });
-                
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application Created', life: 3000 });
-            }
 
-            this.applications = [...this.applications];
-            this.applicationDialog = false;
-            this.application = {};
+
+        } catch (error) {
+
         }
+
+
+
     }
 
-    findIndexById(id: number): number {
-        let index = -1;
-        for (let i = 0; i < this.applications.length; i++) {
-            if (this.applications[i].applicationId === id) {
-                index = i;
-                break;
-            }
-        }
-        return index;
+    Clear() {
+        this.buttonText = "Save";
+        this.IsUpdate = false;
+        this.ApplicationCreationForm.controls['applicationName']?.setValue('');
+        this.ApplicationCreationForm.controls['description']?.setValue('');
+        this.ApplicationCreationForm.reset();
+        this.GetAll();
     }
+
+    
+
+    //#region APPLICATION LIST
 
     onGlobalFilter(table: Table, event: Event) {
         table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+    }
+
+    Edit(item: any) {
+
+        console.log('Edit',item);
+        this.ApplicationId = item.applicationId;
+        // this.ApplicationCreationForm.setValue({ applicationName: item.applicationName, description: item.description });
+        this.ApplicationCreationForm.controls['applicationName']?.setValue(item.applicationName);
+        this.ApplicationCreationForm.controls['description']?.setValue(item.description);
+        this.IsUpdate = true;
+        this.buttonText = 'Update';
+    }
+
+    Delete(data: any) {
+        this.deleteDialog = true;
+        this.item = { ...data };
+    }
+
+    confirmDelete() {
+
+        this.deleteDialog = false;
+        let deletedItem: any[] = this.items.filter(val => val.applicationId === this.item.applicationId);
+
+        console.log('deletedItem',deletedItem)
+
+        if (deletedItem != null && deletedItem.length > 0) {
+            var passSaveParams: any = {};
+            passSaveParams.applicationId = deletedItem[0].applicationId;
+            passSaveParams.applicationName = deletedItem[0].applicationName;
+            passSaveParams.description = deletedItem[0].description;
+            passSaveParams.isActive = false;  //  1 | 0
+
+            console.log(passSaveParams)
+
+            this.httpService.globalPost(AdminAPIConfig.API_CONFIG.API_URL.ADMIN.APPLICATION.DELETE,
+                JSON.stringify(passSaveParams))
+                .subscribe({
+                    next: (result: any) => {
+
+                        this.Clear();
+                        this.notificationsService(AdminValidation.NOTIFICATION_SUCCESS, 'Success Message', result.message);
+                    },
+                    error: (err: HttpErrorResponse) => console.log(err)
+                });
+        }
+
+        this.item = {};
+    }
+    //#endregion
+
+    private notificationsService(_severity: any, _summary: any, _message: any) {
+        this.messageService.add({ severity: _severity, summary: _summary, detail: _message, life: 3000 });
+        return;
     }
 
 }

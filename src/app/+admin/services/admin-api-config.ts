@@ -1,12 +1,34 @@
 export const AdminAPIConfig = {
 
-    ADMIN_API_BASE_URL: "http://localhost:49802/api",
+    ADMIN_API_BASE_URL: "https://localhost:7189",
 
 
     API_CONFIG: {
         API_URL: {
             ADMIN: {
                 APPLICATION: {
+                    SAVE: "/application/Create",
+                    UPDATE: "/application/Update",
+                    DELETE: "/application/Delete",
+                    LIST: "/application/GetApplications"
+                },
+                MODULE: {
+                    SAVE: "/module/Create",
+                    UPDATE: "/module/Update",
+                    DELETE: "/module/Delete",
+                    LIST: "/module/GetModules"
+                },
+                PAGE_CREATION: {
+                    SAVE: "/Module/List",
+                    UPDATE: "/Module/List"
+                },
+                ROLE_CREATION: {
+                    SAVE: "/Module/List"
+                },
+                ROLE_PAGE_ASSOCIATION: {
+                    SAVE: "/Module/List"
+                },
+                USER: {
                     SAVE: "/Module/List"
                 },
 

@@ -1,165 +1,109 @@
 <div class="card">
-    <h5>PAGE CREATION</h5>
+    <h4>PAGE CREATION</h4>
+
     <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
             <div class="my-2">
-                <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
-                    (click)="openNew()"></button>
-                <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger"
-                    (click)="deleteSelectedProducts()"></button>
             </div>
         </ng-template>
 
         <ng-template pTemplate="right">
-            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+            <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" [disabled]="!PageCreationInfoForm.valid"
+            (click)="Save()">{{buttonText}}</button>
+        <button pButton pRipple label="List" icon="pi pi-align-justify" class="p-button-primary mr-2"
+            (click)="RedirecttoList()"></button>
+        <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
+            (click)="Clear()"></button>
         </ng-template>
     </p-toolbar>
 
-    <p-dialog [(visible)]="PageCreationDialog" [style]="{width: '950px'}" header="Add" [modal]="true" class="p-fluid">
-        <ng-template pTemplate="content">
+    <form [formGroup]="PageCreationInfoForm" (ngSubmit)="onSubmitPageCreationInfo()" style="margin-top: 10px;">
+        <div class="grid p-fluid mt-3">
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <p-dropdown id="ApplicationName" formControlName="ApplicationName" [options]="ApplicationList"
+                        optionLabel="applicationName" [autoDisplayFirst]="false" [showClear]="true" (onChange)="onChangeApplicationName($event)">
+                    </p-dropdown>
+                    <label for="ApplicationName">Application Name<span class="mandatory">*</span></label>
+                </span>
+                <small id="ApplicationName-help">{{formError("ApplicationName",PageCreationInfoForm)}}</small>
+            </div>
 
-            <form [formGroup]="PageCreationInfoForm" (ngSubmit)="onSubmitPageCreationInfo()" style="margin-top: 10px;">
-                <div class="grid nested-grid">
-                    <div class="md:col-12 col-12  ">
-                        <div class=" grid  grid-row-split">
-                            <div class="field col-12 md:col-4">
-                                <span class="p-float-label">
-                                    <p-multiSelect inputId="multiselect" id="ApplicationName" [options]="cities"
-                                        [(ngModel)]="ngApplicationName" optionLabel="name" [filter]="false"
-                                        formControlName="ApplicationName"></p-multiSelect>
-                                    <!-- <input type="text" id="companyName" pInputText formControlName="companyName"> -->
-                                    <label for="ApplicationName">Application Name<span
-                                            class="mandatory">*</span></label>
-                                </span>
-                                <small id="ApplicationName-help">{{ formError("ApplicationName"
-                                    ,PageCreationInfoForm)}}</small>
-                            </div>
-                            <div class="field col-12 md:col-4">
-                                <span class="p-float-label">
-                                    <p-autoComplete inputId="txtModule" id="ModuleName" [(ngModel)]="ngModuleName"
-                                        [suggestions]="filteredCountries" (completeMethod)="searchCountry($event)"
-                                        field="name" formControlName="ModuleName"></p-autoComplete>
-                                    <label for="ModuleName">Module Name</label>
-                                </span>
-                                <small id="ModuleName-help">{{ formError("ModuleName" ,PageCreationInfoForm)}}</small>
-                            </div>
-                            <div class="field col-12 md:col-4">
-                                <span class="p-float-label">
-                                    <p-autoComplete inputId="txtSubModule" id="SubModuleName"
-                                        [(ngModel)]="ngSubModuleName" [suggestions]="filteredCountries"
-                                        (completeMethod)="searchCountry($event)" field="name"
-                                        formControlName="SubModuleName"></p-autoComplete>
-                                    <label for="SubModuleName">Sub Module Name</label>
-                                </span>
-                                <small id="SubModuleName-help">{{ formError("SubModuleName"
-                                    ,PageCreationInfoForm)}}</small>
-                            </div>
-                            <div class="field col-12 md:col-4">
-                                <span class="p-float-label">
-                                    <input type="text" id="PageName" pInputText [(ngModel)]="ngPageName"
-                                        formControlName="PageName">
-                                    <label for="PageName">Page Name</label>
-                                </span>
-                                <small id="PageName-help">{{ formError("PageName" ,PageCreationInfoForm)}}</small>
-                            </div>
-                            <div class="field col-12 md:col-4">
-                                <span class="p-float-label">
-                                    <input type="text" id="PageURL" pInputText [(ngModel)]="ngPageURL"
-                                        formControlName="PageURL">
-                                    <label for="PageURL">Page URL</label>
-                                    <!-- <i class="pi pi-eye"></i> -->
-                                </span>
-                                <small id="PageURL-help">{{ formError("PageURL" ,PageCreationInfoForm)}}</small>
-                            </div>
-                            <!-- <div class="field col-12 md:col-4">
-                                <span class="p-float-label">
-                                    <input type="text" id="MainPageName" pInputText [(ngModel)]="ngMainPageName"
-                                        formControlName="MainPageName">
-                                    <label for="MainPageName">Page URL</label>
-                                </span>
-                                <small id="MainPageName-help">{{ formError("MainPageName"
-                                    ,PageCreationInfoForm)}}</small>
-                            </div> -->
-                            <div class="field col-12 md:col-4">
-                                <span class="p-float-label">
-                                    <input type="text" id="MainPageName" pInputText [(ngModel)]="ngMainPageName"
-                                        formControlName="MainPageName">
-                                    <label for="MainPageName">Main Page Name</label>
-                                </span>
-                                <small id="MainPageName-help">{{ formError("MainPageName"
-                                    ,PageCreationInfoForm)}}</small>
-                            </div>
-                            <div class="field col-12 md:col-4">
-                                <span class="p-float-label">
-                                    <input type="text" id="OrderBy" pInputText [(ngModel)]="ngOrderBy"
-                                        formControlName="OrderBy">
-                                    <label for="OrderBy">Order By</label>
-                                </span>
-                                <small id="OrderBy-help">{{ formError("OrderBy" ,PageCreationInfoForm)}}</small>
-                            </div>
-                            <div class="field col-12 md:col-4">
-                                <span class="p-float-label">
-                                    <input type="text" id="IconStyle" pInputText [(ngModel)]="ngIconStyle"
-                                        formControlName="IconStyle">
-                                    <label for="IconStyle">Icon Style</label>
-                                </span>
-                                <small id="IconStyle-help">{{ formError("IconStyle" ,PageCreationInfoForm)}}</small>
-                            </div>          
-                            <div class="field col-12 md:col-2">    
-                            <span class="p-float-label">
-                                <label>IsSubMenu</label>
-                            </span>          
-                        </div>    
-                            <div class="flex flex-wrap gap-6">                              
-                                
-                                <div class="flex align-items-center">
-                                    <span class="p-float-label">
-                                        <p-radioButton name="IsSubMenuName" value="true" [(ngModel)]="ngIsSubMenu"
-                                            id="IsSubMenu1" inputId="IsSubMenu1"
-                                            formControlName="IsSubMenu1"></p-radioButton>
-                                        <label for="IsSubMenu1" class="ml-3">True</label>
-                                    </span>
-                                    <small id="IsSubMenu1-help">{{
-                                        formError("IsSubMenu1",PageCreationInfoForm)}}</small>
-                                </div>
-                                
-                                <div class="flex align-items-center">
-                                    <span class="p-float-label">
-                                        <p-radioButton name="IsSubMenuName" value="false" [(ngModel)]="ngIsSubMenu"
-                                            id="IsSubMenu2" inputId="IsSubMenu2"
-                                            formControlName="IsSubMenu2"></p-radioButton>
-                                        <label for="IsSubMenu2" class="ml-3">False</label>
-                                    </span>
-                                    <small id="IsSubMenu2-help">{{
-                                        formError("IsSubMenu2",PageCreationInfoForm)}}</small>
-                                </div>                               
-                                
-                            </div>
-                        </div>
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <p-dropdown id="ModuleName" formControlName="ModuleName" [options]="filteredModuleList"
+                        optionLabel="moduleName" [autoDisplayFirst]="false" [showClear]="true"></p-dropdown>
+                    <label for="ModuleName">Module Name<span class="mandatory">*</span></label>
+                </span>
+                <small id="ModuleName-help">{{ formError("ModuleName" ,PageCreationInfoForm)}}</small>
+            </div>
+
+            <!-- <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <p-dropdown id="SubModuleName" formControlName="SubModuleName" [options]="SubModuleList" optionLabel="name"
+                        [autoDisplayFirst]="false" [showClear]="true"></p-dropdown>
+                    <label for="SubModuleName">Sub Module Name</label>
+                </span>
+                <small id="SubModuleName-help">{{ formError("SubModuleName",PageCreationInfoForm)}}</small>
+            </div> -->
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="PageName" pInputText formControlName="PageName">
+                    <label for="PageName">Page Name<span class="mandatory">*</span></label>
+                </span>
+                <small id="PageName-help">{{ formError("PageName" ,PageCreationInfoForm)}}</small>
+            </div>
+
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="PageURL" pInputText formControlName="PageURL">
+                    <label for="PageURL">Page URL</label>
+                </span>
+                <small id="PageURL-help">{{ formError("PageURL" ,PageCreationInfoForm)}}</small>
+            </div>
+
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="MainPageName" pInputText formControlName="MainPageName">
+                    <label for="MainPageName">Main Page Name</label>
+                </span>
+                <small id="MainPageName-help">{{ formError("MainPageName",PageCreationInfoForm)}}</small>
+            </div>
+
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="OrderBy" pInputText formControlName="OrderBy">
+                    <label for="OrderBy">Order By</label>
+                </span>
+                <small id="OrderBy-help">{{ formError("OrderBy" ,PageCreationInfoForm)}}</small>
+            </div>
+
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="IconStyle" pInputText formControlName="IconStyle">
+                    <label for="IconStyle">Icon / Font Style</label>
+                </span>
+                <small id="IconStyle-help">{{ formError("IconStyle" ,PageCreationInfoForm)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-1" style="margin-top: 15px;">
+                <span class="p-float-label">
+                    <label>Is Menu</label>
+                </span>
+            </div>
+
+            <div class="field col-12 md:col-2 flex flex-wrap gap-2">
+                    <div *ngFor="let category of categories" class="field-checkbox">
+                        <p-radioButton [inputId]="category.key" [value]="category" formControlName="selectedCategory"></p-radioButton>
+                        <label [for]="category.key" class="ml-2">{{ category.name }}</label>
                     </div>
-                </div>
-            </form>
+            </div>
 
-        </ng-template>
-
-        <ng-template pTemplate="footer">
-            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
-                (click)="hideDialog()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
-                (click)="saveProduct()"></button>
-        </ng-template>
-    </p-dialog>
-
-    <p-dialog [(visible)]="deleteProductDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
-        <div class="flex align-items-center justify-content-center">
-            <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-            <span>Are you sure you want to delete ?</span>
         </div>
-        <ng-template pTemplate="footer">
-            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"
-                (click)="deleteProductDialog = false"></button>
-            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes"
-                (click)="confirmDelete()"></button>
-        </ng-template>
-    </p-dialog>
+    </form>
 </div>

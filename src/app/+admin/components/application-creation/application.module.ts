@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TableModule } from 'primeng/table';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -18,6 +18,8 @@ import { DialogModule } from 'primeng/dialog';
 
 import { ApplicationRoutingModule } from './application-routing.module';
 import { ApplicationCreationComponent } from './application-creation.component';
+import { UtilService } from 'src/app/shared/util.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { ApplicationCreationComponent } from './application-creation.component';
   imports: [
     CommonModule,
 		FormsModule,
-    ApplicationRoutingModule,
+		ReactiveFormsModule,
+    	ApplicationRoutingModule,
 
 		TableModule,
 		FileUploadModule,
@@ -43,7 +46,7 @@ import { ApplicationCreationComponent } from './application-creation.component';
 		RadioButtonModule,
 		InputNumberModule,
 		DialogModule
-    
-  ]
+  ],
+  providers: [UtilService, MessageService, ConfirmationService]
 })
 export class ApplicationModule { }

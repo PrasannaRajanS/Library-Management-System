@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 // import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
@@ -8,10 +9,14 @@ export class LoginComponent {
 
 	rememberMe: boolean = false;
 
-	// constructor(private layoutService: LayoutService) {}
+	constructor(private router: Router) {}
 
 	// get dark(): boolean {
 	// 	return this.layoutService.config.colorScheme !== 'light';
 	// }
+
+	onLoginClick() {
+		this.router.navigate(['/apps/dashboard/dashboard-sales']);
+	}
 
 }
