@@ -23,7 +23,10 @@ export const AdminAPIConfig = {
                     UPDATE: "/Module/List"
                 },
                 ROLE_CREATION: {
-                    SAVE: "/Module/List"
+                    SAVE: "/role/Create",
+                    UPDATE: "/role/Update",
+                    DELETE: "/role/Delete",
+                    LIST: "/role/GetModules"
                 },
                 ROLE_PAGE_ASSOCIATION: {
                     SAVE: "/Module/List"
