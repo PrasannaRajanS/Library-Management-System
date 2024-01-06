@@ -1,1 +1,50 @@
-<p>role-page-associate works!</p>
+<div class="card">
+    <h4>ROLE PAGE ASSOCIATION</h4>
+
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <div class="my-2">
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" 
+            (click)="Save()">Save</button>
+        
+        <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
+            (click)="Clear()"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <!-- <form [formGroup]="RolePageAssociateorm" style="margin-top: 10px;">
+        <div class="grid p-fluid mt-3">
+            
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <p-dropdown id="ApplicationName" formControlName="ApplicationName" [options]="ApplicationList"
+                        optionLabel="applicationName" [autoDisplayFirst]="false" [showClear]="true" (onChange)="onChangeApplicationName($event)">
+                    </p-dropdown>
+                    <label for="ApplicationName">Application <span class="mandatory">*</span></label>
+                </span>
+                <small id="ApplicationName-help">{{formError("ApplicationName",PageCreationInfoForm)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <p-dropdown id="ApplicationName" formControlName="ApplicationName" [options]="ApplicationList"
+                        optionLabel="applicationName" [autoDisplayFirst]="false" [showClear]="true" (onChange)="onChangeApplicationName($event)">
+                    </p-dropdown>
+                    <label for="ApplicationName">Role<span class="mandatory">*</span></label>
+                </span>
+                <small id="ApplicationName-help">{{formError("ApplicationName",PageCreationInfoForm)}}</small>
+            </div>
+        </div>
+    </form> -->
+</div>
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <p-tree [value]="files1" selectionMode="checkbox" [(selection)]="selectedFiles1"></p-tree>
+        </div>
+    </div>
+</div>
