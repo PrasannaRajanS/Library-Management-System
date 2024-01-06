@@ -8,43 +8,45 @@
         </ng-template>
 
         <ng-template pTemplate="right">
-            <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" 
-            (click)="Save()">Save</button>
-        
-        <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
-            (click)="Clear()"></button>
+            <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" (click)="Save()">Save</button>
+
+            <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
+                (click)="Clear()"></button>
         </ng-template>
     </p-toolbar>
 
-    <!-- <form [formGroup]="RolePageAssociateorm" style="margin-top: 10px;">
+   <p-toast></p-toast>
         <div class="grid p-fluid mt-3">
             
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
-                    <p-dropdown id="ApplicationName" formControlName="ApplicationName" [options]="ApplicationList"
+                    <p-dropdown id="ApplicationName" [(ngModel)]="selectApplication"  [options]="ApplicationList"
                         optionLabel="applicationName" [autoDisplayFirst]="false" [showClear]="true" (onChange)="onChangeApplicationName($event)">
                     </p-dropdown>
                     <label for="ApplicationName">Application <span class="mandatory">*</span></label>
                 </span>
-                <small id="ApplicationName-help">{{formError("ApplicationName",PageCreationInfoForm)}}</small>
+           
             </div>
 
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
-                    <p-dropdown id="ApplicationName" formControlName="ApplicationName" [options]="ApplicationList"
-                        optionLabel="applicationName" [autoDisplayFirst]="false" [showClear]="true" (onChange)="onChangeApplicationName($event)">
+                    <p-dropdown id="Role"  [options]="RoleList" [(ngModel)]="selectRole"
+                        optionLabel="applicationName" [autoDisplayFirst]="false" [showClear]="true" (onChange)="onChangeRole($event)">
                     </p-dropdown>
-                    <label for="ApplicationName">Role<span class="mandatory">*</span></label>
+                    <label for="Role">Role<span class="mandatory">*</span></label>
                 </span>
-                <small id="ApplicationName-help">{{formError("ApplicationName",PageCreationInfoForm)}}</small>
+              
             </div>
         </div>
-    </form> -->
+
 </div>
 <div class="grid">
     <div class="col-12">
         <div class="card">
-            <p-tree [value]="files1" selectionMode="checkbox" [(selection)]="selectedFiles1"></p-tree>
+            <p-tree [value]="Pages" selectionMode="checkbox" [(selection)]="SelectedPages"
+                (onNodeSelect)="nodeSelect($event.node)" (onNodeUnselect)="nodeUnselect($event.node)"
+                [propagateSelectionUp]="true" [propagateSelectionDown]="true">
+            </p-tree>
         </div>
     </div>
 </div>
