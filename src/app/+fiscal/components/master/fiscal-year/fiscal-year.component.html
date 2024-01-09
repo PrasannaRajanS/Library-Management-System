@@ -40,7 +40,7 @@
                 <small>{{ formError("endDate" ,AcademicYearForm)}}</small>
             </div>
 
-            <div class="field col-12 md:col-3">
+            <div class="field col-12 md:col-2">
                 <span class="p-float-label">
                     <input type="text" id="txtAcademicYear" pInputText formControlName="academicYear">
                     <label for="txtAcademicYear">Academic Year<span class="mandatory">*</span></label>
@@ -48,7 +48,7 @@
                 <small>{{ formError("academicYear" ,AcademicYearForm)}}</small>
             </div>
 
-            <div class="field col-12 md:col-3">
+            <div class="field col-12 md:col-2">
                 <span class="p-float-label">
                     <p-calendar id="calaccountYear" formControlName="accountYear" view="year"
                         dateFormat="yy"></p-calendar>
@@ -57,7 +57,7 @@
                 <small>{{ formError("accountYear" ,AcademicYearForm)}}</small>
             </div>
 
-            <div class="field col-12 md:col-3">
+            <div class="field col-12 md:col-2">
                 <p-radioButton inputId="radIsDefault" value="IsDefault"
                     formControlName="selectedIsDefault"></p-radioButton>
                 <label for="radIsDefault" class="ml-2">IsDefault</label>
