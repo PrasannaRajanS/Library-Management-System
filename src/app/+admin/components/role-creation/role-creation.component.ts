@@ -85,7 +85,7 @@ export class RoleCreationComponent {
 
     try {
 
-      this.httpService.globalGet(AdminAPIConfig.API_CONFIG.API_URL.ADMIN.ROLE_CREATION.LIST)
+      this.httpService.globalGet(AdminAPIConfig.API_CONFIG.API_URL.ADMIN.APPLICATION.LIST)
         .subscribe({
           next: (result: any) => {
             this.ApplicationList = result.applications;
@@ -211,6 +211,18 @@ export class RoleCreationComponent {
     this.buttonText = 'Update';
   }
 
+
+  // Edit(item: any) {
+
+  //   console.log('Edit', item);
+  //   this.ModuleId = item.moduleId;
+  //   this.ModuleCreationForm.get("application")?.setValue(this.ApplicationList.find(app => app.applicationId === item.applicationId));
+  //   this.ModuleCreationForm.controls['moduleName']?.setValue(item.moduleName);
+  //   this.ModuleCreationForm.controls['description']?.setValue(item.description);
+  //   this.IsUpdate = true;
+  //   this.buttonText = 'Update';
+  // }
+
   Delete(data: any) {
     this.deleteDialog = true;
     this.item = { ...data };
@@ -230,6 +242,8 @@ export class RoleCreationComponent {
       passSaveParams.roleName = deletedItem[0].roleName;
       passSaveParams.description = deletedItem[0].description;
       passSaveParams.isActive = false;  //  1 | 0
+      passSaveParams.userId = this.userDetails ? this.userDetails.UserId : 0;
+      passSaveParams.ipAddress = "192.168.1.1";
 
       console.log(passSaveParams)
 
