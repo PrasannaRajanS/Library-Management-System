@@ -53,7 +53,7 @@ export class PageCreationComponent {
 
   ingredient: string = '';
 
-  submitted: boolean = false;
+  // submitted: boolean = false;
   PageCreationInfoForm: FormGroup<YupFormControls<IPageCreation>>;  //  Step 1
 
   initialValues: IPageCreation = {   //  Step 2
@@ -368,7 +368,7 @@ export class PageCreationComponent {
   }
 
   openNew() {
-    this.submitted = false;
+    // this.submitted = false;
     this.PageCreationDialog = true;
   }
 
@@ -382,18 +382,18 @@ export class PageCreationComponent {
 
   hideDialog() {
     this.PageCreationDialog = false;
-    this.submitted = false;
+    // this.submitted = false;
   }
 
   saveProduct() {
-    this.submitted = true;
+    // this.submitted = true;
     // if (_.isEmpty(this.PageCreationInfoForm)) {
     //   alert();
     // }
   }
 
   saveUsers() {
-    this.submitted = true;
+    // this.submitted = true;
   }
 
   onSubmitPageCreationInfo() {
