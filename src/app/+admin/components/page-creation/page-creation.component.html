@@ -8,94 +8,100 @@
         </ng-template>
 
         <ng-template pTemplate="right">
-            <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" [disabled]="!PageCreationInfoForm.valid"
-            (click)="Save()">{{buttonText}}</button>
-        <button pButton pRipple label="List" icon="pi pi-align-justify" class="p-button-primary mr-2"
-            (click)="RedirecttoList()"></button>
-        <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
-            (click)="Clear()"></button>
+            <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2"
+                [disabled]="!PageCreationInfoForm.valid" (click)="Save()">{{buttonText}}</button>
+            <button pButton pRipple label="List" icon="pi pi-align-justify" class="p-button-primary mr-2"
+                (click)="RedirecttoList()"></button>
+            <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
+                (click)="Clear()"></button>
         </ng-template>
     </p-toolbar>
 
-    <form [formGroup]="PageCreationInfoForm" (ngSubmit)="onSubmitPageCreationInfo()" style="margin-top: 10px;">
+    <form [formGroup]="PageCreationInfoForm" style="margin-top: 10px;">
         <div class="grid p-fluid mt-3">
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
-                    <p-dropdown id="ApplicationName" formControlName="ApplicationName" [options]="ApplicationList"
-                        optionLabel="applicationName" [autoDisplayFirst]="false" [showClear]="true" (onChange)="onChangeApplicationName($event)">
+                    <p-dropdown id="ddlApplication" formControlName="application" [options]="ApplicationList"
+                        optionLabel="applicationName" [autoDisplayFirst]="false" [showClear]="true"
+                        (onChange)="onChangeApplicationName($event)">
                     </p-dropdown>
-                    <label for="ApplicationName">Application Name<span class="mandatory">*</span></label>
+                    <label for="ddlApplication">Application Name<span class="mandatory">*</span></label>
                 </span>
-                <small id="ApplicationName-help">{{formError("ApplicationName",PageCreationInfoForm)}}</small>
+                <small id="ddlApplication-help">{{formError("application",PageCreationInfoForm)}}</small>
             </div>
 
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
-                    <p-dropdown id="ModuleName" formControlName="ModuleName" [options]="filteredModuleList"
+                    <p-dropdown id="ddlModuleName" formControlName="moduleName" [options]="filteredModuleList"
                         optionLabel="moduleName" [autoDisplayFirst]="false" [showClear]="true"></p-dropdown>
-                    <label for="ModuleName">Module Name<span class="mandatory">*</span></label>
+                    <label for="ddlModuleName">Module Name<span class="mandatory">*</span></label>
                 </span>
-                <small id="ModuleName-help">{{ formError("ModuleName" ,PageCreationInfoForm)}}</small>
+                <small id="ModuleName-help">{{ formError("moduleName" ,PageCreationInfoForm)}}</small>
             </div>
 
             <!-- <div class="field col-12 md:col-3">
                 <span class="p-float-label">
-                    <p-dropdown id="SubModuleName" formControlName="SubModuleName" [options]="SubModuleList" optionLabel="name"
-                        [autoDisplayFirst]="false" [showClear]="true"></p-dropdown>
-                    <label for="SubModuleName">Sub Module Name</label>
+                    <p-dropdown id="ddlSubModuleName" formControlName="subModuleName" [options]="SubModuleList"
+                        optionLabel="name" [autoDisplayFirst]="false" [showClear]="true"></p-dropdown>
+                    <label for="ddlSubModuleName">Sub Module Name</label>
                 </span>
-                <small id="SubModuleName-help">{{ formError("SubModuleName",PageCreationInfoForm)}}</small>
+                <small id="SubModuleName-help">{{ formError("subModuleName",PageCreationInfoForm)}}</small>
             </div> -->
 
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
-                    <input type="text" id="PageName" pInputText formControlName="PageName">
-                    <label for="PageName">Page Name<span class="mandatory">*</span></label>
+                    <input type="text" id="pageName" pInputText formControlName="pageName">
+                    <label for="pageName">Page Name<span class="mandatory">*</span></label>
                 </span>
-                <small id="PageName-help">{{ formError("PageName" ,PageCreationInfoForm)}}</small>
+                <small id="pageName-help">{{ formError("pageName" ,PageCreationInfoForm)}}</small>
             </div>
+
+            <!-- <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="txtUniqueName" pInputText formControlName="uniqueName">
+                    <label for="txtUniqueName">Unique Name<span class="mandatory">*</span></label>
+                </span>
+                <small id="PageName-help">{{ formError("uniqueName" ,PageCreationInfoForm)}}</small>
+            </div> -->
 
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
-                    <input type="text" id="PageName" pInputText formControlName="PageName">
-                    <label for="PageName">Unique Name<span class="mandatory">*</span></label>
+                    <input type="text" id="pageURL" pInputText formControlName="pageURL">
+                    <label for="pageURL">Page URL</label>
                 </span>
-                <small id="PageName-help">{{ formError("PageName" ,PageCreationInfoForm)}}</small>
-            </div>
-
-            <div class="field col-12 md:col-3">
-                <span class="p-float-label">
-                    <input type="text" id="PageURL" pInputText formControlName="PageURL">
-                    <label for="PageURL">Page URL</label>
-                </span>
-                <small id="PageURL-help">{{ formError("PageURL" ,PageCreationInfoForm)}}</small>
-            </div>
-
-
-            <div class="field col-12 md:col-3">
-                <span class="p-float-label">
-                    <input type="text" id="MainPageName" pInputText formControlName="MainPageName">
-                    <label for="MainPageName">Main Page Name</label>
-                </span>
-                <small id="MainPageName-help">{{ formError("MainPageName",PageCreationInfoForm)}}</small>
+                <small id="pageURL-help">{{ formError("pageURL" ,PageCreationInfoForm)}}</small>
             </div>
 
 
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
-                    <input type="text" id="OrderBy" pInputText formControlName="OrderBy">
-                    <label for="OrderBy">Order By</label>
+                    <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
+
+                    <p-autoComplete formControlName="mainPageName" [suggestions]="filteredMainPageList"
+                        (completeMethod)="filterMagePage($event)" [minLength]="0" [dropdown]="true" [forceSelection]="true"
+                        field="mainPageName"></p-autoComplete>
+
+                    <label for="mainPageName">Main Page Name</label>
                 </span>
-                <small id="OrderBy-help">{{ formError("OrderBy" ,PageCreationInfoForm)}}</small>
+                <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
             </div>
 
 
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
-                    <input type="text" id="IconStyle" pInputText formControlName="IconStyle">
-                    <label for="IconStyle">Icon / Font Style</label>
+                    <input type="text" id="orderBy" pInputText formControlName="orderBy">
+                    <label for="orderBy">Order By</label>
                 </span>
-                <small id="IconStyle-help">{{ formError("IconStyle" ,PageCreationInfoForm)}}</small>
+                <small id="orderBy-help">{{ formError("orderBy" ,PageCreationInfoForm)}}</small>
+            </div>
+
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="iconStyle" pInputText formControlName="iconStyle">
+                    <label for="iconStyle">Icon / Font Style</label>
+                </span>
+                <small id="iconStyle-help">{{ formError("iconStyle" ,PageCreationInfoForm)}}</small>
             </div>
 
             <div class="field col-12 md:col-1" style="margin-top: 15px;">
@@ -105,10 +111,11 @@
             </div>
 
             <div class="field col-12 md:col-2 flex flex-wrap gap-2">
-                    <div *ngFor="let category of categories" class="field-checkbox">
-                        <p-radioButton [inputId]="category.key" [value]="category" formControlName="selectedCategory"></p-radioButton>
-                        <label [for]="category.key" class="ml-2">{{ category.name }}</label>
-                    </div>
+                <div *ngFor="let category of categories" class="field-checkbox">
+                    <p-radioButton [inputId]="category.key" [value]="category"
+                        formControlName="isMenu"></p-radioButton>
+                    <label [for]="category.key" class="ml-2">{{ category.name }}</label>
+                </div>
             </div>
 
         </div>

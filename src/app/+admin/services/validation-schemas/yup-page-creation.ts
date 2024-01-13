@@ -21,17 +21,26 @@ export const YupAdminValidation = Object.freeze({
   }),
 
   PAGE_CREATION: yup.object().shape({
-    ApplicationName: yup.object().required('Application Name is required'),
-    ModuleName: yup.object().required('Module Name is required'),
-    SubModuleName: yup.object().nullable(),
 
-    PageName: yup.string().required('Page Name is required'),
-    PageURL: yup.string().nullable(),
-    MainPageName: yup.string().nullable(),
+    pageId: yup.number().notRequired(),
+    pageName: yup.string().required('Page Name is required'),
+    pageURL: yup.string().nullable(),
+    mainPageId: yup.number().nullable().notRequired(),
+    mainPageName: yup.object().nullable(),
 
-    OrderBy: yup.string().required().min(1),
-    IconStyle: yup.string().required().min(1),
-    selectedCategory: yup.boolean().required()
+    // uniqueName: yup.string().nullable(),
+    
+    applicationId: yup.number().nullable().notRequired(),
+    application: yup.object().required('Application Name is required'),
+
+    moduleId: yup.number().nullable().notRequired(),
+    moduleName: yup.object().required('Module Name is required'),
+    // subModuleId: yup.number().notRequired(),
+    // subModuleName: yup.object().nullable(),
+
+    orderBy: yup.string().nullable().notRequired(),
+    iconStyle: yup.string().required('Icon / Font Style is required'),
+    isMenu: yup.object().nullable().notRequired()
   }),
 
   ROLE_CREATION: yup.object().shape({

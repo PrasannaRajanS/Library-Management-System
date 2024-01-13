@@ -6,7 +6,11 @@ const routes: Routes = [
   { path: 'module-creation', data: { breadcrumb: 'Modules' }, loadChildren: () => import('./module-creation/module.module').then(m => m.ModuleModule) }, //  Only for Developers
 
   { path: 'role-creation', data: { breadcrumb: 'Roles' }, loadChildren: () => import('./role-creation/role.module').then(m => m.RoleModule) },
+  
   { path: 'page-creation', data: { breadcrumb: 'Pages' }, loadChildren: () => import('./page-creation/page.module').then(m => m.PageModule) },
+  { path: 'page-creation/:id', data: { breadcrumb: 'Pages' },  loadChildren: () => import('./page-creation/page.module').then(m => m.PageModule) },
+  { path: 'page-list', data: { breadcrumb: 'Pages' }, loadChildren: () => import('./page-list/page-list.module').then(m => m.PageListModule) },
+
   { path: 'role-page-associate', data: { breadcrumb: 'Role & Page Associate' }, loadChildren: () => import('./role-page-associate/role-page.module').then(m => m.RolePageModule) },
   { path: 'user-creation', data: { breadcrumb: 'Users' }, loadChildren: () => import('./user-creation/user.module').then(m => m.UserModule) },
   { path: 'form-field-button-permission', data: { breadcrumb: 'Form Field & Button Associate' }, loadChildren: () => import('./form-field-button-permission/form-field-button.module').then(m => m.FormFieldButtonModule) },

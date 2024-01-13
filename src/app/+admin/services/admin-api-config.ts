@@ -19,8 +19,12 @@ export const AdminAPIConfig = {
                     LIST: "/module/GetModules"
                 },
                 PAGE_CREATION: {
-                    SAVE: "/Module/List",
-                    UPDATE: "/Module/List"
+                    SAVE: "/page/Create",
+                    UPDATE: "/page/Update",
+                    DELETE: "/page/Delete",
+                    LIST: "/page/GetPages",
+                    EDIT: "/page/GetPageById",
+                    MAIN_PAGE_LIST: "/page/GetMainPages",
                 },
                 ROLE_CREATION: {
                     SAVE: "/role/Create",
