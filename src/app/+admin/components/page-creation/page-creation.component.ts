@@ -15,7 +15,7 @@ import { HttpService } from '../../services/http.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AdminValidation } from '../../services/admin-validation';
 import { MessageService } from 'primeng/api';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IMainPage } from '../../services/interfaces/IMainPage';
 
 interface AutoCompleteCompleteEvent {
@@ -99,6 +99,7 @@ export class PageCreationComponent {
     private PageService: PageService,
     private httpService: HttpService,
     private messageService: MessageService,
+    private router:Router,
     private activatedRoute: ActivatedRoute,
   ) {
 
@@ -331,6 +332,7 @@ export class PageCreationComponent {
         JSON.stringify(passSaveParams))
         .subscribe({
           next: (result: any) => {
+            console.log('After Save/Update', result);
 
             this.notificationsService(AdminValidation.NOTIFICATION_SUCCESS, 'Success Message', result.message);
             this.Clear();
@@ -348,11 +350,13 @@ export class PageCreationComponent {
   }
 
   RedirecttoList() {
-
+    this.router.navigate(['/apps/admin/page-list']);
   }
 
   Clear() {
-
+    this.buttonText = "Save";
+    this.IsUpdate = false;
+    this.PageCreationInfoForm.reset();
   }
 
   numberOnly(event: any) {

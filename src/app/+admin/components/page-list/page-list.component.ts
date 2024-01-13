@@ -114,4 +114,8 @@ export class PageListComponent {
 
     this.item = {};
   }
+
+  AddPage(){
+    this.router.navigate(['/apps/admin/page-creation']);
+  }
 }

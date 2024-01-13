@@ -1,3 +1,13 @@
+<p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+        <div class="my-2">
+            <button pButton pRipple icon="pi pi-plus" class="p-button-primary mr-2" (click)="AddPage()">Add</button>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="right">
+    </ng-template>
+</p-toolbar>
 <div class="grid">
     <div class="col-12">
         <div class="card px-6 py-6">
@@ -10,6 +20,7 @@
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                         <h4 class="m-0"> PAGE LIST</h4>
+                        
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."

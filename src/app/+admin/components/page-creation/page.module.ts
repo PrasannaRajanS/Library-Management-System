@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -26,6 +26,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { PageListModule } from '../page-list/page-list.module';
 
 @NgModule({
   declarations: [
@@ -44,9 +45,11 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     ToolbarModule,
     CheckboxModule,
 
+    PageListModule
 
 
   ],
-  providers: [UtilService, MessageService, ConfirmationService]
+  providers: [UtilService, MessageService, ConfirmationService],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PageModule { }
