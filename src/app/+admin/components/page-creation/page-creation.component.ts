@@ -307,7 +307,7 @@ export class PageCreationComponent {
 
         passSaveParams.pageId = 0;
         passSaveParams.pageName = this.PageCreationInfoForm.value['pageName'];
-        passSaveParams.pageURL = this.PageCreationInfoForm.value['pageURL'];
+        passSaveParams.pageURL = this.PageCreationInfoForm.value['pageURL'] !=undefined ? this.PageCreationInfoForm.value['pageURL'] : '';
 
         passSaveParams.linkId = this.PageCreationInfoForm.value['mainPageName'] != undefined ? this.PageCreationInfoForm.value['mainPageName'].mainPageId : 0;
         passSaveParams.applicationId = this.PageCreationInfoForm.value['application'] != undefined ? this.PageCreationInfoForm.value['application'].applicationId : 0;
@@ -315,7 +315,7 @@ export class PageCreationComponent {
 
         passSaveParams.orderID = this.PageCreationInfoForm.value['orderBy'];
         passSaveParams.iconStyle = this.PageCreationInfoForm.value['iconStyle'];
-        passSaveParams.isMenu = Boolean(this.PageCreationInfoForm.value['isMenu'].key);
+        passSaveParams.isMenu = this.PageCreationInfoForm.value['isMenu'] !=null ? Boolean(this.PageCreationInfoForm.value['isMenu'].key) : false;
         
         passSaveParams.unitId = 0;
         passSaveParams.isActive = true;

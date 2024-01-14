@@ -90,7 +90,7 @@
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
                     <input type="text" id="orderBy" pInputText formControlName="orderBy">
-                    <label for="orderBy">Order By</label>
+                    <label for="orderBy">Order By<span class="mandatory">*</span></label>
                 </span>
                 <small id="orderBy-help">{{ formError("orderBy" ,PageCreationInfoForm)}}</small>
             </div>
@@ -99,22 +99,16 @@
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
                     <input type="text" id="iconStyle" pInputText formControlName="iconStyle">
-                    <label for="iconStyle">Icon / Font Style</label>
+                    <label for="iconStyle">Icon / Font Style<span class="mandatory">*</span></label>
                 </span>
                 <small id="iconStyle-help">{{ formError("iconStyle" ,PageCreationInfoForm)}}</small>
             </div>
 
-            <div class="field col-12 md:col-1" style="margin-top: 15px;">
-                <span class="p-float-label">
-                    <label>Is Menu</label>
-                </span>
-            </div>
-
             <div class="field col-12 md:col-2 flex flex-wrap gap-2">
-                <div *ngFor="let category of categories" class="field-checkbox">
+                <div tooltipPosition="bottom" pTooltip="Yes, Only for Direct Menu / SubModule" *ngFor="let category of categories" class="field-checkbox">
                     <p-radioButton [inputId]="category.key" [value]="category"
                         formControlName="isMenu"></p-radioButton>
-                    <label [for]="category.key" class="ml-2">{{ category.name }}</label>
+                    <label [for]="category.key"  class="ml-2">{{ category.name }}</label>
                 </div>
             </div>
 

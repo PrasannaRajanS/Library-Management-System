@@ -27,6 +27,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { PageListModule } from '../page-list/page-list.module';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { PageListModule } from '../page-list/page-list.module';
     ToolbarModule,
     CheckboxModule,
 
-    PageListModule
+    PageListModule,
+    TooltipModule
 
 
   ],

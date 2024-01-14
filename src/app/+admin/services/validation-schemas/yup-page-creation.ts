@@ -56,8 +56,18 @@ export const YupAdminValidation = Object.freeze({
   }),
 
   ROLE_PAGE_ASSOCIATE: yup.object().shape({
-    ApplicationName: yup.object().required('Application Name is required'),
-    RoleName: yup.object().required('Role Name is required'),
+    rolePageAssocId: yup.number().notRequired(),
+    
+    applicationId: yup.number().notRequired(),
+    application: yup.object().required('Application Name is required'),
+
+    roleId: yup.number().notRequired(),
+    role: yup.object().required('Role Name is required'),
+    pageId: yup.number().notRequired(),
+
+    isActive: yup.bool().nullable(),
+    userId: yup.number().nullable(),
+    ipAddress: yup.string().nullable(),
   }),
 
   USER_CREATION: yup.object().shape({

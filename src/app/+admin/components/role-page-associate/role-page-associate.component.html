@@ -15,30 +15,33 @@
         </ng-template>
     </p-toolbar>
 
-   <p-toast></p-toast>
+    <p-toast></p-toast>
+    <form [formGroup]="RolePageAssociateForm" style="margin-top: 10px;">
         <div class="grid p-fluid mt-3">
-            
+    
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
-                    <p-dropdown id="ApplicationName" [(ngModel)]="selectApplication"  [options]="ApplicationList"
-                        optionLabel="applicationName" [autoDisplayFirst]="false" [showClear]="true" (onChange)="onChangeApplicationName($event)">
+                    <p-dropdown id="application" formControlName="application" [options]="ApplicationList"
+                        optionLabel="applicationName" [autoDisplayFirst]="false" [showClear]="true"
+                        (onChange)="onChangeApplicationName($event)">
                     </p-dropdown>
-                    <label for="ApplicationName">Application <span class="mandatory">*</span></label>
+                    <label for="application">Application Name<span class="mandatory">*</span></label>
                 </span>
-           
+                <small id="application-help">{{formError("application",RolePageAssociateForm)}}</small>
+            </div>
+    
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <p-dropdown id="role" formControlName="role" [options]="filteredRoleList" optionLabel="roleName"
+                        [autoDisplayFirst]="false" [showClear]="true" (onChange)="onChangeRole($event)">
+                    </p-dropdown>
+                    <label for="role">Role Name<span class="mandatory">*</span></label>
+                </span>
+                <small id="application-help">{{formError("role",RolePageAssociateForm)}}</small>
             </div>
 
-            <div class="field col-12 md:col-3">
-                <span class="p-float-label">
-                    <p-dropdown id="Role"  [options]="RoleList" [(ngModel)]="selectRole"
-                        optionLabel="applicationName" [autoDisplayFirst]="false" [showClear]="true" (onChange)="onChangeRole($event)">
-                    </p-dropdown>
-                    <label for="Role">Role<span class="mandatory">*</span></label>
-                </span>
-              
-            </div>
         </div>
-
+    </form>
 </div>
 <div class="grid">
     <div class="col-12">

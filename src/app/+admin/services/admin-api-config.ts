@@ -33,6 +33,7 @@ export const AdminAPIConfig = {
                     LIST: "/role/GetRoles"
                 },
                 ROLE_PAGE_ASSOCIATION: {
+                    GET_ROLE_PAGES: "/page/GetAllPagesByRoleId",
                     SAVE: "/Module/List"
                 },
                 USER: {
