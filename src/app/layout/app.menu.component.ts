@@ -16,27 +16,22 @@ export class AppMenuComponent implements OnInit {
                 icon: 'pi pi-fw pi-user',
                 items: [
                     {
-                        label: 'Application Creation',
+                        label: 'Application',
                         icon: 'pi pi-fw pi-globe',
                         routerLink: ['/apps/admin/application-creation']
                     },
                     {
-                        label: 'Module Creation',
+                        label: 'Module',
                         icon: 'pi pi-fw pi-box',
                         routerLink: ['/apps/admin/module-creation']
                     },
                     {
-                        label: 'Page Creation',
+                        label: 'Page',
                         icon: 'pi pi-fw pi-book',
                         routerLink: ['/apps/admin/page-creation']
                     },
                     {
-                        label: 'Page List',
-                        icon: 'pi pi-fw pi-book',
-                        routerLink: ['/apps/admin/page-list']
-                    },
-                    {
-                        label: 'Role Creation',
+                        label: 'Role',
                         icon: 'pi pi-fw pi-user',
                         routerLink: ['/apps/admin/role-creation']
                     },
@@ -46,7 +41,7 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/apps/admin/role-page-associate']
                     },
                     {
-                        label: 'User Creation',
+                        label: 'User',
                         icon: 'pi pi-fw pi-user-plus',
                         routerLink: ['/apps/admin/user-creation']
                     },

@@ -34,10 +34,17 @@ export const AdminAPIConfig = {
                 },
                 ROLE_PAGE_ASSOCIATION: {
                     GET_ROLE_PAGES: "/page/GetAllPagesByRoleId",
-                    SAVE: "/Module/List"
+                    SAVE: ""
                 },
                 USER: {
-                    SAVE: "/Module/List"
+                    SAVE: "/user/Create",
+                    UPDATE: "/user/Update",
+                    DELETE: "/user/Delete",
+                    LIST: "/user/GetUsers",
+                    
+                    EMPOLOYEES_LIST: "/user/GetEmployees",
+                    DEFAULT_PAGE_LIST: "/user/GetDefaultPages",
+                    UNIT_LIST: "/user/GetUnits",
                 },
 
             }

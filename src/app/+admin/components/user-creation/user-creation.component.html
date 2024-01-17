@@ -1,99 +1,109 @@
 <div class="card">
     <h5>USER CREATION</h5>
+
     <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
             <div class="my-2">
-                <button pButton pRipple label="Save" icon="pi pi-plus" class="p-button-success mr-2"
-                    (click)="saveUsers()"></button>
-                <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger"></button>
             </div>
         </ng-template>
-
+    
         <ng-template pTemplate="right">
-            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+            <button pButton pRipple label="Save" icon="pi pi-plus" class="p-button-success mr-2" (click)="Save()"></button>
+            <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger"></button>
         </ng-template>
     </p-toolbar>
 
-    <div class="grid p-fluid mt-3">
+    <p-toast></p-toast>
 
-        <div class="field col-12 md:col-4">
-            <span class="p-float-label">
-                <p-autoComplete inputId="txtApplication" [(ngModel)]="value2" [suggestions]="filteredCountries"
-                    (completeMethod)="searchCountry($event)" field="name" 
-                    [ngClass]="{'ng-invalid ng-dirty' : submitted && !value2}"></p-autoComplete>
-                <label for="txtApplication">Application<span class="mandatory">*</span></label>
-            </span>
-            <!-- <small class="ng-dirty ng-invalid" *ngIf="submitted && !value2">Name is required.</small> -->
+    <form  [formGroup]="UserCreationForm" style="margin-top: 10px;">
+        <div class="grid p-fluid mt-3">
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <p-dropdown id="ddlApplication" formControlName="application" [options]="ApplicationList"
+                        optionLabel="applicationName" [autoDisplayFirst]="false" [showClear]="true"
+                        (onChange)="onChangeApplicationName($event)">
+                    </p-dropdown>
+                    <label for="ddlApplication">Application Name<span class="mandatory">*</span></label>
+                </span>
+                <small id="ddlApplication-help">{{formError("application",UserCreationForm)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <p-autoComplete formControlName="employee" [suggestions]="filteredEmployeeList"
+                        (completeMethod)="filterEmployee($event)" [minLength]="0" [dropdown]="true" [forceSelection]="true"
+                        field="employeeName"></p-autoComplete>
+                    <label for="employee">Employee</label>
+                </span>
+                <small id="employee-help">{{ formError("employee",UserCreationForm)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="userName" pInputText formControlName="userName">
+                    <label for="userName">User Name<span class="mandatory">*</span></label>
+                </span>
+                <small id="userName-help">{{ formError("userName" ,UserCreationForm)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label p-input-icon-right">
+                    <!-- <input type="text" id="txtPassword" pInputText [(ngModel)]="value4"> -->
+                    <input type="text" id="password" pInputText formControlName="password">
+                    <label for="password">Password</label>
+                    <i class="pi" [ngClass]="{ 'pi-eye-slash': !fieldTextType, 'pi-eye': fieldTextType }" 
+                    (click)="toggleFieldTextType()"></i>
+                </span>
+                <small id="password-help">{{ formError("password" ,UserCreationForm)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <p-dropdown id="role" formControlName="role" [options]="filteredRoleList" optionLabel="roleName"
+                        [autoDisplayFirst]="false" [showClear]="true" (onChange)="onChangeRole($event)">
+                    </p-dropdown>
+                    <label for="role">Role Name<span class="mandatory">*</span></label>
+                </span>
+                <small id="application-help">{{formError("role",UserCreationForm)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <p-multiSelect inputId="multiselect" [options]="UnitList" formControlName="selectedUnits" optionLabel="unitName"
+                        [filter]="false"></p-multiSelect>
+                    <label for="multiselect">Unit</label>
+                </span>
+                <small id="application-help">{{formError("selectedUnits",UserCreationForm)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <p-dropdown id="page" formControlName="page" [options]="filteredPageList" optionLabel="pageName"
+                        [autoDisplayFirst]="false" [showClear]="true" (onChange)="onChangePage($event)">
+                    </p-dropdown>
+                    <label for="page">Default Page<span class="mandatory">*</span></label>
+                </span>
+                <small id="application-help">{{formError("page",UserCreationForm)}}</small>
+            </div>
+
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="email" pInputText formControlName="email">
+                    <label for="email">Email<span class="mandatory">*</span></label>
+                </span>
+                <small id="email-help">{{ formError("email" ,UserCreationForm)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="phoneNumber" pInputText formControlName="phoneNumber">
+                    <label for="phoneNumber">Phone Number<span class="mandatory">*</span></label>
+                </span>
+                <small id="phoneNumber-help">{{ formError("phoneNumber" ,UserCreationForm)}}</small>
+            </div>
+
         </div>
-
-        <div class="field col-12 md:col-4">
-            <span class="p-float-label">
-                <p-autoComplete inputId="txtEmployee" [(ngModel)]="value2" [suggestions]="filteredCountries"
-                    (completeMethod)="searchCountry($event)" field="name"></p-autoComplete>
-                <label for="txtEmployee">Employee</label>
-            </span>
-        </div>
-
-        <div class="field col-12 md:col-4">
-            <span class="p-float-label">
-                <input type="text" id="txtUsername" pInputText [(ngModel)]="value1">
-                <label for="txtUsername">Username</label>
-            </span>
-        </div>
-
-        <div class="field col-12 md:col-4">
-            <span class="p-float-label p-input-icon-right">
-                <input type="text" id="txtPassword" pInputText [(ngModel)]="value4">
-                <label for="txtPassword">Password</label>
-                <i class="pi" [ngClass]="{
-                    'pi-eye-slash': !fieldTextType,
-                    'pi-eye': fieldTextType
-                  }" (click)="toggleFieldTextType()"></i>
-            </span>
-        </div>
-
-        <div class="field col-12 md:col-4">
-            <span class="p-float-label">
-                <p-autoComplete inputId="txtRole" [(ngModel)]="value2" [suggestions]="filteredCountries"
-                    (completeMethod)="searchCountry($event)" field="name"></p-autoComplete>
-                <label for="txtRole">Role</label>
-            </span>
-        </div>
-
-        <div class="field col-12 md:col-4">
-            <span class="p-float-label">
-                <p-multiSelect inputId="multiselect" [options]="cities" [(ngModel)]="value11" optionLabel="name"
-                    [filter]="false"></p-multiSelect>
-                <label for="multiselect">Unit</label>
-            </span>
-        </div>
-
-        <div class="field col-12 md:col-4">
-            <span class="p-float-label">
-                <p-autoComplete inputId="txtDefaultPage" [(ngModel)]="value2" [suggestions]="filteredCountries"
-                    (completeMethod)="searchCountry($event)" field="name"></p-autoComplete>
-                <label for="txtDefaultPage">Default Page</label>
-            </span>
-        </div>
-
-
-        <div class="field col-12 md:col-4">
-            <span class="p-float-label">
-                <input type="text" id="txtEmail" pInputText [(ngModel)]="value1">
-                <label for="txtEmail">Email</label>
-            </span>
-        </div>
-
-
-
-        <div class="field col-12 md:col-4">
-            <span class="p-float-label">
-                <input type="text" id="txtMobileNo" pInputText [(ngModel)]="value1">
-                <label for="txtMobileNo">MobileNo</label>
-            </span>
-        </div>
-
-
-
-    </div>
+    </form>
 </div>

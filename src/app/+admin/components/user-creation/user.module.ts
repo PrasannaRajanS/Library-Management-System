@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UserRoutingModule } from './user-routing.module';
 import { UserCreationComponent } from './user-creation.component';
@@ -11,6 +11,19 @@ import { InputMaskModule } from "primeng/inputmask";
 import { MultiSelectModule } from "primeng/multiselect";
 import { InputTextModule } from "primeng/inputtext";
 import { ToolbarModule } from 'primeng/toolbar';
+import { ToastModule } from 'primeng/toast';
+import { UtilService } from 'src/app/shared/util.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { DropdownModule } from 'primeng/dropdown';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DialogModule } from 'primeng/dialog';
+import { CheckboxModule } from 'primeng/checkbox';
+import { TooltipModule } from 'primeng/tooltip';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -19,14 +32,19 @@ import { ToolbarModule } from 'primeng/toolbar';
   imports: [
     CommonModule,
     UserRoutingModule,
-    FormsModule,
+
+    ReactiveFormsModule,
 
     AutoCompleteModule,
-		CalendarModule,
-		InputMaskModule,
-		MultiSelectModule,
-		InputTextModule,
-    ToolbarModule
-  ]
+    TableModule,
+    ButtonModule, RippleModule,
+    InputMaskModule, ToastModule, InputTextareaModule, DropdownModule,
+    MultiSelectModule, RadioButtonModule, InputNumberModule, DialogModule,
+    InputTextModule,
+    ToolbarModule,
+    CheckboxModule,
+    TooltipModule
+  ],
+  providers: [UtilService, MessageService, ConfirmationService],
 })
 export class UserModule { }

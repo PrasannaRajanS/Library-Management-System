@@ -71,8 +71,34 @@ export const YupAdminValidation = Object.freeze({
   }),
 
   USER_CREATION: yup.object().shape({
-    ApplicationName: yup.object().required('Application Name is required'),
-    RoleName: yup.object().required('Role Name is required'),
+    userId: yup.number().nullable().notRequired(),
+
+    userName: yup.string().required('User Name is required'),
+    employeeId: yup.number().nullable().notRequired(),
+    employeeName: yup.string().nullable().notRequired(),
+    employee: yup.object().required('Employee is required'),
+    password: yup.string().required('Password is required'),
+    description: yup.string().nullable().notRequired(),
+    
+    pageId: yup.number().notRequired(),
+    pageName: yup.string().nullable().notRequired(),
+    page: yup.object().required('Default Page is required'),
+
+    applicationId: yup.number().nullable().notRequired(),
+    applicationName: yup.string().nullable().notRequired(),
+    application: yup.object().required('Application is required'),
+
+    roleId: yup.number().nullable().notRequired(),
+    roleName: yup.string().nullable().notRequired(),
+    role: yup.object().required('Role is required'),
+
+    email: yup.string().required('Email is required'),
+    phoneNumber: yup.string().required('Phone Number is required'),
+
+    isActive: yup.bool().nullable().notRequired(),
+    loggedinUserId: yup.number().nullable().notRequired(),
+    ipAddress: yup.string().nullable().notRequired(),
+    selectedUnits: yup.object().required('Default Page is required'),
   }),
 
 });
