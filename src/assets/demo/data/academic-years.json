@@ -2,10 +2,32 @@
 	"data": [
 		{
 			"academicYearId": 1,
-			"academicYear": "[09/13/2022 - 09/12/2023]",
-			"startDate": "09/13/2022",
-			"endDate": "09/13/2023",
-			"accountYear": "09/13/2023",
+			"academicYear": "[04/01/2020 - 03/31/2021]",
+			"startDate": "04/01/2020",
+			"endDate": "03/31/2021",
+			"accountYear": "04/01/2020",
+			"isDefault": 0,
+			"isActive": 1,
+			"userId": "1",
+			"ipAddress": "192.168.1.1"
+		},
+		{
+			"academicYearId": 2,
+			"academicYear": "[04/01/2021 - 03/31/2022]",
+			"startDate": "04/01/2021",
+			"endDate": "03/31/2022",
+			"accountYear": "04/01/2021",
+			"isDefault": 0,
+			"isActive": 1,
+			"userId": "1",
+			"ipAddress": "192.168.1.1"
+		},
+		{
+			"academicYearId": 3,
+			"academicYear": "[04/01/2023 - 03/31/2024]",
+			"startDate": "04/01/2023",
+			"endDate": "03/31/2024",
+			"accountYear": "04/01/2023",
 			"isDefault": 1,
 			"isActive": 1,
 			"userId": "1",

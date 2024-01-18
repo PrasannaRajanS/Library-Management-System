@@ -18,6 +18,7 @@ import { UtilService } from 'src/app/shared/util.service';
 import { HttpService } from 'src/app/+admin/services/http.service';
 
 import { PageService } from 'src/app/+admin/services/page.service';
+import { ProductService } from 'src/app/demo/service/product.service';
 
 @Component({
   selector: 'app-fiscal-year',
@@ -73,7 +74,7 @@ export class FiscalYearComponent {
     private utilService: UtilService,
     private httpService: HttpService,
     private messageService: MessageService,
-    private PageService: PageService
+    private productService: ProductService
   ) {
     this.AcademicYearForm = FormHandler.controls<IAcademicYear>(this.initialValues);  //  Step 5
     this.AcademicYearForm.setValidators(FormHandler.validate<IAcademicYear>(this.validationSchema));
@@ -117,21 +118,27 @@ export class FiscalYearComponent {
 
 
   public GetAll() {
-    try {
-      this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.ACADEMIC_YEAR.LIST)
-        .subscribe({
-          next: (result: any) => {
-            // doubt
-            this.items = result.academicYear;
-            console.log('GetAll', this.items);
 
-          },
-          error: (err: HttpErrorResponse) => console.log(err)
+    this.productService.getAcademicYears().then(data => {
+      this.items = data;
+    });
 
-        });
-    } catch (error) {
 
-    }
+    // try {
+    //   this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.ACADEMIC_YEAR.LIST)
+    //     .subscribe({
+    //       next: (result: any) => {
+    //         // doubt
+    //         this.items = result.academicYear;
+    //         console.log('GetAll', this.items);
+
+    //       },
+    //       error: (err: HttpErrorResponse) => console.log(err)
+
+    //     });
+    // } catch (error) {
+
+    // }
   }
 
 

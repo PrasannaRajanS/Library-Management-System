@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { IAcademicYear } from 'src/app/+fiscal/services/interfaces/IAcademicYear';
 
 import { Product } from 'src/app/demo/api/product';
 
@@ -42,6 +43,13 @@ export class ProductService {
         return this.http.get<any>('assets/demo/data/products-orders.json')
             .toPromise()
             .then(res => res.data as Product[])
+            .then(data => data);
+    }
+
+    getAcademicYears() {
+        return this.http.get<any>('assets/demo/data/academic-years.json')
+            .toPromise()
+            .then(res => res.data as IAcademicYear[])
             .then(data => data);
     }
 }
