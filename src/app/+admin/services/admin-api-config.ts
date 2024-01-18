@@ -40,6 +40,7 @@ export const AdminAPIConfig = {
                     SAVE: "/user/Create",
                     UPDATE: "/user/Update",
                     DELETE: "/user/Delete",
+                    EDIT: "/user/GeUserById",
                     LIST: "/user/GetUsers",
                     
                     EMPOLOYEES_LIST: "/user/GetEmployees",

@@ -12,7 +12,11 @@ const routes: Routes = [
   { path: 'page-list', data: { breadcrumb: 'Pages' }, loadChildren: () => import('./page-list/page-list.module').then(m => m.PageListModule) },
 
   { path: 'role-page-associate', data: { breadcrumb: 'Role & Page Associate' }, loadChildren: () => import('./role-page-associate/role-page.module').then(m => m.RolePageModule) },
+  
   { path: 'user-creation', data: { breadcrumb: 'Users' }, loadChildren: () => import('./user-creation/user.module').then(m => m.UserModule) },
+  { path: 'user-creation/:id', data: { breadcrumb: 'Users' },  loadChildren: () => import('./user-creation/user.module').then(m => m.UserModule) },
+  { path: 'user-list', data: { breadcrumb: 'Users' }, loadChildren: () => import('./user-list/user-list.module').then(m => m.UserListModule) },
+
   { path: 'form-field-button-permission', data: { breadcrumb: 'Form Field & Button Associate' }, loadChildren: () => import('./form-field-button-permission/form-field-button.module').then(m => m.FormFieldButtonModule) },
 ];
 

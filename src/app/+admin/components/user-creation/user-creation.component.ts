@@ -18,6 +18,7 @@ import { YupAdminValidation } from '../../services/validation-schemas/yup-page-c
 import * as yup from "yup";
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { IRole } from '../../services/interfaces/IRole';
+import { AdminValidation } from '../../services/admin-validation';
 
 @Component({
     selector: 'app-user-creation',
@@ -68,7 +69,6 @@ export class UserCreationComponent {
     };
     //#endregion 
 
-
     ApplicationList: IApplication[] = [];
 
     EmployeesList: IUser[] = [];
@@ -83,10 +83,14 @@ export class UserCreationComponent {
 
     UnitList: IUnit[] = [];
     public selectedUnits: any = null;
-    
-    //#region Password
-    fieldTextType: boolean = false;
 
+    UserList: IUser[] = [];
+
+    //#region Save
+    buttonText: string = 'Save';
+    private IsUpdate: boolean = false;
+    public userDetails: any;
+    UserId?: number | null | undefined = 0;
 
     constructor(
         private UtilService: UtilService,
@@ -98,12 +102,25 @@ export class UserCreationComponent {
         private countryService: CountryService
     ) {
         
-        this.toggleFieldTextType();
 
         this.UserCreationForm = FormHandler.controls<IUser>(this.initialValues);    //  Step 4
         this.UserCreationForm.setValidators(FormHandler.validate<IUser>(this.validationSchema));
 
+        //#region 
+        this.activatedRoute.params.subscribe((params: any) => {
 
+
+            if (params != undefined && !_.isEmpty(params)) {
+                this.UserId = (+(params.id));
+                this.buttonText = "Update";
+                this.IsUpdate = true;
+
+            } else {
+                this.UserId = 0;
+                this.IsUpdate = false;
+            }
+        });
+        //#endregion
     }
 
     ngOnInit() {
@@ -111,7 +128,48 @@ export class UserCreationComponent {
         this.LoadEmployees();
         this.LoadRoles();
         this.LoadUnits();
+
+        /** Update **/
+    this.fnGetUserById();
+    /** Update **/
     }
+
+
+    public fnGetUserById() {
+
+        try {
+    
+          this.httpService.globalGet(AdminAPIConfig.API_CONFIG.API_URL.ADMIN.USER.EDIT + '/?userId=' + this.UserId)
+            .subscribe({
+              next: (result: any) => {
+                this.UserList = result.users;
+                console.log('fnGetUserById', this.UserList);
+    
+                if (this.UserList != undefined && this.UserList.length > 0) {
+
+                  this.UserId = this.UserList[0].userId;
+                  this.UserCreationForm.get("application")?.setValue(this.ApplicationList.find(app => app.applicationId === this.UserList[0].applicationId));
+                  this.UserCreationForm.get("employee")?.setValue(this.EmployeesList.find(app => app.employeeId === this.UserList[0].employeeId));
+                  this.UserCreationForm.get('userName')?.setValue(this.UserList[0].userName);
+                  this.UserCreationForm.get('password')?.setValue(this.UserList[0].password);
+                  this.UserCreationForm.get("role")?.setValue(this.RoleList.find(app => app.roleId === this.UserList[0].roleId));
+
+                  this.UserCreationForm.get("selectedUnits")?.setValue(this.UnitList.find(app => app.unitId === this.UserList[0].selectedUnits));
+                  this.UserCreationForm.get('page')?.setValue(this.DefaultPagesList.find(app => app.pageId === this.UserList[0].pageId));
+
+                  this.UserCreationForm.get('email')?.setValue(this.UserList[0].email);
+                  this.UserCreationForm.get('phoneNumber')?.setValue(this.UserList[0].phoneNumber);
+
+                }
+              },
+              error: (err: HttpErrorResponse) => console.log('fnGetUserById() ', err)
+
+            });
+    
+        } catch (error) {
+    
+        }
+      }
 
 
     public LoadApplications() {
@@ -215,11 +273,6 @@ export class UserCreationComponent {
 
     }
 
-    
-
-    toggleFieldTextType() {
-        this.fieldTextType = !this.fieldTextType;
-    }
 
     onChangeApplicationName($event: any) {
     
@@ -265,5 +318,105 @@ export class UserCreationComponent {
 
     Save() {
 
+        console.log(this.UserCreationForm.value);
+
+        // {
+        //     "userId": 0,
+        //     "userName": "string",
+        //     "employeeId": 0,
+        //     "password": "string",
+        //     "description": "string",
+        //     "defaultPageId": 0,
+        //     "applicationId": 0,
+        //     "roleId": 0,
+        //     "email": "string",
+        //     "phoneNumber": "string",
+        //     "unitId": 0,
+        //     "isActive": true,
+        //     "loggedinUserId": 0,
+        //     "ipAddress": "string"
+        //   }
+        let _apiUrl: string = '';
+        let passSaveParams: any = {};
+
+        try {
+
+            if (this.IsUpdate) {  //  UPDATE
+
+                passSaveParams.userId = this.UserId;
+                passSaveParams.userName = this.UserCreationForm.value['userName'];
+                passSaveParams.employeeId = this.UserCreationForm.value['employee'] != undefined ? this.UserCreationForm.value['employee'].employeeId : 0;
+
+                passSaveParams.password = this.UserCreationForm.value['password'];
+                passSaveParams.description = '';
+                passSaveParams.defaultPageId = this.UserCreationForm.value['page'] != undefined ? this.UserCreationForm.value['page'].pageId : 0;
+
+                passSaveParams.applicationId = this.UserCreationForm.value['application'] != undefined ? this.UserCreationForm.value['application'].applicationId : 0;
+                passSaveParams.roleId = this.UserCreationForm.value['role'] != undefined ? this.UserCreationForm.value['role'].roleId : 0;
+                passSaveParams.email = this.UserCreationForm.value['email'];
+                passSaveParams.phoneNumber = this.UserCreationForm.value['phoneNumber'];
+                passSaveParams.selectedUnits = this.UserCreationForm.value['selectedUnits'];
+
+                passSaveParams.isActive = true;
+                passSaveParams.loggedinUserId = this.userDetails ? this.userDetails.UserId : 0;
+                passSaveParams.ipAddress = "192.168.1.1";
+
+                _apiUrl = AdminAPIConfig.API_CONFIG.API_URL.ADMIN.USER.UPDATE;
+
+            } else {    //  SAVE
+
+                passSaveParams.userId = this.UserId;
+                passSaveParams.userName = this.UserCreationForm.value['userName'];
+                passSaveParams.employeeId = this.UserCreationForm.value['employee'] != undefined ? this.UserCreationForm.value['employee'].employeeId : 0;
+
+                passSaveParams.password = this.UserCreationForm.value['password'];
+                passSaveParams.description = '';
+                passSaveParams.defaultPageId = this.UserCreationForm.value['page'] != undefined ? this.UserCreationForm.value['page'].pageId : 0;
+
+                passSaveParams.applicationId = this.UserCreationForm.value['application'] != undefined ? this.UserCreationForm.value['application'].applicationId : 0;
+                passSaveParams.roleId = this.UserCreationForm.value['role'] != undefined ? this.UserCreationForm.value['role'].roleId : 0;
+                passSaveParams.email = this.UserCreationForm.value['email'];
+                passSaveParams.phoneNumber = this.UserCreationForm.value['phoneNumber'];
+                passSaveParams.selectedUnits = this.UserCreationForm.value['selectedUnits'];
+
+                passSaveParams.isActive = true;
+                passSaveParams.loggedinUserId = this.userDetails ? this.userDetails.UserId : 0;
+                passSaveParams.ipAddress = "192.168.1.1";
+
+                _apiUrl = AdminAPIConfig.API_CONFIG.API_URL.ADMIN.USER.SAVE;
+
+            }
+            console.log('Before Save/Update', JSON.stringify(passSaveParams));
+
+            this.httpService.globalPost(_apiUrl,
+                JSON.stringify(passSaveParams))
+                .subscribe({
+                    next: (result: any) => {
+                        console.log('After Save/Update', result);
+
+                        this.notificationsService(AdminValidation.NOTIFICATION_SUCCESS, 'Success Message', result.message);
+                        this.Clear();
+                    },
+                    error: (err: HttpErrorResponse) => console.log(err)
+                });
+
+        } catch (error) {
+
+        }
+    }
+
+    private notificationsService(_severity: any, _summary: any, _message: any) {
+        this.messageService.add({ severity: _severity, summary: _summary, detail: _message, life: 3000 });
+        return;
+    }
+
+    Clear() {
+        this.buttonText = "Save";
+        this.IsUpdate = false;
+        this.UserCreationForm.reset();
+    }
+
+    RedirecttoList() {
+        this.router.navigate(['/apps/admin/user-list']);
     }
 }
