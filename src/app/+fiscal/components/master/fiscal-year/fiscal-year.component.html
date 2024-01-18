@@ -33,7 +33,7 @@
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
                     <p-calendar id="calEndDate" formControlName="endDate" [showIcon]="true"
-                    [showButtonBar]="true"></p-calendar>
+                        [showButtonBar]="true"></p-calendar>
 
                     <label for="calEndDate">End Date<span class="mandatory">*</span></label>
                 </span>
@@ -42,7 +42,8 @@
 
             <div class="field col-12 md:col-2">
                 <span class="p-float-label">
-                    <input type="text" id="txtAcademicYear" pInputText formControlName="academicYear">
+                    <p-calendar id="txtAcademicYear" formControlName="academicYear" view="year" dateFormat="yy"
+                        selectionMode="range" [showIcon]="true"></p-calendar>
                     <label for="txtAcademicYear">Academic Year<span class="mandatory">*</span></label>
                 </span>
                 <small>{{ formError("academicYear" ,AcademicYearForm)}}</small>
@@ -50,17 +51,21 @@
 
             <div class="field col-12 md:col-2">
                 <span class="p-float-label">
-                    <p-calendar id="calaccountYear" formControlName="accountYear" view="year"
-                        dateFormat="yy"></p-calendar>
+                    <p-calendar id="calaccountYear" formControlName="accountYear" view="year" dateFormat="yy"
+                        [showIcon]="true"></p-calendar>
                     <label for="calaccountYear">Account Year<span class="mandatory">*</span></label>
                 </span>
                 <small>{{ formError("accountYear" ,AcademicYearForm)}}</small>
             </div>
 
-            <div class="field col-12 md:col-2">
-                <p-radioButton inputId="radIsDefault" value="IsDefault"
-                    formControlName="selectedIsDefault"></p-radioButton>
-                <label for="radIsDefault" class="ml-2">IsDefault</label>
+
+
+            <div class="field col-12 md:col-2 flex flex-wrap gap-2">
+                <div *ngFor="let category of categories" class="field-checkbox">
+                    <p-radioButton [inputId]="category.key" [value]="category"
+                        formControlName="isDefault"></p-radioButton>
+                    <label [for]="category.key" class="ml-2">{{ category.name }}</label>
+                </div>
             </div>
 
 
@@ -68,15 +73,18 @@
     </form>
 </div>
 
-<!-- 
+
 <div class="grid">
     <div class="col-12">
         <div class="card px-6 py-6">
-            <p-table #dt [value]="items" [columns]="cols" responsiveLayout="scroll" [rows]="10"
-                [globalFilterFields]="['applicationName']" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]"
-                [showCurrentPageReport]="true"
+            <p-table #dt [value]="items" [columns]="cols" resposiveLayout="scroll" [rows]="10"
+                [globalFilterFields]="['academicYear,applicationName']" [rows]="10" [paginator]="true"
+                [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                 [(selection)]="selectedItems" selectionMode="multiple" [rowHover]="true" dataKey="id">
+
+
+
 
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
@@ -94,27 +102,42 @@
                         <th style="width: 3rem">
                             S.No
                         </th>
-                        <th pSortableColumn="name">Application Name<p-sortIcon field="applicationName"></p-sortIcon></th>
-                        <th>Description</th>
+                        <th pSortableColumn="startDate">Start Date<p-sortIcon field="startDate"></p-sortIcon></th>
+                        <th pSortableColumn="endDate">End Date<p-sortIcon field="endDate"></p-sortIcon></th>
+                        <th pSortableColumn="academicYear">Academic Year<p-sortIcon field="academicYear"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="accountYear">Account Year<p-sortIcon field="accountYear"></p-sortIcon></th>
                         <th>Action</th>
                     </tr>
                 </ng-template>
 
                 <ng-template pTemplate="body" let-item>
                     <tr>
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{item.academicYearId}}
+                        </td>
+
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{item.startDate}}
+                        </td>
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{item.endDate}}
+                        </td>
+
+                        <td style="width:15%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{item.academicYear}}
+                        </td>
                         <td style="width:5%; min-width:10rem;">
-                            {{item.applicationId}}
+                            {{item.accountYear}}
                         </td>
 
-                        <td style="width:30%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.applicationName}}
-                        </td>
-
-                        <td style="width:30%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.description}}
-                        </td>
 
                         <td style="width:15%; min-width:10rem;">
                             <div class="flex">
@@ -130,12 +153,13 @@
                 </ng-template>
 
             </p-table>
+
         </div>
 
         <p-dialog [(visible)]="deleteDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
             <div class="flex align-items-center justify-content-center">
                 <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span *ngIf="item">Are you sure you want to delete <b>{{item.applicationName}}</b>?</span>
+                <span *ngIf="item">Are you sure you want to delete <b>{{item.academicYear}}</b>?</span>
             </div>
 
             <ng-template pTemplate="footer">
@@ -147,4 +171,5 @@
         </p-dialog>
 
     </div>
-</div> -->
+
+</div>

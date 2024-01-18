@@ -1,0 +1,15 @@
+{
+	"data": [
+		{
+			"academicYearId": 1,
+			"academicYear": "[09/13/2022 - 09/12/2023]",
+			"startDate": "09/13/2022",
+			"endDate": "09/13/2023",
+			"accountYear": "09/13/2023",
+			"isDefault": 1,
+			"isActive": 1,
+			"userId": "1",
+			"ipAddress": "192.168.1.1"
+		}
+    ]
+    }
