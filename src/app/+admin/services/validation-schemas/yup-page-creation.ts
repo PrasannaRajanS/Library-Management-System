@@ -98,7 +98,7 @@ export const YupAdminValidation = Object.freeze({
     isActive: yup.bool().nullable().notRequired(),
     loggedinUserId: yup.number().nullable().notRequired(),
     ipAddress: yup.string().nullable().notRequired(),
-    selectedUnits: yup.object().required('Default Page is required'),
+    selectedUnits: yup.array().required('Unit is required'),
   }),
 
 });

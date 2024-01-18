@@ -24,6 +24,9 @@ import { DialogModule } from 'primeng/dialog';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PasswordModule } from 'primeng/password';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import { TableModule } from 'primeng/table';
     InputTextModule,
     ToolbarModule,
     CheckboxModule,
-    TooltipModule
+    TooltipModule,
+
+    PasswordModule,
+    DividerModule
   ],
   providers: [UtilService, MessageService, ConfirmationService],
 })

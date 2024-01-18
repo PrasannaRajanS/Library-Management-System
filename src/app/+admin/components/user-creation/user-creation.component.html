@@ -32,7 +32,8 @@
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
                     <p-autoComplete formControlName="employee" [suggestions]="filteredEmployeeList"
-                        (completeMethod)="filterEmployee($event)" [minLength]="0" [dropdown]="true" [forceSelection]="true"
+                        (completeMethod)="filterEmployee($event)"
+                        (onSelect)="onSelectEmployee()" [minLength]="0" [dropdown]="true" [forceSelection]="true"
                         field="employeeName"></p-autoComplete>
                     <label for="employee">Employee</label>
                 </span>
@@ -49,11 +50,24 @@
 
             <div class="field col-12 md:col-3">
                 <span class="p-float-label p-input-icon-right">
-                    <!-- <input type="text" id="txtPassword" pInputText [(ngModel)]="value4"> -->
-                    <input type="text" id="password" pInputText formControlName="password">
+
+                    <p-password formControlName="password" [feedback]="true" [toggleMask]="true">
+                        <ng-template pTemplate="header">
+                          <!-- <h6>Pick a password</h6> -->
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                          <p-divider></p-divider>
+                          <p class="p-mt-2">Suggestions</p>
+                          <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
+                            <li>At least one lowercase</li>
+                            <li>At least one uppercase</li>
+                            <li>At least one numeric</li>
+                            <li>Minimum 8 characters</li>
+                          </ul>
+                        </ng-template>
+                      </p-password>
+
                     <label for="password">Password</label>
-                    <i class="pi" [ngClass]="{ 'pi-eye-slash': !fieldTextType, 'pi-eye': fieldTextType }" 
-                    (click)="toggleFieldTextType()"></i>
                 </span>
                 <small id="password-help">{{ formError("password" ,UserCreationForm)}}</small>
             </div>
@@ -68,7 +82,7 @@
                 <small id="application-help">{{formError("role",UserCreationForm)}}</small>
             </div>
 
-            <div class="field col-12 md:col-4">
+            <div class="field col-12 md:col-3">
                 <span class="p-float-label">
                     <p-multiSelect inputId="multiselect" [options]="UnitList" formControlName="selectedUnits" optionLabel="unitName"
                         [filter]="false"></p-multiSelect>
@@ -79,7 +93,7 @@
 
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
-                    <p-dropdown id="page" formControlName="page" [options]="filteredPageList" optionLabel="pageName"
+                    <p-dropdown id="page" formControlName="page" [options]="DefaultPagesList" optionLabel="pageName"
                         [autoDisplayFirst]="false" [showClear]="true" (onChange)="onChangePage($event)">
                     </p-dropdown>
                     <label for="page">Default Page<span class="mandatory">*</span></label>
