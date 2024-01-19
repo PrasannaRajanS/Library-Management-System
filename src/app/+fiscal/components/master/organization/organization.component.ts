@@ -25,10 +25,23 @@ export class OrganizationComponent {
         organizationId: 0,
         name: null,
         shortName: null,
+        addressOne: null,
+        addressTwo: null,
+        addressThree: null,
+        addressFour: null,
+        city: null,
+        state: null,
+        country: null,
+        pinCode: null,
+        phoneNumber: null, 
+        fax: null,
+        mobileNumber: null,
+        email: null,
+        website: null,
 
         isActive: null,
         userId: null,
-        ipAddress: null,
+        ipAddress: null
     };
 
     validationSchema: yup.ObjectSchema<IOrganization> = YupFiscalValidation.ORGANIZATION; //  Step 3
