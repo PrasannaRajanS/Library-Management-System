@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 
+
 import { OrganizationRoutingModule } from './organization-routing.module';
 import { OrganizationComponent } from './organization.component';
 import { TableModule } from 'primeng/table';
@@ -18,6 +19,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { UtilService } from 'src/app/shared/util.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TabViewModule } from 'primeng/tabview';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 @NgModule({
@@ -43,7 +45,11 @@ import { TabViewModule } from 'primeng/tabview';
 		DialogModule,
 
     CalendarModule,
-    TabViewModule  
+    TabViewModule,
+    
+    // image preview
+    FileUploadModule
+
   ],providers: [UtilService, MessageService, ConfirmationService,DatePipe]
 })
 export class OrganizationModule { }

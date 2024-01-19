@@ -14,7 +14,9 @@ export interface IOrganization {
     fax?: string | null | undefined;
     mobileNumber?: string | null | undefined; 
     email?:  string | null | undefined;
-    website?: string | null | undefined
+    website?: string | null | undefined;
+    logoURL?: string | null | undefined; 
+    iconURL?: string | null | undefined;
     
     
     isActive?: boolean | null | undefined;
