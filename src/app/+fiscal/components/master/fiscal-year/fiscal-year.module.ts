@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { FiscalYearRoutingModule } from './fiscal-year-routing.module';
 import { FiscalYearComponent } from './fiscal-year.component';
@@ -44,7 +44,7 @@ import { CalendarModule } from 'primeng/calendar';
 
     CalendarModule 
   ],
-  providers: [UtilService, MessageService, ConfirmationService]
+  providers: [UtilService, MessageService, ConfirmationService,DatePipe]
   
 })
 export class FiscalYearModule { }
