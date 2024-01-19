@@ -2,7 +2,7 @@
 	"data": [
 		{
 			"academicYearId": 1,
-			"academicYear": "[04/01/2020 - 03/31/2021]",
+			"academicYear": ["04/01/2020" , "03/31/2021"],
 			"startDate": "04/01/2020",
 			"endDate": "03/31/2021",
 			"accountYear": "04/01/2020",
@@ -13,7 +13,7 @@
 		},
 		{
 			"academicYearId": 2,
-			"academicYear": "[04/01/2021 - 03/31/2022]",
+			"academicYear": ["04/01/2021" , "03/31/2022"],
 			"startDate": "04/01/2021",
 			"endDate": "03/31/2022",
 			"accountYear": "04/01/2021",
@@ -24,7 +24,7 @@
 		},
 		{
 			"academicYearId": 3,
-			"academicYear": "[04/01/2023 - 03/31/2024]",
+			"academicYear": ["04/01/2023" , "03/31/2024"],
 			"startDate": "04/01/2023",
 			"endDate": "03/31/2024",
 			"accountYear": "04/01/2023",
