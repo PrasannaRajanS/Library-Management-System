@@ -27,8 +27,11 @@ import { DatePipe } from "@angular/common";
     templateUrl: './fiscal-year.component.html',
     styleUrls: ['./fiscal-year.component.scss'],
 })
+
+
 export class FiscalYearComponent {
     buttonText: string = 'Save';
+   public AcadamicYearId:number|null|undefined =0;
 
     private IsUpdate: boolean = false;
 
@@ -148,7 +151,9 @@ export class FiscalYearComponent {
             if (this.IsUpdate) {
                 //  UPDATE
 
-                passSaveParams.academicYearId = 0;
+
+                passSaveParams.academicYearId = this.AcadamicYearId;
+
                 passSaveParams.startDate =
                     this.AcademicYearForm.value['startDate'];
                 passSaveParams.endDate = this.AcademicYearForm.value['endDate'];
@@ -169,7 +174,7 @@ export class FiscalYearComponent {
             } else {
                 //  SAVE
 
-                console.log(this.AcademicYearForm.value);
+                //console.log(this.AcademicYearForm.value);
 
                 passSaveParams.academicYearId = 0;
                 passSaveParams.startDate =
@@ -190,6 +195,8 @@ export class FiscalYearComponent {
                     FiscalAPIConfig.API_CONFIG.API_URL.MASTER.ACADEMIC_YEAR
                         .SAVE;
             }
+
+            console.log('Before SAVE',passSaveParams)
 
             this.httpService
                 .globalPost('', JSON.stringify(passSaveParams))
@@ -223,7 +230,11 @@ export class FiscalYearComponent {
     }
 
     Edit(item: any) {
-        console.log('Edit', item.academicYear);
+
+
+        console.log('Edit', item);
+
+        this.AcadamicYearId=item.academicYearId;
 
         this.AcademicYearForm.controls['startDate']?.setValue(item.startDate);
         this.AcademicYearForm.controls['endDate']?.setValue(item.endDate);
