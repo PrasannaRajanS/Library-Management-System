@@ -10,9 +10,9 @@ export interface IOrganization {
     state?: string | null | undefined;
     country?: string | null | undefined;
     pinCode?: number | null | undefined; 
-    phoneNumber?: number | null | undefined; 
+    phoneNumber?: string | null | undefined; 
     fax?: string | null | undefined;
-    mobileNumber?: number | null | undefined; 
+    mobileNumber?: string | null | undefined; 
     email?:  string | null | undefined;
     website?: string | null | undefined
     
