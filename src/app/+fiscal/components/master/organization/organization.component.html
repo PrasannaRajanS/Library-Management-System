@@ -42,7 +42,7 @@
             <div class="card">
                 <p-tabView orientation="left">
                     <p-tabPanel header="Address Details" class="line-height-3 m-0">
-                        <div class="col-12 md:col-12">
+                        <div class="grid md:col-12">
                             <div class="field col-12 md:col-3">
                                 <span class="p-float-label">
                                     <input type="text" id="address_One" pInputText formControlName="addressOne">
@@ -150,9 +150,27 @@
                             </div>
                         </div>
                     </p-tabPanel>
-                    <p-tabPanel header="Header II" class="line-height-3 m-0">
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                        totam rem aperiam, eaque.
+                    <p-tabPanel header="General Settings" class="line-height-3 m-0">
+                      
+                <div class="field mb-4">
+                    <label for="file"> Organization Logo <span class="mandatory mr-2">*</span> <i class="mb-2 pi pi-info-circle" pTooltip="Image Size (1920 X 1080)"></i> </label><br>
+                    <input type="file" id="file" #file placeholder="Choose file" accept='image/*' (change)="getOrganizationLogo($event)" />
+                </div>
+
+                <div class="field mb-4" *ngIf="logoURL">
+                    <img [src]="logoURL" height="100">
+                </div>
+
+                <div class="field mb-4">
+                    <label for="file"> Favicon <span class="mandatory mr-2">*</span> <i class="mb-2 pi pi-info-circle" pTooltip="Image Size (1920 X 1080)"></i> </label><br>
+                    <input type="file" id="file" #file placeholder="Choose file" accept='image/*' (change)="getFavicon($event)" />
+                </div>
+
+                <div class="field mb-4" *ngIf="iconURL">
+                    <img [src]="iconURL" height="100">
+                </div>
+
+
                     </p-tabPanel>
                     <p-tabPanel header="Header III" class="line-height-3 m-0">
                         At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum

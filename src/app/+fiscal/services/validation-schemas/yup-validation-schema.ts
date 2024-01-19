@@ -33,6 +33,8 @@ export const YupFiscalValidation = Object.freeze({
     mobileNumber: yup.string().nullable().notRequired(),
     email: yup.string().email().nullable().notRequired(),
     website: yup.string().nullable().notRequired(),
+    logoURL: yup.string().url().notRequired(),
+    iconURL: yup.string().url().notRequired(),
 
     isActive:yup.boolean().nullable(),
     userId:yup.number().nullable(),
