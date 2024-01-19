@@ -132,10 +132,10 @@
 
                         <td style="width:15%; min-width:10rem;">
                             <span class="p-column-title">Name</span>
-                            {{item.academicYear}}
+                            {{item.academicYear[0] | date : "yyyy"}} - {{item.academicYear[1] | date : "yyyy"}}
                         </td>
                         <td style="width:5%; min-width:10rem;">
-                            {{item.accountYear}}
+                            {{item.accountYear | date : "yyyy"}}
                         </td>
 
 
