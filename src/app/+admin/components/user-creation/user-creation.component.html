@@ -8,7 +8,7 @@
         </ng-template>
     
         <ng-template pTemplate="right">
-            <button pButton pRipple label="Save" icon="pi pi-plus" class="p-button-success mr-2" [disabled]="!UserCreationForm.valid" (click)="Save()"></button>
+            <button pButton pRipple  icon="pi pi-plus" class="p-button-success mr-2" [disabled]="!UserCreationForm.valid" (click)="Save()">{{buttonText}}</button>
             <button pButton pRipple label="List" icon="pi pi-align-justify" class="p-button-primary mr-2"
                 (click)="RedirecttoList()"></button>
             <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"

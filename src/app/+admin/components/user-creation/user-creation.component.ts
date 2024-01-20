@@ -91,6 +91,7 @@ export class UserCreationComponent {
     private IsUpdate: boolean = false;
     public userDetails: any;
     UserId?: number | null | undefined = 0;
+    ApplicationId?: number | null | undefined = 0;
 
     constructor(
         private UtilService: UtilService,
@@ -106,71 +107,92 @@ export class UserCreationComponent {
         this.UserCreationForm = FormHandler.controls<IUser>(this.initialValues);    //  Step 4
         this.UserCreationForm.setValidators(FormHandler.validate<IUser>(this.validationSchema));
 
-        //#region 
-        this.activatedRoute.params.subscribe((params: any) => {
 
-
-            if (params != undefined && !_.isEmpty(params)) {
-                this.UserId = (+(params.id));
-                this.buttonText = "Update";
-                this.IsUpdate = true;
-
-            } else {
-                this.UserId = 0;
-                this.IsUpdate = false;
-            }
-        });
-        //#endregion
-    }
-
-    ngOnInit() {
         this.LoadApplications();
         this.LoadEmployees();
         this.LoadRoles();
         this.LoadUnits();
 
-        /** Update **/
-    this.fnGetUserById();
-    /** Update **/
+
+        this.activatedRoute.queryParams.subscribe((params:any)=>{
+            this.UserId = params.id;
+            this.ApplicationId = (+(params.applicationId));
+
+            this.buttonText = "Update";
+            this.IsUpdate = true;
+
+            /** Update **/
+            this.LoadDefaultPages(this.ApplicationId);
+            this.fnGetUserById();
+            /** Update **/
+        });
+
+        //#region 
+        // this.activatedRoute.params.subscribe((params: any) => {
+
+        //     if (params != undefined && !_.isEmpty(params)) {
+        //         this.UserId = (+(params.id));
+        //         this.ApplicationId = (+(params.applicationId));
+        //         this.buttonText = "Update";
+        //         this.IsUpdate = true;
+
+
+        //         /** Update **/
+        //         this.fnGetUserById();
+        //         this.LoadDefaultPages(this.ApplicationId);
+        //         /** Update **/
+
+        //     } else {
+        //         this.UserId = 0;
+        //         this.IsUpdate = false;
+        //     }
+        // });
+        //#endregion
     }
 
+    ngOnInit() {
 
-    public fnGetUserById() {
+    }
+
+    public async fnGetUserById() {
 
         try {
-    
-          this.httpService.globalGet(AdminAPIConfig.API_CONFIG.API_URL.ADMIN.USER.EDIT + '/?userId=' + this.UserId)
-            .subscribe({
-              next: (result: any) => {
-                this.UserList = result.users;
-                console.log('fnGetUserById', this.UserList);
-    
-                if (this.UserList != undefined && this.UserList.length > 0) {
 
-                  this.UserId = this.UserList[0].userId;
-                  this.UserCreationForm.get("application")?.setValue(this.ApplicationList.find(app => app.applicationId === this.UserList[0].applicationId));
-                  this.UserCreationForm.get("employee")?.setValue(this.EmployeesList.find(app => app.employeeId === this.UserList[0].employeeId));
-                  this.UserCreationForm.get('userName')?.setValue(this.UserList[0].userName);
-                  this.UserCreationForm.get('password')?.setValue(this.UserList[0].password);
-                  this.UserCreationForm.get("role")?.setValue(this.RoleList.find(app => app.roleId === this.UserList[0].roleId));
+          await  this.httpService.globalGet(AdminAPIConfig.API_CONFIG.API_URL.ADMIN.USER.EDIT + '/?userId=' + this.UserId)
+                .subscribe({
+                    next: (result: any) => {
+                        this.UserList = result.users.userList;
+                       
+                        if (this.UserList != undefined && this.UserList.length > 0) {
 
-                  this.UserCreationForm.get("selectedUnits")?.setValue(this.UnitList.find(app => app.unitId === this.UserList[0].selectedUnits));
-                  this.UserCreationForm.get('page')?.setValue(this.DefaultPagesList.find(app => app.pageId === this.UserList[0].pageId));
+                            this.filteredRoleList = _.filter(this.RoleList, m => {
+                                return m.applicationId == this.UserList[0].applicationId;
+                            });
+                            let selectedunitIds: any = result.users.unitList.map((id: any) => id.unitId)
 
-                  this.UserCreationForm.get('email')?.setValue(this.UserList[0].email);
-                  this.UserCreationForm.get('phoneNumber')?.setValue(this.UserList[0].phoneNumber);
+                            this.UserId = this.UserList[0].userId;
+                            this.UserCreationForm.get("application")?.setValue(this.ApplicationList.find(app => app.applicationId === this.UserList[0].applicationId));
+                            this.UserCreationForm.get("employee")?.setValue(this.EmployeesList.find(app => app.employeeId === this.UserList[0].employeeId));
+                            this.UserCreationForm.get('userName')?.setValue(this.UserList[0].userName);
+                            this.UserCreationForm.get('password')?.setValue(this.UserList[0].password);
+                            this.UserCreationForm.get("role")?.setValue(this.filteredRoleList.find(app => app.roleId === this.UserList[0].roleId));
 
-                }
-              },
-              error: (err: HttpErrorResponse) => console.log('fnGetUserById() ', err)
+                            this.UserCreationForm.get("selectedUnits")?.setValue(this.UnitList.filter(o => selectedunitIds.includes(o.unitId)));
+                            this.UserCreationForm.get('page')?.setValue(this.DefaultPagesList.find(app => app.pageId === this.UserList[0].pageId));
 
-            });
-    
+                            this.UserCreationForm.get('email')?.setValue(this.UserList[0].email);
+                            this.UserCreationForm.get('phoneNumber')?.setValue(this.UserList[0].phoneNumber);
+
+                        }
+                    },
+                    error: (err: HttpErrorResponse) => console.log('fnGetUserById() ', err)
+
+                });
+
         } catch (error) {
-    
-        }
-      }
 
+        }
+    }
 
     public LoadApplications() {
 
@@ -220,11 +242,11 @@ export class UserCreationComponent {
         this.filteredEmployeeList = filtered;
     }
 
-    public LoadDefaultPages(applicationId: number) {
+    public LoadDefaultPages(applicationId: any) {
 
         try {
 
-            this.httpService.globalGet(AdminAPIConfig.API_CONFIG.API_URL.ADMIN.USER.DEFAULT_PAGE_LIST + '/?applicationId=' + applicationId)
+           this.httpService.globalGet(AdminAPIConfig.API_CONFIG.API_URL.ADMIN.USER.DEFAULT_PAGE_LIST + '/?applicationId=' + applicationId)
                 .subscribe({
                     next: (result: any) => {
                         this.DefaultPagesList = result.defaultPages;
@@ -263,6 +285,7 @@ export class UserCreationComponent {
                 .subscribe({
                     next: (result: any) => {
                         this.UnitList = result.units;
+                        
                     },
                     error: (err: HttpErrorResponse) => console.log(err)
                 });
@@ -272,7 +295,6 @@ export class UserCreationComponent {
         }
 
     }
-
 
     onChangeApplicationName($event: any) {
     
@@ -349,7 +371,7 @@ export class UserCreationComponent {
 
                 passSaveParams.password = this.UserCreationForm.value['password'];
                 passSaveParams.description = '';
-                passSaveParams.defaultPageId = this.UserCreationForm.value['page'] != undefined ? this.UserCreationForm.value['page'].pageId : 0;
+                passSaveParams.pageId = this.UserCreationForm.value['page'] != undefined ? this.UserCreationForm.value['page'].pageId : 0;
 
                 passSaveParams.applicationId = this.UserCreationForm.value['application'] != undefined ? this.UserCreationForm.value['application'].applicationId : 0;
                 passSaveParams.roleId = this.UserCreationForm.value['role'] != undefined ? this.UserCreationForm.value['role'].roleId : 0;
@@ -371,7 +393,7 @@ export class UserCreationComponent {
 
                 passSaveParams.password = this.UserCreationForm.value['password'];
                 passSaveParams.description = '';
-                passSaveParams.defaultPageId = this.UserCreationForm.value['page'] != undefined ? this.UserCreationForm.value['page'].pageId : 0;
+                passSaveParams.pageId = this.UserCreationForm.value['page'] != undefined ? this.UserCreationForm.value['page'].pageId : 0;
 
                 passSaveParams.applicationId = this.UserCreationForm.value['application'] != undefined ? this.UserCreationForm.value['application'].applicationId : 0;
                 passSaveParams.roleId = this.UserCreationForm.value['role'] != undefined ? this.UserCreationForm.value['role'].roleId : 0;

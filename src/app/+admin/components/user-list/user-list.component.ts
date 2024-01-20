@@ -68,8 +68,11 @@ export class UserListComponent {
 
 
   Edit(item: any) {
-    console.log('Edit', item.userId);
-    this.router.navigate(['/apps/admin/user-creation/', item.userId]);
+    console.log('Edit', item);
+    // this.router.navigate(['/apps/admin/user-creation/', item.userId]); 
+    // this.router.navigate( ['/apps/admin/user-creation/', {id: item.userId, applicationId: item.applicationId}]);
+    this.router.navigate(['/apps/admin/user-creation/'], { queryParams: { id: item.userId, applicationId: item.applicationId } });
+
   }
 
 
