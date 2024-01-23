@@ -27,7 +27,7 @@ export const YupFiscalValidation = Object.freeze({
     city: yup.string().nullable().notRequired(),
     state: yup.string().nullable().notRequired(),
     country:yup.string().nullable().notRequired(),
-    pinCode:yup.number().nullable().notRequired(),
+    pinCode:yup.string().nullable().notRequired(),
     phoneNumber: yup.string().nullable().notRequired(),
     fax: yup.string().nullable().notRequired(),
     mobileNumber: yup.string().nullable().notRequired(),
