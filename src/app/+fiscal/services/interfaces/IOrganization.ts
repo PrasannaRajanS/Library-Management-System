@@ -9,7 +9,7 @@ export interface IOrganization {
     city?: string | null | undefined;
     state?: string | null | undefined;
     country?: string | null | undefined;
-    pinCode?: number | null | undefined; 
+    pinCode?: string | null | undefined; 
     phoneNumber?: string | null | undefined; 
     fax?: string | null | undefined;
     mobileNumber?: string | null | undefined; 

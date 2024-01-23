@@ -1,0 +1,100 @@
+{
+	"data": [
+		{
+			"organizationId": 1,
+			"name": "Aijth",
+			"shortName": "Thala",
+			"addressOne": "chennai",
+			"addressTwo": "vadalur",
+			"addressThree": "cuddalore",
+            "addressFour": "pondy",
+			"city": "Viluburam",
+			"state": "TamilNadu",
+			"country": "India",
+            "pinCode": "123456",
+            "phoneNumber": "9876543210",
+			"fax": "Thala@819fax.com",
+			"mobileNumber": "998811224",
+			"email": "Thala@gmail.com",
+            "website": "www.google.com",
+			"isActive": 1,
+			"userId": "1",
+			"ipAddress": "192.168.1.1"
+		},
+		{
+			"organizationId": 2,
+			"name": "Vijay",
+			"shortName": "Thalapthy",
+			"addressOne": "madurai",
+			"addressTwo": "vadalur",
+			"addressThree": "cuddalore",
+            "addressFour": "pondy",
+			"city": "Viluburam",
+			"state": "TamilNadu",
+			"country": "India",
+            "pinCode": "123456",
+            "phoneNumber": "9876543210",
+			"fax": "thalapathy@819fax.com",
+			"mobileNumber": "998811224",
+			"email": "Thalapthy@gmail.com",
+            "website": "www.yahoo.com",
+			"isActive": 1,
+			"userId": "1",
+			"ipAddress": "192.168.1.1"
+		},
+		{
+			"organizationId": 2,
+			"name": "Rajini",
+			"shortName": "SuperStar",
+			"addressOne": "Trichy",
+			"addressTwo": "vadalur",
+			"addressThree": "cuddalore",
+            "addressFour": "pondy",
+			"city": "Viluburam",
+			"state": "TamilNadu",
+			"country": "India",
+            "pinCode": "123456",
+            "phoneNumber": "9876543210",
+			"fax": "SuperStar@819fax.com",
+			"mobileNumber": "998811224",
+			"email": "SuperStar@gmail.com",
+            "website": "www.yahoo.com",
+			"isActive": 1,
+			"userId": "1",
+			"ipAddress": "192.168.1.1"
+		},
+		{
+			"organizationId": 2,
+			"name": "Kamal",
+			"shortName": "UlagaNayagan",
+			"addressOne": "Coimbatore",
+			"addressTwo": "vadalur",
+			"addressThree": "cuddalore",
+            "addressFour": "pondy",
+			"city": "Viluburam",
+			"state": "TamilNadu",
+			"country": "India",
+            "pinCode": "123456",
+            "phoneNumber": "9876543210",
+			"fax": "UlagaNayagan@819fax.com",
+			"mobileNumber": "998811224",
+			"email": "UlagaNayagan@gmail.com",
+            "website": "www.yahoo.com",
+			"isActive": 1,
+			"userId": "1",
+			"ipAddress": "192.168.1.1"
+		}
+    ]
+}
+
+
+
+
+
+
+
+
+
+
+
+

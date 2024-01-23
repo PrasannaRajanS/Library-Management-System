@@ -12,7 +12,15 @@ export const FiscalAPIConfig = {
                     DELETE: "/academicyear/Delete",
                     LIST: "/academicyear/GetAcademicYears"
                 },
+                ORGANIZATION: {
+                    SAVE: "/ORGANIZATION/Create",
+                    UPDATE: "/ORGANIZATION/Update",
+                    DELETE: "/ORGANIZATION/Delete",
+                    LIST: "/ORGANIZATION/GetOrganization"
+                },
             }
         }
     }
 }
+
+
