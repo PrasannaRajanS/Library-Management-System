@@ -18,6 +18,12 @@ export const FiscalAPIConfig = {
                     DELETE: "/ORGANIZATION/Delete",
                     LIST: "/ORGANIZATION/GetOrganization"
                 },
+                Misc: {
+                    SAVE: "/Misc/Create",
+                    UPDATE: "/Misc/Update",
+                    DELETE: "/Misc/Delete",
+                    LIST: "/Misc/GetMisc"
+                },
             }
         }
     }

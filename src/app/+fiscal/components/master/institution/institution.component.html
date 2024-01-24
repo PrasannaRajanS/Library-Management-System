@@ -1,1 +1,249 @@
-<p>institution works!</p>
+<div class="card">
+    <h4>INSTITUTION</h4>
+
+
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <div class="my-2">
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" (click)="Save()"
+                [disabled]="!InstitutionFrom.valid">{{buttonText}}</button>
+
+            <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
+                (click)="Clear()"></button>
+        </ng-template>
+    </p-toolbar>
+
+    
+    <p-toast></p-toast>
+
+
+ <form [formGroup]="InstitutionFrom" style="margin-top: 10px;">
+   
+    <div class="grid p-fluid mt-3">
+
+        <div class="field col-12 md:col-3">
+            <span class="p-float-label">
+                <input type="text" id="organizationName" pInputText formControlName="organizationName" autocomplete="off">
+                <label for="organizationName">Organization Name<span class="mandatory">*</span></label>
+            </span>
+            <small id="organizationName-help">{{ formError("organizationName" ,InstitutionFrom)}}</small>
+        </div>
+
+        <div class="field col-12 md:col-3">
+            <span class="p-float-label">
+                <input type="text" id="nameOfSchool" pInputText formControlName="nameOfSchool" autocomplete="off">
+                <label for="nameOfSchool">Name of School<span class="mandatory">*</span></label>
+            </span>
+            <small id="nameOfSchool-help">{{ formError("nameOfSchool" ,InstitutionFrom)}}</small>
+        </div>
+
+        <div class="field col-12 md:col-3">
+            <span class="p-float-label">
+                <input type="text" id="shortName" pInputText formControlName="shortName" autocomplete="off">
+                <label for="shortName">Short Name<span class="mandatory">*</span></label>
+            </span>
+            <small id="shortName-help">{{ formError("shortName" ,InstitutionFrom)}}</small>
+        </div>
+
+
+        <div class="field col-12 md:col-3">
+            <span class="p-float-label">
+                <input type="text" id="schoolUDiseCode" pInputText formControlName="schoolUDiseCode" autocomplete="off">
+                <label for="schoolUDiseCode"> School U-DISE Code<span class="mandatory">*</span></label>
+            </span>
+            <small id="schoolUDiseCode-help">{{ formError("schoolUDiseCode" ,InstitutionFrom)}}</small>
+        </div>
+
+        <div class="field col-12 md:col-3">
+            <span class="p-float-label">
+                <input type="text" id="affiliatedCode" pInputText formControlName="affiliatedCode" autocomplete="off">
+                <label for="affiliatedCode">Affiliated Code<span class="mandatory">*</span></label>
+            </span>
+            <small id="shortName-help">{{ formError("affiliatedCode" ,InstitutionFrom)}}</small>
+        </div>
+
+        <div class="field col-12 md:col-3">
+            <span class="p-float-label">
+                <input type="text" id="category" pInputText formControlName="category" autocomplete="off">
+                <label for="category">Category(Classes being taught)<span class="mandatory">*</span></label>
+            </span>
+            <small id="shortName-help">{{ formError("category" ,InstitutionFrom)}}</small>
+        </div>
+
+    </div>
+
+
+
+    <div class="col-12 md:col-12">
+        <div class="card">
+            <p-tabView orientation="left">
+                <p-tabPanel header="Address Details" class="line-height-3 m-0">
+                   <div class="grid md:col-12">
+                    
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="text" id="addressOne" pInputText formControlName="addressOne">
+                                <label for="addressOne">Address-1</label>
+                            </span>
+                            <small id="addressOne-help">{{ formError("addressOne" ,InstitutionFrom)}}</small>
+                        </div>
+ 
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="text" id="addressTwo" pInputText formControlName="addressTwo">
+                                <label for="addressTwo">Address-2</label>
+                            </span>
+                            <small id="addressTwo-help">{{ formError("addressTwo" ,InstitutionFrom)}}</small>
+                        </div>
+
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="text" id="addressThree" pInputText formControlName="addressThree">
+                                <label for="addressThree">Address-3</label>
+                            </span>
+                            <small id="addressThree-help">{{ formError("addressThree" ,InstitutionFrom)}}</small>
+                        </div>
+                     
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="text" id="addressFour" pInputText formControlName="addressFour">
+                                <label for="addressFour">Address-4</label>
+                            </span>
+                            <small id="addressFour-help">{{ formError("addressFour" ,InstitutionFrom)}}</small>
+                        </div>
+  
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="text" id="city" pInputText formControlName="city">
+                                <label for="city">City</label>
+                            </span>
+                            <small id="city-help">{{ formError("city" ,InstitutionFrom)}}</small>
+                        </div>
+
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="text" id="stateId" pInputText formControlName="stateId">
+                                <label for="stateId">State</label>
+                            </span>
+                            <small id="stateId-help">{{ formError("stateId" ,InstitutionFrom)}}</small>
+                        </div>
+
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="text" id="countryId" pInputText formControlName="countryId">
+                                <label for="countryId">Country</label>
+                            </span>
+                            <small id="countryId-help">{{ formError("countryId" ,InstitutionFrom)}}</small>
+                        </div>
+
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="text" id="pinCode" pInputText formControlName="pinCode">
+                                <label for="pinCode">PINCode / ZIP Code</label>
+                            </span>
+                            <small id="pinCode-help">{{ formError("pinCode" ,InstitutionFrom)}}</small>
+                        </div>
+
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="text" id="fax" pInputText formControlName="fax">
+                                <label for="fax">Fax</label>
+                            </span>
+                            <small id="fax-help">{{ formError("fax" ,InstitutionFrom)}}</small>
+                        </div>
+
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="text" id="mobileNumber1" pInputText formControlName="mobileNumber1">
+                                <label for="mobileNumber1">MobileNumber 1</label>
+                            </span>
+                            <small id="mobileNumber1-help">{{ formError("mobileNumber1" ,InstitutionFrom)}}</small>
+                        </div>
+
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="text" id="mobileNumber2" pInputText formControlName="mobileNumber2">
+                                <label for="mobileNumber2">MobileNumber 2</label>
+                            </span>
+                            <small id="mobileNumber2-help">{{ formError("mobileNumber2" ,InstitutionFrom)}}</small>
+                        </div>
+
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="text" id="phoneNumber1" pInputText formControlName="phoneNumber1">
+                                <label for="phoneNumber1">PhoneNumber 1</label>
+                            </span>
+                            <small id="fax-help">{{ formError("phoneNumber1" ,InstitutionFrom)}}</small>
+                        </div>
+
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="text" id="phoneNumber2" pInputText formControlName="phoneNumber2">
+                                <label for="phoneNumber2">PhoneNumber 2</label>
+                            </span>
+                            <small id="phoneNumber2-help">{{ formError("phoneNumber2" ,InstitutionFrom)}}</small>
+                        </div>
+
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="email" id="primaryEmail" pInputText formControlName="primaryEmail">
+                                <label for="primaryEmail">Primary Email </label>
+                            </span>
+                            <small id="primaryEmail-help">{{ formError("primaryEmail" ,InstitutionFrom)}}</small>
+                        </div>
+
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="email" id="secondaryEmail" pInputText formControlName="secondaryEmail">
+                                <label for="secondaryEmail">Secondary Email</label>
+                            </span>
+                            <small id="secondaryEmail-help">{{ formError("secondaryEmail" ,InstitutionFrom)}}</small>
+                        </div>
+
+                        <div class="field col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input type="url" id="website" pInputText formControlName="website">
+                                <label for="website">Website</label>
+                            </span>
+                            <small id="website-help">{{ formError("website" ,InstitutionFrom)}}</small>
+                        </div>
+ 
+                    </div>  
+
+                </p-tabPanel>
+
+                <p-tabPanel header="General Settings" class="line-height-3 m-0">
+
+              
+
+
+                 
+
+
+
+                </p-tabPanel>
+                <!-- <p-tabPanel header="Header III" class="line-height-3 m-0">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                    deleniti atque corrupti quos dolores.
+                </p-tabPanel> -->
+            </p-tabView>
+        </div>
+    </div>
+
+
+
+ </form>
+
+
+
+
+
+
+
+
+
+</div>

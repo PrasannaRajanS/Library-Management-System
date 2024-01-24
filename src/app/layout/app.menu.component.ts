@@ -71,6 +71,16 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-chart-pie',
                         routerLink: ['/apps/fiscal/fiscal-year']
                     },
+                    {
+                        label: 'Misc',
+                        icon: 'pi pi-fw pi-chart-pie',
+                        routerLink: ['/apps/fiscal/misc']
+                    },
+                    {
+                        label: 'Misc Detail',
+                        icon: 'pi pi-fw pi-chart-pie',
+                        routerLink: ['/apps/fiscal/misc-detail']
+                    },
                 ]
             },
             {
