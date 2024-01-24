@@ -1,35 +1,35 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { InstitutionRoutingModule } from './institution-routing.module';
-import { InstitutionComponent } from './institution.component';
-import {  ToolbarModule } from 'primeng/toolbar';
+import { MiscRoutingModule } from './misc-routing.module';
+import { MiscComponent } from './misc.component';
+import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UtilService } from 'src/app/shared/util.service';
 import { MessageService } from 'primeng/api';
+import { UtilService } from 'src/app/shared/util.service';
 import { InputTextModule } from 'primeng/inputtext';
-import { TabViewModule } from 'primeng/tabview';
-
+import { ProductService } from 'src/app/demo/service/product.service';
 
 
 @NgModule({
   declarations: [
-    InstitutionComponent
+    MiscComponent
   ],
   imports: [
     CommonModule,
-    InstitutionRoutingModule,
+    MiscRoutingModule,
     ToolbarModule,
     ButtonModule,
-    ToastModule ,
-    InputTextModule,
+    ToastModule,
     ReactiveFormsModule,
-    TabViewModule
+    InputTextModule
   ],
   providers:[
-    UtilService,MessageService
+    MessageService,
+    UtilService,
+    ProductService
   ]
 })
-export class InstitutionModule { }
+export class MiscModule { }

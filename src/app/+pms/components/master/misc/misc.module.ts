@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MiscRoutingModule } from './misc-routing.module';
 import { MiscComponent } from './misc.component';
+import { ToolbarModule } from 'primeng/toolbar';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { MiscComponent } from './misc.component';
   ],
   imports: [
     CommonModule,
-    MiscRoutingModule
+    MiscRoutingModule,
+    ToolbarModule
   ]
 })
 export class MiscModule { }
