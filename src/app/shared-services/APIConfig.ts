@@ -1,10 +1,10 @@
 export const APIConfig = {
 
-     APIURL: "https://localhost:7189/api",
-     URL: "https://localhost:7189/",
+    //  APIURL: "https://localhost:7189/api",
+    //  URL: "https://localhost:7189/",
 
-    // APIURL: "http://administrator-api.kangayaa.com/api/",
-    // URL: "http://administrator-api.kangayaa.com/",
+     APIURL:"http://kangayaa-001-site3.ftempurl.com/api",
+     URL: "http://kangayaa-001-site3.ftempurl.com/",
 
 
     API_CONFIG: {

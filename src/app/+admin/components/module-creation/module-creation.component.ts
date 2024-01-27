@@ -9,7 +9,7 @@ import { HttpService } from '../../services/http.service';
 
 import { AdminAPIConfig } from '../../services/admin-api-config';
 import { IModule } from '../../services/interfaces/IModule';
-import { IApplication } from '../../api/application';
+import { IApplication } from './../../services/interfaces/IApplication';
 
 //#region Validation
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';

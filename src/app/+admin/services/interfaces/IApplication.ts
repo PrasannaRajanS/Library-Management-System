@@ -1,9 +1,9 @@
 export interface IApplication {
-    applicationId?: number;
-    applicationName?: string;
-    description?: string;
-    
-    isActive?: boolean;
-    userId?: number;
-    ipAddress?: string;
+    applicationId?: number | null | undefined;
+    applicationName?: string | null | undefined;
+    description?: string | null | undefined;
+
+    isActive?: boolean | null | undefined;
+    userId?: number | null | undefined;
+    ipAddress?: string | null | undefined;
 }

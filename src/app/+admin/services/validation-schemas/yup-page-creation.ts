@@ -5,7 +5,11 @@ export const YupAdminValidation = Object.freeze({
   APPLICATION_CREATION: yup.object().shape({
     applicationId: yup.number().nullable(),
     applicationName: yup.string().required('Application Name is required'),
-    description: yup.string().nullable()
+    description: yup.string().nullable(),
+    
+    isActive: yup.bool().nullable(),
+    userId: yup.number().nullable(),
+    ipAddress: yup.string().nullable(),
   }),
 
   MODULE_CREATION: yup.object().shape({

@@ -7,7 +7,7 @@ import { YupAdminValidation } from '../../services/validation-schemas/yup-page-c
 import { UtilService } from "../../../shared/util.service";
 import { PageService } from '../../services/page.service';
 
-import { IApplication } from '../../api/application';
+import { IApplication } from './../../services/interfaces/IApplication';
 import { IModule } from '../../services/interfaces/IModule';
 import * as _ from 'lodash';
 import { AdminAPIConfig } from '../../services/admin-api-config';

@@ -32,7 +32,7 @@ export class MiscComponent {
         miscId: 0,
         name: null,
         description: null,
-
+        selectedMiscName:null,
         isActive:null,
         unitId:null,
         userId:null,

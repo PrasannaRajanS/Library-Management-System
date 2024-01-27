@@ -16,7 +16,7 @@ import { AdminValidation } from '../../services/admin-validation';
 //#endregion
 
 import { Table } from 'primeng/table';
-import { IApplication } from '../../api/application';
+import { IApplication } from './../../services/interfaces/IApplication';
 
 @Component({
   selector: 'app-role-creation',

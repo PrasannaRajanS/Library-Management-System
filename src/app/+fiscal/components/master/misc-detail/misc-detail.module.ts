@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { UtilService } from 'src/app/shared/util.service';
 import { MessageService } from 'primeng/api';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
     declarations: [MiscDetailComponent],
@@ -35,6 +36,7 @@ import { MessageService } from 'primeng/api';
         ToolbarModule,
         ToastModule,
         AutoCompleteModule,
+        CheckboxModule 
         // #endregion
     ],
     providers:[

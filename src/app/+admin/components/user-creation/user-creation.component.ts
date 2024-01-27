@@ -9,9 +9,9 @@ import { HttpService } from '../../services/http.service';
 import { MessageService } from 'primeng/api';
 
 import { AdminAPIConfig } from '../../services/admin-api-config';
-import { IApplication } from '../../api/application';
+import { IApplication } from './../../services/interfaces/IApplication';
 
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
 import { IUnit, IUser } from '../../services/interfaces/IUser';
 import { YupAdminValidation } from '../../services/validation-schemas/yup-page-creation';
@@ -115,17 +115,28 @@ export class UserCreationComponent {
 
 
         this.activatedRoute.queryParams.subscribe((params:any)=>{
-            this.UserId = params.id;
+
+            this.UserId = (+(params.id));
             this.ApplicationId = (+(params.applicationId));
 
-            this.buttonText = "Update";
-            this.IsUpdate = true;
+            if (this.UserId &&  this.ApplicationId) {
 
-            /** Update **/
-            this.LoadDefaultPages(this.ApplicationId);
-            this.fnGetUserById();
-            /** Update **/
+                this.buttonText = "Update";
+                this.IsUpdate = true;
+    
+                /** Update **/
+                this.LoadDefaultPages(this.ApplicationId);
+                this.fnGetUserById();
+                /** Update **/
+            }
+           
         });
+
+        console.log('this.UserId',this.UserId)
+        console.log('this.ApplicationId',this.ApplicationId)
+        console.log('this.buttonText',this.buttonText)
+        console.log('this.IsUpdate',this.IsUpdate)
+
 
         //#region 
         // this.activatedRoute.params.subscribe((params: any) => {
@@ -154,11 +165,11 @@ export class UserCreationComponent {
 
     }
 
-    public async fnGetUserById() {
+    public  fnGetUserById() {
 
         try {
 
-          await  this.httpService.globalGet(AdminAPIConfig.API_CONFIG.API_URL.ADMIN.USER.EDIT + '/?userId=' + this.UserId)
+            this.httpService.globalGet(AdminAPIConfig.API_CONFIG.API_URL.ADMIN.USER.EDIT + '/?userId=' + this.UserId)
                 .subscribe({
                     next: (result: any) => {
                         this.UserList = result.users.userList;
@@ -183,6 +194,9 @@ export class UserCreationComponent {
                             this.UserCreationForm.get('email')?.setValue(this.UserList[0].email);
                             this.UserCreationForm.get('phoneNumber')?.setValue(this.UserList[0].phoneNumber);
 
+                            // this.UserCreationForm.get("application")?.disable();
+
+                            
                         }
                     },
                     error: (err: HttpErrorResponse) => console.log('fnGetUserById() ', err)
@@ -387,7 +401,7 @@ export class UserCreationComponent {
 
             } else {    //  SAVE
 
-                passSaveParams.userId = this.UserId;
+                passSaveParams.userId = 0;
                 passSaveParams.userName = this.UserCreationForm.value['userName'];
                 passSaveParams.employeeId = this.UserCreationForm.value['employee'] != undefined ? this.UserCreationForm.value['employee'].employeeId : 0;
 
@@ -426,6 +440,7 @@ export class UserCreationComponent {
 
         }
     }
+
 
     private notificationsService(_severity: any, _summary: any, _message: any) {
         this.messageService.add({ severity: _severity, summary: _summary, detail: _message, life: 3000 });

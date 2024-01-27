@@ -1,6 +1,7 @@
 export const AdminAPIConfig = {
 
-    ADMIN_API_BASE_URL: "https://localhost:7189",
+    // ADMIN_API_BASE_URL: "https://localhost:7189",
+    ADMIN_API_BASE_URL:"http://kangayaa-001-site3.ftempurl.com/",
 
 
     API_CONFIG: {

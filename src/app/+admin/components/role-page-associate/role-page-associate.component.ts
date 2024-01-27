@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { TreeNode } from 'primeng/api';
-import { NodeService } from 'src/app/demo/service/node.service';
 import * as _ from 'lodash';
-import { IApplication } from '../../api/application';
+import { IApplication } from './../../services/interfaces/IApplication';
 import { AdminAPIConfig } from '../../services/admin-api-config';
 import { HttpErrorResponse } from '@angular/common/http';
 

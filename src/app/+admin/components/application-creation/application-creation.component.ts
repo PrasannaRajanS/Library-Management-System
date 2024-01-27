@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 //#region Interfaces
-import { IApplication } from '../../api/application';
+import { IApplication } from './../../services/interfaces/IApplication';
 //#endregion
 //#region Services
 import { UtilService } from 'src/app/shared/util.service';
@@ -41,6 +41,10 @@ export class ApplicationCreationComponent {
         applicationId: null,
         applicationName: null,
         description: null,
+
+        isActive:null,
+        userId:null,
+        ipAddress:null
     }
 
     validationSchema: yup.ObjectSchema<IApplication> = YupAdminValidation.APPLICATION_CREATION;  //  Step 3
