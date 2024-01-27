@@ -1,7 +1,6 @@
 <div class="card">
     <h4>MISC</h4>
 
-
     <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
             <div class="my-2">
@@ -20,32 +19,25 @@
     <p-toast></p-toast>
 
     <form [formGroup]="MiscForm" style="margin-top: 10px;">
-        <div class="grid p-fluid mt-3"> 
+        <div class="grid p-fluid mt-3">
 
-
-            <div class="field col-12 md:col-3">
+            <div class="field col-12 md:col-6">
                 <span class="p-float-label">
-                    <input  id="name" pInputText formControlName="name" autocomplete="off">
+                    <input id="name" pInputText formControlName="name" autocomplete="off">
                     <label for="name">Name<span class="mandatory">*</span></label>
                 </span>
                 <small id="name-help">{{ formError("name" ,MiscForm)}}</small>
             </div>
 
-            <div class="field col-12 md:col-3">
+            <div class="field col-12 md:col-6">
                 <span class="p-float-label">
-                    <input  id="description" pInputText formControlName="description" autocomplete="off">
+                    <input id="description" pInputText formControlName="description" autocomplete="off">
                     <label for="description">Description<span class="mandatory">*</span></label>
                 </span>
                 <small id="description-help">{{ formError("description" ,MiscForm)}}</small>
             </div>
 
-            
-     
-
-
-        </div> 
+        </div>
     </form>
 
 </div>
-
-

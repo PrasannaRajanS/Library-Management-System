@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { IMisc } from 'src/app/+fiscal/services/interfaces/IMisc';
 import { Customer } from 'src/app/demo/api/customer';
 
 @Injectable({
@@ -27,6 +28,12 @@ export class CustomerService {
         return this.http.get<any>('assets/demo/data/customers-large.json')
             .toPromise()
             .then(res => res.data as Customer[])
+            .then(data => data);
+    }
+    getMiscDetailcLarge() {
+        return this.http.get<any>('assets/demo/data/misc-details.json')
+            .toPromise()
+            .then(res => res.data as IMisc[])
             .then(data => data);
     }
 

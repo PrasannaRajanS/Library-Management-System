@@ -163,9 +163,7 @@ export class FiscalYearComponent {
                     this.AcademicYearForm.value['accountYear'];
 
                 passSaveParams.isActive = true;
-                passSaveParams.userId = this.userDetails
-                    ? this.userDetails.userId
-                    : 0;
+                passSaveParams.userId = this.userDetails ? this.userDetails.userId : 0;
                 passSaveParams.ipAddress = '192.168.1.1';
 
                 _apiUrl =

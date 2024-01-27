@@ -1,1 +1,115 @@
-<p>misc-detail works! </p>
+<div class="card">
+    <h4>MISC</h4>
+
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <div class="my-2">
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" (click)="Save()"
+                [disabled]="!MiscDetailForm.valid">{{buttonText}}</button>
+
+            <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
+                (click)="Clear()"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-toast></p-toast>
+
+    <form [formGroup]="MiscDetailForm" style="margin-top: 10px;">
+        <div class="grid p-fluid mt-3">
+            <div class="field col-12 md:col-4">
+
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <input id="name" pInputText formControlName="name" autocomplete="off">
+                    <label for="name">Name<span class="mandatory">*</span></label>
+                </span>
+                <small id="name-help">{{ formError("name" ,MiscDetailForm)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-4">
+
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
+<div class="card">
+    <p-table #dt [value]="miscdetails" [columns]="cols" resposiveLayout="scroll" [rows]="10"
+    [globalFilterFields]="['academicYear']" [rows]="10" [paginator]="true"
+    [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [(selection)]="selectedItems" selectionMode="multiple" [rowHover]="true" dataKey="id">
+
+
+
+
+    <ng-template pTemplate="caption">
+        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+            <h4 class="m-0"> </h4>
+            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."
+                    class="w-full sm:w-auto" />
+            </span>
+        </div>
+    </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:8% !important" class="text-center">
+                  <div class="btn btn-sm btn-primary" (click)="AddRows()">
+                    <span class="fa fa-plus"></span>
+                  </div>
+                </th>
+                <th style="width:8% !important" class="text-center">Edit</th>
+                <th style="width:8% !important" class="text-center">S.No</th>
+                <th style="width:40% !important" class="text-center">Description
+                  <span class="mandatory">*</span>
+                </th>
+                <th style="width:16% !important" class="text-center">Created By</th>
+                <th style="width:16% !important" class="text-center">Created Dt</th>
+              </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-miscdetails let-i="rowIndex">
+            <tr>
+                <td style="width:8% !important" class="text-center">
+                  <div class="btn btn-sm btn-danger" (click)="RemoveRows(miscdetails,i)">
+                    <span class="fa fa-times"></span>
+                  </div>
+                </td>
+                <td style="width:8% !important" class="text-center">
+                  <section>
+                    <label class="checkbox">
+                      <input type="checkbox" name="chkEdit" id="chkEdit" [(ngModel)]="miscdetails.Edit"   >
+                      <i></i>
+                    </label>
+                  </section>
+                </td>
+                <td style="width:8% !important" class="text-center">{{i+1}}</td>
+                <td style="width:40% !important">
+                  <input class="form-control" type="text" [disabled]="!miscdetails.Edit" id="txtDescription"
+                    name="txtDescription" [(ngModel)]="miscdetails.MiscDtlName">
+                </td>
+                <td style="width:16% !important">{{miscdetails.Createdby}}</td>
+                <td style="width:16% !important">{{miscdetails.CreatedDate}}</td>
+                <td style="width:15%; min-width:10rem;">
+                    <div class="flex">
+                        <!-- <button pButton pRipple icon="pi pi-pencil"
+                            class="p-button-rounded p-button-success mr-2" (click)="Edit(item)"></button>
+
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                            (click)="Delete(item)"></button> -->
+                    </div>
+                </td>
+              </tr>
+
+        </ng-template>
+    </p-table>
+</div>

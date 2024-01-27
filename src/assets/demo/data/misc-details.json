@@ -1,0 +1,20 @@
+{
+	"data": [
+		{
+			"miscId": 1,
+			"name":"Kodaikanal",
+			"description": "Queen of hills"
+		},
+        {
+			"miscId": 2,
+			"name":"Coimbatore",
+			"description": "Manchester of South India"
+		},
+        {
+			"miscId": 3,
+			"name":"Cuddalore",
+			"description": "the First see port in tamilnadu"
+		}
+        
+    ]
+}
