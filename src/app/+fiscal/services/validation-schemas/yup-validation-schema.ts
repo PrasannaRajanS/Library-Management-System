@@ -39,6 +39,24 @@ export const YupFiscalValidation = Object.freeze({
     isActive:yup.boolean().nullable(),
     userId:yup.number().nullable(),
     ipAddress:yup.string().nullable()
-  })
+  }),
+
+
+  MISC: yup.object().shape({
+    miscId: yup.number().nullable(),
+    name: yup.string().nullable().required('Name is required'),
+    description: yup.string().nullable().required('Description is required'),
+
+    isActive:yup.boolean().nullable(),
+    unitId:yup.boolean().nullable(),
+    userId:yup.number().nullable(),
+    ipAddress:yup.string().nullable()
+  }),
+
+
+
+
+
 
 });
+
