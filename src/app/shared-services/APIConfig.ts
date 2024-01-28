@@ -6,6 +6,8 @@ export const APIConfig = {
      APIURL:"http://kangayaa-001-site3.ftempurl.com/api",
      URL: "http://kangayaa-001-site3.ftempurl.com/",
 
+    //  http://academy-portal.kangayaa.com/
+
 
     API_CONFIG: {
         API_URL: {
