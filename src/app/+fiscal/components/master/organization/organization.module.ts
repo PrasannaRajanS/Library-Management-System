@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { OrganizationRoutingModule } from './organization-routing.module';
 import { OrganizationComponent } from './organization.component';
+
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -14,13 +16,14 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
-import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import { UtilService } from 'src/app/shared/util.service';
-import { ConfirmationService, MessageService } from 'primeng/api';
 import { TabViewModule } from 'primeng/tabview';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { FileUploadModule } from 'primeng/fileupload';
 
+
+
+import { UtilService } from 'src/app/shared/util.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     
     ReactiveFormsModule,
 
+   // Prime Ng Start
     TableModule,
 		ButtonModule,
 		RippleModule,
@@ -43,13 +47,11 @@ import { FileUploadModule } from 'primeng/fileupload';
 		RadioButtonModule,
 		InputNumberModule,
 		DialogModule,
-
     CalendarModule,
     TabViewModule,
-    
-    // image preview
     FileUploadModule
+     // Prime Ng End
 
-  ],providers: [UtilService, MessageService, ConfirmationService,DatePipe]
+  ],providers: [UtilService, ConfirmationService,MessageService]
 })
 export class OrganizationModule { }

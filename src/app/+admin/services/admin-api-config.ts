@@ -47,8 +47,18 @@ export const AdminAPIConfig = {
                     DEFAULT_PAGE_LIST: "/user/GetDefaultPages",
                     UNIT_LIST: "/user/GetUnits",
                 },
+                ORGANIZATION: {
+                    SAVE: "/organization/Create",
+                    UPDATE: "/organization/Update",
+                    DELETE: "/organization/Delete",
+                    EDIT: "/organization/GetByOrganizationId",
+                    LIST: "/organization/GetOrganizations",
+                    
+                },
 
             }
         }
     }
 }
+
+
