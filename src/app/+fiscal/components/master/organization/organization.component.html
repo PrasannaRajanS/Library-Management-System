@@ -1,157 +1,174 @@
-<div class="card">
-    <h4>ORGANIZATION</h4>
 
-    <p-toolbar styleClass="mb-4">
-        <ng-template pTemplate="left">
-            <div class="my-2">
+    <div class="card">
+        <h4>ORGANIZATION</h4>
+
+        <p-toolbar styleClass="mb-4">
+            <ng-template pTemplate="left">
+                <div class="my-2">
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="right">
+                <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" (click)="Save()"
+                    [disabled]="!OrganizationForm.valid">{{buttonText}}</button>
+                    <button pButton pRipple label="List" icon="pi pi-align-justify" class="p-button-primary mr-2"
+                    (click)="RedirecttoList()"></button>
+
+                <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
+                    (click)="Clear()"></button>
+            </ng-template>
+        </p-toolbar>
+
+        <p-toast></p-toast>
+
+        <form [formGroup]="OrganizationForm" style="margin-top: 10px;">
+            <div class="grid p-fluid mt-3">
+
+                <div class="field col-12 md:col-3">
+                    <span class="p-float-label">
+                        <input type="text" id="name" pInputText formControlName="name" autocomplete="off">
+                        <label for="name">Name<span class="mandatory">*</span></label>
+                    </span>
+                    <small id="name-help">{{ formError("name" ,OrganizationForm)}}</small>
+                </div>
+
+
+                <div class="field col-12 md:col-3">
+                    <span class="p-float-label">
+                        <input type="text" id="shortName" pInputText formControlName="shortName" autocomplete="off">
+                        <label for="shortName">Short Name<span class="mandatory">*</span></label>
+                    </span>
+                    <small id="shortName-help">{{ formError("shortName" ,OrganizationForm)}}</small>
+                </div>
             </div>
-        </ng-template>
 
-        <ng-template pTemplate="right">
-            <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" (click)="Save()"
-                [disabled]="!OrganizationForm.valid">{{buttonText}}</button>
-
-            <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
-                (click)="Clear()"></button>
-        </ng-template>
-    </p-toolbar>
-
-    <p-toast></p-toast>
-
-    <form [formGroup]="OrganizationForm" style="margin-top: 10px;">
-        <div class="grid p-fluid mt-3">
-
-            <div class="field col-12 md:col-3">
-                <span class="p-float-label">
-                    <input type="text" id="name" pInputText formControlName="name" autocomplete="off">
-                    <label for="name">Name<span class="mandatory">*</span></label>
-                </span>
-                <small id="name-help">{{ formError("name" ,OrganizationForm)}}</small>
-            </div>
-
-
-            <div class="field col-12 md:col-3">
-                <span class="p-float-label">
-                    <input type="text" id="shortName" pInputText formControlName="shortName" autocomplete="off">
-                    <label for="shortName">Short Name<span class="mandatory">*</span></label>
-                </span>
-                <small id="shortName-help">{{ formError("shortName" ,OrganizationForm)}}</small>
-            </div>
-        </div>
-
-
-        <div class="col-12 md:col-12">
-            <div class="card">
-                <p-tabView orientation="left">
+            <div  class="grid p-fluid mt-3" >
+                <div class="col-12 md:col-12">
+                <div class="card">
+                    <p-tabView orientation="left">
+            
+                    
                     <p-tabPanel header="Address Details" class="line-height-3 m-0">
-                        <div class="grid md:col-12">
-                            <div class="field col-12 md:col-3">
-                                <span class="p-float-label">
-                                    <input type="text" id="address_One" pInputText formControlName="addressOne">
-                                    <label for="address_One">Address-1</label>
-                                </span>
-                                <small id="address_One-help">{{ formError("addressOne" ,OrganizationForm)}}</small>
-                            </div>
+                        <div class="grid p-fluid">
+                    <div class="grid formgrid">
 
-                            <div class="field col-12 md:col-3">
-                                <span class="p-float-label">
-                                    <input type="text" id="address_Two" pInputText formControlName="addressTwo">
-                                    <label for="address_Two">Address-2</label>
-                                </span>
-                                <small id="address_Two-help">{{ formError("addressTwo" ,OrganizationForm)}}</small>
-                            </div>
-
-                            <div class="field col-12 md:col-3">
-                                <span class="p-float-label">
-                                    <input type="text" id="address_Three" pInputText formControlName="addressThree">
-                                    <label for="address_Three">Address-3</label>
-                                </span>
-                                <small id="address_Three-help">{{ formError("addressThree" ,OrganizationForm)}}</small>
-                            </div>
-
-                            <div class="field col-12 md:col-3">
-                                <span class="p-float-label">
-                                    <input type="text" id="address_Four" pInputText formControlName="addressFour">
-                                    <label for="address_Four">Address-4</label>
-                                </span>
-                                <small id="address_Four-help">{{ formError("addressFour" ,OrganizationForm)}}</small>
-                            </div>
-
-                            <div class="field col-12 md:col-3">
-                                <span class="p-float-label">
-                                    <input type="text" id="city" pInputText formControlName="city">
-                                    <label for="city">City</label>
-                                </span>
-                                <small id="city-help">{{ formError("city" ,OrganizationForm)}}</small>
-                            </div>
-
-                            <div class="field col-12 md:col-3">
-                                <span class="p-float-label">
-                                    <input type="text" id="state" pInputText formControlName="state">
-                                    <label for="state">State</label>
-                                </span>
-                                <small id="state-help">{{ formError("state" ,OrganizationForm)}}</small>
-                            </div>
-
-                            <div class="field col-12 md:col-3">
-                                <span class="p-float-label">
-                                    <input type="text" id="country" pInputText formControlName="country">
-                                    <label for="country">Country</label>
-                                </span>
-                                <small id="country-help">{{ formError("country" ,OrganizationForm)}}</small>
-                            </div>
-
-                            <div class="field col-12 md:col-3">
-                                <span class="p-float-label">
-                                    <input type="text" id="pinCode" pInputText formControlName="pinCode">
-                                    <label for="pinCode">PINCode / ZIP Code</label>
-                                </span>
-                                <small id="pinCode-help">{{ formError("pinCode" ,OrganizationForm)}}</small>
-                            </div>
-
-                            <div class="field col-12 md:col-3">
-                                <span class="p-float-label">
-                                    <input type="text" id="phoneNumber" pInputText formControlName="phoneNumber">
-                                    <label for="phoneNumber">Phone(LandLine)</label>
-                                </span>
-                                <small id="phoneNumber-help">{{ formError("phoneNumber" ,OrganizationForm)}}</small>
-                            </div>
-
-                            <div class="field col-12 md:col-3">
-                                <span class="p-float-label">
-                                    <input type="text" id="fax" pInputText formControlName="fax">
-                                    <label for="fax">Fax</label>
-                                </span>
-                                <small id="fax-help">{{ formError("fax" ,OrganizationForm)}}</small>
-                            </div>
-
-                            <div class="field col-12 md:col-3">
-                                <span class="p-float-label">
-                                    <input type="text" id="mobileNumber" pInputText formControlName="mobileNumber">
-                                    <label for="mobileNumber">Mobile</label>
-                                </span>
-                                <small id="mobileNumber-help">{{ formError("mobileNumber" ,OrganizationForm)}}</small>
-                            </div>
-
-
-                            <div class="field col-12 md:col-3">
-                                <span class="p-float-label">
-                                    <input type="email" id="email" pInputText formControlName="email">
-                                    <label for="email">Email</label>
-                                </span>
-                                <small id="email-help">{{ formError("email" ,OrganizationForm)}}</small>
-                            </div>
-
-
-                            <div class="field col-12 md:col-3">
-                                <span class="p-float-label">
-                                    <input type="url" id="website" pInputText formControlName="website">
-                                    <label for="website">Website</label>
-                                </span>
-                                <small id="website-help">{{ formError("website" ,OrganizationForm)}}</small>
-                            </div>
+                        <div class="field col-12 md:col-3 mt-3">
+                            <span class="p-float-label">
+                                <input type="text" id="addressOne" pInputText formControlName="addressOne"  autocomplete="off">
+                                <label for="addressOne">Address 1</label>
+                                <small id="addressOne-help">{{ formError("addressOne" ,OrganizationForm)}}</small>
+                            </span>
                         </div>
+                        <div class="field col-12 md:col-3 mt-3">
+                            <span class="p-float-label">
+                                <input type="text" id="addressTwo" pInputText formControlName="addressTwo"  autocomplete="off">
+                                <label for="addressTwo">Address 2</label>
+                                <small id="addressTwo-help">{{ formError("addressTwo" ,OrganizationForm)}}</small>
+                            </span>
+                        </div>
+
+                        <div class="field col-12 md:col-3 mt-3">
+                            <span class="p-float-label">
+                                <input type="text" id="addressThree" pInputText formControlName="addressThree"  autocomplete="off">
+                                <label for="addressThree">Address 3</label>
+                                <small id="addressThree-help">{{ formError("addressThree" ,OrganizationForm)}}</small>
+                            </span>
+                        </div>
+
+                        <div class="field col-12 md:col-3 mt-3">
+                            <span class="p-float-label">
+                                <input type="text" id="addressFour" pInputText formControlName="addressFour"  autocomplete="off">
+                                <label for="addressFour">Address 4</label>
+                                <small id="addressFour-help">{{ formError("addressFour" ,OrganizationForm)}}</small>
+                            </span>
+                        </div>
+
+                        <div class="field col-12 md:col-3 mt-3">
+                            <span class="p-float-label">
+                                <input type="text" id="city" pInputText formControlName="city"  autocomplete="off">
+                                <label for="city">City</label>
+                                <small id="city-help">{{ formError("city" ,OrganizationForm)}}</small>
+
+                            </span>
+                        </div>
+
+                        <div class="field col-12 md:col-3 mt-3">
+                            <span class="p-float-label">
+                                <input type="text" id="state" pInputText formControlName="state"  autocomplete="off">
+                                <label for="state">State</label>
+                                <small id="state-help">{{ formError("state" ,OrganizationForm)}}</small>
+                            </span>
+                        </div>
+
+
+                        <div class="field col-12 md:col-3 mt-3">
+                            <span class="p-float-label">
+                                <input type="text" id="country" pInputText formControlName="country" autocomplete="off">
+                                <label for="country">Country</label>
+                                <small id="country-help">{{ formError("country" ,OrganizationForm)}}</small>
+
+                            </span>
+                        </div>
+
+
+                        <div class="field col-12 md:col-3 mt-3">
+                            <span class="p-float-label">
+                                <input type="text" id="pinzipCode" pInputText formControlName="pinCode"  autocomplete="off">
+                                <label for="pinzipCode">PINCode / ZIP Code</label>
+                                <small id="pinCode-help">{{ formError("pinCode" ,OrganizationForm)}}</small>
+                            </span>
+                        </div>
+
+
+                        <div class="field col-12 md:col-3 mt-3">
+                            <span class="p-float-label">
+                                <input type="text" id="phoneNumber" pInputText formControlName="phoneNumber"  autocomplete="off">
+                                <label for="phoneNumber">Phone(LandLine)</label>
+                                <small id="phoneNumber-help">{{ formError("phoneNumber" ,OrganizationForm)}}</small>
+                            </span>
+                        </div>
+
+
+                        <div class="field col-12 md:col-3 mt-3">
+                            <span class="p-float-label">
+                                <input type="text" id="fax" pInputText  formControlName="fax" autocomplete="off">
+                                <label for="fax">Fax</label>
+                                <small id="fax-help">{{ formError("fax" ,OrganizationForm)}}</small>
+                            </span>
+                        </div>
+
+                        <div class="field col-12 md:col-3 mt-3">
+                            <span class="p-float-label">
+                                <input type="text" id="mobile" pInputText formControlName="mobileNumber"  autocomplete="off">
+                                <label for="mobile">Mobile</label>
+                                <small id="mobileNumber-help">{{ formError("mobileNumber" ,OrganizationForm)}}</small>
+
+                            </span>
+                        </div>
+
+
+                        <div class="field col-12 md:col-3 mt-3">
+                            <span class="p-float-label">
+                                <input type="text" id="email" pInputText formControlName="email"  autocomplete="off">
+                                <label for="email">Email</label>
+                                <small id="email-help">{{ formError("email" ,OrganizationForm)}}</small>
+
+                            </span>
+                        </div>
+
+
+                        <div class="field col-12 md:col-3 mt-3">
+                            <span class="p-float-label">
+                                <input type="text" id="website" pInputText formControlName="website"  autocomplete="off">
+                                <label for="website">Website</label>
+                                <small id="website-help">{{ formError("website",OrganizationForm)}}</small>
+ 
+                            </span>
+                        </div>
+                    </div>
+                    </div>
                     </p-tabPanel>
+
                     <p-tabPanel header="General Settings" class="line-height-3 m-0">
 
                         <div class="field mb-4">
@@ -159,197 +176,33 @@
                                     class="mb-2 pi pi-info-circle" pTooltip="Image Size (1920 X 1080)"></i> </label><br>
                             <input type="file" id="file" #file placeholder="Choose file" accept='image/*'
                                 (change)="getOrganizationLogo($event)" />
+                                <small id="logoURL-help">{{ formError("logoURL" ,OrganizationForm)}}</small>
+ 
                         </div>
-
+        
                         <div class="field mb-4" *ngIf="logoURL">
                             <img [src]="logoURL" height="100">
                         </div>
-
+        
                         <div class="field mb-4">
                             <label for="file"> Favicon <span class="mandatory mr-2">*</span> <i
                                     class="mb-2 pi pi-info-circle" pTooltip="Image Size (1920 X 1080)"></i> </label><br>
                             <input type="file" id="file" #file placeholder="Choose file" accept='image/*'
                                 (change)="getFavicon($event)" />
+                                <small id="iconURL-help">{{ formError("iconURL" ,OrganizationForm)}}</small>
                         </div>
-
+        
                         <div class="field mb-4" *ngIf="iconURL">
                             <img [src]="iconURL" height="100">
                         </div>
-
-
+        
+        
                     </p-tabPanel>
-                    <!-- <p-tabPanel header="Header III" class="line-height-3 m-0">
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                        deleniti atque corrupti quos dolores.
-                    </p-tabPanel> -->
-                </p-tabView>
-            </div>
-        </div>
-
-    </form>
-</div>
-
-<div class="grid">
-    <div class="col-12">
-        <div class="card px-6 py-6">
-
-            <p-table #dt [value]="items" [columns]="cols" resposiveLayout="scroll" [rows]="10"
-                [globalFilterFields]="['organization','name']" [rows]="10" [paginator]="true"
-                [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                [(selection)]="selectedItems" selectionMode="multiple" [rowHover]="true" dataKey="id">
 
 
-
-
-                <ng-template pTemplate="caption">
-                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                        <h4 class="m-0"> </h4>
-                        <span class="block mt-2 md:mt-0 p-input-icon-left">
-                            <i class="pi pi-search"></i>
-                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."
-                                class="w-full sm:w-auto" />
-                        </span>
+                    </p-tabView>
                     </div>
-                </ng-template>
-
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th style="width: 3rem">
-                            S.No
-                        </th>
-                        <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
-                        <th pSortableColumn="shortName">ShortName<p-sortIcon field="shortName"></p-sortIcon></th>
-                        <th pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon>
-<!--
-                        <th pSortableColumn="addressOne">Address One<p-sortIcon field="addressOne"></p-sortIcon>
-                        <th pSortableColumn="addressTwo">Address Two<p-sortIcon field="addressTwo"></p-sortIcon>
-                        <th pSortableColumn="addressThree">Address Three<p-sortIcon field="addressThree"></p-sortIcon>
-                        <th pSortableColumn="addressFour">Address Four<p-sortIcon field="addressFour"></p-sortIcon>
-                         <th pSortableColumn="state">State<p-sortIcon field="state"></p-sortIcon>
-                        <th pSortableColumn="country">Country<p-sortIcon field="country"></p-sortIcon>
-                        <th pSortableColumn="pinCode">Pincode Year<p-sortIcon field="pinCode"></p-sortIcon>
-                        <th pSortableColumn="phoneNumber">Phone number<p-sortIcon field="phoneNumber"></p-sortIcon>
-                        <th pSortableColumn="fax">Fax<p-sortIcon field="fax"></p-sortIcon>
-                        <th pSortableColumn="mobileNumber">MobileNumber<p-sortIcon field="mobileNumber"></p-sortIcon>
-                        <th pSortableColumn="email">Email<p-sortIcon field="email"></p-sortIcon>
-                        <th pSortableColumn="website">Website<p-sortIcon field="website"></p-sortIcon> -->                       
-    </th>
-                        
-                        <th>Action</th>
-
-                    </tr>
-                </ng-template>
-
-                <ng-template pTemplate="body" let-item>
-                    <tr>
-
-                        <td style="width:20%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.organizationId}}
-                        </td>
-
-
-                        <td style="width:20%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.name}}
-                        </td>
-
-                        <td style="width:20%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.shortName}}
-                        </td>
-
-                        <td style="width:15%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.city}}
-                        </td>
-
-                        <!-- <td style="width:15%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.addressOne}}
-                        </td>
-                        <td style="width:15%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.addressTwo}}
-                        </td>
-                        <td style="width:15%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.addressThree}}
-                        </td>
-                        <td style="width:15%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.addressFour}}
-                        </td>
-                    
-                        <td style="width:15%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.state}}
-                        </td>
-                        <td style="width:15%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.country}}
-                        </td>
-                        <td style="width:15%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.pinCode}}
-                        </td>
-                        <td style="width:15%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.phoneNumber}}
-                        </td>
-                        <td style="width:15%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.fax}}
-                        </td>
-                        <td style="width:15%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.mobileNumber}}
-                        </td>
-                        <td style="width:15%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.email}}
-                        </td> -->
-                        <!-- <td style="width:15%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{item.website}}
-                        </td> -->
-              
-
-
-                        <td style="width:15%; min-width:10rem;">
-                            <div class="flex">
-                                <button pButton pRipple icon="pi pi-pencil"
-                                    class="p-button-rounded p-button-success mr-2" (click)="Edit(item)"></button>
-
-                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                                    (click)="Delete(item)"></button>
-                            </div>
-                        </td>
-
-                    </tr>
-                </ng-template>
-
-            </p-table>
-
-        </div>
-
-
-        <p-dialog [(visible)]="deleteDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
-            <div class="flex align-items-center justify-content-center">
-                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span *ngIf="item">Are you sure you want to delete <b>{{item.name}}</b>?</span>
+                </div>
             </div>
-
-            <ng-template pTemplate="footer">
-                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"
-                    (click)="deleteDialog = false"></button>
-                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes"
-                    (click)="confirmDelete()"></button>
-            </ng-template>
-        </p-dialog>
-
+        </form>
     </div>
-</div>
-
-

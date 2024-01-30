@@ -1,20 +1,25 @@
-import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { HttpService } from 'src/app/+admin/services/http.service';
-import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
-import { FiscalValidation } from 'src/app/+fiscal/services/fiscal-validation';
-import { IOrganization } from 'src/app/+fiscal/services/interfaces/IOrganization';
-import { OrganizationValidation } from 'src/app/+fiscal/services/organization-validation';
 
-import { YupFiscalValidation } from 'src/app/+fiscal/services/validation-schemas/yup-validation-schema';
-import { ProductService } from 'src/app/demo/service/product.service';
+import { AdminAPIConfig } from 'src/app/+admin/services/admin-api-config';
+import { IOrganization } from 'src/app/+fiscal/services/interfaces/IOrganization';
+import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
+
+import { FiscalValidation } from 'src/app/+fiscal/services/fiscal-validation';
+import { OrganizationValidation } from 'src/app/+fiscal/services/organization-validation';
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
-import { UtilService } from 'src/app/shared/util.service';
+import { YupFiscalValidation } from 'src/app/+fiscal/services/validation-schemas/yup-validation-schema';
 import * as yup from 'yup';
+
+import { ProductService } from 'src/app/demo/service/product.service';
+import { UtilService } from 'src/app/shared/util.service';
+import { HttpService } from 'src/app/+admin/services/http.service';
+
 
 @Component({
   selector: 'app-organization',
@@ -23,9 +28,10 @@ import * as yup from 'yup';
 })
 export class OrganizationComponent {
 
+  OrganizationId:any = 0;
+  OrganizationList: IOrganization[]=[];
 
-
-  OrganizationId: number = 0;
+  
   public buttonText:string="Save";
   public userDetails: any;
 
@@ -43,14 +49,7 @@ export class OrganizationComponent {
   iconURL:any;
 
 
-  // grid head coloum
-  cols:any[]=[];
 
-
-
-  // for Delete
-  
-  deleteDialog:boolean=false;
 
   // public OrganizationId
 
@@ -95,7 +94,7 @@ export class OrganizationComponent {
     private httpService: HttpService,
     private messageService: MessageService,
     private productService:ProductService,
-    private _datePipe: DatePipe
+    private router:Router
   ) {
     this.OrganizationForm = FormHandler.controls<IOrganization>(this.initialValues); //  Step 5
     this.OrganizationForm.setValidators(FormHandler.validate<IOrganization>(this.validationSchema)
@@ -104,36 +103,17 @@ export class OrganizationComponent {
   }
 
   ngOnInit(){
-    this.LoadApplication;
-    this.GetAll();
+    this.fnGetOrganizationById();
   }
 
-  public LoadApplication(){
-    try {
-      this.httpService
-      .globalGet(
-      FiscalAPIConfig.API_CONFIG.API_URL.MASTER.ORGANIZATION.LIST
-      )
-      .subscribe({
-        next:(result:any)=>{
+  //  list button
 
-        },
-        error: (err: HttpErrorResponse) => console.log(err),
-        
-      })
-      
-    } catch (error) {
-      
-    }
+  RedirecttoList(){
+    this.router.navigate(['/apps/fiscal/organization-list']);  
   }
 
 
 
-  public GetAll(){
-    this.productService.getOrganization().then((data)=>{
-      this.items=data
-    })
-  }
 
   getOrganizationLogo($event: any) {
 
@@ -283,7 +263,6 @@ export class OrganizationComponent {
     this.buttonText = "Save";
     this.IsUpdate = false;
     this.OrganizationForm.reset();
-    this.GetAll();
   }
 
 
@@ -320,71 +299,40 @@ export class OrganizationComponent {
     this.OrganizationForm.controls['email']?.setValue(item.email);
     this.OrganizationForm.controls['website']?.setValue(item.website);
 
-
-
-
-
     
 this.IsUpdate=true
 this.buttonText="Update"
 
   }
 
-  Delete(data:any){
-    this.deleteDialog=true;
-    this.item={ ...data }
 
-  }
 
-  confirmDelete(){
-    this.deleteDialog=false;
-    let deletedItem:any[]=this.items.filter(
-      (val)=>val.organizationId === this.item.organizationId
-    );
-    console.log('deletedItem',deletedItem);
-    
-    if(deletedItem !=null && deletedItem.length > 0){
-        var passSaveParams:any = {};
 
-        passSaveParams.organizationId = deletedItem[0].organizationId;
-        passSaveParams.isActive = false;
-        passSaveParams.userId = this.userDetails? this.userDetails.userId: 0;
-        passSaveParams.ipAddress = '192.168.1.1';
+
+  public  fnGetOrganizationById(){
+
+    try {
+     this.httpService.globalGet(AdminAPIConfig.API_CONFIG.API_URL.ADMIN.ORGANIZATION.EDIT + '/?organizationId='+ this.OrganizationId )
+     .subscribe({
+        next:(result:any) =>{
+        this.OrganizationList = result.pages;
+        console.log('fnGetByPageId',this.OrganizationList);
+
+        if(this.OrganizationList != undefined && this.OrganizationList,length > 0){
+                this.OrganizationId=this.OrganizationList[0].organizationId;
+
+                this.OrganizationForm.get("name")?.setValue(this.OrganizationList[0].name);
+                this.OrganizationForm.get("shortName")?.setValue(this.OrganizationList[0].shortName);
+        }
+                    
+        },
+        error:(err:HttpErrorResponse)=> console.log('fnGetByPageId',err)
         
-        // passSaveParams.name=deletedItem[0].name;
-        // passSaveParams.shortName=deletedItem[0].shortName;
-        // passSaveParams.addressOne=deletedItem[0].addressOne;
-        // passSaveParams.addressTwo=deletedItem[0].addressTwo;
-        // passSaveParams.addressThree=deletedItem[0].addressThree;
-        // passSaveParams.addressFour=deletedItem[0].addressFour;
-        // passSaveParams.city=deletedItem[0].city;
-        // passSaveParams.state=deletedItem[0].state;
-        // passSaveParams.country=deletedItem[0].country;
-        // passSaveParams.pinCode=deletedItem[0].pinCode;
-        // passSaveParams.phoneNumber=deletedItem[0].phoneNumber;
-        // passSaveParams.fax=deletedItem[0].fax;
-        // passSaveParams.mobileNumber=deletedItem[0].mobileNumber;
-        // passSaveParams.email=deletedItem[0].email;
-        // passSaveParams.website=deletedItem[0].website;
-
-
-        this.httpService
-        .globalPost(
-          FiscalAPIConfig.API_CONFIG.API_URL.MASTER.ORGANIZATION.DELETE,
-          JSON.stringify(passSaveParams)
-        )
-        .subscribe({
-          next: (result:any) =>{
-            this.Clear();
-            this.notificationsService(
-              FiscalValidation.NOTIFICATION_SUCCESS,'success Message',result.message
-            )
-          },
-          error:(err: HttpErrorResponse) => console.log(err),
-          
-        })
+     })   
+    } catch (error) {
+        
     }
-    this.item={}
-  }
+
+ }
 
 }
