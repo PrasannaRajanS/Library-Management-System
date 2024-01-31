@@ -21,6 +21,14 @@ interface Image {
 }
 
 
+//   Drop down by mj tamil
+
+interface AutoCompleteCompleteEvent {
+    originalEvent: Event;
+    query: string;
+  }
+
+
 @Component({
   selector: 'app-employee-add',
   templateUrl: './employee-add.component.html',
@@ -88,5 +96,13 @@ export class EmployeeAddComponent {
   removeImage(file: Image) {
       this.product.images = this.product.images.filter(i => i !== file);
   }
+
+
+//   Drop down by mj tamil
+
+filterMagePage( event: AutoCompleteCompleteEvent){
+
+}
+
   
 }

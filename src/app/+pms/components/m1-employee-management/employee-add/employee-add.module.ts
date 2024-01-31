@@ -21,6 +21,7 @@ import { DividerModule } from 'primeng/divider';
 import { SplitterModule } from 'primeng/splitter';
 import { PanelModule } from 'primeng/panel';
 import { FieldsetModule } from 'primeng/fieldset';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 
 @NgModule({
@@ -43,7 +44,10 @@ import { FieldsetModule } from 'primeng/fieldset';
 		InputTextModule,
 		DividerModule,
 		SplitterModule,
-		PanelModule
+		PanelModule,
+		// dropdown ng
+		AutoCompleteModule,
+		DropdownModule
   ]
 })
 export class EmployeeAddModule { }
