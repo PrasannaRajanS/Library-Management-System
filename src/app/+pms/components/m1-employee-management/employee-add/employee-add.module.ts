@@ -6,7 +6,7 @@ import { EmployeeAddComponent } from './employee-add.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { ChipModule } from 'primeng/chip';
 import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -22,6 +22,7 @@ import { SplitterModule } from 'primeng/splitter';
 import { PanelModule } from 'primeng/panel';
 import { FieldsetModule } from 'primeng/fieldset';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { CalendarModule } from 'primeng/calendar';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     CommonModule,
     EmployeeAddRoutingModule,
     FormsModule,
+	ReactiveFormsModule,
 
     ToolbarModule,
 		ButtonModule,
@@ -47,7 +49,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 		PanelModule,
 		// dropdown ng
 		AutoCompleteModule,
-		DropdownModule
+		DropdownModule,
+		CalendarModule
   ]
 })
 export class EmployeeAddModule { }

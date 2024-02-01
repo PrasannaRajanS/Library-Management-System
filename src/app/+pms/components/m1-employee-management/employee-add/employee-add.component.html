@@ -21,8 +21,7 @@
                                             <label htmlFor="firstname2">Employee No</label>
                                         </span>
                                     </div>
-
-                                    
+                                   
                                     
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
@@ -30,7 +29,6 @@
                                             <label htmlFor="firstname2">First Name</label>
                                         </span>    
                                     </div>
-
 
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
@@ -56,7 +54,7 @@
 
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input type="text" pInputText>
+                                            <p-calendar formControlName="date"></p-calendar>
                                             <label htmlFor="firstname2">DOB</label>
                                         </span>
                                     </div>
@@ -211,16 +209,14 @@
                                             </span>
                                             
                                     </div>
-
                                     
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label"> 
-                                            <input type="text" pInputText >
+                                            <p-calendar formControlName="date"></p-calendar>
                                             <label for="">Date Of Join *</label>
                                         </span>
                                             
                                     </div>
-
 
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
@@ -236,7 +232,6 @@
                                     </div>
 
 
-
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
                                             <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
@@ -249,7 +244,6 @@
                                         </span>
                                         <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
                                     </div>
-
 
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
@@ -265,7 +259,6 @@
                                     </div>
 
 
-
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
                                             <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
@@ -278,9 +271,6 @@
                                         </span>
                                         <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
                                     </div>
-
-
-
 
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
@@ -319,7 +309,6 @@
                                         <!-- <small id="application-help">{{formError("role",UserCreationForm)}}</small> -->
                                     </div>
 
-
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
                                             <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
@@ -332,9 +321,6 @@
                                         </span>
                                         <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
                                     </div>
-
-
-
                                     
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
@@ -349,13 +335,132 @@
 
                                 </div>
 
+
+                                
+
+                            </div>
+
+
+
+                            <div class="card">
+                                <h5>Emergency Contact Info</h5>
+                                <div class="grid formgrid">
+                                    <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText >
+                                                <label for="">Contact Person *</label>
+                                            </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label"> 
+                                                <input type="text" pInputText >
+                                                <label for="">Contact Person Mobile No *</label>
+                                            </span>
+                                            
+                                    </div>
+                                    
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label"> 
+                                            <input type="text" pInputText >
+                                            <label for="">Contact Person Mobile No</label>
+                                        </span>
+                                            
+                                    </div>
+
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
+                                            <!-- formControlName="" [suggestions]="filteredMainPageList" -->
+                                            <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                                [dropdown]="true" [forceSelection]="true"
+                                                field="mainPageName"></p-autoComplete>
+
+                                            <label for="mainPageName">Blood Group</label>
+                                        </span>
+                                        <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
+                                    </div>
+
+
+ 
+
+                                </div>
+
+
+                                
+
+                            </div>
+
+
+                            <div class="card">
+                                <h5>Unique Number Info</h5>
+                                <div class="grid formgrid">
+                                    <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText >
+                                                <label for="">Nationality</label>
+                                            </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label"> 
+                                                <input type="text" pInputText >
+                                                <label for="">PAN No</label>
+                                            </span>
+                                            
+                                    </div>
+                                    
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label"> 
+                                            <input type="text" pInputText >
+                                            <label for="">Community</label>
+                                        </span>
+                                            
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label"> 
+                                            <input type="text" pInputText >
+                                            <label for="">Aadhaar No *</label>
+                                        </span>
+                                            
+                                    </div>
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label"> 
+                                            <input type="text" pInputText >
+                                            <label for="">UAN No</label>
+                                        </span>
+                                            
+                                    </div>
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label"> 
+                                            <input type="text" pInputText >
+                                            <label for="">ESI No</label>
+                                        </span>
+                                            
+                                    </div>
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label"> 
+                                            <input type="text" pInputText >
+                                            <label for="">EPF No</label>
+                                        </span>
+                                            
+                                    </div>
+
+                                </div>
+
+
+                                
+
                             </div>
 
 
                         </div>
 
-
                     </div>
+                    
 
                 </p-tabPanel>
 
@@ -416,7 +521,7 @@
 
                             <div class="field" class="field col-12 md:col-3 mt-3">
                                 <span class="p-float-label">
-                                    <input pInputText id="YearOfPassing" />
+                                    <p-calendar [readonlyInput]="true"  view="year"   dateFormat="yy" inputId="yearpicker" ></p-calendar>
                                     <label htmlFor="YearOfPassing" >Year Of Passing</label>
                                 </span>
                                 
@@ -465,7 +570,6 @@
                     </div>
                 </p-tabPanel>
 
-
                 <p-tabPanel header="Work" class="line-height-3 m-0">
                     <div class="grid p-fluid m-3">
                         <h5>Work Experience Detail</h5>
@@ -483,14 +587,14 @@
 
                             <div class="field col-12 md:col-3 mt-3">
                                 <span class="p-float-label">
-                                <input pInputText id="StartingDate"  placeholder="dd.mm.yy" />
+                                    <p-calendar formControlName="date"></p-calendar>
                                 <label htmlFor="StartingDate" >Starting Date</label>
                                 </span>
                             </div>
 
                             <div class="field col-12 md:col-3 mt-3">
                                 <span class="p-float-label">
-                                    <input pInputText id="EndingDate"  placeholder="dd.mm.yy" />
+                                    <p-calendar formControlName="date"></p-calendar>
                                     <label htmlFor="EndingDate">Ending Date</label>
                                 </span>
                                 
