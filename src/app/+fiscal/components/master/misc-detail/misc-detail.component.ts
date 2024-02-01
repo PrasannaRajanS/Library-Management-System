@@ -101,9 +101,7 @@ export class MiscDetailComponent {
   };
 
 
-  Clear() {
 
-  }
 
   Save() {
 
@@ -205,6 +203,13 @@ export class MiscDetailComponent {
 
   //     this.filteredCountries = filtered;
   // }
+
+  Clear() {
+
+    this.MiscDetailForm.reset();
+    this.miscdetails=[];     
+
+  }
 
 
   private notificationsService(_severity: any, _summary: any, _message: any) {
