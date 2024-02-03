@@ -65,10 +65,10 @@ export class InstitutionComponent {
     category: null,
 
     // 2
-    addressOne: null,
-    addressTwo: null,
-    addressThree: null,
-    addressFour: null,
+    address1: null,
+    address2: null,
+    address3: null,
+    address4: null,
     cityId: null,
     stateId: null,
     countryId: null,
@@ -169,6 +169,8 @@ export class InstitutionComponent {
   //   }
   // }
 
+
+
   public LoadApplication() {
     try {
       this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.LIST)
@@ -209,10 +211,10 @@ export class InstitutionComponent {
         passSaveParams.affiliatedCode = this.InstitutionFrom.value['affiliatedCode']
         passSaveParams.category = this.InstitutionFrom.value['category']
 
-        passSaveParams.addressOne = this.InstitutionFrom.value['addressOne']
-        passSaveParams.addressTwo = this.InstitutionFrom.value['addressTwo']
-        passSaveParams.addressThree = this.InstitutionFrom.value['addressThree']
-        passSaveParams.addressFour = this.InstitutionFrom.value['addressFour']
+        passSaveParams.addressOne = this.InstitutionFrom.value['address1']
+        passSaveParams.addressTwo = this.InstitutionFrom.value['address2']
+        passSaveParams.addressThree = this.InstitutionFrom.value['address3']
+        passSaveParams.addressFour = this.InstitutionFrom.value['address4']
         passSaveParams.cityId = this.InstitutionFrom.value['cityId']
         passSaveParams.stateId = this.InstitutionFrom.value['stateId']
         passSaveParams.countryId = this.InstitutionFrom.value['countryId']
@@ -245,10 +247,10 @@ export class InstitutionComponent {
         passSaveParams.affiliatedCode = this.InstitutionFrom.value['affiliatedCode']
         passSaveParams.category = this.InstitutionFrom.value['category']
 
-        passSaveParams.addressOne = this.InstitutionFrom.value['addressOne']
-        passSaveParams.addressTwo = this.InstitutionFrom.value['addressTwo']
-        passSaveParams.addressThree = this.InstitutionFrom.value['addressThree']
-        passSaveParams.addressFour = this.InstitutionFrom.value['addressFour']
+        passSaveParams.addressOne = this.InstitutionFrom.value['address1']
+        passSaveParams.addressTwo = this.InstitutionFrom.value['address2']
+        passSaveParams.addressThree = this.InstitutionFrom.value['address3']
+        passSaveParams.addressFour = this.InstitutionFrom.value['address4']
         passSaveParams.cityId = this.InstitutionFrom.value['cityId']
         passSaveParams.stateId = this.InstitutionFrom.value['stateId']
         passSaveParams.countryId = this.InstitutionFrom.value['countryId']

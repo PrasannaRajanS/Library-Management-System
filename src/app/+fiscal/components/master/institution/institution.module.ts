@@ -15,8 +15,8 @@ import { MessageService } from 'primeng/api';
 import { UtilService } from 'src/app/shared/util.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { CheckboxModule } from 'primeng/checkbox';
 import { CalendarModule } from 'primeng/calendar';
+
 
 
 
@@ -40,8 +40,8 @@ import { CalendarModule } from 'primeng/calendar';
     TabViewModule,
     DropdownModule,
     AutoCompleteModule,
-    CheckboxModule,
-    CalendarModule 
+    CalendarModule,
+ 
 
   ],
   providers: [
