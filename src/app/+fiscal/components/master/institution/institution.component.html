@@ -268,10 +268,13 @@
                                         </span>
                                     </div>
 
-                                    <div class="flex align-items-center gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="PrePrimary"> Pre Primary </label>
-                                        <p-checkbox value="Pre Primary" formControlName="basicPrePrimary"
-                                            inputId="PrePrimary"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                formControlName="basicPrePrimary" (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="PrePrimary" inputId="PrePrimary"></p-autoComplete>
+                                            <label for="PrePrimary">Pre Primary</label>
+                                        </span>
                                     </div>
 
                                 </div>
@@ -284,45 +287,47 @@
 
                                     <div class="field col-12 md:col-3 mt-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="address_1" formControlName="addressOne" pInputText
+                                            <input type="text" id="address_1" formControlName="address1" pInputText
                                                 autocomplete="off">
                                             <label for="address_1">Address 1</label>
                                         </span>
-                                        <small id="address_1-help">{{ formError("addressOne" ,InstitutionFrom)}}</small>
+                                        <small id="address_1-help">{{ formError("address1" ,InstitutionFrom)}}</small>
                                     </div>
                                     <div class="field col-12 md:col-3 mt-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="address_2" formControlName="addressTwo" pInputText
+                                            <input type="text" id="address_2" formControlName="address2" pInputText
                                                 autocomplete="off">
                                             <label for="address_2">Address 2</label>
                                         </span>
-                                        <small id="address_2-help">{{ formError("addressTwo" ,InstitutionFrom)}}</small>
+                                        <small id="address_2-help">{{ formError("address2" ,InstitutionFrom)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3 mt-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="address_3" formControlName="addressThree" pInputText
+                                            <input type="text" id="address_3" formControlName="address3" pInputText
                                                 autocomplete="off">
                                             <label for="address_3">Address 3</label>
                                         </span>
-                                        <small id="address_3-help">{{ formError("addressThree"
+                                        <small id="address_3-help">{{ formError("address3"
                                             ,InstitutionFrom)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3 mt-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="address_4" formControlName="addressFour" pInputText
+                                            <input type="text" id="address_4" formControlName="address4" pInputText
                                                 autocomplete="off">
                                             <label for="address_4">Address 4</label>
                                         </span>
-                                        <small id="address_4-help">{{ formError("addressFour"
+                                        <small id="address_4-help">{{ formError("address4"
                                             ,InstitutionFrom)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3 mt-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="city" formControlName="cityId" pInputText
-                                                autocomplete="off">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                formControlName="cityId" [minLength]="0" [dropdown]="true"
+                                                [forceSelection]="true" field="city"
+                                                inputId="city"></p-autoComplete>
                                             <label for="city">City</label>
                                         </span>
                                         <small id="city-help">{{ formError("cityId" ,InstitutionFrom)}}</small>
@@ -330,23 +335,25 @@
 
                                     <div class="field col-12 md:col-3 mt-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="state" formControlName="stateId" pInputText
-                                                autocomplete="off">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                formControlName="stateId" [minLength]="0" [dropdown]="true"
+                                                [forceSelection]="true" field="state"
+                                                inputId="state"></p-autoComplete>
                                             <label for="state">State</label>
                                         </span>
                                         <small id="state-help">{{ formError("stateId" ,InstitutionFrom)}}</small>
                                     </div>
 
-
                                     <div class="field col-12 md:col-3 mt-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="country" formControlName="countryId" pInputText
-                                                autocomplete="off">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                formControlName="countryId" [minLength]="0" [dropdown]="true"
+                                                [forceSelection]="true" field="state"
+                                                inputId="country"></p-autoComplete>
                                             <label for="country">Country</label>
                                         </span>
-                                        <small id="state-help">{{ formError("stateId" ,InstitutionFrom)}}</small>
+                                        <small id="country-help">{{ formError("countryId" ,InstitutionFrom)}}</small>
                                     </div>
-
 
                                     <div class="field col-12 md:col-3 mt-3">
                                         <span class="p-float-label">
@@ -354,7 +361,7 @@
                                                 autocomplete="off">
                                             <label for="pinzipCode">PINCode / ZIP Code</label>
                                         </span>
-                                        <small id="state-help">{{ formError("stateId" ,InstitutionFrom)}}</small>
+                                        <small id="pinzipCode-help">{{ formError("pinCode" ,InstitutionFrom)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3 mt-3">
@@ -363,7 +370,7 @@
                                                 autocomplete="off">
                                             <label for="fax">Fax</label>
                                         </span>
-                                        <small id="state-help">{{ formError("stateId" ,InstitutionFrom)}}</small>
+                                        <small id="fax-help">{{ formError("fax" ,InstitutionFrom)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3 mt-3">
@@ -600,41 +607,67 @@
                                         </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="ny">Residential School</label>
-                                        <p-checkbox value="Residential School" inputId="ny"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="ResidentialSchool" inputId="ResidentialSchool"></p-autoComplete>
+                                            <label for="ResidentialSchool">Residential School</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="ny">Is this a Shift School</label>
-                                        <p-checkbox value=" Shift School" inputId="ny"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="IsthisAShiftSchool" inputId="IsthisAShiftSchool"></p-autoComplete>
+                                            <label for="IsthisAShiftSchool">Is this a Shift School</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="ny">Is Special School for CWSN</label>
-                                        <p-checkbox value=" Is Special School For CWSN" inputId="ny"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="IsSpecialSchoolforCWSN" inputId="IsSpecialSchoolforCWSN"></p-autoComplete>
+                                            <label for="IsSpecialSchoolforCWSN">Is Special School for CWSN</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="ny">Availability of Ramps</label>
-                                        <p-checkbox value=" Availability Of Ramps" inputId="ny"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="AvailabilityOfRamps" inputId="AvailabilityOfRamps"></p-autoComplete>
+                                            <label for="AvailabilityOfRamps">Availability of Ramps</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="ny">Availability of Handrails</label>
-                                        <p-checkbox value="Availability Of Handrails" inputId="ny"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="AvailabilityOfHandrails" inputId="AvailabilityOfHandrails"></p-autoComplete>
+                                            <label for="AvailabilityOfHandrails">Availability of Handrails</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="MinoritySchool">Minority School</label>
-                                        <p-checkbox value="Minority School" inputId="MinoritySchool"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="MinoritySchool" inputId="MinoritySchool"></p-autoComplete>
+                                            <label for="MinoritySchool">Minority School</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="ApproachableByAllWeatherRoad ">Approachable By All Weather Road
-                                        </label>
-                                        <p-checkbox value="Approachable By All Weather Road"
-                                            inputId="ApproachableByAllWeatherRoad "></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="ApproachableByAllWeatherRoad" inputId="ApproachableByAllWeatherRoad"></p-autoComplete>
+                                            <label for="ApproachableByAllWeatherRoad">Approachable By All Weather Road</label>
+                                        </span>
                                     </div>
 
                                 </div>
@@ -702,67 +735,85 @@
                                         </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="LibraryAvailability">Library Availability
-                                        </label>
-                                        <p-checkbox value="Library Availability"
-                                            inputId="LibraryAvailability "></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="LibraryAvailability" inputId="LibraryAvailability"></p-autoComplete>
+                                            <label for="LibraryAvailability">Library Availability</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="ElectricityAvailability">Electricity Availability
-                                        </label>
-                                        <p-checkbox value="Electricity Availability"
-                                            inputId="ElectricityAvailability"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="ElectricityAvailability" inputId="ElectricityAvailability"></p-autoComplete>
+                                            <label for="ElectricityAvailability">Electricity Availability</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="PlaygroundAvailable">Playground Available
-                                        </label>
-                                        <p-checkbox value="Playground Available"
-                                            inputId="PlaygroundAvailable"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="PlaygroundAvailable" inputId="PlaygroundAvailable"></p-autoComplete>
+                                            <label for="PlaygroundAvailable">Playground Available</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="DrinkingWaterAvailable">Drinking Water Available
-                                        </label>
-                                        <p-checkbox value="Drinking Water Available"
-                                            inputId="DrinkingWaterAvailable"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="DrinkingWaterAvailable" inputId="DrinkingWaterAvailable"></p-autoComplete>
+                                            <label for="DrinkingWaterAvailable">Drinking Water Available</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="DrinkingWaterFunctional">Drinking Water Functional 
-                                        </label>
-                                        <p-checkbox value="Drinking Water Functional"
-                                            inputId="DrinkingWaterFunctional"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="DrinkingWaterFunctional" inputId="DrinkingWaterFunctional"></p-autoComplete>
+                                            <label for="DrinkingWaterFunctional">Drinking Water Functional</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="RainWaterHarvesting">Rain Water Harvesting
-                                        </label>
-                                        <p-checkbox value="Rain Water Harvesting"
-                                            inputId="RainWaterHarvesting "></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="RainWaterHarvesting" inputId="RainWaterHarvesting"></p-autoComplete>
+                                            <label for="RainWaterHarvesting">Rain Water Harvesting</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="SolarPanel">Solar Panel
-                                        </label>
-                                        <p-checkbox value="Solar Panel"
-                                            inputId="SolarPanel"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="SolarPanel" inputId="SolarPanel"></p-autoComplete>
+                                            <label for="SolarPanel">Solar Panel</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="MedicalCheckups">Medical Checkups
-                                        </label>
-                                        <p-checkbox value="Medical Checkups"
-                                            inputId="MedicalCheckups"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="MedicalCheckups" inputId="MedicalCheckups"></p-autoComplete>
+                                            <label for="MedicalCheckups">Medical Checkups</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="SeparateRoomforHM ">Separate Room for HM
-                                        </label>
-                                        <p-checkbox value="Separate Room for HM"
-                                            inputId="SeparateRoomforHM "></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="SeparateRoomforHM" inputId="SeparateRoomforHM"></p-autoComplete>
+                                            <label for="SeparateRoomforHM">Separate Room for HM</label>
+                                        </span>
                                     </div>
 
                                 </div>
@@ -843,18 +894,22 @@
                                         </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="HandwashNearToilet ">Handwash Near Toilet
-                                        </label>
-                                        <p-checkbox value="Handwash Near Toilet"
-                                            inputId="HandwashNearToilet "></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="HandwashNearToilet" inputId="HandwashNearToilet"></p-autoComplete>
+                                            <label for="HandwashNearToilet">Handwash Near Toilet</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="HandwashFacilityforMeal ">Handwash Facility for Meal
-                                        </label>
-                                        <p-checkbox value="Handwash Facility for Meal"
-                                            inputId="HandwashFacilityforMeal"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="HandwashFacilityforMeal" inputId="HandwashFacilityforMeal"></p-autoComplete>
+                                            <label for="HandwashFacilityforMeal">Handwash Facility for Meal</label>
+                                        </span>
                                     </div>
 
                                 </div>
@@ -972,18 +1027,22 @@
                                         </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="ICTLab ">ICT Lab
-                                        </label>
-                                        <p-checkbox value="ICT Lab"
-                                            inputId="ICTLab"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="ICTLab" inputId="ICTLab"></p-autoComplete>
+                                            <label for="ICTLab">ICT Lab</label>
+                                        </span>
                                     </div>
 
-                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
-                                        <label for="Internet ">Internet
-                                        </label>
-                                        <p-checkbox value="Internet"
-                                            inputId="Internet"></p-checkbox>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="Internet" inputId="Internet"></p-autoComplete>
+                                            <label for="Internet">Internet</label>
+                                        </span>
                                     </div>
 
                                 </div>
@@ -993,7 +1052,7 @@
                         <p-tabPanel header="Teachers Info" class="line-height-3 m-0">
                             <div class="grid p-fluid">
                                 <div class="grid formgrid">
-
+                                    
                                 </div>
                             </div>
                         </p-tabPanel>

@@ -15,10 +15,10 @@ export interface IInstitution {
     category?: string | null | undefined;
 
     // Address Details
-    addressOne?: string | null | undefined;
-    addressTwo?: string | null | undefined;
-    addressThree?: string | null | undefined;
-    addressFour?: string | null | undefined;
+    address1?: string | null | undefined;
+    address2?: string | null | undefined;
+    address3?: string | null | undefined;
+    address4?: string | null | undefined;
     cityId?: string | null | undefined;
     stateId?: string | null | undefined;
     countryId?: string | null | undefined;
@@ -54,7 +54,7 @@ export interface IInstitution {
     basicMedium2?: string | null | undefined;
     basicMedium3?: string | null | undefined;
     basicMedium4?: string | null | undefined;
-    basicPrePrimary?: boolean | null | undefined;
+    basicPrePrimary?: any | null | undefined;
     
     // Management Info
 

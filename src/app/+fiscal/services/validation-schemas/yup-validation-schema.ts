@@ -60,10 +60,10 @@ export const YupFiscalValidation = Object.freeze({
     category: yup.string().required('Category is required'),
 
     // Address Details
-    addressOne: yup.string().nullable().notRequired(),
-    addressTwo: yup.string().nullable().notRequired(),
-    addressThree: yup.string().nullable().notRequired(),
-    addressFour: yup.string().nullable().notRequired(),
+    address1: yup.string().nullable().notRequired(),
+    address2: yup.string().nullable().notRequired(),
+    address3: yup.string().nullable().notRequired(),
+    address4: yup.string().nullable().notRequired(),
     cityId: yup.string().nullable().notRequired(),
     stateId: yup.string().nullable().notRequired(),
     countryId: yup.string().nullable().notRequired(),
@@ -98,7 +98,7 @@ export const YupFiscalValidation = Object.freeze({
     basicMedium2: yup.string().nullable().notRequired(),
     basicMedium3: yup.string().nullable().notRequired(),
     basicMedium4: yup.string().nullable().notRequired(),
-    basicPrePrimary: yup.boolean().nullable(),
+    basicPrePrimary: yup.object().nullable(),
 
     // Management Info
     YearOfEstablishment: yup.date().notRequired(),
