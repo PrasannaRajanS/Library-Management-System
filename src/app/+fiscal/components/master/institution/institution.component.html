@@ -11,239 +11,998 @@
         <ng-template pTemplate="right">
             <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" (click)="Save()"
                 [disabled]="!InstitutionFrom.valid">{{buttonText}}</button>
-
+            <button pButton pRipple label="List" icon="pi pi-align-justify" class="p-button-primary mr-2"
+                (click)="RedirecttoList()"></button>
             <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
                 (click)="Clear()"></button>
         </ng-template>
     </p-toolbar>
 
-    
+
     <p-toast></p-toast>
 
 
- <form [formGroup]="InstitutionFrom" style="margin-top: 10px;">
-   
-    <div class="grid p-fluid mt-3">
+    <form [formGroup]="InstitutionFrom" style="margin-top: 10px;">
 
-        <div class="field col-12 md:col-3">
-            <span class="p-float-label">
-                <input type="text" id="organizationName" pInputText formControlName="organizationName" autocomplete="off">
-                <label for="organizationName">Organization Name<span class="mandatory">*</span></label>
-            </span>
-            <small id="organizationName-help">{{ formError("organizationName" ,InstitutionFrom)}}</small>
+        <div class="grid p-fluid mt-3">
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="institutionName" pInputText formControlName="institutionName"
+                        autocomplete="off">
+                    <label for="institutionName">Organization Name<span class="mandatory">*</span></label>
+                </span>
+                <small id="institutionName-help">{{ formError("institutionName" ,InstitutionFrom)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="nameOfSchool" pInputText formControlName="nameOfSchool" autocomplete="off">
+                    <label for="nameOfSchool">Name of School<span class="mandatory">*</span></label>
+                </span>
+                <small id="nameOfSchool-help">{{ formError("nameOfSchool" ,InstitutionFrom)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="shortName" pInputText formControlName="shortName" autocomplete="off">
+                    <label for="shortName">Short Name<span class="mandatory">*</span></label>
+                </span>
+                <small id="shortName-help">{{ formError("shortName" ,InstitutionFrom)}}</small>
+            </div>
+
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="schoolUDISECode" pInputText formControlName="schoolUDISECode"
+                        autocomplete="off">
+                    <label for="schoolUDISECode"> School U-DISE Code<span class="mandatory">*</span></label>
+                </span>
+                <small id="schoolUDISECode-help">{{ formError("schoolUDISECode" ,InstitutionFrom)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="affiliatedCode" pInputText formControlName="affiliatedCode"
+                        autocomplete="off">
+                    <label for="affiliatedCode">Affiliated Code<span class="mandatory">*</span></label>
+                </span>
+                <small id="shortName-help">{{ formError("affiliatedCode" ,InstitutionFrom)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <input type="text" id="category" pInputText formControlName="category" autocomplete="off">
+                    <label for="category">Category(Classes being taught)<span class="mandatory">*</span></label>
+                </span>
+                <small id="shortName-help">{{ formError("category" ,InstitutionFrom)}}</small>
+            </div>
+
         </div>
 
-        <div class="field col-12 md:col-3">
-            <span class="p-float-label">
-                <input type="text" id="nameOfSchool" pInputText formControlName="nameOfSchool" autocomplete="off">
-                <label for="nameOfSchool">Name of School<span class="mandatory">*</span></label>
-            </span>
-            <small id="nameOfSchool-help">{{ formError("nameOfSchool" ,InstitutionFrom)}}</small>
+
+        <div class="grid p-fluid mt-3">
+            <div class="col-12 md:col-12">
+                <div class="card">
+                    <p-tabView orientation="left">
+
+                        <p-tabPanel header="Basic Info" class="line-height-3 m-0">
+                            <div class="grid p-fluid">
+                                <div class="grid formgrid">
+
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                formControlName="basicStateId" [minLength]="0" [dropdown]="true"
+                                                [forceSelection]="true" field="basicStateId"
+                                                inputId="State"></p-autoComplete>
+                                            <label for="State">State</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                formControlName="basicDistrictId" [minLength]="0" [dropdown]="true"
+                                                [forceSelection]="true" field="basicDistrictId"
+                                                inputId="District"></p-autoComplete>
+                                            <label for="District">District</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                formControlName="basicCityId" (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="basicCityId" inputId="City"></p-autoComplete>
+                                            <label for="City">City</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-dropdown id="Location" [options]="InstitutionList"
+                                                optionLabel="applicationName" formControlName="basicLocation"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+
+                                            </p-dropdown>
+                                            <label for="Location">Location</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="pincode" formControlName="basicPincode" pInputText
+                                                autocomplete="off">
+                                            <label for="pincode">Pincode</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="municipality" formControlName="basicMunicipality"
+                                                pInputText autocomplete="off">
+                                            <label for="municipality">Municipality</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="block" formControlName="basicBlock" pInputText
+                                                autocomplete="off">
+                                            <label for="block">Block</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="ward" formControlName="basicWard" pInputText
+                                                autocomplete="off">
+                                            <label for="ward">Ward</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="panchayat" formControlName="basicPanchayat"
+                                                pInputText autocomplete="off">
+                                            <label for="panchayat">Panchayat</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="mohalla" formControlName="basicMohalla" pInputText
+                                                autocomplete="off">
+                                            <label for="mohalla">Mohalla</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="cluster" formControlName="basicCluster" pInputText
+                                                autocomplete="off">
+                                            <label for="cluster">Cluster</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-dropdown id="school_Type" formControlName="basicSchoolType"
+                                                [options]="InstitutionList" optionLabel="applicationName"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+
+                                            </p-dropdown>
+                                            <label for="school_Type ">School Type </label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                formControlName="basicSchoolCategory"
+                                                (completeMethod)="filterCountry($event)" [dropdown]="true" field="name"
+                                                inputId="SchoolCategory"></p-autoComplete>
+                                            <label for="SchoolCategory"> School Category </label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="school_Management"
+                                                formControlName="basicSchoolManagement" pInputText autocomplete="off">
+                                            <label for="school_Management">School Management</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="class_From" formControlName="basicClassFrom"
+                                                pInputText autocomplete="off">
+                                            <label for="class_From">Class From</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="class_To" formControlName="basicClassTo" pInputText
+                                                autocomplete="off">
+                                            <label for="class_To">Class To</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                formControlName="basicMedium1" (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="name" inputId="medium1"></p-autoComplete>
+                                            <label for="medium1">Medium 1 </label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                formControlName="basicMedium2" (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="name" inputId="medium2"></p-autoComplete>
+                                            <label for="medium2">Medium 2</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                formControlName="basicMedium3" (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="name" inputId="medium3"></p-autoComplete>
+                                            <label for="medium3">Medium 3</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete [suggestions]="InstitutionList"
+                                                formControlName="basicMedium4" (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" field="name" inputId="medium4"></p-autoComplete>
+                                            <label for="medium4">Medium 4</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="flex align-items-center gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="PrePrimary"> Pre Primary </label>
+                                        <p-checkbox value="Pre Primary" formControlName="basicPrePrimary"
+                                            inputId="PrePrimary"></p-checkbox>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </p-tabPanel>
+
+                        <p-tabPanel header="Address Info" class="line-height-3 m-0">
+                            <div class="grid p-fluid">
+                                <div class="grid formgrid">
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="address_1" formControlName="addressOne" pInputText
+                                                autocomplete="off">
+                                            <label for="address_1">Address 1</label>
+                                        </span>
+                                        <small id="address_1-help">{{ formError("addressOne" ,InstitutionFrom)}}</small>
+                                    </div>
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="address_2" formControlName="addressTwo" pInputText
+                                                autocomplete="off">
+                                            <label for="address_2">Address 2</label>
+                                        </span>
+                                        <small id="address_2-help">{{ formError("addressTwo" ,InstitutionFrom)}}</small>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="address_3" formControlName="addressThree" pInputText
+                                                autocomplete="off">
+                                            <label for="address_3">Address 3</label>
+                                        </span>
+                                        <small id="address_3-help">{{ formError("addressThree"
+                                            ,InstitutionFrom)}}</small>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="address_4" formControlName="addressFour" pInputText
+                                                autocomplete="off">
+                                            <label for="address_4">Address 4</label>
+                                        </span>
+                                        <small id="address_4-help">{{ formError("addressFour"
+                                            ,InstitutionFrom)}}</small>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="city" formControlName="cityId" pInputText
+                                                autocomplete="off">
+                                            <label for="city">City</label>
+                                        </span>
+                                        <small id="city-help">{{ formError("cityId" ,InstitutionFrom)}}</small>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="state" formControlName="stateId" pInputText
+                                                autocomplete="off">
+                                            <label for="state">State</label>
+                                        </span>
+                                        <small id="state-help">{{ formError("stateId" ,InstitutionFrom)}}</small>
+                                    </div>
+
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="country" formControlName="countryId" pInputText
+                                                autocomplete="off">
+                                            <label for="country">Country</label>
+                                        </span>
+                                        <small id="state-help">{{ formError("stateId" ,InstitutionFrom)}}</small>
+                                    </div>
+
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="pinzipCode" formControlName="pinCode" pInputText
+                                                autocomplete="off">
+                                            <label for="pinzipCode">PINCode / ZIP Code</label>
+                                        </span>
+                                        <small id="state-help">{{ formError("stateId" ,InstitutionFrom)}}</small>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="fax" formControlName="fax" pInputText
+                                                autocomplete="off">
+                                            <label for="fax">Fax</label>
+                                        </span>
+                                        <small id="state-help">{{ formError("stateId" ,InstitutionFrom)}}</small>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="mobileNumber1" formControlName="mobileNumber1" pInputText
+                                                autocomplete="off">
+                                            <label for="mobileNumber1">Mobile Number 1</label>
+                                        </span>
+                                        <small id="mobileNumber1-help">{{ formError("mobileNumber1"
+                                            ,InstitutionFrom)}}</small>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="mobileNumber2" formControlName="mobileNumber2" pInputText
+                                                autocomplete="off">
+                                            <label for="mobileNumber2">Mobile Number 2</label>
+                                        </span>
+                                        <small id="mobileNumber2-help">{{ formError("mobileNumber2"
+                                            ,InstitutionFrom)}}</small>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="phoneNumber1" formControlName="phoneNumber1" pInputText
+                                                autocomplete="off">
+                                            <label for="phoneNumber1">Phone Number 1</label>
+                                        </span>
+                                        <small id="phoneNumber1-help">{{ formError("phoneNumber1"
+                                            ,InstitutionFrom)}}</small>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="phoneNumber2" formControlName="phoneNumber2" pInputText
+                                                autocomplete="off">
+                                            <label for="phoneNumber2">Phone Number 2</label>
+                                            <small id="phoneNumber2-help">{{ formError("phoneNumber2"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="primaryEmail" formControlName="primaryEmail" pInputText
+                                                autocomplete="off">
+                                            <label for="primaryEmail">Primary Email</label>
+                                            <small id="primaryEmail-help">{{ formError("primaryEmail"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="secondaryEmail" formControlName="secondaryEmail" pInputText
+                                                autocomplete="off">
+                                            <label for="secondaryEmail">Secondary Email</label>
+                                            <small id="secondaryEmail-help">{{ formError("secondaryEmail"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="website" formControlName="website" pInputText
+                                                autocomplete="off">
+                                            <label for="website">Website</label>
+                                            <small id="website-help">{{ formError("website" ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </p-tabPanel>
+
+
+                        <p-tabPanel header="Management Info" class="line-height-3 m-0">
+                            <div class="grid p-fluid">
+                                <div class="grid formgrid">
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-calendar id="YearofEstablishment" formControlName="YearOfEstablishment" view="year" dateFormat="yy"
+                                                [showIcon]="true"></p-calendar>
+                                            <label for="YearofEstablishment">Year of Establishment</label>
+                                            <small id="YearofEstablishment-help">{{ formError("YearofEstablishment"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-calendar id="YearofRecognitionPri" formControlName="YearofRecognitionPri" view="year" dateFormat="yy"
+                                                [showIcon]="true"></p-calendar>
+                                            <label for="YearofRecognition-Pri">Year of Recognition-Pri</label>
+                                            <small id="YearofRecognition-Pri-help">{{ formError("YearofRecognition-Pri"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-calendar id="YearOfRecognitionUprPri" formControlName="YearOfRecognitionUprPri" view="year" dateFormat="yy"
+                                                [showIcon]="true"></p-calendar>
+                                            <label for="YearOfRecognitionUprPri">Year of Recognition-Upr.Pri</label>
+                                            <small id="YearOfRecognitionUprPri-help">{{ formError("YearOfRecognitionUprPri"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-calendar id="YearOfRecognitionSec" formControlName="YearOfRecognitionSec" view="year" dateFormat="yy"
+                                                [showIcon]="true"></p-calendar>
+                                            <label for="YearOfRecognitionSec">Year of Recognition-Sec</label>
+                                            <small id="YearOfRecognitionSec-help">{{ formError("YearOfRecognitionSec"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-calendar id="YearOfRecognitionHigherSec" formControlName="YearOfRecognitionHigherSec" view="year" dateFormat="yy"
+                                                [showIcon]="true"></p-calendar>
+                                            <label for="YearOfRecognitionHigherSec">Year of Recognition-Higher Sec</label>
+                                            <small id="YearOfRecognitionHigherSec-help">{{ formError("YearOfRecognitionHigherSec"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-dropdown id="AffiliationBoard" [options]="InstitutionList"
+                                                optionLabel="applicationName" [autoDisplayFirst]="false"
+                                                [showClear]="true">
+
+                                            </p-dropdown>
+                                            <label for="AffiliationBoard-Sec">Affiliation Board-Sec</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-dropdown id="AffiliationBoard-HSec" [options]="InstitutionList"
+                                                optionLabel="applicationName" [autoDisplayFirst]="false"
+                                                [showClear]="true">
+
+                                            </p-dropdown>
+                                            <label for="AffiliationBoard-HSec">Affiliation Board-HSec</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-dropdown id="BuildingStatus" [options]="InstitutionList"
+                                                optionLabel="applicationName" [autoDisplayFirst]="false"
+                                                [showClear]="true">
+
+                                            </p-dropdown>
+                                            <label for="BuildingStatus">Building Status</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <p-dropdown id="BoundaryWall" [options]="InstitutionList"
+                                                optionLabel="applicationName" [autoDisplayFirst]="false"
+                                                [showClear]="true">
+
+                                            </p-dropdown>
+                                            <label for="BoundaryWall">Boundary wall </label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="NoOfBuildingBlocks" pInputText autocomplete="off">
+                                            <label for="NoOfBuildingBlocks">No of Building Blocks</label>
+                                            <small id="NoOfBuildingBlocks-help">{{ formError("NoOfBuildingBlocks"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="PuccaBuildingBlocks" pInputText autocomplete="off">
+                                            <label for="PuccaBuildingBlocks">Pucca Building Blocks</label>
+                                            <small id="PuccaBuildingBlocks-help">{{ formError("PuccaBuildingBlocks"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="AnganwadiAtPremises" pInputText autocomplete="off">
+                                            <label for="AnganwadiAtPremises">Anganwadi At Premises</label>
+                                            <small id="AnganwadiAtPremises-help">{{ formError("AnganwadiAtPremises"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="AnganwadiBoys" pInputText autocomplete="off">
+                                            <label for="AnganwadiBoys">Anganwadi Boys</label>
+                                            <small id="AnganwadiBoys-help">{{ formError("AnganwadiBoys"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="AnganwadiGirls" pInputText autocomplete="off">
+                                            <label for="AnganwadiGirls">Anganwadi Girls</label>
+                                            <small id="AnganwadiGirls-help">{{ formError("AnganwadiGirls"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="AnganwadiWorker" pInputText autocomplete="off">
+                                            <label for="AnganwadiWorker">Anganwadi Worker</label>
+                                            <small id="AnganwadiWorker-help">{{ formError("AnganwadiWorker"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="ResidentialType" pInputText autocomplete="off">
+                                            <label for="ResidentialType">Residential Type</label>
+                                            <small id="ResidentialType-help">{{ formError("ResidentialType"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="ny">Residential School</label>
+                                        <p-checkbox value="Residential School" inputId="ny"></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="ny">Is this a Shift School</label>
+                                        <p-checkbox value=" Shift School" inputId="ny"></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="ny">Is Special School for CWSN</label>
+                                        <p-checkbox value=" Is Special School For CWSN" inputId="ny"></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="ny">Availability of Ramps</label>
+                                        <p-checkbox value=" Availability Of Ramps" inputId="ny"></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="ny">Availability of Handrails</label>
+                                        <p-checkbox value="Availability Of Handrails" inputId="ny"></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="MinoritySchool">Minority School</label>
+                                        <p-checkbox value="Minority School" inputId="MinoritySchool"></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="ApproachableByAllWeatherRoad ">Approachable By All Weather Road
+                                        </label>
+                                        <p-checkbox value="Approachable By All Weather Road"
+                                            inputId="ApproachableByAllWeatherRoad "></p-checkbox>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </p-tabPanel>
+
+                        <p-tabPanel header="Infrastructure Info" class="line-height-3 m-0">
+                            <div class="grid p-fluid">
+
+                                <h5  class="mt-3">Class Rooms</h5>
+
+                                <div class="grid formgrid">
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="ResidentialType" pInputText autocomplete="off">
+                                            <label for="ResidentialType">Total Class Rooms</label>
+                                            <small id="ResidentialType-help">{{ formError("ResidentialType"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="ResidentialType" pInputText autocomplete="off">
+                                            <label for="ResidentialType">In Good Condition</label>
+                                            <small id="ResidentialType-help">{{ formError("ResidentialType"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="ResidentialType" pInputText autocomplete="off">
+                                            <label for="ResidentialType">Needs Minor Repair</label>
+                                            <small id="ResidentialType-help">{{ formError("ResidentialType"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="ResidentialType" pInputText autocomplete="off">
+                                            <label for="ResidentialType">Needs Major Repair</label>
+                                            <small id="ResidentialType-help">{{ formError("ResidentialType"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="ResidentialType" pInputText autocomplete="off">
+                                            <label for="ResidentialType">Other Rooms </label>
+                                            <small id="ResidentialType-help">{{ formError("ResidentialType"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="ResidentialType" pInputText autocomplete="off">
+                                            <label for="ResidentialType">Furniture Availability</label>
+                                            <small id="ResidentialType-help">{{ formError("ResidentialType"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="LibraryAvailability">Library Availability
+                                        </label>
+                                        <p-checkbox value="Library Availability"
+                                            inputId="LibraryAvailability "></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="ElectricityAvailability">Electricity Availability
+                                        </label>
+                                        <p-checkbox value="Electricity Availability"
+                                            inputId="ElectricityAvailability"></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="PlaygroundAvailable">Playground Available
+                                        </label>
+                                        <p-checkbox value="Playground Available"
+                                            inputId="PlaygroundAvailable"></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="DrinkingWaterAvailable">Drinking Water Available
+                                        </label>
+                                        <p-checkbox value="Drinking Water Available"
+                                            inputId="DrinkingWaterAvailable"></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="DrinkingWaterFunctional">Drinking Water Functional 
+                                        </label>
+                                        <p-checkbox value="Drinking Water Functional"
+                                            inputId="DrinkingWaterFunctional"></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="RainWaterHarvesting">Rain Water Harvesting
+                                        </label>
+                                        <p-checkbox value="Rain Water Harvesting"
+                                            inputId="RainWaterHarvesting "></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="SolarPanel">Solar Panel
+                                        </label>
+                                        <p-checkbox value="Solar Panel"
+                                            inputId="SolarPanel"></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="MedicalCheckups">Medical Checkups
+                                        </label>
+                                        <p-checkbox value="Medical Checkups"
+                                            inputId="MedicalCheckups"></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="SeparateRoomforHM ">Separate Room for HM
+                                        </label>
+                                        <p-checkbox value="Separate Room for HM"
+                                            inputId="SeparateRoomforHM "></p-checkbox>
+                                    </div>
+
+                                </div>
+
+                                <h5  class="mt-3">Toilets</h5>
+
+                                <div class="grid formgrid">
+                                    
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="TotalToiletsForBoys" pInputText autocomplete="off">
+                                            <label for="TotalToiletsForBoys">Total Toilets For Boys</label>
+                                            <small id="TotalToiletsForBoys-help">{{ formError("TotalToiletsForBoys"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="TotalToiletsForGirls" pInputText autocomplete="off">
+                                            <label for="TotalToiletsForGirls">Total Toilets For Girls</label>
+                                            <small id="TotalToiletsForGirls-help">{{ formError("TotalToiletsForGirls"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="FunctionalToiletsForBoys" pInputText autocomplete="off">
+                                            <label for="FunctionalToiletsForBoys">Functional Toilets For Boys</label>
+                                            <small id="FunctionalToiletsForBoys-help">{{ formError("FunctionalToiletsForBoys"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="FunctionalToiletsForGirls" pInputText autocomplete="off">
+                                            <label for="FunctionalToiletsForGirls">Functional Toilets For Girls</label>
+                                            <small id="FunctionalToiletsForGirls-help">{{ formError("FunctionalToiletsForGirls"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="FuncCWSNFriendlyForBoys" pInputText autocomplete="off">
+                                            <label for="FuncCWSNFriendlyForBoys">Func CWSN Friendly For Boys</label>
+                                            <small id="FuncCWSNFriendlyForBoys-help">{{ formError("FuncCWSNFriendlyForBoys"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="FuncCWSNFriendlyForGirls" pInputText autocomplete="off">
+                                            <label for="FuncCWSNFriendlyForGirls">Func CWSN Friendly For Girls</label>
+                                            <small id="FuncCWSNFriendlyForGirls-help">{{ formError("FuncCWSNFriendlyForGirls"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="UrinalForBoys" pInputText autocomplete="off">
+                                            <label for="UrinalForBoys">Urinal For Boys</label>
+                                            <small id="UrinalForBoys-help">{{ formError("UrinalForBoys"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="UrinalForGirls" pInputText autocomplete="off">
+                                            <label for="UrinalForGirls">Urinal For Girls</label>
+                                            <small id="UrinalForGirls-help">{{ formError("UrinalForGirls"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="HandwashNearToilet ">Handwash Near Toilet
+                                        </label>
+                                        <p-checkbox value="Handwash Near Toilet"
+                                            inputId="HandwashNearToilet "></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="HandwashFacilityforMeal ">Handwash Facility for Meal
+                                        </label>
+                                        <p-checkbox value="Handwash Facility for Meal"
+                                            inputId="HandwashFacilityforMeal"></p-checkbox>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </p-tabPanel>
+
+                        <p-tabPanel header="Digital Facilities" class="line-height-3 m-0">
+                            <div class="grid p-fluid">
+                                <div class="grid formgrid">
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="Desktop" pInputText autocomplete="off">
+                                            <label for="Desktop">Desktop</label>
+                                            <small id="Desktop-help">{{ formError("Desktop"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="Laptop" pInputText autocomplete="off">
+                                            <label for="Desktop">Laptop</label>
+                                            <small id="Laptop-help">{{ formError("Laptop"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="Projector" pInputText autocomplete="off">
+                                            <label for="Desktop">Projector</label>
+                                            <small id="Projector-help">{{ formError("Projector"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="Tablet" pInputText autocomplete="off">
+                                            <label for="Tablet">Tablet</label>
+                                            <small id="Tablet-help">{{ formError("Tablet"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="Printer" pInputText autocomplete="off">
+                                            <label for="Printer">Printer</label>
+                                            <small id="Printer-help">{{ formError("Printer"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="DigiBoard" pInputText autocomplete="off">
+                                            <label for="DigiBoard">DigiBoard</label>
+                                            <small id="DigiBoard-help">{{ formError("DigiBoard"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="DigiBoard" pInputText autocomplete="off">
+                                            <label for="DigiBoard">Free text books for Primary</label>
+                                            <small id="DigiBoard-help">{{ formError("DigiBoard"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="DigiBoard" pInputText autocomplete="off">
+                                            <label for="DigiBoard">Transport for Primary</label>
+                                            <small id="DigiBoard-help">{{ formError("DigiBoard"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="DigiBoard" pInputText autocomplete="off">
+                                            <label for="DigiBoard">Free uniform for Primary</label>
+                                            <small id="DigiBoard-help">{{ formError("DigiBoard"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="DigiBoard" pInputText autocomplete="off">
+                                            <label for="DigiBoard">Free text books for Up.Primary</label>
+                                            <small id="DigiBoard-help">{{ formError("DigiBoard"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="DigiBoard" pInputText autocomplete="off">
+                                            <label for="DigiBoard">Transport for Up.Primary</label>
+                                            <small id="DigiBoard-help">{{ formError("DigiBoard"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="DigiBoard" pInputText autocomplete="off">
+                                            <label for="DigiBoard">Free uniform for Up.Primary</label>
+                                            <small id="DigiBoard-help">{{ formError("DigiBoard"
+                                                ,InstitutionFrom)}}</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="ICTLab ">ICT Lab
+                                        </label>
+                                        <p-checkbox value="ICT Lab"
+                                            inputId="ICTLab"></p-checkbox>
+                                    </div>
+
+                                    <div class="flex align-items-center  gap-1 field col-12 md:col-3 mt-3">
+                                        <label for="Internet ">Internet
+                                        </label>
+                                        <p-checkbox value="Internet"
+                                            inputId="Internet"></p-checkbox>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </p-tabPanel>
+
+                        <p-tabPanel header="Teachers Info" class="line-height-3 m-0">
+                            <div class="grid p-fluid">
+                                <div class="grid formgrid">
+
+                                </div>
+                            </div>
+                        </p-tabPanel>
+
+                    </p-tabView>
+                </div>
+            </div>
         </div>
 
-        <div class="field col-12 md:col-3">
-            <span class="p-float-label">
-                <input type="text" id="shortName" pInputText formControlName="shortName" autocomplete="off">
-                <label for="shortName">Short Name<span class="mandatory">*</span></label>
-            </span>
-            <small id="shortName-help">{{ formError("shortName" ,InstitutionFrom)}}</small>
-        </div>
-
-
-        <div class="field col-12 md:col-3">
-            <span class="p-float-label">
-                <input type="text" id="schoolUDiseCode" pInputText formControlName="schoolUDiseCode" autocomplete="off">
-                <label for="schoolUDiseCode"> School U-DISE Code<span class="mandatory">*</span></label>
-            </span>
-            <small id="schoolUDiseCode-help">{{ formError("schoolUDiseCode" ,InstitutionFrom)}}</small>
-        </div>
-
-        <div class="field col-12 md:col-3">
-            <span class="p-float-label">
-                <input type="text" id="affiliatedCode" pInputText formControlName="affiliatedCode" autocomplete="off">
-                <label for="affiliatedCode">Affiliated Code<span class="mandatory">*</span></label>
-            </span>
-            <small id="shortName-help">{{ formError("affiliatedCode" ,InstitutionFrom)}}</small>
-        </div>
-
-        <div class="field col-12 md:col-3">
-            <span class="p-float-label">
-                <input type="text" id="category" pInputText formControlName="category" autocomplete="off">
-                <label for="category">Category(Classes being taught)<span class="mandatory">*</span></label>
-            </span>
-            <small id="shortName-help">{{ formError("category" ,InstitutionFrom)}}</small>
-        </div>
-
-    </div>
-
-
-
-    <div class="col-12 md:col-12">
-        <div class="card">
-            <p-tabView orientation="left">
-                <p-tabPanel header="Address Details" class="line-height-3 m-0">
-                   <div class="grid md:col-12">
-                    
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="text" id="addressOne" pInputText formControlName="addressOne">
-                                <label for="addressOne">Address-1</label>
-                            </span>
-                            <small id="addressOne-help">{{ formError("addressOne" ,InstitutionFrom)}}</small>
-                        </div>
- 
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="text" id="addressTwo" pInputText formControlName="addressTwo">
-                                <label for="addressTwo">Address-2</label>
-                            </span>
-                            <small id="addressTwo-help">{{ formError("addressTwo" ,InstitutionFrom)}}</small>
-                        </div>
-
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="text" id="addressThree" pInputText formControlName="addressThree">
-                                <label for="addressThree">Address-3</label>
-                            </span>
-                            <small id="addressThree-help">{{ formError("addressThree" ,InstitutionFrom)}}</small>
-                        </div>
-                     
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="text" id="addressFour" pInputText formControlName="addressFour">
-                                <label for="addressFour">Address-4</label>
-                            </span>
-                            <small id="addressFour-help">{{ formError("addressFour" ,InstitutionFrom)}}</small>
-                        </div>
-  
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="text" id="city" pInputText formControlName="city">
-                                <label for="city">City</label>
-                            </span>
-                            <small id="city-help">{{ formError("city" ,InstitutionFrom)}}</small>
-                        </div>
-
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="text" id="stateId" pInputText formControlName="stateId">
-                                <label for="stateId">State</label>
-                            </span>
-                            <small id="stateId-help">{{ formError("stateId" ,InstitutionFrom)}}</small>
-                        </div>
-
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="text" id="countryId" pInputText formControlName="countryId">
-                                <label for="countryId">Country</label>
-                            </span>
-                            <small id="countryId-help">{{ formError("countryId" ,InstitutionFrom)}}</small>
-                        </div>
-
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="text" id="pinCode" pInputText formControlName="pinCode">
-                                <label for="pinCode">PINCode / ZIP Code</label>
-                            </span>
-                            <small id="pinCode-help">{{ formError("pinCode" ,InstitutionFrom)}}</small>
-                        </div>
-
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="text" id="fax" pInputText formControlName="fax">
-                                <label for="fax">Fax</label>
-                            </span>
-                            <small id="fax-help">{{ formError("fax" ,InstitutionFrom)}}</small>
-                        </div>
-
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="text" id="mobileNumber1" pInputText formControlName="mobileNumber1">
-                                <label for="mobileNumber1">MobileNumber 1</label>
-                            </span>
-                            <small id="mobileNumber1-help">{{ formError("mobileNumber1" ,InstitutionFrom)}}</small>
-                        </div>
-
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="text" id="mobileNumber2" pInputText formControlName="mobileNumber2">
-                                <label for="mobileNumber2">MobileNumber 2</label>
-                            </span>
-                            <small id="mobileNumber2-help">{{ formError("mobileNumber2" ,InstitutionFrom)}}</small>
-                        </div>
-
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="text" id="phoneNumber1" pInputText formControlName="phoneNumber1">
-                                <label for="phoneNumber1">PhoneNumber 1</label>
-                            </span>
-                            <small id="fax-help">{{ formError("phoneNumber1" ,InstitutionFrom)}}</small>
-                        </div>
-
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="text" id="phoneNumber2" pInputText formControlName="phoneNumber2">
-                                <label for="phoneNumber2">PhoneNumber 2</label>
-                            </span>
-                            <small id="phoneNumber2-help">{{ formError("phoneNumber2" ,InstitutionFrom)}}</small>
-                        </div>
-
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="email" id="primaryEmail" pInputText formControlName="primaryEmail">
-                                <label for="primaryEmail">Primary Email </label>
-                            </span>
-                            <small id="primaryEmail-help">{{ formError("primaryEmail" ,InstitutionFrom)}}</small>
-                        </div>
-
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="email" id="secondaryEmail" pInputText formControlName="secondaryEmail">
-                                <label for="secondaryEmail">Secondary Email</label>
-                            </span>
-                            <small id="secondaryEmail-help">{{ formError("secondaryEmail" ,InstitutionFrom)}}</small>
-                        </div>
-
-                        <div class="field col-12 md:col-3">
-                            <span class="p-float-label">
-                                <input type="url" id="website" pInputText formControlName="website">
-                                <label for="website">Website</label>
-                            </span>
-                            <small id="website-help">{{ formError("website" ,InstitutionFrom)}}</small>
-                        </div>
- 
-                    </div>  
-
-                </p-tabPanel>
-
-                <p-tabPanel header="General Settings" class="line-height-3 m-0">
-
-              
-
-
-                 
-
-
-
-                </p-tabPanel>
-                <!-- <p-tabPanel header="Header III" class="line-height-3 m-0">
-                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                    deleniti atque corrupti quos dolores.
-                </p-tabPanel> -->
-            </p-tabView>
-        </div>
-    </div>
-
-
-
- </form>
-
-
-
-
-
-
-
-
+    </form>
 
 </div>

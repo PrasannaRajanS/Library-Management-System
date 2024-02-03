@@ -1,8 +1,22 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
+import { FiscalValidation } from 'src/app/+fiscal/services/fiscal-validation';
+
 import { IInstitution } from 'src/app/+fiscal/services/interfaces/IInstitution';
-import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
+
 import { UtilService } from 'src/app/shared/util.service';
+import { ProductService } from 'src/app/demo/service/product.service';
+import { MessageService } from 'primeng/api';
+import { HttpService } from 'src/app/+admin/services/http.service';
+
+import * as yup from "yup";
+import { YupFiscalValidation } from 'src/app/+fiscal/services/validation-schemas/yup-validation-schema';
+import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
+
 
 @Component({
   selector: 'app-institution',
@@ -11,63 +25,278 @@ import { UtilService } from 'src/app/shared/util.service';
 })
 export class InstitutionComponent {
 
+  OrganizationId: number = 0;
+  InstitutionId: any = 0;
+
+
+  public buttonText: string = "Save";
+  myFiles: string[] = [];
+
+  selectedItems: IInstitution[] = [];
+  item: IInstitution = {};
+  items: IInstitution[] = []
+  InstitutionList: IInstitution[] = [];
+
+  public userDetails: any;
+
+  private IsUpdate: boolean = true;
 
   // 1.
-  public buttonText:string="Save";
 
-  InstitutionFrom:FormGroup<YupFormControls<IInstitution>>;
+  //#region UI Validation Declarations
 
-  initialValues: IInstitution ={
+  //  Step 1
+  InstitutionFrom: FormGroup<YupFormControls<IInstitution>>;
+
+  //  Step 2
+  initialValues: IInstitution = {
     // 1
-    organizationId:0,
-    organizationName:null,
-    nameOfSchool:null,
-    shortName:null,
-    schoolUDiseCode:null,
-    affiliatedCode:null,
-    category:null,
+
+  
+
+    institutionId: 0,
+    institutionName: null,
+    // organizationId:0,
+    // organizationName:null,
+    nameOfSchool: null,
+    shortName: null,
+    schoolUDISECode: null,
+    affiliatedCode: null,
+    category: null,
 
     // 2
-    addressOne:null,
-    addressTwo:null,
-    addressThree:null,
-    addressFour:null,
-    city:null,
-    stateId:null,
-    countryId:null,
-    pinCode:null,
-    fax:null,
-    mobileNumber1:null,
-    mobileNumber2:null,
-    phoneNumber1:null,
-    phoneNumber2:null,
-    primaryEmail:null,
-    secondaryEmail:null,
-    website:null,
+    addressOne: null,
+    addressTwo: null,
+    addressThree: null,
+    addressFour: null,
+    cityId: null,
+    stateId: null,
+    countryId: null,
+    pinCode: null,
+    fax: null,
+    mobileNumber1: null,
+    mobileNumber2: null,
+    phoneNumber1: null,
+    phoneNumber2: null,
+    primaryEmail: null,
+    secondaryEmail: null,
+    website: null,
+
+    // Basic Info
+    
+    basicStateId: null,
+    basicDistrictId: null,
+    basicCityId: null,
+    basicLocation: null,
+    basicPincode: null,
+    basicMunicipality: null,
+    basicBlock: null,
+    basicWard: null,
+    basicPanchayat: null,
+    basicMohalla: null,
+    basicCluster: null,
+    basicSchoolType: null,
+    basicSchoolCategory: null,
+    basicSchoolManagement: null,
+    basicClassFrom: null,
+    basicClassTo: null,
+    basicMedium1: null,
+    basicMedium2: null,
+    basicMedium3: null,
+    basicMedium4: null,
+    basicPrePrimary: null,
+
+     // Management Info
+     YearOfEstablishment: null,
+     YearofRecognitionPri: null,
+     YearOfRecognitionUprPri: null,
+     YearOfRecognitionSec: null,
+     YearOfRecognitionHigherSec: null,
 
     // 3
 
-    isActive:null,
-    userId:null,
-    ipAddress:null
+    isActive: null,
+    userId: null,
+    ipAddress: null
 
   };
 
-  formError=(controlName:string, formName:any) =>{
-    return this.utilService.formError(controlName,formName);
+  //  Step 3
+  validationSchema: yup.ObjectSchema<IInstitution> = YupFiscalValidation.INSTITUTION;
+
+  //  Step 4
+  formError = (controlName: string, formName: any) => {
+    return this.utilService.formError(controlName, formName);
   }
 
   constructor(
-    private utilService:UtilService
-    
-  ){
-    this.InstitutionFrom=FormHandler.controls<IInstitution>(this.initialValues);
+    private utilService: UtilService,
+    private router: Router,
+    private messageService: MessageService,
+    private productService: ProductService,
+    private httpService: HttpService,
+
+  ) {
+    this.InstitutionFrom = FormHandler.controls<IInstitution>(this.initialValues);
+    this.InstitutionFrom.setValidators(FormHandler.validate<IInstitution>(this.validationSchema))
   }
 
-  Clear(){
+  ngOnInit() {
+    this.LoadApplication;
 
   }
-  Save(){
+
+  // public fnGetByInstitutionId(){
+
+  //   try {
+
+  //     this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.EDIT + '/?institutionId' + this.InstitutionId)
+  //     .subscribe({
+  //       next:(result: any) =>{
+  //         this.InstitutionId = result.institution;
+  //         console.log('fnGetByInstitutionId',this.InstitutionId);
+
+  //         if (this.InstitutionList != undefined && this.InstitutionList.length > 0) {
+  //           this.InstitutionId = this.InstitutionList[0].institutionId;
+
+  //         }
+  //       },
+  //       error: (err: HttpErrorResponse) => console.log('fnGetById',err)
+
+  //     })
+  //   } catch (error) {
+
+  //   }
+  // }
+
+  public LoadApplication() {
+    try {
+      this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.LIST)
+        .subscribe({
+          next: (result: any) => {
+
+          },
+          error: (err: HttpErrorResponse) => console.log(err)
+
+        })
+    } catch (error) {
+
+    }
+  }
+
+  Clear() {
+
+    this.buttonText = "Save";
+    this.IsUpdate = false;
+    this.InstitutionFrom.reset();
 
   }
+
+  Save() {
+
+    try {
+      let _apiUrl: string = '';
+      let passSaveParams: any = {};
+      if (this.IsUpdate) { //  UPDATE
+
+        passSaveParams.institutionId = this.InstitutionId;
+        passSaveParams.institutionName = this.InstitutionFrom.value['institutionName']
+        // passSaveParams.organizationId = this.OrganizationId;
+        // passSaveParams.organizationName = this.InstitutionFrom.value['organizationName']
+        passSaveParams.nameOfSchool = this.InstitutionFrom.value['nameOfSchool']
+        passSaveParams.shortName = this.InstitutionFrom.value['shortName']
+        passSaveParams.schoolUDISECode = this.InstitutionFrom.value['schoolUDISECode']
+        passSaveParams.affiliatedCode = this.InstitutionFrom.value['affiliatedCode']
+        passSaveParams.category = this.InstitutionFrom.value['category']
+
+        passSaveParams.addressOne = this.InstitutionFrom.value['addressOne']
+        passSaveParams.addressTwo = this.InstitutionFrom.value['addressTwo']
+        passSaveParams.addressThree = this.InstitutionFrom.value['addressThree']
+        passSaveParams.addressFour = this.InstitutionFrom.value['addressFour']
+        passSaveParams.cityId = this.InstitutionFrom.value['cityId']
+        passSaveParams.stateId = this.InstitutionFrom.value['stateId']
+        passSaveParams.countryId = this.InstitutionFrom.value['countryId']
+        passSaveParams.pinCode = this.InstitutionFrom.value['pinCode']
+        passSaveParams.fax = this.InstitutionFrom.value['fax']
+        passSaveParams.mobileNumber1 = this.InstitutionFrom.value['mobileNumber1']
+        passSaveParams.mobileNumber2 = this.InstitutionFrom.value['mobileNumber2']
+        passSaveParams.phoneNumber1 = this.InstitutionFrom.value['phoneNumber1']
+        passSaveParams.phoneNumber2 = this.InstitutionFrom.value['phoneNumber2']
+        passSaveParams.primaryEmail = this.InstitutionFrom.value['primaryEmail']
+        passSaveParams.secondaryEmail = this.InstitutionFrom.value['secondaryEmail']
+        passSaveParams.website = this.InstitutionFrom.value['website']
+
+        passSaveParams.isActive = true
+        passSaveParams.userId = this.userDetails ? this.userDetails.UserId : 0
+        passSaveParams.ipAddress = "192.168.1.1";
+
+        _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.UPDATE
+
+      }
+      else { //  SAVE
+
+        passSaveParams.institutionId = this.InstitutionId;
+        passSaveParams.institutionName = this.InstitutionFrom.value['institutionName']
+        // passSaveParams.organizationId = this.OrganizationId;
+        // passSaveParams.organizationName = this.InstitutionFrom.value['organizationName']
+        passSaveParams.nameOfSchool = this.InstitutionFrom.value['nameOfSchool']
+        passSaveParams.shortName = this.InstitutionFrom.value['shortName']
+        passSaveParams.schoolUDISECode = this.InstitutionFrom.value['schoolUDISECode']
+        passSaveParams.affiliatedCode = this.InstitutionFrom.value['affiliatedCode']
+        passSaveParams.category = this.InstitutionFrom.value['category']
+
+        passSaveParams.addressOne = this.InstitutionFrom.value['addressOne']
+        passSaveParams.addressTwo = this.InstitutionFrom.value['addressTwo']
+        passSaveParams.addressThree = this.InstitutionFrom.value['addressThree']
+        passSaveParams.addressFour = this.InstitutionFrom.value['addressFour']
+        passSaveParams.cityId = this.InstitutionFrom.value['cityId']
+        passSaveParams.stateId = this.InstitutionFrom.value['stateId']
+        passSaveParams.countryId = this.InstitutionFrom.value['countryId']
+        passSaveParams.pinCode = this.InstitutionFrom.value['pinCode']
+        passSaveParams.fax = this.InstitutionFrom.value['fax']
+        passSaveParams.mobileNumber1 = this.InstitutionFrom.value['mobileNumber1']
+        passSaveParams.mobileNumber2 = this.InstitutionFrom.value['mobileNumber2']
+        passSaveParams.phoneNumber1 = this.InstitutionFrom.value['phoneNumber1']
+        passSaveParams.phoneNumber2 = this.InstitutionFrom.value['phoneNumber2']
+        passSaveParams.primaryEmail = this.InstitutionFrom.value['primaryEmail']
+        passSaveParams.secondaryEmail = this.InstitutionFrom.value['secondaryEmail']
+        passSaveParams.website = this.InstitutionFrom.value['website']
+
+        passSaveParams.isActive = true
+        passSaveParams.userId = this.userDetails ? this.userDetails.UserId : 0
+        passSaveParams.ipAddress = "192.168.1.1";
+
+        _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.SAVE
+
+      }
+      console.log("Save / Update click",JSON.stringify(passSaveParams));
+      this.httpService.globalPost(_apiUrl,JSON.stringify(passSaveParams))
+      .subscribe({
+        next:(result:any)=>{
+          this.notificationsService(FiscalValidation.NOTIFICATION_SUCCESS,'Success Message',result.message)
+          this.Clear()
+        },
+        error: (err: HttpErrorResponse) => console.log(err)
+        
+      })
+      
+    } catch (error) {
+
+    }
+  }
+
+
+  filterCountry($event:any){
+
+  }
+
+  RedirecttoList() {
+    this.router.navigate(['/apps/fiscal/institution-list'])
+  }
+
+  private notificationsService(_severity: any, _summary: any, _message: any) {
+    this.messageService.add({ severity: _severity, summary: _summary, detail: _message, life: 3000 });
+    return;
+  }
+
 }
