@@ -23,6 +23,9 @@ import { PanelModule } from 'primeng/panel';
 import { FieldsetModule } from 'primeng/fieldset';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CalendarModule } from 'primeng/calendar';
+import { TableModule } from 'primeng/table';
+
+import { UtilService } from 'src/app/shared/util.service';
 
 
 @NgModule({
@@ -50,7 +53,12 @@ import { CalendarModule } from 'primeng/calendar';
 		// dropdown ng
 		AutoCompleteModule,
 		DropdownModule,
-		CalendarModule
+		CalendarModule,
+		// Grid
+		TableModule
+  ],
+  providers:[
+	UtilService
   ]
 })
 export class EmployeeAddModule { }
