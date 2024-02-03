@@ -14,7 +14,8 @@ import { Table } from 'primeng/table';
 @Component({
   selector: 'app-institution-list',
   templateUrl: './institution-list.component.html',
-  styleUrls: ['./institution-list.component.scss']
+  styleUrls:['./institution-list.component.scss']
+  
 })
 export class InstitutionListComponent {
 
