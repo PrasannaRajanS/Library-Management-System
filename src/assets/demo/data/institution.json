@@ -1,0 +1,32 @@
+{
+	"data": [
+		{
+			"institutionId": 1,
+			"institutionName":"VIBGYOR Group of Schools",
+			"nameOfSchool": "VIBGYOR matriculation higher secondary school",
+			"shortName":"VIBGYOR",
+			"schoolUDiseCode": "22220100101",
+			"affiliatedCode":"778201",
+			"category": "Primary and  Secondary School"
+		},
+		{
+			"institutionId": 2,
+			"institutionName":"Vignan Educational Foundation",
+			"nameOfSchool": "Vignan higher secondary school",
+			"shortName":"Vignan",
+			"schoolUDiseCode": "22220100102",
+			"affiliatedCode":"552205",
+			"category": "Secondary School"
+		},
+		{
+			"institutionId": 3,
+			"institutionName":"Vidya Bharati",
+			"nameOfSchool": "Vidya matriculation school",
+			"shortName":"Vidya",
+			"schoolUDiseCode": "22220100103",
+			"affiliatedCode":"883301",
+			"category": "Junior High School"
+		}
+        
+    ]
+}
