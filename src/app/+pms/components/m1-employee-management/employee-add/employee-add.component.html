@@ -1,649 +1,785 @@
-<div class="grid">
-    <div class="col-12 md:col-12">
-        <div class="card">
-            <h5>ADD EMPLOYEE</h5>
-            <p-tabView orientation="left">
-                <p-tabPanel header="Profile" class="line-height-3 m-0">
-                    <div class="grid p-fluid">
-                        <div class="col-12 md:col-6">
-                            <div class="flex flex-column align-items-center  surface-border p-6">
-                                <img src="assets/demo/images/avatar/circle/avatar-f-1@2x.png"
-                                    class="w-6rem h-6rem border-circle shadow-4" alt="Asiya Javayant">
-                                <span class="text-900 text-xl font-semibold mt-4">Asiya Javayant</span>
-                            </div>
-                            <div class="card">
-                                <h5>Personal Info</h5>
-                                <div class="grid formgrid">
+<form [formGroup]="EmployeeForm" >
+    <div class="grid">
+        <div class="col-12 md:col-12">
+            <div class="card">
+                <h5>ADD EMPLOYEE</h5>
+                <p-tabView orientation="left">
     
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">Employee No</label>
-                                        </span>
-                                    </div>
-                                   
-                                    
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">First Name</label>
-                                        </span>    
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">Last Name</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">Nick Name</label>
-                                        </span>
-                                    </div>
-
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">Gender</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <p-calendar formControlName="date"></p-calendar>
-                                            <label htmlFor="firstname2">DOB</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">Age</label>
-                                        </span>
-                                        
-                                    </div>
+                    <p-tabPanel header="Profile" class="line-height-3 m-0">
+                        <div class="grid p-fluid">
+                            <div class="col-12 md:col-6">
+                                <div class="flex flex-column align-items-center  surface-border p-6">
+                                    <img src="assets/demo/images/avatar/circle/avatar-f-1@2x.png"
+                                        class="w-6rem h-6rem border-circle shadow-4" alt="Asiya Javayant">
+                                    <span class="text-900 text-xl font-semibold mt-4">Asiya Javayant</span>
                                 </div>
+                                <div class="card">
+                                    <h5>Personal Info</h5>
+                                    <div class="grid formgrid">
 
-                                <h5>Present Address</h5>
-                                <div class="grid formgrid">
 
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">Address 1</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">Address 2</label>
-                                        </span>
-                                        
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">Address 3</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">City / Town</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">State</label>
-                                        </span>
-                                        
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">Country</label>
-                                        </span>
-                                        
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">PIN</label>
-                                        </span>                                                                      
-                                    </div>
-
-                                </div>
-
-                                <h5>Permanant Address</h5>
-                                <div class="grid formgrid">
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <!-- Span no need here -->
-                                        <span class="p-float-label">
-                                            <input type="checkbox" value="Same as Present">
-                                            <label htmlFor="firstname2"></label>
-                                        </span>
-                                        
-                                       
-                                    </div>
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">Address 1</label>
-                                        </span>                                                                     
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">Address 2</label>
-                                        </span>
-                                                                    
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">Address 3</label>
-                                        </span>                                   
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">City / Town</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">State</label>
-                                        </span>  
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">Country</label>
-                                        </span> 
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input type="text" pInputText>
-                                            <label htmlFor="firstname2">PIN</label>
-                                        </span>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-12 md:col-6 mb-3">
-                            <div class="card">
-                                <h5>Organizational Info</h5>
-                                <div class="grid formgrid">
-                                    <div class="col-12 md:col-6 mb-3">
+    
+                                        <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText >
+                                                <input type="text" pInputText formControlName="employeeNumber">
+                                                <label htmlFor="firstname2">Employee No</label>
+                                            </span>
+                                        </div>
+    
+    
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" id="firstName" pInputText formControlName="firstName">
+                                                <label for="firstName" >First Name</label>
+                                            </span>
+                                            <small id="firstName-help">{{ formError("firstName" ,EmployeeForm)}}</small>
+                                        </div>
+
+                                             
+      
+
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="lastName">
+                                                <label htmlFor="firstname2">Last Name</label>
+                                            </span>
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="nickName">
+                                                <label htmlFor="firstname2">Nick Name</label>
+                                            </span>
+                                        </div>
+    
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="gender"> 
+                                                <label htmlFor="firstname2">Gender</label>
+                                            </span>
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-calendar  formControlName="DOB"></p-calendar>
+                                                <label htmlFor="firstname2">DOB</label>
+                                            </span>
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="age">
+                                                <label htmlFor="firstname2">Age</label>
+                                            </span>
+    
+                                        </div>
+                                    </div>
+    
+                                    <h5>Present Address</h5>
+                                    <div class="grid formgrid">
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="presentAddress1">
+                                                <label htmlFor="firstname2">Address 1</label>
+                                            </span>
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="presentAddress2">
+                                                <label htmlFor="firstname2">Address 2</label>
+                                            </span>
+    
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="presentAddress3">
+                                                <label htmlFor="firstname2">Address 3</label>
+                                            </span>
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="presentCity">
+                                                <label htmlFor="firstname2">City / Town</label>
+                                            </span>
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="presentState">
+                                                <label htmlFor="firstname2">State</label>
+                                            </span>
+    
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="presentCountry">
+                                                <label htmlFor="firstname2">Country</label>
+                                            </span>
+    
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="presentPIN">
+                                                <label htmlFor="firstname2">PIN</label>
+                                            </span>
+                                        </div>
+    
+                                    </div>
+    
+                                    <h5>Permanent Address</h5>
+                                    <div class="grid formgrid">
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <!-- Span no need here -->
+                                            <span class="p-float-label">
+                                                <input type="checkbox" value="Same as Present">
+                                                <label htmlFor="firstname2"></label>
+                                            </span>
+    
+    
+                                        </div>
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="permanentAddress1">
+                                                <label htmlFor="firstname2" >Address 1</label>
+                                            </span>
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="permanentAddress2">
+                                                <label htmlFor="firstname2">Address 2</label>
+                                            </span>
+    
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="permanentAddress3">
+                                                <label htmlFor="firstname2">Address 3</label>
+                                            </span>
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="permanentCity">
+                                                <label htmlFor="firstname2">City / Town</label>
+                                            </span>
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="permanentState">
+                                                <label htmlFor="firstname2">State</label>
+                                            </span>
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="permanentCountry">
+                                                <label htmlFor="firstname2">Country</label>
+                                            </span>
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="permanentPIN">
+                                                <label htmlFor="firstname2">PIN</label>
+                                            </span>
+                                        </div>
+    
+                                    </div>
+    
+                                </div>
+                            </div>
+    
+                            <div class="col-12 md:col-6 mb-3">
+                                <div class="card">
+                                    <h5>Organizational Info</h5>
+                                    <div class="grid formgrid">
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="officialEmail">
                                                 <label for="">Official Email</label>
                                             </span>
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                            <span class="p-float-label"> 
-                                                <input type="text" pInputText >
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="officialMobile">
                                                 <label for="">Official Mobile</label>
                                             </span>
-                                            
-                                    </div>
-                                    
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label"> 
-                                            <p-calendar formControlName="date"></p-calendar>
-                                            <label for="">Date Of Join *</label>
-                                        </span>
-                                            
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                            <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                            <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                [dropdown]="true" [forceSelection]="true"
-                                                field="mainPageName"></p-autoComplete>
-
-                                            <label for="mainPageName">Employee Category *</label>
-                                        </span>
-                                        <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
-                                    </div>
-
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                            <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                            <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                [dropdown]="true" [forceSelection]="true"
-                                                field="mainPageName"></p-autoComplete>
-
-                                            <label for="mainPageName">Dept Section *</label>
-                                        </span>
-                                        <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                            <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                            <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                [dropdown]="true" [forceSelection]="true"
-                                                field="mainPageName"></p-autoComplete>
-
-                                            <label for="mainPageName">Production</label>
-                                        </span>
-                                        <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
-                                    </div>
-
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                            <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                            <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                [dropdown]="true" [forceSelection]="true"
-                                                field="mainPageName"></p-autoComplete>
-
-                                            <label for="mainPageName">Type of Employment *</label>
-                                        </span>
-                                        <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <!-- formControlName=""  (onChange)="onChangeRole($event)" [options]="filteredRoleList" -->
-                                            <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false"
-                                                [showClear]="true">
-                                            </p-dropdown>
-                                            <label for="role">Reporting To</label>
-                                        </span>
-                                        <!-- <small id="application-help">{{formError("role",UserCreationForm)}}</small> -->
-                                    </div>
-
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                            <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                            <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                [dropdown]="true" [forceSelection]="true"
-                                                field="mainPageName"></p-autoComplete>
-
-                                            <label for="mainPageName">Salary Type *</label>
-                                        </span>
-                                        <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
-                                    </div>
-
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <!-- formControlName=""  (onChange)="onChangeRole($event)" [options]="filteredRoleList" -->
-                                            <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false"
-                                                [showClear]="true">
-                                            </p-dropdown>
-                                            <label for="role">Working Location *</label>
-                                        </span>
-                                        <!-- <small id="application-help">{{formError("role",UserCreationForm)}}</small> -->
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                            <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                            <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                [dropdown]="true" [forceSelection]="true"
-                                                field="mainPageName"></p-autoComplete>
-
-                                            <label for="mainPageName">Shift</label>
-                                        </span>
-                                        <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
-                                    </div>
-                                    
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <!-- formControlName=""  (onChange)="onChangeRole($event)" [options]="filteredRoleList" -->
-                                            <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false"
-                                                [showClear]="true">
-                                            </p-dropdown>
-                                            <label for="role">Designation (Job Title) *</label>
-                                        </span>
-                                        <!-- <small id="application-help">{{formError("role",UserCreationForm)}}</small> -->
-                                    </div>
-
-                                </div>
-
-
-                                
-
-                            </div>
-
-
-
-                            <div class="card">
-                                <h5>Emergency Contact Info</h5>
-                                <div class="grid formgrid">
-                                    <div class="col-12 md:col-6 mb-3">
+    
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText >
-                                                <label for="">Contact Person *</label>
+                                                <p-calendar formControlName="dateOfJoin" ></p-calendar>
+                                                <label for="">Date Of Join *</label>
                                             </span>
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                            <span class="p-float-label"> 
-                                                <input type="text" pInputText >
-                                                <label for="">Contact Person Mobile No *</label>
-                                            </span>
-                                            
-                                    </div>
-                                    
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label"> 
-                                            <input type="text" pInputText >
-                                            <label for="">Contact Person Mobile No</label>
-                                        </span>
-                                            
-                                    </div>
-
-
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                            <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                            <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                [dropdown]="true" [forceSelection]="true"
-                                                field="mainPageName"></p-autoComplete>
-
-                                            <label for="mainPageName">Blood Group</label>
-                                        </span>
-                                        <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
-                                    </div>
-
-
- 
-
-                                </div>
-
-
-                                
-
-                            </div>
-
-
-                            <div class="card">
-                                <h5>Unique Number Info</h5>
-                                <div class="grid formgrid">
-                                    <div class="col-12 md:col-6 mb-3">
+    
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText >
-                                                <label for="">Nationality</label>
+                                                <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
+                                                <!-- formControlName="" [suggestions]="filteredMainPageList" -->
+                                                <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                                    [dropdown]="true" [forceSelection]="true"
+                                                    field="mainPageName" formControlName="employeeCategory"></p-autoComplete>
+    
+                                                <label for="mainPageName">Employee Category *</label>
                                             </span>
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                            <span class="p-float-label"> 
-                                                <input type="text" pInputText >
-                                                <label for="">PAN No</label>
+                                            <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
+                                        </div>
+    
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
+                                                <!-- formControlName="" [suggestions]="filteredMainPageList" -->
+                                                <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                                    [dropdown]="true" [forceSelection]="true"
+                                                    field="mainPageName" formControlName="deptSection"></p-autoComplete>
+    
+                                                <label for="mainPageName">Dept Section *</label>
                                             </span>
-                                            
+                                            <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
+                                                <!-- formControlName="" [suggestions]="filteredMainPageList" -->
+                                                <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                                    [dropdown]="true" [forceSelection]="true"
+                                                    field="mainPageName" formControlName="production"></p-autoComplete>
+    
+                                                <label for="mainPageName">Production</label>
+                                            </span>
+                                            <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
+                                        </div>
+    
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
+                                                <!-- formControlName="" [suggestions]="filteredMainPageList" -->
+                                                <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                                    [dropdown]="true" [forceSelection]="true"
+                                                    field="mainPageName" formControlName="typeOfEmployment"></p-autoComplete>
+    
+                                                <label for="mainPageName">Type of Employment *</label>
+                                            </span>
+                                            <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <!-- formControlName=""  (onChange)="onChangeRole($event)" [options]="filteredRoleList" -->
+                                                <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false"
+                                                    [showClear]="true" formControlName="reportingTo">
+                                                </p-dropdown>
+                                                <label for="role">Reporting To</label>
+                                            </span>
+                                            <!-- <small id="application-help">{{formError("role",UserCreationForm)}}</small> -->
+                                        </div>
+    
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
+                                                <!-- formControlName="" [suggestions]="filteredMainPageList" -->
+                                                <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                                    [dropdown]="true" [forceSelection]="true"
+                                                    field="mainPageName" formControlName="salaryType"></p-autoComplete>
+    
+                                                <label for="mainPageName">Salary Type *</label>
+                                            </span>
+                                            <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
+                                        </div>
+    
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <!-- formControlName=""  (onChange)="onChangeRole($event)" [options]="filteredRoleList" -->
+                                                <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false"
+                                                    [showClear]="true" formControlName="workingLocation">
+                                                </p-dropdown>
+                                                <label for="role">Working Location *</label>
+                                            </span>
+                                            <!-- <small id="application-help">{{formError("role",UserCreationForm)}}</small> -->
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
+                                                <!-- formControlName="" [suggestions]="filteredMainPageList" -->
+                                                <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                                    [dropdown]="true" [forceSelection]="true"
+                                                    field="mainPageName" formControlName="shift"></p-autoComplete>
+    
+                                                <label for="mainPageName">Shift</label>
+                                            </span>
+                                            <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <!-- formControlName=""  (onChange)="onChangeRole($event)" [options]="filteredRoleList" -->
+                                                <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false"
+                                                    [showClear]="true" formControlName="designationJobTitle">
+                                                </p-dropdown>
+                                                <label for="role">Designation (Job Title) *</label>
+                                            </span>
+                                            <!-- <small id="application-help">{{formError("role",UserCreationForm)}}</small> -->
+                                        </div>
+    
                                     </div>
-                                    
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label"> 
-                                            <input type="text" pInputText >
-                                            <label for="">Community</label>
-                                        </span>
-                                            
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label"> 
-                                            <input type="text" pInputText >
-                                            <label for="">Aadhaar No *</label>
-                                        </span>
-                                            
-                                    </div>
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label"> 
-                                            <input type="text" pInputText >
-                                            <label for="">UAN No</label>
-                                        </span>
-                                            
-                                    </div>
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label"> 
-                                            <input type="text" pInputText >
-                                            <label for="">ESI No</label>
-                                        </span>
-                                            
-                                    </div>
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label"> 
-                                            <input type="text" pInputText >
-                                            <label for="">EPF No</label>
-                                        </span>
-                                            
-                                    </div>
-
+    
+    
+    
+    
                                 </div>
+    
+    
+    
+                                <div class="card">
+                                    <h5>Emergency Contact Info</h5>
+                                    <div class="grid formgrid">
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="contactPerson1">
+                                                <label for="">Contact Person 1 *</label>
+                                            </span>
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="mobileNo1">
+                                                <label for="">Mobile No 1 *</label>
+                                            </span>
+    
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="contactPerson2">
+                                                <label for="">Contact Person 2</label>
+                                            </span>
+    
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="mobileNo2">
+                                                <label for="">Mobile No 2</label>
+                                            </span>
+    
+                                        </div>
+    
+    
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
+                                                <!-- formControlName="" [suggestions]="filteredMainPageList" -->
+                                                <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                                    [dropdown]="true" [forceSelection]="true"
+                                                    field="mainPageName" formControlName="bloodGroup"></p-autoComplete>
+    
+                                                <label for="mainPageName">Blood Group</label>
+                                            </span>
+                                            <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
+                                        </div>
+    
+    
+    
+    
+                                    </div>
+    
+    
+    
+    
+                                </div>
+    
+    
+                                <div class="card">
+                                    <h5>Unique Number Info</h5>
+                                    <div class="grid formgrid">
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="nationality">
+                                                <label for="">Nationality *</label>
+                                            </span>
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="community">
+                                                <label for="">Community *</label>
+                                            </span>
+    
+                                        </div>
 
 
-                                
-
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="PANNo">
+                                                <label for="">PAN No *</label>
+                                            </span>
+    
+                                        </div>
+    
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="aadhaarNo">
+                                                <label for="">Aadhaar No *</label>
+                                            </span>
+    
+                                        </div>
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="UANNo">
+                                                <label for="">UAN No</label>
+                                            </span>
+    
+                                        </div>
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="ESINo">
+                                                <label for="">ESI No</label>
+                                            </span>
+    
+                                        </div>
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input type="text" pInputText formControlName="EPFNo">
+                                                <label for="">EPF No</label>
+                                            </span>
+    
+                                        </div>
+    
+                                    </div>
+    
+    
+    
+    
+                                </div>
+    
+    
                             </div>
-
-
+    
                         </div>
+    
+    
+                    </p-tabPanel>
+    
+                    <p-tabPanel header="Education" class="line-height-3 m-0">
+                        <div class="grid p-fluid m-3">
+                            <h5>Education Detail</h5>
+                            <div class="grid formgrid">
+    
+                                <div class="field col-12 md:col-3 mb-3">
+    
+                                    <span class="p-float-label">
+                                        <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
+                                        <!-- formControlName="" [suggestions]="filteredMainPageList" -->
+                                        <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                            [dropdown]="true" [forceSelection]="true" field="mainPageName"></p-autoComplete>
+    
+                                        <label for="mainPageName">Qualification</label>
+                                    </span>
+                                    <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
+                                </div>
+    
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <!-- formControlName=""  (onChange)="onChangeRole($event)" [options]="filteredRoleList" -->
+                                        <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false"
+                                            [showClear]="true">
+                                        </p-dropdown>
+                                        <label for="role">Course<span class="mandatory">*</span></label>
+                                    </span>
+                                    <!-- <small id="application-help">{{formError("role",UserCreationForm)}}</small> -->
+                                </div>
+    
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <!-- formControlName=""  (onChange)="onChangeRole($event)" [options]="filteredRoleList" -->
+                                        <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false"
+                                            [showClear]="true">
+                                        </p-dropdown>
+                                        <label for="role">Specialisation<span class="mandatory">*</span></label>
+                                    </span>
+                                    <!-- <small id="application-help">{{formError("role",UserCreationForm)}}</small> -->
+                                </div>
+    
+                                <div class="field" class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input pInputText id="MajorQualification" />
+                                        <label htmlFor="MajorQualification">School/Institute/University</label>
+                                    </span>
+                                </div>
 
-                    </div>
+
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
+                                        <!-- formControlName="" [suggestions]="filteredMainPageList" -->
+                                        <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                            [dropdown]="true" [forceSelection]="true" field="mainPageName"></p-autoComplete>
+    
+                                        <label for="mainPageName">Mode of Study</label>
+                                    </span>
+                                    <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
+                                </div>
+    
+                                <div class="field" class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input pInputText id="Percentage" />
+                                        <label htmlFor="Percentage">Percentage / CGPA</label>
+                                    </span>
+    
+                                </div>
+    
+                                <div class="field" class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-calendar [readonlyInput]="true" view="year" dateFormat="yy"
+                                            inputId="yearpicker"></p-calendar>
+                                        <label htmlFor="YearOfPassing">Year Of Passing</label>
+                                    </span>
+    
+    
+                                </div>
+
+    
+                            </div>
+    
+                            <!-- <div class="card">
+                                <h5>Inline</h5>
+                                <div class="formgroup-inline">
+                                    <div class="field">
+                                        <label htmlFor="firstname1" class="p-sr-only">Firstname</label>
+                                        <input pInputText id="firstname1" type="text" placeholder="Firstname" />
+                                    </div>
+                                    <div class="field">
+                                        <label htmlFor="lastname1" class="p-sr-only">Lastname</label>
+                                        <input pInputText id="lastname1" type="text" placeholder="Lastname" />
+                                    </div>
+                                    <button pButton label="Submit"></button>
+                                </div>
+                            </div> -->
+    
+                            <!-- <div class="card">
+                                <h5>Help Text</h5>
+                                <div class="field p-fluid">
+                                    <label htmlFor="username">Username</label>
+                                    <input pInputText id="username" type="text" />
+                                    <small>Enter your username to reset your password.</small>
+                                </div>
+                            </div> -->
+                        </div>
+    
+                        <div class="grid">
+                            <div class="col-12">
+                                <div class="card px-6 py-6">
+                                    <p-table #dt [value]="items" [columns]="cols" responsiveLayout="scroll" [rows]="10"
+                                        [globalFilterFields]="['applicationName']" [rows]="10" [paginator]="true"
+                                        [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+                                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                         [rowHover]="true"
+                                        dataKey="id">
+    
+    
+                                        <ng-template pTemplate="caption">
+                                            <div
+                                                class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                                                <h4 class="m-0"> </h4>
+                                                <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                                    <i class="pi pi-search"></i>
+                                                    <input pInputText type="text" (input)="onGlobalFilter(dt, $event)"
+                                                        placeholder="Search..." class="w-full sm:w-auto" />
+                                                </span>
+                                            </div>
+                                        </ng-template>
+    
+    
+    
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th style="width: 3rem">
+                                                    S.No
+                                                </th>
+                                                <!-- Should change the field name -->
+                                                <th pSortableColumn="name">Qualification<p-sortIcon
+                                                        field="applicationName"></p-sortIcon></th>
+                                                <th>Course</th>
+                                                <th>Specialisation</th>
+                                                <th>School/Institute/University</th>
+                                                <th>Percentage / CGPA</th>
+                                                <th>Year Of Passing</th>
+                                                <th>Mode of Study</th>
+                                                <th>Action</th>
+    
+                                            </tr>
+                                        </ng-template>
+    
+    
+                                    </p-table>
+    
+    
+                                </div>
+                            </div>
+                        </div>
+                    </p-tabPanel>
+    
+                    <p-tabPanel header="Work" class="line-height-3 m-0">
+                        <div class="grid p-fluid m-3">
+                            <h5>Work Experience Detail</h5>
+                            <div class="grid formgrid">
+    
+    
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input pInputText id="PreviousCompanyName" />
+                                        <label htmlFor="PreviousCompanyName">Previous Company Name</label>
+                                    </span>
+    
+                                </div>
+    
+    
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-calendar ></p-calendar>
+                                        <label htmlFor="StartingDate">Starting Date</label>
+                                    </span>
+                                </div>
+    
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-calendar ></p-calendar>
+                                        <label htmlFor="EndingDate">Ending Date</label>
+                                    </span>
+    
+                                </div>
+    
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input pInputText id="Experience" />
+                                        <label htmlFor="Experience">Experience</label>
+                                    </span>
+                                </div>
+    
+                                <div class="field col-12 md:col-3 mb-3">
+    
+                                    <span class="p-float-label">
+                                        <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
+                                        <!-- formControlName="" [suggestions]="filteredMainPageList" -->
+                                        <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                            [dropdown]="true" [forceSelection]="true" field="mainPageName"></p-autoComplete>
+    
+                                        <label for="mainPageName">Job Title</label>
+                                    </span>
+                                    <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
+                                </div>
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input pInputText id="JobDescription" />
+                                        <label htmlFor="JobDescription">Job Description</label>
+                                    </span>
+    
+    
+                                </div>
+    
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input pInputText id="ReasonForChange" type="text" />
+                                        <label htmlFor="ReasonForChange">Reason For Change</label>
+                                    </span>
+    
+    
+                                </div>
+    
+    
+                            </div>
+                        </div>
+                        <div class="grid">
+                            <div class="col-12">
+                                <div class="card px-6 py-6">
+                                    <p-table #dt [value]="items" [columns]="cols" responsiveLayout="scroll" [rows]="10"
+                                        [globalFilterFields]="['applicationName']" [rows]="10" [paginator]="true"
+                                        [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+                                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                        [rowHover]="true"
+                                        dataKey="id">
+    
+    
+                                        <ng-template pTemplate="caption">
+                                            <div
+                                                class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                                                <h4 class="m-0"> </h4>
+                                                <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                                    <i class="pi pi-search"></i>
+                                                    <input pInputText type="text" (input)="onGlobalFilter(dt, $event)"
+                                                        placeholder="Search..." class="w-full sm:w-auto" />
+                                                </span>
+                                            </div>
+                                        </ng-template>
+    
+    
+    
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th style="width: 3rem">
+                                                    S.No
+                                                </th>
+                                                <!-- Should change the field name -->
+                                                <th pSortableColumn="name">Company Name<p-sortIcon
+                                                        field="applicationName"></p-sortIcon></th>
+                                                <th>From Date</th>
+                                                <th>To Date</th>
+                                                <th>Experience</th>
+                                                <th>Job Title</th>
+                                                <th>Reason For Change</th>
+                                                <th>Action</th>
+    
+                                            </tr>
+                                        </ng-template>
+    
+    
+    
+                                    </p-table>
+    
+    
+                                </div>
+                            </div>
+                        </div>
+    
+                    </p-tabPanel>
+    
+                    <p-tabPanel header="Family" class="line-height-3 m-0">
+                    </p-tabPanel>
+    
+                    <p-tabPanel header="Asset" class="line-height-3 m-0">
+                    </p-tabPanel>
                     
-
-                </p-tabPanel>
-
-                <p-tabPanel header="Education" class="line-height-3 m-0">
-                    <div class="grid p-fluid m-3">
-                        <h5>Education Detail</h5>
-                        <div class="grid formgrid">
-
-                            <div class="field col-12 md:col-3 mt-3">
-
-                                <span class="p-float-label">
-                                    <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                    <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                    <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                        [dropdown]="true" [forceSelection]="true" field="mainPageName"></p-autoComplete>
-
-                                    <label for="mainPageName">Qualification</label>
-                                </span>
-                                <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
-                            </div>
-
-                            <div class="field col-12 md:col-3 mt-3">
-                                <span class="p-float-label">
-                                    <!-- formControlName=""  (onChange)="onChangeRole($event)" [options]="filteredRoleList" -->
-                                    <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false"
-                                        [showClear]="true">
-                                    </p-dropdown>
-                                    <label for="role">Course<span class="mandatory">*</span></label>
-                                </span>
-                                <!-- <small id="application-help">{{formError("role",UserCreationForm)}}</small> -->
-                            </div>
-
-                            <div class="field col-12 md:col-3 mt-3">
-                                <span class="p-float-label">
-                                    <!-- formControlName=""  (onChange)="onChangeRole($event)" [options]="filteredRoleList" -->
-                                    <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false"
-                                        [showClear]="true">
-                                    </p-dropdown>
-                                    <label for="role">Specialisation<span class="mandatory">*</span></label>
-                                </span>
-                                <!-- <small id="application-help">{{formError("role",UserCreationForm)}}</small> -->
-                            </div>
-
-                            <div class="field" class="field col-12 md:col-3 mt-3">
-                                <span class="p-float-label">
-                                    <input pInputText id="MajorQualification"/>
-                                    <label htmlFor="MajorQualification">School/Institute/University</label>
-                                </span>
-                            </div>
-
-                            <div class="field" class="field col-12 md:col-3 mt-3">
-                                <span class="p-float-label">
-                                    <input pInputText id="Percentage"  />
-                                    <label htmlFor="Percentage" >Percentage / CGPA</label>
-                                </span>
-                               
-                            </div>
-
-                            <div class="field" class="field col-12 md:col-3 mt-3">
-                                <span class="p-float-label">
-                                    <p-calendar [readonlyInput]="true"  view="year"   dateFormat="yy" inputId="yearpicker" ></p-calendar>
-                                    <label htmlFor="YearOfPassing" >Year Of Passing</label>
-                                </span>
-                                
-                               
-                            </div>
-
-                            <div class="field col-12 md:col-3 mt-3">
-                                <span class="p-float-label">
-                                    <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                    <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                    <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                        [dropdown]="true" [forceSelection]="true" field="mainPageName"></p-autoComplete>
-
-                                    <label for="mainPageName">Mode of Study</label>
-                                </span>
-                                <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
-                            </div>
-
-
-
-                        </div>
-
-                        <!-- <div class="card">
-                            <h5>Inline</h5>
-                            <div class="formgroup-inline">
-                                <div class="field">
-                                    <label htmlFor="firstname1" class="p-sr-only">Firstname</label>
-                                    <input pInputText id="firstname1" type="text" placeholder="Firstname" />
-                                </div>
-                                <div class="field">
-                                    <label htmlFor="lastname1" class="p-sr-only">Lastname</label>
-                                    <input pInputText id="lastname1" type="text" placeholder="Lastname" />
-                                </div>
-                                <button pButton label="Submit"></button>
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="card">
-                            <h5>Help Text</h5>
-                            <div class="field p-fluid">
-                                <label htmlFor="username">Username</label>
-                                <input pInputText id="username" type="text" />
-                                <small>Enter your username to reset your password.</small>
-                            </div>
-                        </div> -->
-                    </div>
-                </p-tabPanel>
-
-                <p-tabPanel header="Work" class="line-height-3 m-0">
-                    <div class="grid p-fluid m-3">
-                        <h5>Work Experience Detail</h5>
-                        <div class="grid formgrid">
-
-
-                            <div class="field col-12 md:col-3 mt-3">
-                                <span class="p-float-label">
-                                    <input pInputText id="PreviousCompanyName"  />
-                                    <label htmlFor="PreviousCompanyName" >Previous Company Name</label>
-                                </span>
-                                
-                            </div>
-
-
-                            <div class="field col-12 md:col-3 mt-3">
-                                <span class="p-float-label">
-                                    <p-calendar formControlName="date"></p-calendar>
-                                <label htmlFor="StartingDate" >Starting Date</label>
-                                </span>
-                            </div>
-
-                            <div class="field col-12 md:col-3 mt-3">
-                                <span class="p-float-label">
-                                    <p-calendar formControlName="date"></p-calendar>
-                                    <label htmlFor="EndingDate">Ending Date</label>
-                                </span>
-                                
-                            </div>
-
-                            <div class="field col-12 md:col-3 mt-3">
-                                <span class="p-float-label">
-                                    <input pInputText id="Experience"   />
-                                    <label htmlFor="Experience" >Experience</label>
-                                </span> 
-                            </div>
-
-                            <div class="field col-12 md:col-3 mt-3">
-
-                                <span class="p-float-label">
-                                    <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                    <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                    <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                        [dropdown]="true" [forceSelection]="true" field="mainPageName"></p-autoComplete>
-
-                                    <label for="mainPageName">Job Title</label>
-                                </span>
-                                <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
-                            </div>
-                            <div class="field col-12 md:col-3 mt-3">
-                                <span class="p-float-label">
-                                    <input pInputText id="JobDescription" />
-                                    <label htmlFor="JobDescription">Job Description</label>
-                                </span>
-                               
-                                
-                            </div>
-
-                            <div class="field col-12 md:col-3 mt-3">
-                                <span class="p-float-label">
-                                    <input pInputText id="ReasonForChange" type="text" />
-                                    <label htmlFor="ReasonForChange" >Reason For Change</label>
-                                </span>
-                                
-                               
-                            </div>
-                      
-
-                        </div>
-                    </div>
-
-                </p-tabPanel>
-            </p-tabView>
+                    <p-tabPanel header="Benefit" class="line-height-3 m-0">
+                    </p-tabPanel>
+    
+                    <p-tabPanel header="Exit Details" class="line-height-3 m-0">
+                    </p-tabPanel>
+    
+                </p-tabView>
+            </div>
         </div>
+    
     </div>
-
-</div>
+</form>

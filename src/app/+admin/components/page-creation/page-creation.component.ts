@@ -5,7 +5,7 @@ import { YupFormControls, FormHandler } from '../../../shared/form-handler';
 import { IPageCreation } from "../../services/interfaces/IPageCreation";
 import { YupAdminValidation } from '../../services/validation-schemas/yup-page-creation';
 import { UtilService } from "../../../shared/util.service";
-import { PageService } from '../../services/page.service';
+
 
 import { IApplication } from './../../services/interfaces/IApplication';
 import { IModule } from '../../services/interfaces/IModule';
@@ -96,7 +96,6 @@ export class PageCreationComponent {
 
   constructor(
     private UtilService: UtilService,
-    private PageService: PageService,
     private httpService: HttpService,
     private messageService: MessageService,
     private router:Router,
@@ -253,14 +252,7 @@ export class PageCreationComponent {
     this.filteredMainPageList = filtered;
   }
 
-  LoadGridData() {
-    var params: any = {};
-    this.PageService.LoadGridData(params).then((res: any[] | undefined) => {
-      if (res != undefined) {
-        this.LoadGrid = res;
-      }
-    });
-  }
+
 
   onChangeApplicationName($event: any) {
 

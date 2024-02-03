@@ -17,7 +17,7 @@ import * as yup from 'yup';
 import { UtilService } from 'src/app/shared/util.service';
 import { HttpService } from 'src/app/+admin/services/http.service';
 
-import { PageService } from 'src/app/+admin/services/page.service';
+
 import { ProductService } from 'src/app/demo/service/product.service';
 
 import { DatePipe } from "@angular/common";
