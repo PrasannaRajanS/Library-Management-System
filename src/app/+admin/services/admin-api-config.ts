@@ -1,8 +1,5 @@
 export const AdminAPIConfig = {
 
-    // ADMIN_API_BASE_URL: "https://localhost:7189",
-     ADMIN_API_BASE_URL:"http://academic-api.kangayaa.com",
-
     API_CONFIG: {
         API_URL: {
             ADMIN: {
@@ -46,15 +43,7 @@ export const AdminAPIConfig = {
                     EMPOLOYEES_LIST: "/user/GetEmployees",
                     DEFAULT_PAGE_LIST: "/user/GetDefaultPages",
                     UNIT_LIST: "/user/GetUnits",
-                },
-                ORGANIZATION: {
-                    SAVE: "/organization/Create",
-                    UPDATE: "/organization/Update",
-                    DELETE: "/organization/Delete",
-                    EDIT: "/organization/GetByOrganizationId",
-                    LIST: "/organization/GetOrganizations",
-                    
-                },
+                }
 
             }
         }

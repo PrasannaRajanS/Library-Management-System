@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, retry, throwError } from 'rxjs';
-import { AdminAPIConfig } from './admin-api-config';
 import { map } from 'rxjs/operators';
+import { APIConfig } from 'src/app/config/api.config';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class HttpService {
 
   private baseAPIURL: string = "";
   constructor(private _httpClient: HttpClient) {
-    this.baseAPIURL = AdminAPIConfig.ADMIN_API_BASE_URL;
+    this.baseAPIURL = APIConfig.ADMIN_API_BASE_URL;
   }
 
   globalPost(url: string, data: any): any {

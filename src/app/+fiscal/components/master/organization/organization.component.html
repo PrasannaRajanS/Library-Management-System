@@ -1,208 +1,229 @@
+<div class="card">
+    <h4>ORGANIZATION</h4>
 
-    <div class="card">
-        <h4>ORGANIZATION</h4>
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <div class="my-2">
+            </div>
+        </ng-template>
 
-        <p-toolbar styleClass="mb-4">
-            <ng-template pTemplate="left">
-                <div class="my-2">
-                </div>
-            </ng-template>
+        <ng-template pTemplate="right">
+            <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" (click)="Save()"
+                [disabled]="!OrganizationForm.valid">{{buttonText}}</button>
+            <button pButton pRipple label="List" icon="pi pi-align-justify" class="p-button-primary mr-2"
+                (click)="RedirecttoList()"></button>
 
-            <ng-template pTemplate="right">
-                <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" (click)="Save()"
-                    [disabled]="!OrganizationForm.valid">{{buttonText}}</button>
-                    <button pButton pRipple label="List" icon="pi pi-align-justify" class="p-button-primary mr-2"
-                    (click)="RedirecttoList()"></button>
+            <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
+                (click)="Clear()"></button>
+        </ng-template>
+    </p-toolbar>
 
-                <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
-                    (click)="Clear()"></button>
-            </ng-template>
-        </p-toolbar>
+    <p-toast></p-toast>
 
-        <p-toast></p-toast>
+    <form [formGroup]="OrganizationForm">
+        <div class="grid p-fluid">
 
-        <form [formGroup]="OrganizationForm" style="margin-top: 10px;">
-            <div class="grid p-fluid mt-3">
-
-                <div class="field col-12 md:col-3">
-                    <span class="p-float-label">
-                        <input type="text" id="name" pInputText formControlName="name" autocomplete="off">
-                        <label for="name">Name<span class="mandatory">*</span></label>
-                    </span>
-                    <small id="name-help">{{ formError("name" ,OrganizationForm)}}</small>
-                </div>
-
-
-                <div class="field col-12 md:col-3">
-                    <span class="p-float-label">
-                        <input type="text" id="shortName" pInputText formControlName="shortName" autocomplete="off">
-                        <label for="shortName">Short Name<span class="mandatory">*</span></label>
-                    </span>
-                    <small id="shortName-help">{{ formError("shortName" ,OrganizationForm)}}</small>
-                </div>
+            <div class="field col-12 md:col-3 m-0 pb-0">
+                <span class="p-float-label">
+                    <input type="text" id="name" pInputText formControlName="name" autocomplete="off">
+                    <label for="name">Name<span class="mandatory">*</span></label>
+                </span>
+                <small id="name-help">{{ formError("name" ,OrganizationForm)}}</small>
             </div>
 
-            <div  class="grid p-fluid mt-3" >
-                <div class="col-12 md:col-12">
+
+            <div class="field col-12 md:col-3 m-0  pb-0">
+                <span class="p-float-label">
+                    <input type="text" id="shortName" pInputText formControlName="shortName" autocomplete="off">
+                    <label for="shortName">Short Name<span class="mandatory">*</span></label>
+                </span>
+                <small id="shortName-help">{{ formError("shortName" ,OrganizationForm)}}</small>
+            </div>
+        </div>
+
+        <div class="grid p-fluid mt-3">
+            <div class="col-12 md:col-12">
                 <div class="card">
                     <p-tabView orientation="left">
-            
-                    
-                    <p-tabPanel header="Address Details" class="line-height-3 m-0">
-                        <div class="grid p-fluid">
-                    <div class="grid formgrid">
 
-                        <div class="field col-12 md:col-3 mt-3">
-                            <span class="p-float-label">
-                                <input type="text" id="addressOne" pInputText formControlName="addressOne"  autocomplete="off">
-                                <label for="addressOne">Address 1</label>
-                                <small id="addressOne-help">{{ formError("addressOne" ,OrganizationForm)}}</small>
-                            </span>
-                        </div>
-                        <div class="field col-12 md:col-3 mt-3">
-                            <span class="p-float-label">
-                                <input type="text" id="addressTwo" pInputText formControlName="addressTwo"  autocomplete="off">
-                                <label for="addressTwo">Address 2</label>
-                                <small id="addressTwo-help">{{ formError("addressTwo" ,OrganizationForm)}}</small>
-                            </span>
-                        </div>
 
-                        <div class="field col-12 md:col-3 mt-3">
-                            <span class="p-float-label">
-                                <input type="text" id="addressThree" pInputText formControlName="addressThree"  autocomplete="off">
-                                <label for="addressThree">Address 3</label>
-                                <small id="addressThree-help">{{ formError("addressThree" ,OrganizationForm)}}</small>
-                            </span>
-                        </div>
+                        <p-tabPanel header="Address Details" class="line-height-3 m-0">
+                            <div class="grid p-fluid mt-3">
+                                <div class="grid formgrid">
 
-                        <div class="field col-12 md:col-3 mt-3">
-                            <span class="p-float-label">
-                                <input type="text" id="addressFour" pInputText formControlName="addressFour"  autocomplete="off">
-                                <label for="addressFour">Address 4</label>
-                                <small id="addressFour-help">{{ formError("addressFour" ,OrganizationForm)}}</small>
-                            </span>
-                        </div>
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="address1" pInputText formControlName="address1"
+                                                autocomplete="off">
+                                            <label for="address1">Address 1</label>
+                                           
+                                        </span>
+                                    </div>
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="address2" pInputText formControlName="address2"
+                                                autocomplete="off">
+                                            <label for="address2">Address 2</label>
+                                           
+                                        </span>
+                                    </div>
 
-                        <div class="field col-12 md:col-3 mt-3">
-                            <span class="p-float-label">
-                                <input type="text" id="city" pInputText formControlName="city"  autocomplete="off">
-                                <label for="city">City</label>
-                                <small id="city-help">{{ formError("city" ,OrganizationForm)}}</small>
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="address3" pInputText
+                                                formControlName="address3" autocomplete="off">
+                                            <label for="address3">Address 3</label>
+                                           
+                                        </span>
+                                    </div>
 
-                            </span>
-                        </div>
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="address4" pInputText formControlName="address4"
+                                                autocomplete="off">
+                                            <label for="address4">Address 4</label>
+                                           
+                                        </span>
+                                    </div>
 
-                        <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="city" pInputText formControlName="city"
+                                                autocomplete="off">
+                                            <label for="city">City</label>
+
+                                        </span>
+                                    </div>
+
+                                    <!-- <div class="field col-12 md:col-3 mt-3">
                             <span class="p-float-label">
                                 <input type="text" id="state" pInputText formControlName="state"  autocomplete="off">
                                 <label for="state">State</label>
                                 <small id="state-help">{{ formError("state" ,OrganizationForm)}}</small>
                             </span>
-                        </div>
+                        </div> -->
+
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <!-- <input type="text" id="state" pInputText formControlName="state"  autocomplete="off"> -->
+                                            <p-autoComplete formControlName="selectedState"
+                                                [suggestions]="filteredStateList" (completeMethod)="filterState($event)"
+                                                [minLength]="0" [dropdown]="true" [forceSelection]="true"
+                                                (onSelect)="onSelectState()"
+                                                field="stateName" [showClear]="true" (onClear)="onClearState()"></p-autoComplete>
+
+                                            <label for="selectedState">State</label>
+                                        </span>
+                                    </div>
 
 
-                        <div class="field col-12 md:col-3 mt-3">
-                            <span class="p-float-label">
-                                <input type="text" id="country" pInputText formControlName="country" autocomplete="off">
-                                <label for="country">Country</label>
-                                <small id="country-help">{{ formError("country" ,OrganizationForm)}}</small>
-
-                            </span>
-                        </div>
-
-
-                        <div class="field col-12 md:col-3 mt-3">
-                            <span class="p-float-label">
-                                <input type="text" id="pinzipCode" pInputText formControlName="pinCode"  autocomplete="off">
-                                <label for="pinzipCode">PINCode / ZIP Code</label>
-                                <small id="pinCode-help">{{ formError("pinCode" ,OrganizationForm)}}</small>
-                            </span>
-                        </div>
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <!-- <input type="text" id="country" pInputText formControlName="country"
+                                                autocomplete="off"> -->
+                                                <p-autoComplete formControlName="selectedCountry"
+                                                [suggestions]="filteredCoutryList" (completeMethod)="filterCountry($event)"
+                                                [minLength]="0" [dropdown]="true" [forceSelection]="true"
+                                                field="countryName"></p-autoComplete>
+                                            <label for="selectedCountry">Country</label>
+                                        </span>
+                                    </div>
 
 
-                        <div class="field col-12 md:col-3 mt-3">
-                            <span class="p-float-label">
-                                <input type="text" id="phoneNumber" pInputText formControlName="phoneNumber"  autocomplete="off">
-                                <label for="phoneNumber">Phone(LandLine)</label>
-                                <small id="phoneNumber-help">{{ formError("phoneNumber" ,OrganizationForm)}}</small>
-                            </span>
-                        </div>
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="pinzipCode" pInputText formControlName="pinCode"
+                                                autocomplete="off">
+                                            <label for="pinzipCode">PINCode / ZIP Code</label>
+                                        </span>
+                                    </div>
 
 
-                        <div class="field col-12 md:col-3 mt-3">
-                            <span class="p-float-label">
-                                <input type="text" id="fax" pInputText  formControlName="fax" autocomplete="off">
-                                <label for="fax">Fax</label>
-                                <small id="fax-help">{{ formError("fax" ,OrganizationForm)}}</small>
-                            </span>
-                        </div>
-
-                        <div class="field col-12 md:col-3 mt-3">
-                            <span class="p-float-label">
-                                <input type="text" id="mobile" pInputText formControlName="mobileNumber"  autocomplete="off">
-                                <label for="mobile">Mobile</label>
-                                <small id="mobileNumber-help">{{ formError("mobileNumber" ,OrganizationForm)}}</small>
-
-                            </span>
-                        </div>
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="phoneNumber" pInputText formControlName="phoneNumber"
+                                                autocomplete="off">
+                                            <label for="phoneNumber">Phone(LandLine)</label>
+                                        </span>
+                                    </div>
 
 
-                        <div class="field col-12 md:col-3 mt-3">
-                            <span class="p-float-label">
-                                <input type="text" id="email" pInputText formControlName="email"  autocomplete="off">
-                                <label for="email">Email</label>
-                                <small id="email-help">{{ formError("email" ,OrganizationForm)}}</small>
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="fax" pInputText formControlName="fax"
+                                                autocomplete="off">
+                                            <label for="fax">Fax</label>
+                                        </span>
+                                    </div>
 
-                            </span>
-                        </div>
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="mobile" pInputText formControlName="mobileNumber"
+                                                autocomplete="off">
+                                            <label for="mobile">Mobile</label>
+
+                                        </span>
+                                    </div>
 
 
-                        <div class="field col-12 md:col-3 mt-3">
-                            <span class="p-float-label">
-                                <input type="text" id="website" pInputText formControlName="website"  autocomplete="off">
-                                <label for="website">Website</label>
-                                <small id="website-help">{{ formError("website",OrganizationForm)}}</small>
- 
-                            </span>
-                        </div>
-                    </div>
-                    </div>
-                    </p-tabPanel>
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="email" pInputText formControlName="email"
+                                                autocomplete="off">
+                                            <label for="email">Email</label>
 
-                    <p-tabPanel header="General Settings" class="line-height-3 m-0">
+                                        </span>
+                                    </div>
 
-                        <div class="field mb-4">
-                            <label for="file"> Organization Logo <span class="mandatory mr-2">*</span> <i
-                                    class="mb-2 pi pi-info-circle" pTooltip="Image Size (1920 X 1080)"></i> </label><br>
-                            <input type="file" id="file" #file placeholder="Choose file" accept='image/*'
-                                (change)="getOrganizationLogo($event)" />
+
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="website" pInputText formControlName="website"
+                                                autocomplete="off">
+                                            <label for="website">Website</label>
+
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </p-tabPanel>
+
+                        <p-tabPanel header="General Settings" class="line-height-3 m-0">
+
+                            <div class="field mb-4">
+                                <label for="file"> Organization Logo <span class="mandatory mr-2">*</span> <i
+                                        class="mb-2 pi pi-info-circle" pTooltip="Image Size (1920 X 1080)"></i>
+                                </label><br>
+                                <input type="file" id="file" #file placeholder="Choose file" accept='image/*'
+                                    (change)="getOrganizationLogo($event)" />
                                 <small id="logoURL-help">{{ formError("logoURL" ,OrganizationForm)}}</small>
- 
-                        </div>
-        
-                        <div class="field mb-4" *ngIf="logoURL">
-                            <img [src]="logoURL" height="100">
-                        </div>
-        
-                        <div class="field mb-4">
-                            <label for="file"> Favicon <span class="mandatory mr-2">*</span> <i
-                                    class="mb-2 pi pi-info-circle" pTooltip="Image Size (1920 X 1080)"></i> </label><br>
-                            <input type="file" id="file" #file placeholder="Choose file" accept='image/*'
-                                (change)="getFavicon($event)" />
+
+                            </div>
+
+                            <div class="field mb-4" *ngIf="logoURL">
+                                <img [src]="logoURL" height="100">
+                            </div>
+
+                            <div class="field mb-4">
+                                <label for="file"> Favicon <span class="mandatory mr-2">*</span> <i
+                                        class="mb-2 pi pi-info-circle" pTooltip="Image Size (1920 X 1080)"></i>
+                                </label><br>
+                                <input type="file" id="file" #file placeholder="Choose file" accept='image/*'
+                                    (change)="getFavicon($event)" />
                                 <small id="iconURL-help">{{ formError("iconURL" ,OrganizationForm)}}</small>
-                        </div>
-        
-                        <div class="field mb-4" *ngIf="iconURL">
-                            <img [src]="iconURL" height="100">
-                        </div>
-        
-        
-                    </p-tabPanel>
+                            </div>
+
+                            <div class="field mb-4" *ngIf="iconURL">
+                                <img [src]="iconURL" height="100">
+                            </div>
+
+
+                        </p-tabPanel>
 
 
                     </p-tabView>
-                    </div>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
+</div>

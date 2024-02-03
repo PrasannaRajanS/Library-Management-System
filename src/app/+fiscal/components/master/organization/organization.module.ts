@@ -24,6 +24,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 
 
 import { UtilService } from 'src/app/shared/util.service';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [
@@ -49,9 +50,11 @@ import { UtilService } from 'src/app/shared/util.service';
 		DialogModule,
     CalendarModule,
     TabViewModule,
-    FileUploadModule
+    FileUploadModule,
+    AutoCompleteModule
      // Prime Ng End
 
-  ],providers: [UtilService, ConfirmationService,MessageService]
+  ]
+  ,providers: [UtilService, ConfirmationService,MessageService]
 })
 export class OrganizationModule { }

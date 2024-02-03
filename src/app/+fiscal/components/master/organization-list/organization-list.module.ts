@@ -11,6 +11,7 @@ import { HttpService } from 'src/app/+admin/services/http.service';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
 
 
 
@@ -27,8 +28,8 @@ import { DialogModule } from 'primeng/dialog';
     ButtonModule,
     TableModule,
     InputTextModule,
-    DialogModule
-
+    DialogModule,
+    ToastModule
     // PrimeNg Region End
 
     

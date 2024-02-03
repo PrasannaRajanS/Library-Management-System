@@ -9,81 +9,73 @@
     </ng-template>
 </p-toolbar>
 
+<p-toast></p-toast>
 
 <div class="grid">
     <div class="col-12">
 
-
         <div class="card px-6 py-6">
 
-
             <p-table #dt [value]="items" [columns]="cols" responsiveLayout="scroll" [rows]="10"
-            [globalFilterFields]="['name','shortName','city']" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]"
-            [showCurrentPageReport]="true"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [(selection)]="selectedItems" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                [globalFilterFields]="['name','shortName']" [rows]="10" [paginator]="true"
+                [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [(selection)]="selectedItems" selectionMode="multiple" [rowHover]="true" dataKey="id">
 
-            <ng-template pTemplate="caption">
-                <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                    <h4 class="m-0"> ORGANIZATION LIST</h4>
-                    
-                    <span class="block mt-2 md:mt-0 p-input-icon-left">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."
-                            class="w-full sm:w-auto" />
-                    </span>
-                </div>
-            </ng-template>
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h4 class="m-0"> ORGANIZATION LIST</h4>
 
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="width: 3rem">
-                        S.No
-                    </th>
-                    <th pSortableColumn="name">Name<p-sortIcon field="applicationName"></p-sortIcon></th>
-                    <th pSortableColumn="name">Short Name<p-sortIcon field="moduleName"></p-sortIcon></th>
-                    <th pSortableColumn="name">City<p-sortIcon field="pageName"></p-sortIcon></th>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."
+                                class="w-full sm:w-auto" />
+                        </span>
+                    </div>
+                </ng-template>
 
-                    <th>Action</th>
-                </tr>
-            </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            S.No
+                        </th>
+                        <th pSortableColumn="name">Name<p-sortIcon field="applicationName"></p-sortIcon></th>
+                        <th pSortableColumn="name">Short Name<p-sortIcon field="moduleName"></p-sortIcon></th>
 
-            <ng-template pTemplate="body" let-item>
-                <tr>
-                    <td style="width:1%; min-width:10rem;">
-                        {{item.organizationId}}
-                    </td>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
 
-                    <td style="width:24%; min-width:10rem;">
-                        <span class="p-column-title">Name</span>
-                        {{item.name}}
-                    </td>
+                <ng-template pTemplate="body" let-item>
+                    <tr>
+                        <td style="width:1%; min-width:10rem;">
+                            {{item.organizationId}}
+                        </td>
 
-                    <td style="width:15%; min-width:10rem;">
-                        <span class="p-column-title">Name</span>
-                        {{item.shortName}}
-                    </td>
+                        <td style="width:24%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{item.name}}
+                        </td>
 
-                    <td style="width:15%; min-width:10rem;">
-                        <span class="p-column-title">Name</span>
-                        {{item.city}}
-                    </td>
+                        <td style="width:15%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{item.shortName}}
+                        </td>
 
+                        <td style="width:15%; min-width:10rem;">
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success mr-2" (click)="Edit(item)"></button>
 
-                    <td style="width:15%; min-width:10rem;">
-                        <div class="flex">
-                            <button pButton pRipple icon="pi pi-pencil"
-                                class="p-button-rounded p-button-success mr-2" (click)="Edit(item)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                    (click)="Delete(item)"></button>
+                            </div>
+                        </td>
 
-                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                                (click)="Delete(item)"></button>
-                        </div>
-                    </td>
+                    </tr>
+                </ng-template>
 
-                </tr>
-            </ng-template>
-
-        </p-table>
+            </p-table>
 
         </div>
 
@@ -101,12 +93,8 @@
             </ng-template>
 
         </p-dialog>
-        
+
 
     </div>
 
 </div>
-
-
-
-

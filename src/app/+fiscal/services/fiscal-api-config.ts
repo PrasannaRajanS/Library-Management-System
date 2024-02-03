@@ -1,22 +1,15 @@
 export const FiscalAPIConfig = {
-
-    FISCAL_API_BASE_URL: "https://localhost:7189",
-
-
     API_CONFIG: {
         API_URL: {
             MASTER: {
-                ACADEMIC_YEAR: {
-                    SAVE: "/academicyear/Create",
-                    UPDATE: "/academicyear/Update",
-                    DELETE: "/academicyear/Delete",
-                    LIST: "/academicyear/GetAcademicYears"
-                },
                 ORGANIZATION: {
-                    SAVE: "/ORGANIZATION/Create",
-                    UPDATE: "/ORGANIZATION/Update",
-                    DELETE: "/ORGANIZATION/Delete",
-                    LIST: "/ORGANIZATION/GetOrganization"
+                    SAVE: "Organization/Create",
+                    UPDATE: "Organization/Update",
+                    DELETE: "Organization/Delete",
+                    LIST: "Organization/GetAllOrganizations",
+                    EDIT: "Organization/GetOrganizationById",
+                    GET_COUNTRIES: "Organization/GetCountries",
+                    GET_STATES: "Organization/GetStates",
                 },
                 Institution: {
                     SAVE: "/Institution/Create",
@@ -25,6 +18,13 @@ export const FiscalAPIConfig = {
                     LIST: "/Institution/GetInstitution",
                     EDIT:"/Institution/GetInstitutionById"
                 },
+                ACADEMIC_YEAR: {
+                    SAVE: "/academicyear/Create",
+                    UPDATE: "/academicyear/Update",
+                    DELETE: "/academicyear/Delete",
+                    LIST: "/academicyear/GetAcademicYears"
+                },
+                
                 Misc: {
                     SAVE: "/Misc/Create",
                     UPDATE: "/Misc/Update",

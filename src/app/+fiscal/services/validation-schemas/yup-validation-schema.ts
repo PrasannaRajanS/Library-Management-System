@@ -20,13 +20,20 @@ export const YupFiscalValidation = Object.freeze({
     name: yup.string().required('Name is required'),
     shortName: yup.string().required('Short Name is required'),
 
-    addressOne: yup.string().nullable().notRequired(),
-    addressTwo: yup.string().nullable().notRequired(),
-    addressThree: yup.string().nullable().notRequired(),
-    addressFour: yup.string().nullable().notRequired(),
+    address1: yup.string().nullable().notRequired(),
+    address2: yup.string().nullable().notRequired(),
+    address3: yup.string().nullable().notRequired(),
+    address4: yup.string().nullable().notRequired(),
     city: yup.string().nullable().notRequired(),
-    state: yup.string().nullable().notRequired(),
-    country: yup.string().nullable().notRequired(),
+    
+     stateId: yup.number().nullable().notRequired(),
+    // stateName: yup.string().nullable().notRequired(),
+    selectedState: yup.object().nullable().notRequired(),
+
+     countryId: yup.number().nullable().notRequired(),
+    // countryName: yup.string().nullable().notRequired(),
+    selectedCountry: yup.object().nullable().notRequired(),
+
     pinCode: yup.string().nullable().notRequired(),
     phoneNumber: yup.string().nullable().notRequired(),
     fax: yup.string().nullable().notRequired(),

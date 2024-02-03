@@ -1,20 +1,41 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { MegaMenuItem } from 'primeng/api';
+import { MegaMenuItem, MessageService } from 'primeng/api';
 import { LayoutService } from './service/app.layout.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-topbar',
-    templateUrl: './app.topbar.component.html'
+    templateUrl: './app.topbar.component.html',
+    styleUrls:['./app.topbar.component.css'],
 })
 export class AppTopbarComponent {
     
+    confirmDialog: boolean = false;
+    selectedFiscalYear: any = null;
+    dropdownFiscalYears = [
+        { name: '2021-2022', code: 'Option 1' },
+        { name: '2022-2023', code: 'Option 2' },
+        { name: '2023-2024', code: 'Option 3' }
+    ];
+
+    selectedUnit: any = null;
+    dropdownUnits = [
+        { name: 'Institute - I', code: '1' },
+        { name: 'Institute - II', code: '2' },
+        { name: 'Institute - III', code: '3' }
+    ];
+
+
     @ViewChild('menuButton') menuButton!: ElementRef;
 
     @ViewChild('mobileMenuButton') mobileMenuButton!: ElementRef;
 
     @ViewChild('searchInput') searchInput!: ElementRef;
     
-    constructor(public layoutService: LayoutService, public el: ElementRef) {}
+    constructor(public layoutService: LayoutService, 
+        public el: ElementRef,
+        private messageService: MessageService,
+        private router:Router) {}
 
     activeItem!: number;
 
@@ -97,5 +118,15 @@ export class AppTopbarComponent {
        setTimeout(() => {
          this.searchInput.nativeElement.focus()
        }, 0);
+    }
+
+    onLogoutClick() {
+        this.confirmDialog = true;
+    }
+
+    confirmLogout() {
+        this.confirmDialog = false;
+        this.router.navigate(['/auth/login']);
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Logged Out Success', life: 3000 });
     }
 }

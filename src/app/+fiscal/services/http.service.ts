@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpClientModule, HttpHeaders, HttpParams } from '@angular/common/http';
-import * as $ from 'jquery';
-import { Observable, catchError, retry, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, retry, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { APIConfig } from '../config/api.config';
-
+import { APIConfig } from 'src/app/config/api.config';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CommonHttpService {
+export class HttpService {
 
   private baseAPIURL: string = "";
   constructor(private _httpClient: HttpClient) {
-    this.baseAPIURL = APIConfig.API_BASE_URL;
+    this.baseAPIURL = APIConfig.FISCAL_API_BASE_URL;
   }
 
   globalPost(url: string, data: any): any {
@@ -31,6 +29,7 @@ export class CommonHttpService {
     const headers = { 'content-type': 'application/json' }
     config = { headers: new HttpHeaders(headers) };
 
+    console.log('globalGet', this.baseAPIURL + url)
     return this._httpClient.get<any>(this.baseAPIURL + url, config).pipe(map(data => data));
 
   }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,6 +25,10 @@ import { MegaMenuModule } from 'primeng/megamenu';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { StyleClassModule } from 'primeng/styleclass';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
     declarations: [
@@ -55,7 +59,12 @@ import { StyleClassModule } from 'primeng/styleclass';
         RouterModule,
         ButtonModule,
         MenuModule,
-        AppConfigModule
-    ]
+        AppConfigModule,
+        DropdownModule,
+        DialogModule,
+        ToastModule
+    ],
+    schemas:[NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA],
+    providers:[MessageService, ConfirmationService]
 })
 export class AppLayoutModule { }
