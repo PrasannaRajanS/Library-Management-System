@@ -1,6 +1,7 @@
 import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
 
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Table } from 'primeng/table';
 import { IEmployee } from 'src/app/+pms/services/interfaces/IEmployee';
@@ -30,6 +31,8 @@ interface Image {
     name: string;
     objectURL: string;
 }
+
+
 
 //   Drop down by mj tamil
 
@@ -73,6 +76,18 @@ export class EmployeeAddComponent {
     uploadedFiles: any[] = [];
 
     showRemove: boolean = false;
+
+      // Family Information
+
+    genderOptions: any[] = [
+      { label: 'Male', value: 'male' },
+      { label: 'Female', value: 'female' },
+      { label: 'Other', value: 'other' }
+    ];
+
+    // Save
+public buttonText:string="Save";
+
 
     //   Grid List by mj tamil
 
@@ -150,6 +165,11 @@ export class EmployeeAddComponent {
         EPFNo: null,
 
 
+        // Family Information
+
+        selectedGender:null,
+
+
 
         isActive: null,
         unitId: null,
@@ -171,7 +191,8 @@ export class EmployeeAddComponent {
     //     return this.utilService.formError(controlName, formName);
     // };
 
-    constructor(private utilService: UtilService) {
+    constructor(private utilService: UtilService,
+        private router:Router) {
         this.EmployeeForm = FormHandler.controls<IEmployee>(this.initialValues);
         this.EmployeeForm.setValidators(
             FormHandler.validate<IEmployee>(this.validationSchema)
@@ -226,5 +247,23 @@ export class EmployeeAddComponent {
             (event.target as HTMLInputElement).value,
             'contains'
         );
+    }
+
+    // Save
+
+    Save(){
+
+    }
+
+    // Clear
+
+    Clear(){
+
+    }
+
+    // List Link
+
+    RedirecttoList(){
+        this.router.navigate(['/apps/pms/employee/employee-list'])
     }
 }
