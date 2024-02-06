@@ -3,13 +3,12 @@ export const FiscalAPIConfig = {
         API_URL: {
             MASTER: {
                 ORGANIZATION: {
-                    SAVE: "Organization/Create",
-                    UPDATE: "Organization/Update",
-                    DELETE: "Organization/Delete",
-                    LIST: "Organization/GetAllOrganizations",
-                    EDIT: "Organization/GetOrganizationById",
-                    GET_COUNTRIES: "Organization/GetCountries",
-                    GET_STATES: "Organization/GetStates",
+                    SAVE: "/Fiscal/Organization/Create",
+                    UPDATE: "/Fiscal/Organization/Update",
+                    DELETE: "/Fiscal/Organization/Delete",
+                    LIST: "/Fiscal/Organization/GetAllOrganizations",
+                    EDIT: "/Fiscal/Organization/GetOrganizationById",
+                    
                 },
                 Institution: {
                     SAVE: "/Institution/Create",
