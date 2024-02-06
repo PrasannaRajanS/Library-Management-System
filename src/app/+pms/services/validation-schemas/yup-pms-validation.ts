@@ -15,12 +15,16 @@ export const YupPMSValidation = Object.freeze({
 
         // Present Address
 
+        
+        
+
         presentAddress1: yup.string().notRequired(),
         presentAddress2: yup.string().notRequired(),
         presentAddress3: yup.string().notRequired(),
         presentCity: yup.string().notRequired(),
-        presentState: yup.string().notRequired(),
-        presentCountry: yup.string().notRequired(),
+        presentState: yup.object().nullable().notRequired(),
+        presentCountryId: yup.number().nullable().notRequired(),
+        selectedPresentCountry: yup.object().nullable().notRequired(),
         presentPIN: yup.number().notRequired(),
 
         // Permanent Address
