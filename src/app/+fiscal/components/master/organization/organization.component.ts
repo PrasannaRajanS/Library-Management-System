@@ -21,6 +21,7 @@ import { ICountry } from 'src/app/+fiscal/services/interfaces/ICountry';
 import { IState } from 'src/app/+fiscal/services/interfaces/IState';
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { HttpService } from 'src/app/+fiscal/services/http.service';
+import { APIConfig } from 'src/app/config/api.config';
 
 
 @Component({
@@ -149,7 +150,7 @@ export class OrganizationComponent {
 
     try {
 
-      this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.ORGANIZATION.GET_COUNTRIES)
+      this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_COUNTRIES)
         .subscribe({
           next: (result: any) => {
             this.CoutryList = result.countries;
@@ -167,7 +168,7 @@ export class OrganizationComponent {
 
     try {
 
-      this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.ORGANIZATION.GET_STATES)
+      this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_STATES)
         .subscribe({
           next: (result: any) => {
             this.StateList = result.states;

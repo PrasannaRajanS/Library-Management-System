@@ -16,6 +16,10 @@ import { HttpService } from 'src/app/+admin/services/http.service';
 import * as yup from "yup";
 import { YupFiscalValidation } from 'src/app/+fiscal/services/validation-schemas/yup-validation-schema';
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
+import { IState } from 'src/app/+fiscal/services/interfaces/IState';
+import { IOrganization } from 'src/app/+fiscal/services/interfaces/IOrganization';
+import { ILabel, IMedium, ISchoolCategory, ISchoolType } from 'src/app/+fiscal/services/interfaces/ICommon';
+import { AppConstant } from 'src/app/config/app.contant';
 
 
 @Component({
@@ -24,6 +28,14 @@ import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
   styleUrls: ['./institution.component.scss']
 })
 export class InstitutionComponent {
+
+  StateList: IState[] = [];
+  OrganizationList: IOrganization[] = [];
+  SchoolCategoryList: ISchoolCategory[] = [];
+  SchoolTypeList: ISchoolType[] = [];
+  MediumList: IMedium[] = [];
+
+  PrePrimaryList: any = [];
 
   OrganizationId: number = 0;
   InstitutionId: any = 0;
@@ -50,27 +62,42 @@ export class InstitutionComponent {
 
   //  Step 2
   initialValues: IInstitution = {
-    // 1
-
-  
-
     institutionId: 0,
     institutionName: null,
-    // organizationId:0,
-    // organizationName:null,
-    nameOfSchool: null,
+    organizationId: 0,
+    selectedOrganization: null,
     shortName: null,
-    schoolUDISECode: null,
-    affiliatedCode: null,
-    category: null,
+    UDISECode: null,
 
-    // 2
+    stateId:null,
+    selectedState: null,
+    district: null,
+    block: null,
+    cluster: null,
+    ward:null,
+    mohalla:null,
+    pincode:null,
+    panchayat:null,
+    municipality:null,
+
+    categoryId:null,
+    selectedCategory:null,
+    stateManagement:null,
+    nationalManagement:null,
+    schoolTypeId:null,
+    selectedschoolType:null,
+    classFrom:null,
+    classTo:null,
+    selectedPrePrimary:null,
+    selectedMedium:null,
+    
+    // Address Info
     address1: null,
     address2: null,
     address3: null,
     address4: null,
-    cityId: null,
-    stateId: null,
+    city: null,
+    addressStateId: null,
     countryId: null,
     pinCode: null,
     fax: null,
@@ -82,42 +109,42 @@ export class InstitutionComponent {
     secondaryEmail: null,
     website: null,
 
-    // Basic Info
-    
-    basicStateId: null,
-    basicDistrictId: null,
-    basicCityId: null,
-    basicLocation: null,
-    basicPincode: null,
-    basicMunicipality: null,
-    basicBlock: null,
-    basicWard: null,
-    basicPanchayat: null,
-    basicMohalla: null,
-    basicCluster: null,
-    basicSchoolType: null,
-    basicSchoolCategory: null,
-    basicSchoolManagement: null,
-    basicClassFrom: null,
-    basicClassTo: null,
-    basicMedium1: null,
-    basicMedium2: null,
-    basicMedium3: null,
-    basicMedium4: null,
-    basicPrePrimary: null,
+    // // Basic Info
 
-     // Management Info
-     YearOfEstablishment: null,
-     YearofRecognitionPri: null,
-     YearOfRecognitionUprPri: null,
-     YearOfRecognitionSec: null,
-     YearOfRecognitionHigherSec: null,
+    // basicStateId: null,
+    // basicDistrictId: null,
+    // basicCityId: null,
+    // basicLocation: null,
+    // basicPincode: null,
+    // basicMunicipality: null,
+    // basicBlock: null,
+    // basicWard: null,
+    // basicPanchayat: null,
+    // basicMohalla: null,
+    // basicCluster: null,
+    // basicSchoolType: null,
+    // basicSchoolCategory: null,
+    // basicSchoolManagement: null,
+    // basicClassFrom: null,
+    // basicClassTo: null,
+    // basicMedium1: null,
+    // basicMedium2: null,
+    // basicMedium3: null,
+    // basicMedium4: null,
+    // basicPrePrimary: null,
 
-    // 3
+    //  // Management Info
+    //  YearOfEstablishment: null,
+    //  YearofRecognitionPri: null,
+    //  YearOfRecognitionUprPri: null,
+    //  YearOfRecognitionSec: null,
+    //  YearOfRecognitionHigherSec: null,
 
-    isActive: null,
-    userId: null,
-    ipAddress: null
+    // // 3
+
+    // isActive: null,
+    // userId: null,
+    // ipAddress: null
 
   };
 
@@ -142,6 +169,14 @@ export class InstitutionComponent {
   }
 
   ngOnInit() {
+
+    this.PrePrimaryList = AppConstant.DDL_YES_NO
+    this.SchoolCategoryList = [{ categoryId: 1, categoryName: 'Pr. with Up.Pr.' }, { categoryId: 2, categoryName: 'Pr. with Up.Pr. sec. and H.Sec.' }];
+    this.SchoolTypeList = [{ schoolTypeId: 1, schoolType: 'Co-educational' }, { schoolTypeId: 2, schoolType: 'Non Co-educational' }];
+
+    this.MediumList = [{ mediumId: 1, medium: 'Tamil' },{ mediumId: 2, medium: 'English' }];
+    console.log(this.PrePrimaryList);
+
     this.LoadApplication;
 
   }
@@ -201,32 +236,32 @@ export class InstitutionComponent {
       let passSaveParams: any = {};
       if (this.IsUpdate) { //  UPDATE
 
-        passSaveParams.institutionId = this.InstitutionId;
-        passSaveParams.institutionName = this.InstitutionFrom.value['institutionName']
-        // passSaveParams.organizationId = this.OrganizationId;
-        // passSaveParams.organizationName = this.InstitutionFrom.value['organizationName']
-        passSaveParams.nameOfSchool = this.InstitutionFrom.value['nameOfSchool']
-        passSaveParams.shortName = this.InstitutionFrom.value['shortName']
-        passSaveParams.schoolUDISECode = this.InstitutionFrom.value['schoolUDISECode']
-        passSaveParams.affiliatedCode = this.InstitutionFrom.value['affiliatedCode']
-        passSaveParams.category = this.InstitutionFrom.value['category']
+        // passSaveParams.institutionId = this.InstitutionId;
+        // passSaveParams.institutionName = this.InstitutionFrom.value['institutionName']
+        // // passSaveParams.organizationId = this.OrganizationId;
+        // // passSaveParams.organizationName = this.InstitutionFrom.value['organizationName']
+        // passSaveParams.nameOfSchool = this.InstitutionFrom.value['nameOfSchool']
+        // passSaveParams.shortName = this.InstitutionFrom.value['shortName']
+        // passSaveParams.schoolUDISECode = this.InstitutionFrom.value['schoolUDISECode']
+        // passSaveParams.affiliatedCode = this.InstitutionFrom.value['affiliatedCode']
+        // passSaveParams.category = this.InstitutionFrom.value['category']
 
-        passSaveParams.addressOne = this.InstitutionFrom.value['address1']
-        passSaveParams.addressTwo = this.InstitutionFrom.value['address2']
-        passSaveParams.addressThree = this.InstitutionFrom.value['address3']
-        passSaveParams.addressFour = this.InstitutionFrom.value['address4']
-        passSaveParams.cityId = this.InstitutionFrom.value['cityId']
-        passSaveParams.stateId = this.InstitutionFrom.value['stateId']
-        passSaveParams.countryId = this.InstitutionFrom.value['countryId']
-        passSaveParams.pinCode = this.InstitutionFrom.value['pinCode']
-        passSaveParams.fax = this.InstitutionFrom.value['fax']
-        passSaveParams.mobileNumber1 = this.InstitutionFrom.value['mobileNumber1']
-        passSaveParams.mobileNumber2 = this.InstitutionFrom.value['mobileNumber2']
-        passSaveParams.phoneNumber1 = this.InstitutionFrom.value['phoneNumber1']
-        passSaveParams.phoneNumber2 = this.InstitutionFrom.value['phoneNumber2']
-        passSaveParams.primaryEmail = this.InstitutionFrom.value['primaryEmail']
-        passSaveParams.secondaryEmail = this.InstitutionFrom.value['secondaryEmail']
-        passSaveParams.website = this.InstitutionFrom.value['website']
+        // passSaveParams.addressOne = this.InstitutionFrom.value['address1']
+        // passSaveParams.addressTwo = this.InstitutionFrom.value['address2']
+        // passSaveParams.addressThree = this.InstitutionFrom.value['address3']
+        // passSaveParams.addressFour = this.InstitutionFrom.value['address4']
+        // passSaveParams.cityId = this.InstitutionFrom.value['cityId']
+        // passSaveParams.stateId = this.InstitutionFrom.value['stateId']
+        // passSaveParams.countryId = this.InstitutionFrom.value['countryId']
+        // passSaveParams.pinCode = this.InstitutionFrom.value['pinCode']
+        // passSaveParams.fax = this.InstitutionFrom.value['fax']
+        // passSaveParams.mobileNumber1 = this.InstitutionFrom.value['mobileNumber1']
+        // passSaveParams.mobileNumber2 = this.InstitutionFrom.value['mobileNumber2']
+        // passSaveParams.phoneNumber1 = this.InstitutionFrom.value['phoneNumber1']
+        // passSaveParams.phoneNumber2 = this.InstitutionFrom.value['phoneNumber2']
+        // passSaveParams.primaryEmail = this.InstitutionFrom.value['primaryEmail']
+        // passSaveParams.secondaryEmail = this.InstitutionFrom.value['secondaryEmail']
+        // passSaveParams.website = this.InstitutionFrom.value['website']
 
         passSaveParams.isActive = true
         passSaveParams.userId = this.userDetails ? this.userDetails.UserId : 0
@@ -237,32 +272,32 @@ export class InstitutionComponent {
       }
       else { //  SAVE
 
-        passSaveParams.institutionId = this.InstitutionId;
-        passSaveParams.institutionName = this.InstitutionFrom.value['institutionName']
-        // passSaveParams.organizationId = this.OrganizationId;
-        // passSaveParams.organizationName = this.InstitutionFrom.value['organizationName']
-        passSaveParams.nameOfSchool = this.InstitutionFrom.value['nameOfSchool']
-        passSaveParams.shortName = this.InstitutionFrom.value['shortName']
-        passSaveParams.schoolUDISECode = this.InstitutionFrom.value['schoolUDISECode']
-        passSaveParams.affiliatedCode = this.InstitutionFrom.value['affiliatedCode']
-        passSaveParams.category = this.InstitutionFrom.value['category']
+        // passSaveParams.institutionId = this.InstitutionId;
+        // passSaveParams.institutionName = this.InstitutionFrom.value['institutionName']
+        // // passSaveParams.organizationId = this.OrganizationId;
+        // // passSaveParams.organizationName = this.InstitutionFrom.value['organizationName']
+        // passSaveParams.nameOfSchool = this.InstitutionFrom.value['nameOfSchool']
+        // passSaveParams.shortName = this.InstitutionFrom.value['shortName']
+        // passSaveParams.schoolUDISECode = this.InstitutionFrom.value['schoolUDISECode']
+        // passSaveParams.affiliatedCode = this.InstitutionFrom.value['affiliatedCode']
+        // passSaveParams.category = this.InstitutionFrom.value['category']
 
-        passSaveParams.addressOne = this.InstitutionFrom.value['address1']
-        passSaveParams.addressTwo = this.InstitutionFrom.value['address2']
-        passSaveParams.addressThree = this.InstitutionFrom.value['address3']
-        passSaveParams.addressFour = this.InstitutionFrom.value['address4']
-        passSaveParams.cityId = this.InstitutionFrom.value['cityId']
-        passSaveParams.stateId = this.InstitutionFrom.value['stateId']
-        passSaveParams.countryId = this.InstitutionFrom.value['countryId']
-        passSaveParams.pinCode = this.InstitutionFrom.value['pinCode']
-        passSaveParams.fax = this.InstitutionFrom.value['fax']
-        passSaveParams.mobileNumber1 = this.InstitutionFrom.value['mobileNumber1']
-        passSaveParams.mobileNumber2 = this.InstitutionFrom.value['mobileNumber2']
-        passSaveParams.phoneNumber1 = this.InstitutionFrom.value['phoneNumber1']
-        passSaveParams.phoneNumber2 = this.InstitutionFrom.value['phoneNumber2']
-        passSaveParams.primaryEmail = this.InstitutionFrom.value['primaryEmail']
-        passSaveParams.secondaryEmail = this.InstitutionFrom.value['secondaryEmail']
-        passSaveParams.website = this.InstitutionFrom.value['website']
+        // passSaveParams.addressOne = this.InstitutionFrom.value['address1']
+        // passSaveParams.addressTwo = this.InstitutionFrom.value['address2']
+        // passSaveParams.addressThree = this.InstitutionFrom.value['address3']
+        // passSaveParams.addressFour = this.InstitutionFrom.value['address4']
+        // passSaveParams.cityId = this.InstitutionFrom.value['cityId']
+        // passSaveParams.stateId = this.InstitutionFrom.value['stateId']
+        // passSaveParams.countryId = this.InstitutionFrom.value['countryId']
+        // passSaveParams.pinCode = this.InstitutionFrom.value['pinCode']
+        // passSaveParams.fax = this.InstitutionFrom.value['fax']
+        // passSaveParams.mobileNumber1 = this.InstitutionFrom.value['mobileNumber1']
+        // passSaveParams.mobileNumber2 = this.InstitutionFrom.value['mobileNumber2']
+        // passSaveParams.phoneNumber1 = this.InstitutionFrom.value['phoneNumber1']
+        // passSaveParams.phoneNumber2 = this.InstitutionFrom.value['phoneNumber2']
+        // passSaveParams.primaryEmail = this.InstitutionFrom.value['primaryEmail']
+        // passSaveParams.secondaryEmail = this.InstitutionFrom.value['secondaryEmail']
+        // passSaveParams.website = this.InstitutionFrom.value['website']
 
         passSaveParams.isActive = true
         passSaveParams.userId = this.userDetails ? this.userDetails.UserId : 0
@@ -271,24 +306,24 @@ export class InstitutionComponent {
         _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.SAVE
 
       }
-      console.log("Save / Update click",JSON.stringify(passSaveParams));
-      this.httpService.globalPost(_apiUrl,JSON.stringify(passSaveParams))
-      .subscribe({
-        next:(result:any)=>{
-          this.notificationsService(FiscalValidation.NOTIFICATION_SUCCESS,'Success Message',result.message)
-          this.Clear()
-        },
-        error: (err: HttpErrorResponse) => console.log(err)
-        
-      })
-      
+      console.log("Save / Update click", JSON.stringify(passSaveParams));
+      this.httpService.globalPost(_apiUrl, JSON.stringify(passSaveParams))
+        .subscribe({
+          next: (result: any) => {
+            this.notificationsService(FiscalValidation.NOTIFICATION_SUCCESS, 'Success Message', result.message)
+            this.Clear()
+          },
+          error: (err: HttpErrorResponse) => console.log(err)
+
+        })
+
     } catch (error) {
 
     }
   }
 
 
-  filterCountry($event:any){
+  filterCountry($event: any) {
 
   }
 

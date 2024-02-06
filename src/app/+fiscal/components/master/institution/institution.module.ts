@@ -16,6 +16,7 @@ import { UtilService } from 'src/app/shared/util.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CalendarModule } from 'primeng/calendar';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 
@@ -41,6 +42,7 @@ import { CalendarModule } from 'primeng/calendar';
     DropdownModule,
     AutoCompleteModule,
     CalendarModule,
+    TooltipModule 
  
 
   ],
