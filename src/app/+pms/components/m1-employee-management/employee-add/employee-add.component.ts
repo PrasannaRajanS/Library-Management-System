@@ -2,19 +2,24 @@ import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
 
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { Table } from 'primeng/table';
+
+import { APIConfig } from 'src/app/config/api.config';
 import { IStatePMS } from 'src/app/+pms/services/interfaces/IStatePMS';
-
 import { IEmployee } from 'src/app/+pms/services/interfaces/IEmployee';
+import { ICountryPMS } from 'src/app/+pms/services/interfaces/ICountryPMS';
 
+import * as yup from 'yup';
 import { YupPMSValidation } from 'src/app/+pms/services/validation-schemas/yup-pms-validation';
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
 
 import { UtilService } from 'src/app/shared/util.service';
+import { PMSHttpService } from 'src/app/+pms/services/pms-http.service';
 
-import * as yup from 'yup';
-import { ICountryPMS } from 'src/app/+pms/services/interfaces/ICountryPMS';
+
+
 
 interface Product {
     name: string;
@@ -35,8 +40,6 @@ interface Image {
     name: string;
     objectURL: string;
 }
-
-
 
 //   Drop down by mj tamil
 
@@ -81,17 +84,16 @@ export class EmployeeAddComponent {
 
     showRemove: boolean = false;
 
-      // Family Information
+    // Family Information
 
     genderOptions: any[] = [
-      { label: 'Male', value: 'male' },
-      { label: 'Female', value: 'female' },
-      { label: 'Other', value: 'other' }
+        { label: 'Male', value: 'male' },
+        { label: 'Female', value: 'female' },
+        { label: 'Other', value: 'other' },
     ];
 
     // Save
-public buttonText:string="Save";
-
+    public buttonText: string = 'Save';
 
     //   Grid List by mj tamil
 
@@ -131,6 +133,7 @@ public buttonText:string="Save";
         presentAddress3: null,
         presentCity: null,
         presentState: null,
+
         presentCountryId: null,
         selectedPresentCountry: null,
         presentPIN: null,
@@ -176,14 +179,9 @@ public buttonText:string="Save";
         ESINo: null,
         EPFNo: null,
 
-
-
         // Family Information
 
-        selectedGender:null,
-
-
-
+        selectedGender: null,
 
         isActive: null,
         unitId: null,
@@ -200,17 +198,20 @@ public buttonText:string="Save";
     formError = (controlName: string, formName: any) => {
         return this.utilService.formError(controlName, formName);
     };
-    // formError = (controlName: string, formName: any) => {
-    //     //  Step 4
-    //     return this.utilService.formError(controlName, formName);
-    // };
+   
 
-    constructor(private utilService: UtilService,
-        private router:Router) {
+    constructor(private utilService: UtilService,       
+         private router: Router,
+         private httpService : PMSHttpService) {
         this.EmployeeForm = FormHandler.controls<IEmployee>(this.initialValues);
         this.EmployeeForm.setValidators(
             FormHandler.validate<IEmployee>(this.validationSchema)
         );
+    }
+
+    ngOnInit(){
+        this.GetCountries();
+        this.GetStates();
     }
 
     onChipRemove(item: string) {
@@ -263,10 +264,73 @@ public buttonText:string="Save";
         );
     }
 
+    // Filter
+
+    // GetCountries
+
+    public GetCountries(){
+        try {
+            this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_COUNTRIES)
+            .subscribe(
+                {
+                    next:(result :any)=>{
+                        this.CoutryList = result.countries;
+                        // console.log('GetCountries',this.CoutryList);
+                        
+                    },
+                    error: (err: HttpErrorResponse) =>console.log(err)
+                    
+                }
+            )
+        } catch (error) {
+            
+        }
+    }
+
+     // auto complete Country
+
+     filterCountry(event: AutoCompleteCompleteEvent) {
+        let filtered: any[] = [];
+        let query = event.query;
+
+        for (let i = 0; i < (this.CoutryList as any[]).length; i++) {
+            let _countriesList = (this.CoutryList as any[])[i];
+            if (
+                _countriesList.countryName
+                    .toLowerCase()
+                    .indexOf(query.toLowerCase()) == 0
+            ) {
+                filtered.push(_countriesList);
+            }
+        }
+        this.filteredCoutryList = filtered;
+    }
+
+
+    // GetStates
+
+    public GetStates(){
+        try {
+            this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_STATES)
+            .subscribe({
+                next: (result : any) =>{
+                    this.StateList = result.states;
+                    // console.log('GetStates', this.GetStates);
+
+                },
+                error: (err:HttpErrorResponse) =>console.log(err)
+                
+            })
+        } catch (error) {
+            
+        }
+    }
+
+
+
+
 
     // auto complete state
-
-    // Filter
 
     filterState(event: AutoCompleteCompleteEvent) {
         let filtered: any[] = [];
@@ -294,34 +358,31 @@ public buttonText:string="Save";
         ) {
             let _countryId: number =
                 this.EmployeeForm.value['presentState'].countryId;
-            this.EmployeeForm.get('selectedPresentCountry')?.setValue(this.CoutryList.find((c) => c.countryId === _countryId));
+            this.EmployeeForm.get('selectedPresentCountry')?.setValue(
+                this.CoutryList.find((c) => c.countryId === _countryId)
+            );
         } else {
-            this.EmployeeForm.get('selectedPresentCountry')?.setValue(null)
+            this.EmployeeForm.get('selectedPresentCountry')?.setValue(null);
         }
     }
 
     onClearState() {
         console.log('OnClearState', this.EmployeeForm);
-        this.EmployeeForm.get('presentCountry')?.reset();
+        this.EmployeeForm.get('selectedPresentCountry')?.reset();
     }
-    
 
+   
     // Save
 
-    Save(){
-
-    }
+    Save() {}
 
     // Clear
 
-    Clear(){
-
-    }
+    Clear() {}
 
     // List Link
 
-    RedirecttoList(){
-        this.router.navigate(['/apps/pms/employee/employee-list'])
+    RedirecttoList() {
+        this.router.navigate(['/apps/pms/employee/employee-list']);
     }
-
 }

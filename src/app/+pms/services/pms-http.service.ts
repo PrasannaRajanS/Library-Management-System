@@ -1,20 +1,22 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+// Any other use can i delete it
 import { PMSAPIConfig } from './pms-api-config';
 import { catchError, retry, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { APIConfig } from 'src/app/config/api.config';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CommonHttpService {
+export class PMSHttpService {
 
   private baseAPIURL: string = "";
 
 
   constructor( private _httpClient:HttpClient) { 
-      this.baseAPIURL = PMSAPIConfig.PMS_API_BASE_URL;
+      this.baseAPIURL = APIConfig.API_BASE_URL;
     
     }
 

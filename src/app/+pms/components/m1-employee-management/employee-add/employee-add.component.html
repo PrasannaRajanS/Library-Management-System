@@ -48,15 +48,15 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="employeeNumber">
-                                                <label htmlFor="firstname2">Employee No</label>
+                                                <input id="employeeNumber"  pInputText formControlName="employeeNumber">
+                                                <label for="employeeNumber">Employee No</label>
                                             </span>
                                         </div>
 
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" id="firstName" pInputText
+                                                <input id="firstName" pInputText
                                                     formControlName="firstName">
                                                 <label for="firstName">First Name</label>
                                             </span>
@@ -69,37 +69,37 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="lastName">
-                                                <label htmlFor="firstname2">Last Name</label>
+                                                <input id="lastName" pInputText formControlName="lastName">
+                                                <label for="lastName">Last Name</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="nickName">
-                                                <label htmlFor="firstname2">Nick Name</label>
+                                                <input id="nickName" pInputText formControlName="nickName">
+                                                <label for="nickName">Nick Name</label>
                                             </span>
                                         </div>
 
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="gender">
-                                                <label htmlFor="firstname2">Gender</label>
+                                                <input id="gender"  pInputText formControlName="gender">
+                                                <label for="gender">Gender</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-calendar formControlName="DOB"></p-calendar>
-                                                <label htmlFor="firstname2">DOB</label>
+                                                <p-calendar formControlName="DOB" id="dob"></p-calendar>
+                                                <label for="dob">DOB</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="age">
-                                                <label htmlFor="firstname2">Age</label>
+                                                <input id="age" pInputText formControlName="age">
+                                                <label for="age">Age</label>
                                             </span>
 
                                         </div>
@@ -110,73 +110,74 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="presentAddress1">
-                                                <label htmlFor="firstname2">Address 1</label>
+                                                <input id="presentAddress1" pInputText formControlName="presentAddress1">
+                                                <label for="presentAddress1">Address 1</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="presentAddress2">
-                                                <label htmlFor="firstname2">Address 2</label>
+                                                <input pInputText id="presentAddress2" formControlName="presentAddress2">
+                                                <label for="presentAddress2">Address 2</label>
                                             </span>
 
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="presentAddress3">
-                                                <label htmlFor="firstname2">Address 3</label>
+                                                <input pInputText id="presentAddress3" formControlName="presentAddress3">
+                                                <label for="presentAddress3">Address 3</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="presentCity">
-                                                <label htmlFor="firstname2">City / Town</label>
+                                                <input pInputText id="presentCity" formControlName="presentCity">
+                                                <label for="presentCity">City / Town</label>
                                             </span>
                                         </div>
-
-                                        <div class="col-12 md:col-6 mb-3">
-                                            <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="presentState">
-                                                <label htmlFor="firstname2">State</label>
-                                            </span>
-
-                                        </div>
-
-
+                                        
 
                                         <div class="field col-12 md:col-6 mb-3">
-                                            <span class="p-float-label">
-                                              
-                                                <p-autoComplete formControlName="presentState"
+                                            <span class="p-float-label">                                             
+                                                <p-autoComplete id="presentState"
+                                                formControlName="presentState"
                                                     [suggestions]="filteredStateList"
                                                      (completeMethod)="filterState($event)"
                                                     [minLength]="0" [dropdown]="true" 
                                                     [forceSelection]="true"
                                                     (onSelect)="onSelectState()"
                                                     field="stateName" [showClear]="true" (onClear)="onClearState()"></p-autoComplete>
+                                                <label for="presentState">State</label>
+                                            </span>
+                                        </div>
+
+
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">                                          
+                                                <p-autoComplete id="selectedPresentCountry" 
+                                                formControlName="selectedPresentCountry"
+                                                    [suggestions]="filteredCoutryList"
+                                                    (completeMethod)="filterCountry($event)"
+                                                    [minLength]="0"
+                                                     [dropdown]="true" 
+                                                    [forceSelection]="true"                                                   
+                                                    field="countryName"
+                                                     ></p-autoComplete>
     
-                                                <label for="selectedState">State</label>
+                                                <label for="selectedPresentCountry">Country</label>
                                             </span>
                                         </div>
 
 
     
 
-                                        <div class="col-12 md:col-6 mb-3">
-                                            <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="presentCountry">
-                                                <label htmlFor="firstname2">Country</label>
-                                            </span>
-
-                                        </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="presentPIN">
-                                                <label htmlFor="firstname2">PIN</label>
+                                                <input id="presentPIN" pInputText formControlName="presentPIN">
+                                                <label for="presentPIN">PIN</label>
                                             </span>
                                         </div>
 
@@ -187,59 +188,59 @@
                                         <div class="col-12 md:col-6 mb-3">
                                             <!-- Span no need here -->
                                             <span class="p-float-label">
-                                                <input type="checkbox" value="Same as Present">
-                                                <label htmlFor="firstname2"></label>
+                                                <input id=""  type="checkbox" value="Same as Present">
+                                                <label for="firstname2"></label>
                                             </span>
 
 
                                         </div>
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="permanentAddress1">
-                                                <label htmlFor="firstname2">Address 1</label>
+                                                <input id="permanentAddress1" pInputText formControlName="permanentAddress1">
+                                                <label for="permanentAddress1">Address 1</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="permanentAddress2">
-                                                <label htmlFor="firstname2">Address 2</label>
+                                                <input id="permanentAddress2" pInputText formControlName="permanentAddress2">
+                                                <label for="permanentAddress2">Address 2</label>
                                             </span>
 
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="permanentAddress3">
-                                                <label htmlFor="firstname2">Address 3</label>
+                                                <input id="permanentAddress3" pInputText formControlName="permanentAddress3">
+                                                <label for="permanentAddress3">Address 3</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="permanentCity">
-                                                <label htmlFor="firstname2">City / Town</label>
+                                                <input id="permanentCity" pInputText formControlName="permanentCity">
+                                                <label for="permanentCity">City / Town</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="permanentState">
-                                                <label htmlFor="firstname2">State</label>
+                                                <input id="permanentState" pInputText formControlName="permanentState">
+                                                <label for="permanentState">State</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="permanentCountry">
-                                                <label htmlFor="firstname2">Country</label>
+                                                <input id="permanentCountry" pInputText formControlName="permanentCountry">
+                                                <label for="permanentCountry">Country</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="permanentPIN">
-                                                <label htmlFor="firstname2">PIN</label>
+                                                <input id="permanentPIN" pInputText formControlName="permanentPIN">
+                                                <label for="permanentPIN">PIN</label>
                                             </span>
                                         </div>
 
@@ -254,23 +255,23 @@
                                     <div class="grid formgrid">
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="officialEmail">
-                                                <label>Official Email</label>
+                                                <input id="officialEmail" pInputText formControlName="officialEmail">
+                                                <label for="officialEmail">Official Email</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="officialMobile">
-                                                <label>Official Mobile</label>
+                                                <input id="officialMobile" pInputText formControlName="officialMobile">
+                                                <label for="officialMobile">Official Mobile</label>
                                             </span>
 
                                         </div>
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-calendar formControlName="dateOfJoin"></p-calendar>
-                                                <label>Date of Join *</label>
+                                                <p-calendar id="dateOfJoin" formControlName="dateOfJoin"></p-calendar>
+                                                <label for="dateOfJoin" >Date of Join *</label>
                                             </span>
                                             <small id="dateOfJoin-help">{{
                                                 formError("dateOfJoin",EmployeeForm)}}</small>
@@ -280,7 +281,9 @@
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
 
-                                                <p-autoComplete (completeMethod)="filterMagePage($event)"
+                                                <p-autoComplete 
+                                                id="employeeCategory"
+                                                (completeMethod)="filterMagePage($event)"
                                                     [minLength]="0" [dropdown]="true" [forceSelection]="true"
                                                     field="employeeCategory"
                                                     formControlName="employeeCategory"></p-autoComplete>
@@ -294,9 +297,8 @@
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                                <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                                <p-autoComplete (completeMethod)="filterMagePage($event)"
+                                              
+                                                <p-autoComplete id="deptSection" (completeMethod)="filterMagePage($event)"
                                                     [minLength]="0" [dropdown]="true" [forceSelection]="true"
                                                     field="deptSection" formControlName="deptSection"></p-autoComplete>
 
@@ -308,7 +310,8 @@
 
                                         <div class="col-12 md:col-6 mb-3 ">
                                             <span class="p-float-label">
-                                                <p-autoComplete (completeMethod)="filterMagePage($event)"
+                                                <p-autoComplete id="production"
+                                                (completeMethod)="filterMagePage($event)"
                                                     [minLength]="0" [dropdown]="true" [forceSelection]="true"
                                                     field="production" formControlName="production"></p-autoComplete>
 
@@ -320,7 +323,9 @@
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <p-autoComplete (completeMethod)="filterMagePage($event)"
+                                                <p-autoComplete 
+                                                id="typeOfEmployment"
+                                                (completeMethod)="filterMagePage($event)"
                                                     [minLength]="0" [dropdown]="true" [forceSelection]="true"
                                                     field="typeOfEmployment"
                                                     formControlName="typeOfEmployment"></p-autoComplete>
@@ -343,7 +348,7 @@
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <p-autoComplete (completeMethod)="filterMagePage($event)"
+                                                <p-autoComplete id="salaryType" (completeMethod)="filterMagePage($event)"
                                                     [minLength]="0" [dropdown]="true" [forceSelection]="true"
                                                     field="salaryType" formControlName="salaryType"></p-autoComplete>
 
@@ -369,15 +374,14 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                                <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                                <p-autoComplete (completeMethod)="filterMagePage($event)"
+                                                
+                                                <p-autoComplete id="mainPageName" (completeMethod)="filterMagePage($event)"
                                                     [minLength]="0" [dropdown]="true" [forceSelection]="true"
                                                     field="mainPageName" formControlName="shift"></p-autoComplete>
 
                                                 <label for="mainPageName">Shift</label>
                                             </span>
-                                            <!-- <small id="MainPageName-help">{{ formError("mainPageName",EmployeeForm)}}</small> -->
+                                         
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
@@ -406,8 +410,8 @@
                                     <div class="grid formgrid">
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="contactPerson1">
-                                                <label>Contact Person 1 *</label>
+                                                <input id="contactPerson1" pInputText formControlName="contactPerson1">
+                                                <label for="contactPerson1">Contact Person 1 *</label>
                                             </span>
                                             <small id="contactPerson1-help">{{
                                                 formError("contactPerson1",EmployeeForm)}}</small>
@@ -415,24 +419,24 @@
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="mobileNo1">
-                                                <label>Mobile No 1 *</label>
+                                                <input id="mobileNo1" pInputText formControlName="mobileNo1">
+                                                <label for="mobileNo1">Mobile No 1 *</label>
                                             </span>
                                             <small id="mobileNo1-help">{{ formError("mobileNo1",EmployeeForm)}}</small>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="contactPerson2">
-                                                <label>Contact Person 2</label>
+                                                <input id="contactPerson2" pInputText formControlName="contactPerson2">
+                                                <label for="contactPerson2">Contact Person 2</label>
                                             </span>
 
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="mobileNo2">
-                                                <label>Mobile No 2</label>
+                                                <input id="mobileNo2" pInputText formControlName="mobileNo2">
+                                                <label for="mobileNo2">Mobile No 2</label>
                                             </span>
 
                                         </div>
@@ -441,15 +445,16 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                                <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                                <p-autoComplete (completeMethod)="filterMagePage($event)"
+
+                                                <p-autoComplete
+                                                id="mainPageName" 
+                                                (completeMethod)="filterMagePage($event)"
                                                     [minLength]="0" [dropdown]="true" [forceSelection]="true"
                                                     field="mainPageName" formControlName="bloodGroup"></p-autoComplete>
 
                                                 <label for="mainPageName">Blood Group</label>
                                             </span>
-                                            <!-- <small id="MainPageName-help">{{ formError("mainPageName",EmployeeForm)}}</small> -->
+                                        
                                         </div>
 
 
@@ -468,8 +473,8 @@
                                     <div class="grid formgrid">
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="nationality">
-                                                <label>Nationality *</label>
+                                                <input id="nationality" pInputText formControlName="nationality">
+                                                <label for="nationality">Nationality *</label>
                                             </span>
                                             <small id="nationality-help">{{
                                                 formError("nationality",EmployeeForm)}}</small>
@@ -477,8 +482,8 @@
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="community">
-                                                <label>Community *</label>
+                                                <input id="community" pInputText formControlName="community">
+                                                <label for="community">Community *</label>
                                             </span>
                                             <small id="community-help">{{ formError("community",EmployeeForm)}}</small>
 
@@ -487,8 +492,8 @@
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="PANNo">
-                                                <label>PAN No *</label>
+                                                <input id="PANNo" pInputText formControlName="PANNo">
+                                                <label for="PANNo">PAN No *</label>
                                             </span>
                                             <small id="PANNo-help">{{ formError("PANNo",EmployeeForm)}}</small>
 
@@ -496,30 +501,30 @@
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="aadhaarNo">
-                                                <label>Aadhaar No *</label>
+                                                <input id="aadhaarNo" pInputText formControlName="aadhaarNo">
+                                                <label for="aadhaarNo" >Aadhaar No *</label>
                                             </span>
                                             <small id="aadhaarNo-help">{{ formError("aadhaarNo",EmployeeForm)}}</small>
 
                                         </div>
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="UANNo">
-                                                <label>UAN No</label>
+                                                <input id="UANNo" pInputText formControlName="UANNo">
+                                                <label for="UANNo">UAN No</label>
                                             </span>
 
                                         </div>
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="ESINo">
-                                                <label>ESI No</label>
+                                                <input id="ESINo" pInputText formControlName="ESINo">
+                                                <label for="ESINo" >ESI No</label>
                                             </span>
 
                                         </div>
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input type="text" pInputText formControlName="EPFNo">
-                                                <label>EPF No</label>
+                                                <input id="EPFNo" pInputText formControlName="EPFNo">
+                                                <label for="EPFNo">EPF No</label>
                                             </span>
 
                                         </div>
@@ -547,73 +552,72 @@
                                 <div class="field col-12 md:col-3 mb-3">
 
                                     <span class="p-float-label">
-                                        <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                        <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                        <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                        <p-autoComplete 
+                                        id="mainPageName"
+                                        (completeMethod)="filterMagePage($event)" [minLength]="0"
                                             [dropdown]="true" [forceSelection]="true"
                                             field="mainPageName"></p-autoComplete>
 
                                         <label for="mainPageName">Qualification</label>
                                     </span>
-                                    <!-- <small id="MainPageName-help">{{ formError("mainPageName",EmployeeForm)}}</small> -->
                                 </div>
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <!-- formControlName=""  (onChange)="onChangeRole($event)" [options]="filteredRoleList" -->
-                                        <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false"
+                                      
+                                        <p-dropdown id="course" optionLabel="roleName" [autoDisplayFirst]="false"
                                             [showClear]="true">
                                         </p-dropdown>
-                                        <label for="role">Course<span class="mandatory">*</span></label>
+                                        <label for="course">Course<span class="mandatory">*</span></label>
                                     </span>
-                                    <!-- <small id="application-help">{{formError("role",UserCreationForm)}}</small> -->
+                         
                                 </div>
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <!-- formControlName=""  (onChange)="onChangeRole($event)" [options]="filteredRoleList" -->
-                                        <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false"
+                                      
+                                        <p-dropdown id="specialisation" optionLabel="roleName" [autoDisplayFirst]="false"
                                             [showClear]="true">
                                         </p-dropdown>
-                                        <label for="role">Specialisation<span class="mandatory">*</span></label>
+                                        <label for="specialisation">Specialisation<span class="mandatory">*</span></label>
                                     </span>
-                                    <!-- <small id="application-help">{{formError("role",UserCreationForm)}}</small> -->
+                                    
                                 </div>
 
                                 <div class="field" class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText id="MajorQualification" />
-                                        <label htmlFor="MajorQualification">School/Institute/University</label>
+                                        <input id="" pInputText id="majorQualification" />
+                                        <label for="majorQualification">School/Institute/University</label>
                                     </span>
                                 </div>
 
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                        <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                        <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                        
+                                        <p-autoComplete id="modeOfStudy"
+                                        (completeMethod)="filterMagePage($event)" [minLength]="0"
                                             [dropdown]="true" [forceSelection]="true"
                                             field="mainPageName"></p-autoComplete>
 
-                                        <label for="mainPageName">Mode of Study</label>
+                                        <label for="modeOfStudy">Mode of Study</label>
                                     </span>
-                                    <!-- <small id="MainPageName-help">{{ formError("mainPageName",EmployeeForm)}}</small> -->
+                         
                                 </div>
 
                                 <div class="field" class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText id="Percentage" />
-                                        <label htmlFor="Percentage">Percentage / CGPA</label>
+                                        <input id="PercentageCGPA" pInputText id="Percentage" />
+                                        <label for="PercentageCGPA">Percentage / CGPA</label>
                                     </span>
 
                                 </div>
 
                                 <div class="field" class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <p-calendar [readonlyInput]="true" view="year" dateFormat="yy"
+                                        <p-calendar id="YearOfPassing" [readonlyInput]="true" view="year" dateFormat="yy"
                                             inputId="yearpicker"></p-calendar>
-                                        <label htmlFor="YearOfPassing">Year Of Passing</label>
+                                        <label for="YearOfPassing">Year Of Passing</label>
                                     </span>
 
 
@@ -622,29 +626,7 @@
 
                             </div>
 
-                            <!-- <div class="card">
-                                <h5>Inline</h5>
-                                <div class="formgroup-inline">
-                                    <div class="field">
-                                        <label htmlFor="firstname1" class="p-sr-only">Firstname</label>
-                                        <input pInputText id="firstname1" type="text" placeholder="Firstname" />
-                                    </div>
-                                    <div class="field">
-                                        <label htmlFor="lastname1" class="p-sr-only">Lastname</label>
-                                        <input pInputText id="lastname1" type="text" placeholder="Lastname" />
-                                    </div>
-                                    <button pButton label="Submit"></button>
-                                </div>
-                            </div> -->
-
-                            <!-- <div class="card">
-                                <h5>Help Text</h5>
-                                <div class="field p-fluid">
-                                    <label htmlFor="username">Username</label>
-                                    <input pInputText id="username" type="text" />
-                                    <small>Enter your username to reset your password.</small>
-                                </div>
-                            </div> -->
+      
                         </div>
 
                         <div class="grid">
@@ -663,7 +645,7 @@
                                                 <h4 class="m-0"> </h4>
                                                 <span class="block mt-2 md:mt-0 p-input-icon-left">
                                                     <i class="pi pi-search"></i>
-                                                    <input pInputText type="text" (input)="onGlobalFilter(dt, $event)"
+                                                    <input id="" pInputText (input)="onGlobalFilter(dt, $event)"
                                                         placeholder="Search..." class="w-full sm:w-auto" />
                                                 </span>
                                             </div>
@@ -708,7 +690,7 @@
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
                                         <input pInputText id="PreviousCompanyName" />
-                                        <label htmlFor="PreviousCompanyName">Previous Company Name</label>
+                                        <label for="PreviousCompanyName">Previous Company Name</label>
                                     </span>
 
                                 </div>
@@ -716,15 +698,15 @@
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <p-calendar></p-calendar>
-                                        <label htmlFor="StartingDate">Starting Date</label>
+                                        <p-calendar id="StartingDate"></p-calendar>
+                                        <label for="StartingDate">Starting Date</label>
                                     </span>
                                 </div>
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <p-calendar></p-calendar>
-                                        <label htmlFor="EndingDate">Ending Date</label>
+                                        <p-calendar id="EndingDate"></p-calendar>
+                                        <label for="EndingDate">Ending Date</label>
                                     </span>
 
                                 </div>
@@ -732,27 +714,26 @@
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
                                         <input pInputText id="Experience" />
-                                        <label htmlFor="Experience">Experience</label>
+                                        <label for="Experience">Experience</label>
                                     </span>
                                 </div>
 
                                 <div class="field col-12 md:col-3 mb-3">
 
                                     <span class="p-float-label">
-                                        <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
-                                        <!-- formControlName="" [suggestions]="filteredMainPageList" -->
-                                        <p-autoComplete (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                   
+                                        <p-autoComplete id="jobTitle" (completeMethod)="filterMagePage($event)" [minLength]="0"
                                             [dropdown]="true" [forceSelection]="true"
                                             field="mainPageName"></p-autoComplete>
 
-                                        <label for="mainPageName">Job Title</label>
+                                        <label for="jobTitle">Job Title</label>
                                     </span>
-                                    <!-- <small id="MainPageName-help">{{ formError("mainPageName",EmployeeForm)}}</small> -->
+                                   
                                 </div>
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText id="JobDescription" />
-                                        <label htmlFor="JobDescription">Job Description</label>
+                                        <input pInputText id="jobDescription" />
+                                        <label for="jobDescription">Job Description</label>
                                     </span>
 
 
@@ -760,8 +741,8 @@
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText id="ReasonForChange" type="text" />
-                                        <label htmlFor="ReasonForChange">Reason For Change</label>
+                                        <input pInputText id="reasonForChange" />
+                                        <label for="reasonForChange">Reason For Change</label>
                                     </span>
 
 
@@ -786,7 +767,7 @@
                                                 <h4 class="m-0"> </h4>
                                                 <span class="block mt-2 md:mt-0 p-input-icon-left">
                                                     <i class="pi pi-search"></i>
-                                                    <input pInputText type="text" (input)="onGlobalFilter(dt, $event)"
+                                                    <input pInputText (input)="onGlobalFilter(dt, $event)"
                                                         placeholder="Search..." class="w-full sm:w-auto" />
                                                 </span>
                                             </div>
@@ -831,57 +812,57 @@
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText  />
-                                        <label > Full Name*</label>
+                                        <input id="familyPerson1fullName" pInputText  />
+                                        <label for="familyPerson1fullName" > Full Name*</label>
                                     </span>
 
                                 </div>
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText  />
-                                        <label >Relationship*</label>
+                                        <input id="employee1Relationship" pInputText  />
+                                        <label for="employee1Relationship" >Relationship*</label>
                                     </span>
 
                                 </div>
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText  />
-                                        <label> Contact No*</label>
+                                        <input id="relation1ContactNo" pInputText  />
+                                        <label for="relation1ContactNo"> Contact No*</label>
                                     </span>
 
                                 </div>
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <p-dropdown id="Gender" formControlName="selectedGender" [options]="genderOptions" placeholder="Gender"></p-dropdown>
-                                        <label for="Gender"> Gender*</label>
+                                        <p-dropdown id="relation1Gender" formControlName="selectedGender" [options]="genderOptions" placeholder="Gender"></p-dropdown>
+                                        <label for="relation1Gender"> Gender*</label>
                                     </span>
 
                                 </div>
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText  />
-                                        <label > Full Name</label>
+                                        <input id="familyPerson2fullName" pInputText  />
+                                        <label for="familyPerson2fullName" > Full Name</label>
                                     </span>
 
                                 </div>
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText  />
-                                        <label >Relationship</label>
+                                        <input id="employee2Relationship" pInputText  />
+                                        <label for="employee2Relationship" >Relationship</label>
                                     </span>
 
                                 </div>                              
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText  />
-                                        <label> Contact No</label>
+                                        <input id="relation2ContactNo" pInputText  />
+                                        <label for="relation2ContactNo"> Contact No</label>
                                     </span>
 
                                 </div>
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <p-dropdown id="Gender" formControlName="selectedGender" [options]="genderOptions" placeholder="Gender"></p-dropdown>
-                                        <label for="Gender"> Gender</label>
+                                        <p-dropdown id="relation2Gender" formControlName="selectedGender" [options]="genderOptions" placeholder="Gender"></p-dropdown>
+                                        <label for="relation2Gender"> Gender</label>
                                     </span>
 
                                 </div>
@@ -903,38 +884,38 @@
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText  />
-                                        <label >Retirement Plan</label>
+                                        <input id="employeeRetirementPlan" pInputText  />
+                                        <label for="employeeRetirementPlan" >Retirement Plan</label>
                                     </span>
 
                                 </div>
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText  />
-                                        <label >Educational Plan</label>
+                                        <input id="employeeEducationalPlan" pInputText  />
+                                        <label for="employeeEducationalPlan" >Educational Plan</label>
                                     </span>
 
                                 </div>
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText  />
-                                        <label>Health Insurance</label>
+                                        <input id="employeeHealthInsurance" pInputText  />
+                                        <label for="employeeHealthInsurance">Health Insurance</label>
                                     </span>
 
                                 </div>
                            
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText  />
-                                        <label >Life Insurance</label>
+                                        <input id="employeeLifeInsurance" pInputText  />
+                                        <label for="employeeLifeInsurance" >Life Insurance</label>
                                     </span>
 
                                 </div>
                                                           
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText  />
-                                        <label>Disability Insuarance</label>
+                                        <input id="employeeDisabilityInsuarance" pInputText  />
+                                        <label for="employeeDisabilityInsuarance">Disability Insuarance</label>
                                     </span>
 
                                 </div>
@@ -942,8 +923,8 @@
                                                
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText  />
-                                        <label> Other Plan</label>
+                                        <input id="employeeOtherPlan" pInputText  />
+                                        <label for="employeeOtherPlan"> Other Plan</label>
                                     </span>
 
                                 </div>
@@ -963,16 +944,16 @@
                             <div class="grid p-fluid formgrid">
                                  <div class=" col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-calendar ></p-calendar>
-                                                <label >Separation date</label>
+                                                <p-calendar id="employeeSeparationDate"></p-calendar>
+                                                <label for="employeeSeparationDate" >Separation date</label>
                                             </span>
                                         
                                         </div>
 
                                         <div class=" col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input  pInputText >
-                                                <label >Reason for Leaving</label>
+                                                <input id="employeeReasonForLeaving"  pInputText >
+                                                <label for="employeeReasonForLeaving" >Reason for Leaving</label>
                                             </span>
                                         </div>
                                    
@@ -992,40 +973,26 @@
 
                         <div class="col-12 md:col-6 mb-3">
                             <span class="p-float-label">
-                                <input type="text" pInputText >
-                                <label >Think the organization do to improve staff welfare</label>
+                                <input id="employeeOpinion1" pInputText >
+                                <label for="employeeOpinion1"  >Think the organization do to improve staff welfare</label>
                             </span>
                         </div>
 
                         <div class="col-12 md:col-6 mb-3">
                             <span class="p-float-label">
-                                <input  pInputText >
-                                <label >What did you like the most of the organization</label>
+                                <input id="employeeOpinion2"  pInputText >
+                                <label for="employeeOpinion2 " >What did you like the most of the organization</label>
                             </span>
                         </div>
 
                         <div class="col-12 md:col-6 mb-3">
                             <span class="p-float-label">
-                                <input  pInputText>
-                                <label >Anything you wish to share with us</label>
+                                <input id="employeeOpinion3"  pInputText>
+                                <label for="employeeOpinion3" >Anything you wish to share with us</label>
                             </span>
 
                         </div>
 
-                        <div class="col-12 md:col-6 mb-3">
-                            <span class="p-float-label">
-                                <input type="text" pInputText formControlName="presentCountry">
-                                <label htmlFor="firstname2">Country</label>
-                            </span>
-
-                        </div>
-
-                        <div class="col-12 md:col-6 mb-3">
-                            <span class="p-float-label">
-                                <input type="text" pInputText formControlName="presentPIN">
-                                <label htmlFor="firstname2">PIN</label>
-                            </span>
-                        </div>
 
                     </div>
                     <h5>Checklist for Exit Interview</h5>
@@ -1033,50 +1000,50 @@
 
                         <div class="col-12 md:col-6 mb-3">
                             <span class="p-float-label">
-                                <input pInputText >
-                                <label>Company Vehicle handed in</label>
+                                <input id="employeeFinalChecking1" pInputText >
+                                <label for="employeeFinalChecking1">Company Vehicle handed in</label>
                             </span>
                         </div>
 
                         <div class="col-12 md:col-6 mb-3">
                             <span class="p-float-label">
-                                <input pInputText >
-                                <label>All equipments handed in</label>
+                                <input id="employeeFinalChecking2" pInputText >
+                                <label for="employeeFinalChecking2">All equipments handed in</label>
                             </span>
                         </div>
 
                         <div class="col-12 md:col-6 mb-3">
                             <span class="p-float-label">
-                                <input pInputText >
-                                <label>Exit interview conducted</label>
+                                <input id="employeeFinalChecking3" pInputText >
+                                <label for="employeeFinalChecking3">Exit interview conducted</label>
                             </span>
                         </div>
 
                         <div class="col-12 md:col-6 mb-3">
                             <span class="p-float-label">
-                                <input pInputText >
-                                <label>Resignation letter submitted</label>
+                                <input id="employeeFinalChecking4" pInputText >
+                                <label for="employeeFinalChecking4">Resignation letter submitted</label>
                             </span>
                         </div>
 
                         <div class="col-12 md:col-6 mb-3">
                             <span class="p-float-label">
-                                <input pInputText >
-                                <label>Security</label>
+                                <input id="employeeFinalChecking5" pInputText >
+                                <label for="employeeFinalChecking5">Security</label>
                             </span>
                         </div>
 
                         <div class="col-12 md:col-6 mb-3">
                             <span class="p-float-label">
-                                <input pInputText >
-                                <label>Notice Period Followed</label>
+                                <input id="employeeFinalChecking6" pInputText >
+                                <label for="employeeFinalChecking6">Notice Period Followed</label>
                             </span>
                         </div>
 
                         <div class="col-12 md:col-6 mb-3">
                             <span class="p-float-label">
-                                <input pInputText >
-                                <label>Manager / Supervisor clearance</label>
+                                <input id="employeeFinalChecking7" pInputText >
+                                <label for="employeeFinalChecking7">Manager / Supervisor clearance</label>
                             </span>
                         </div>
 
