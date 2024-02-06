@@ -26,6 +26,9 @@ import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
 
 import { UtilService } from 'src/app/shared/util.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 
 @NgModule({
@@ -55,10 +58,13 @@ import { UtilService } from 'src/app/shared/util.service';
 		DropdownModule,
 		CalendarModule,
 		// Grid
-		TableModule
+		TableModule,
+		RadioButtonModule,
+		ToastModule
   ],
   providers:[
-	UtilService
+	UtilService,
+	MessageService
   ]
 })
 export class EmployeeAddModule { }

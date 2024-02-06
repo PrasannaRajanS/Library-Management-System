@@ -36,7 +36,7 @@ export interface IEmployee {
 
     officialEmail?: string | null | undefined;
     officialMobile?: string | null | undefined;
-    dateOfJoin?: number | null | undefined;
+    dateOfJoin?: Date | null | undefined;
     employeeCategory?: string | null | undefined;
     deptSection?: string | null | undefined;
     production?: string | null | undefined;
@@ -57,12 +57,21 @@ export interface IEmployee {
 
     // Unique Number Info
     nationality?: string | null | undefined;
-    PANNo?: number | null | undefined;
+    PANNo?: string | null | undefined;
     community?: string | null | undefined;
     aadhaarNo?: number | null | undefined;
     UANNo?: number | null | undefined;
     ESINo?: number | null | undefined;
     EPFNo?: number | null | undefined;
+
+    
+
+
+    // Education Detail
+
+    // Family Information
+    selectedGender?:string|null|undefined,
+
 
     isActive?: boolean | null | undefined;
     unitId?: number | null | undefined;

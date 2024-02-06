@@ -3,8 +3,14 @@ export const AppConstant = Object.freeze({
         MALE: "1",
         FEMALE: "2",
     },
-    DDL_YES_NO: {
-        Yes: "1",
-        No: "2",
-    }
+    DDL_YES_NO: [
+        {
+            label: "Yes",
+            labelId: "1",
+        },
+        {
+            label: "No",
+            labelId: "0",
+        }
+    ]
 });

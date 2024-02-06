@@ -1,60 +1,53 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, retry, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, retry, throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { APIConfig } from 'src/app/config/api.config';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class CommonHttpService {
 
+  private baseAPIURL: string = "";
+  constructor(private _httpClient: HttpClient) {
+    this.baseAPIURL = APIConfig.API_BASE_URL;
+  }
 
-    constructor(private http: HttpClient) { }
+  globalPost(url: string, data: any): any {
 
+    let config = {};
+    const headers = { 'content-type': 'application/json' }
+    config = { headers: new HttpHeaders(headers) };
 
-    public globalGetService(url: string, data: any) {
+    return this._httpClient.post<any>(this.baseAPIURL + url, data, config).pipe(retry(1), catchError(this.handleError));
+  }
 
-        try {
+  globalGet(url: string): any {
 
-            let config = {};
-            const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' }
-            
-            config = {
-                headers: new HttpHeaders(headers),
-                withCredentials: true
-            }
+    let config = {};
+    const headers = { 'content-type': 'application/json' }
+    config = { headers: new HttpHeaders(headers) };
 
-            var querystring ="";//  "?" + $.param(data);
-            return this.http.get<any>(url + querystring, config).pipe(map(data => data));
-        }
-        catch (e) {
-            return e;
-        }
+    console.log('globalGet', this.baseAPIURL + url)
+    return this._httpClient.get<any>(this.baseAPIURL + url, config).pipe(map(data => data));
+
+  }
+
+  // Error handling
+  handleError(error: any) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-
-    
-    public globalGetWithOutParamaterService(url: string) {
-        return this.http.get<any>(url).pipe(map(data => data));
-    }
-
-
-    public globalPostService(url: string, data: any) {
-        return this.http.post<any>(url, data).pipe(retry(1), catchError(this.handleError));
-    }
-
-    // Error handling
-    handleError(error: any) {
-        let errorMessage = '';
-        if (error.error instanceof ErrorEvent) {
-            // Get client-side error
-            errorMessage = error.error.message;
-        } else {
-            // Get server-side error
-            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-        }
-        window.alert(errorMessage);
-        return throwError(() => {
-            return errorMessage;
-        });
-    }
+    window.alert(errorMessage);
+    return throwError(() => {
+      return errorMessage;
+    });
+  }
 
 }

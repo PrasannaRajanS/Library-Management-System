@@ -40,16 +40,16 @@ export const YupPMSValidation = Object.freeze({
         //  Organizational Info
         officialEmail: yup.string().notRequired(),
         officialMobile: yup.string().notRequired(),
-        dateOfJoin: yup.number().notRequired(),
-        employeeCategory: yup.string().notRequired(),
-        deptSection: yup.string().notRequired(),
+        dateOfJoin: yup.date().required('Date of join is required'),
+        employeeCategory: yup.string().required('Category is required'),
+        deptSection: yup.string().required('Department is required'),
         production: yup.string().notRequired(),
-        typeOfEmployment: yup.string().notRequired(),
+        typeOfEmployment: yup.string().required('Employment is required'),
         reportingTo: yup.string().notRequired(),
-        salaryType: yup.string().notRequired(),
-        workingLocation: yup.string().notRequired(),
+        salaryType: yup.string().required('Type is required'),
+        workingLocation: yup.string().required('Location is required'),
         shift: yup.string().notRequired(),
-        designationJobTitle: yup.string().notRequired(),
+        designationJobTitle: yup.string().required('Designation is required'),
 
         //  Emergency Contact Info
 
@@ -61,17 +61,24 @@ export const YupPMSValidation = Object.freeze({
 
         // Unique Number Info
 
-        nationality: yup.string().notRequired(),
-        PANNo: yup.number().notRequired(),
-        community: yup.string().notRequired(),
-        aadhaarNo: yup.number().notRequired(),
+        nationality: yup.string().required('Nationality is required'),
+        community: yup.string().required('Community is required'),
+        PANNo: yup.string().required('PAN No is required'),
+        aadhaarNo: yup.number().required('Aadhaar No is required '),
         UANNo: yup.number().notRequired(),
         ESINo: yup.number().notRequired(),
         EPFNo: yup.number().notRequired(),
+
+
+        // Family Information
+
+        selectedGender:yup.string().notRequired(),
 
         isActive: yup.boolean().notRequired(),
         unitId: yup.number().nullable().notRequired(),
         userId: yup.number().nullable().notRequired(),
         ipAddress: yup.string().notRequired(),
     }),
+    
+
 });

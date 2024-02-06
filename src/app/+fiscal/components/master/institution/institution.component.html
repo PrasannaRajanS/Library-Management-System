@@ -26,24 +26,26 @@
 
         <div class="grid p-fluid mt-3">
 
-            <div class="field col-12 md:col-3">
+            <div class="field col-12 md:col-3 m-0 pb-0">
+                <span class="p-float-label">
+                    <p-autoComplete [suggestions]="OrganizationList" formControlName="selectedOrganization"
+                        [minLength]="0" [dropdown]="true" [forceSelection]="true"
+                        field="OrganizationName"></p-autoComplete>
+                    <label for="institutionName">Organization Name<span class="mandatory">*</span></label>
+                </span>
+                <small id="institutionName-help">{{ formError("selectedOrganization" ,InstitutionFrom)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-3  m-0 pb-0">
                 <span class="p-float-label">
                     <input type="text" id="institutionName" pInputText formControlName="institutionName"
                         autocomplete="off">
-                    <label for="institutionName">Organization Name<span class="mandatory">*</span></label>
+                    <label for="institutionName">Name of School<span class="mandatory">*</span></label>
                 </span>
                 <small id="institutionName-help">{{ formError("institutionName" ,InstitutionFrom)}}</small>
             </div>
 
-            <div class="field col-12 md:col-3">
-                <span class="p-float-label">
-                    <input type="text" id="nameOfSchool" pInputText formControlName="nameOfSchool" autocomplete="off">
-                    <label for="nameOfSchool">Name of School<span class="mandatory">*</span></label>
-                </span>
-                <small id="nameOfSchool-help">{{ formError("nameOfSchool" ,InstitutionFrom)}}</small>
-            </div>
-
-            <div class="field col-12 md:col-3">
+            <div class="field col-12 md:col-3  m-0 pb-0">
                 <span class="p-float-label">
                     <input type="text" id="shortName" pInputText formControlName="shortName" autocomplete="off">
                     <label for="shortName">Short Name<span class="mandatory">*</span></label>
@@ -51,32 +53,15 @@
                 <small id="shortName-help">{{ formError("shortName" ,InstitutionFrom)}}</small>
             </div>
 
-
-            <div class="field col-12 md:col-3">
+            <div class="field col-12 md:col-3  m-0 pb-0">
                 <span class="p-float-label">
-                    <input type="text" id="schoolUDISECode" pInputText formControlName="schoolUDISECode"
-                        autocomplete="off">
-                    <label for="schoolUDISECode"> School U-DISE Code<span class="mandatory">*</span></label>
+                    <input type="text" id="UDISECode" pInputText formControlName="UDISECode" autocomplete="off">
+                    <label for="UDISECode"> School U-DISE Code<span class="mandatory">*</span></label>
                 </span>
-                <small id="schoolUDISECode-help">{{ formError("schoolUDISECode" ,InstitutionFrom)}}</small>
+                <small id="UDISECode-help">{{ formError("UDISECode" ,InstitutionFrom)}}</small>
             </div>
 
-            <div class="field col-12 md:col-3">
-                <span class="p-float-label">
-                    <input type="text" id="affiliatedCode" pInputText formControlName="affiliatedCode"
-                        autocomplete="off">
-                    <label for="affiliatedCode">Affiliated Code<span class="mandatory">*</span></label>
-                </span>
-                <small id="shortName-help">{{ formError("affiliatedCode" ,InstitutionFrom)}}</small>
-            </div>
 
-            <div class="field col-12 md:col-3">
-                <span class="p-float-label">
-                    <input type="text" id="category" pInputText formControlName="category" autocomplete="off">
-                    <label for="category">Category(Classes being taught)<span class="mandatory">*</span></label>
-                </span>
-                <small id="shortName-help">{{ formError("category" ,InstitutionFrom)}}</small>
-            </div>
 
         </div>
 
@@ -87,205 +72,174 @@
                     <p-tabView orientation="left">
 
                         <p-tabPanel header="Basic Info" class="line-height-3 m-0">
-                            <div class="grid p-fluid">
+                            <div class="grid p-fluid mt-3">
                                 <div class="grid formgrid">
 
-
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                formControlName="basicStateId" [minLength]="0" [dropdown]="true"
-                                                [forceSelection]="true" field="basicStateId"
-                                                inputId="State"></p-autoComplete>
-                                            <label for="State">State</label>
+                                            <p-autoComplete [suggestions]="StateList" formControlName="selectedState"
+                                                [minLength]="0" [dropdown]="true" [forceSelection]="true"
+                                                field="stateName" inputId="selectedState"></p-autoComplete>
+                                            <label for="selectedState">State</label>
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                formControlName="basicDistrictId" [minLength]="0" [dropdown]="true"
-                                                [forceSelection]="true" field="basicDistrictId"
-                                                inputId="District"></p-autoComplete>
-                                            <label for="District">District</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                formControlName="basicCityId" (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="basicCityId" inputId="City"></p-autoComplete>
-                                            <label for="City">City</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-dropdown id="Location" [options]="InstitutionList"
-                                                optionLabel="applicationName" formControlName="basicLocation"
-                                                [autoDisplayFirst]="false" [showClear]="true">
-
-                                            </p-dropdown>
-                                            <label for="Location">Location</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="pincode" formControlName="basicPincode" pInputText
+                                            <input type="text" id="district" pInputText formControlName="district"
                                                 autocomplete="off">
-                                            <label for="pincode">Pincode</label>
+                                            <label for="district">District / City</label>
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="municipality" formControlName="basicMunicipality"
-                                                pInputText autocomplete="off">
-                                            <label for="municipality">Municipality</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="block" formControlName="basicBlock" pInputText
+                                            <input type="text" id="block" pInputText formControlName="block"
                                                 autocomplete="off">
                                             <label for="block">Block</label>
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="ward" formControlName="basicWard" pInputText
-                                                autocomplete="off">
-                                            <label for="ward">Ward</label>
+                                            <p-dropdown id="Location" [options]="InstitutionList"
+                                                optionLabel="applicationName" formControlName="basicLocation"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                            <label for="Location">Location</label>
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="panchayat" formControlName="basicPanchayat"
-                                                pInputText autocomplete="off">
-                                            <label for="panchayat">Panchayat</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="mohalla" formControlName="basicMohalla" pInputText
-                                                autocomplete="off">
-                                            <label for="mohalla">Mohalla</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="cluster" formControlName="basicCluster" pInputText
+                                            <input type="text" id="cluster" formControlName="cluster" pInputText
                                                 autocomplete="off">
                                             <label for="cluster">Cluster</label>
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-dropdown id="school_Type" formControlName="basicSchoolType"
-                                                [options]="InstitutionList" optionLabel="applicationName"
-                                                [autoDisplayFirst]="false" [showClear]="true">
-
-                                            </p-dropdown>
-                                            <label for="school_Type ">School Type </label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                formControlName="basicSchoolCategory"
-                                                (completeMethod)="filterCountry($event)" [dropdown]="true" field="name"
-                                                inputId="SchoolCategory"></p-autoComplete>
-                                            <label for="SchoolCategory"> School Category </label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="school_Management"
-                                                formControlName="basicSchoolManagement" pInputText autocomplete="off">
-                                            <label for="school_Management">School Management</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="class_From" formControlName="basicClassFrom"
-                                                pInputText autocomplete="off">
-                                            <label for="class_From">Class From</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="class_To" formControlName="basicClassTo" pInputText
+                                            <input type="text" id="ward" formControlName="ward" pInputText
                                                 autocomplete="off">
-                                            <label for="class_To">Class To</label>
+                                            <label for="ward">Ward</label>
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                formControlName="basicMedium1" (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="name" inputId="medium1"></p-autoComplete>
-                                            <label for="medium1">Medium 1 </label>
+                                            <input type="text" id="mohalla" formControlName="mohalla" pInputText
+                                                autocomplete="off">
+                                            <label for="mohalla">Mohalla</label>
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                formControlName="basicMedium2" (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="name" inputId="medium2"></p-autoComplete>
-                                            <label for="medium2">Medium 2</label>
+                                            <input type="text" id="pinCode" formControlName="pinCode" pInputText
+                                                autocomplete="off">
+                                            <label for="pinCode">PINCode</label>
                                         </span>
+                                        <small id="pinCode-help">{{ formError("pinCode" ,InstitutionFrom)}}</small>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                formControlName="basicMedium3" (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="name" inputId="medium3"></p-autoComplete>
-                                            <label for="medium3">Medium 3</label>
+                                            <input type="text" id="panchayat" formControlName="panchayat" pInputText
+                                                autocomplete="off">
+                                            <label for="panchayat">Panchayat</label>
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                formControlName="basicMedium4" (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="name" inputId="medium4"></p-autoComplete>
-                                            <label for="medium4">Medium 4</label>
+                                            <input type="text" id="municipality" formControlName="municipality"
+                                                pInputText autocomplete="off">
+                                            <label for="municipality">Municipality</label>
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                formControlName="basicPrePrimary" (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="PrePrimary" inputId="PrePrimary"></p-autoComplete>
-                                            <label for="PrePrimary">Pre Primary</label>
+                                            <p-dropdown id="ddlSchoolCategory" formControlName="selectedCategory"
+                                                [options]="SchoolCategoryList" optionLabel="categoryName"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                            <label for="ddlSchoolCategory">School Category </label>
                                         </span>
                                     </div>
 
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="stateManagement" formControlName="stateManagement"
+                                                pInputText autocomplete="off">
+                                            <label for="stateManagement">State Management</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="nationalManagement"
+                                                formControlName="nationalManagement" pInputText autocomplete="off">
+                                            <label for="nationalManagement">National Management</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <p-dropdown id="ddlSchoolType" formControlName="selectedSchoolType"
+                                                [options]="SchoolTypeList" optionLabel="schoolType"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                            <label for="ddlSchoolType">School Type</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="classFrom" formControlName="classFrom" pInputText
+                                                autocomplete="off">
+                                            <label for="classFrom">Class From</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="txtClassTo" formControlName="classTo" pInputText
+                                                autocomplete="off">
+                                            <label for="txtClassTo">Class To</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                            <label for="ddlPrePrimary ">Pre Primary</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <p-dropdown id="ddlMedium" formControlName="selectedMedium"
+                                                [options]="MediumList" optionLabel="medium" [autoDisplayFirst]="false"
+                                                [showClear]="true">
+                                            </p-dropdown>
+                                            <label for="ddlMedium ">Medium</label>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </p-tabPanel>
 
                         <p-tabPanel header="Address Info" class="line-height-3 m-0">
-                            <div class="grid p-fluid">
+                            <div class="grid p-fluid mt-3">
                                 <div class="grid formgrid">
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <input type="text" id="address_1" formControlName="address1" pInputText
                                                 autocomplete="off">
@@ -293,7 +247,7 @@
                                         </span>
                                         <small id="address_1-help">{{ formError("address1" ,InstitutionFrom)}}</small>
                                     </div>
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <input type="text" id="address_2" formControlName="address2" pInputText
                                                 autocomplete="off">
@@ -302,7 +256,7 @@
                                         <small id="address_2-help">{{ formError("address2" ,InstitutionFrom)}}</small>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <input type="text" id="address_3" formControlName="address3" pInputText
                                                 autocomplete="off">
@@ -312,7 +266,7 @@
                                             ,InstitutionFrom)}}</small>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <input type="text" id="address_4" formControlName="address4" pInputText
                                                 autocomplete="off">
@@ -322,49 +276,39 @@
                                             ,InstitutionFrom)}}</small>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                formControlName="cityId" [minLength]="0" [dropdown]="true"
-                                                [forceSelection]="true" field="city"
+                                            <p-autoComplete [suggestions]="InstitutionList" formControlName="cityId"
+                                                [minLength]="0" [dropdown]="true" [forceSelection]="true" field="city"
                                                 inputId="city"></p-autoComplete>
                                             <label for="city">City</label>
                                         </span>
                                         <small id="city-help">{{ formError("cityId" ,InstitutionFrom)}}</small>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                formControlName="stateId" [minLength]="0" [dropdown]="true"
-                                                [forceSelection]="true" field="state"
+                                            <p-autoComplete [suggestions]="InstitutionList" formControlName="stateId"
+                                                [minLength]="0" [dropdown]="true" [forceSelection]="true" field="state"
                                                 inputId="state"></p-autoComplete>
                                             <label for="state">State</label>
                                         </span>
                                         <small id="state-help">{{ formError("stateId" ,InstitutionFrom)}}</small>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                formControlName="countryId" [minLength]="0" [dropdown]="true"
-                                                [forceSelection]="true" field="state"
+                                            <p-autoComplete [suggestions]="InstitutionList" formControlName="countryId"
+                                                [minLength]="0" [dropdown]="true" [forceSelection]="true" field="state"
                                                 inputId="country"></p-autoComplete>
                                             <label for="country">Country</label>
                                         </span>
                                         <small id="country-help">{{ formError("countryId" ,InstitutionFrom)}}</small>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="pinzipCode" formControlName="pinCode" pInputText
-                                                autocomplete="off">
-                                            <label for="pinzipCode">PINCode / ZIP Code</label>
-                                        </span>
-                                        <small id="pinzipCode-help">{{ formError("pinCode" ,InstitutionFrom)}}</small>
-                                    </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <input type="text" id="fax" formControlName="fax" pInputText
                                                 autocomplete="off">
@@ -373,67 +317,67 @@
                                         <small id="fax-help">{{ formError("fax" ,InstitutionFrom)}}</small>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="mobileNumber1" formControlName="mobileNumber1" pInputText
-                                                autocomplete="off">
+                                            <input type="text" id="mobileNumber1" formControlName="mobileNumber1"
+                                                pInputText autocomplete="off">
                                             <label for="mobileNumber1">Mobile Number 1</label>
                                         </span>
                                         <small id="mobileNumber1-help">{{ formError("mobileNumber1"
                                             ,InstitutionFrom)}}</small>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="mobileNumber2" formControlName="mobileNumber2" pInputText
-                                                autocomplete="off">
+                                            <input type="text" id="mobileNumber2" formControlName="mobileNumber2"
+                                                pInputText autocomplete="off">
                                             <label for="mobileNumber2">Mobile Number 2</label>
                                         </span>
                                         <small id="mobileNumber2-help">{{ formError("mobileNumber2"
                                             ,InstitutionFrom)}}</small>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="phoneNumber1" formControlName="phoneNumber1" pInputText
-                                                autocomplete="off">
+                                            <input type="text" id="phoneNumber1" formControlName="phoneNumber1"
+                                                pInputText autocomplete="off">
                                             <label for="phoneNumber1">Phone Number 1</label>
                                         </span>
                                         <small id="phoneNumber1-help">{{ formError("phoneNumber1"
                                             ,InstitutionFrom)}}</small>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="phoneNumber2" formControlName="phoneNumber2" pInputText
-                                                autocomplete="off">
+                                            <input type="text" id="phoneNumber2" formControlName="phoneNumber2"
+                                                pInputText autocomplete="off">
                                             <label for="phoneNumber2">Phone Number 2</label>
                                             <small id="phoneNumber2-help">{{ formError("phoneNumber2"
                                                 ,InstitutionFrom)}}</small>
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="primaryEmail" formControlName="primaryEmail" pInputText
-                                                autocomplete="off">
+                                            <input type="text" id="primaryEmail" formControlName="primaryEmail"
+                                                pInputText autocomplete="off">
                                             <label for="primaryEmail">Primary Email</label>
                                             <small id="primaryEmail-help">{{ formError("primaryEmail"
                                                 ,InstitutionFrom)}}</small>
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="secondaryEmail" formControlName="secondaryEmail" pInputText
-                                                autocomplete="off">
+                                            <input type="text" id="secondaryEmail" formControlName="secondaryEmail"
+                                                pInputText autocomplete="off">
                                             <label for="secondaryEmail">Secondary Email</label>
                                             <small id="secondaryEmail-help">{{ formError("secondaryEmail"
                                                 ,InstitutionFrom)}}</small>
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <input type="text" id="website" formControlName="website" pInputText
                                                 autocomplete="off">
@@ -445,478 +389,379 @@
                             </div>
                         </p-tabPanel>
 
+                        <p-tabPanel header="Management & Infra Info" class="line-height-3 m-0">
+                            <div class="grid">
 
-                        <p-tabPanel header="Management Info" class="line-height-3 m-0">
-                            <div class="grid p-fluid">
-                                <div class="grid formgrid">
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-calendar id="YearofEstablishment" formControlName="YearOfEstablishment" view="year" dateFormat="yy"
-                                                [showIcon]="true"></p-calendar>
-                                            <label for="YearofEstablishment">Year of Establishment</label>
-                                            <small id="YearofEstablishment-help">{{ formError("YearofEstablishment"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
+                                <div class="col-12 md:col-6">
+                                    <!-- <div class="card p-fluid"> -->
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Year of
+                                            Establishment</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" maxlength="4" pKeyFilter="int" pTooltip="Enter your username" tooltipPosition="right"/>
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-calendar id="YearofRecognitionPri" formControlName="YearofRecognitionPri" view="year" dateFormat="yy"
-                                                [showIcon]="true"></p-calendar>
-                                            <label for="YearofRecognition-Pri">Year of Recognition-Pri</label>
-                                            <small id="YearofRecognition-Pri-help">{{ formError("YearofRecognition-Pri"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Year of
+                                            Recognition-Pri.</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" />
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-calendar id="YearOfRecognitionUprPri" formControlName="YearOfRecognitionUprPri" view="year" dateFormat="yy"
-                                                [showIcon]="true"></p-calendar>
-                                            <label for="YearOfRecognitionUprPri">Year of Recognition-Upr.Pri</label>
-                                            <small id="YearOfRecognitionUprPri-help">{{ formError("YearOfRecognitionUprPri"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Year of
+                                            Recognition-Upr.Pri.</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" />
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-calendar id="YearOfRecognitionSec" formControlName="YearOfRecognitionSec" view="year" dateFormat="yy"
-                                                [showIcon]="true"></p-calendar>
-                                            <label for="YearOfRecognitionSec">Year of Recognition-Sec</label>
-                                            <small id="YearOfRecognitionSec-help">{{ formError("YearOfRecognitionSec"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Year of
+                                            Recognition-Sec.</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" />
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-calendar id="YearOfRecognitionHigherSec" formControlName="YearOfRecognitionHigherSec" view="year" dateFormat="yy"
-                                                [showIcon]="true"></p-calendar>
-                                            <label for="YearOfRecognitionHigherSec">Year of Recognition-Higher Sec</label>
-                                            <small id="YearOfRecognitionHigherSec-help">{{ formError("YearOfRecognitionHigherSec"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Year of
+                                            Recognition-Higher Sec.</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" />
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-dropdown id="AffiliationBoard" [options]="InstitutionList"
-                                                optionLabel="applicationName" [autoDisplayFirst]="false"
-                                                [showClear]="true">
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Affiliation
+                                            Board-Sec</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" />
+                                        </div>
+                                    </div>
 
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Affiliation
+                                            Board-HSec</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Minority School</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
-                                            <label for="AffiliationBoard-Sec">Affiliation Board-Sec</label>
-                                        </span>
+                                        </div>
                                     </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-dropdown id="AffiliationBoard-HSec" [options]="InstitutionList"
-                                                optionLabel="applicationName" [autoDisplayFirst]="false"
-                                                [showClear]="true">
-
+                                    <!-- </div> -->
+                                </div>
+                                <div class="col-12 md:col-6">
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Is this a Shift
+                                            School?</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
-                                            <label for="AffiliationBoard-HSec">Affiliation Board-HSec</label>
-                                        </span>
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-dropdown id="BuildingStatus" [options]="InstitutionList"
-                                                optionLabel="applicationName" [autoDisplayFirst]="false"
-                                                [showClear]="true">
-
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Building
+                                            Status</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
-                                            <label for="BuildingStatus">Building Status</label>
-                                        </span>
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-dropdown id="BoundaryWall" [options]="InstitutionList"
-                                                optionLabel="applicationName" [autoDisplayFirst]="false"
-                                                [showClear]="true">
-
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Boundary
+                                            wall</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
-                                            <label for="BoundaryWall">Boundary wall </label>
-                                        </span>
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="NoOfBuildingBlocks" pInputText autocomplete="off">
-                                            <label for="NoOfBuildingBlocks">No of Building Blocks</label>
-                                            <small id="NoOfBuildingBlocks-help">{{ formError("NoOfBuildingBlocks"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">No.of Building
+                                            Blocks</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Pucca Building
+                                            Blocks</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Is Special School
+                                            for CWSN?</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Availability of
+                                            Ramps</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Availability of
+                                            Handrails</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 md:col-6">
+                                    <h5>Toilets</h5>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Total(Excluding
+                                            CWSN)</label>
+                                        <div class="col-12 md:col-3">
+                                            <input pInputText id="name3" type="text" placeholder="Boys" />
+                                        </div>
+                                        <div class="col-12 md:col-3">
+                                            <input pInputText id="name3" type="text" placeholder="Girls" />
+                                        </div>
+                                    </div>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Functional</label>
+                                        <div class="col-12 md:col-3">
+                                            <input pInputText id="name3" type="text" placeholder="Boys" />
+                                        </div>
+                                        <div class="col-12 md:col-3">
+                                            <input pInputText id="name3" type="text" placeholder="Girls" />
+                                        </div>
+                                    </div>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Func. CWSN
+                                            Friendly</label>
+                                        <div class="col-12 md:col-3">
+                                            <input pInputText id="name3" type="text" placeholder="Boys" />
+                                        </div>
+                                        <div class="col-12 md:col-3">
+                                            <input pInputText id="name3" type="text" placeholder="Girls" />
+                                        </div>
+                                    </div>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Urinal</label>
+                                        <div class="col-12 md:col-3">
+                                            <input pInputText id="name3" type="text" placeholder="Boys" />
+                                        </div>
+                                        <div class="col-12 md:col-3">
+                                            <input pInputText id="name3" type="text" placeholder="Girls" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Handwash Near
+                                            Toilet</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
                                     </div>
 
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="PuccaBuildingBlocks" pInputText autocomplete="off">
-                                            <label for="PuccaBuildingBlocks">Pucca Building Blocks</label>
-                                            <small id="PuccaBuildingBlocks-help">{{ formError("PuccaBuildingBlocks"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Handwash Facility
+                                            for Meal</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="AnganwadiAtPremises" pInputText autocomplete="off">
-                                            <label for="AnganwadiAtPremises">Anganwadi At Premises</label>
-                                            <small id="AnganwadiAtPremises-help">{{ formError("AnganwadiAtPremises"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Drinking Water
+                                            Available</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="AnganwadiBoys" pInputText autocomplete="off">
-                                            <label for="AnganwadiBoys">Anganwadi Boys</label>
-                                            <small id="AnganwadiBoys-help">{{ formError("AnganwadiBoys"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Drinking Water
+                                            Functional</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="AnganwadiGirls" pInputText autocomplete="off">
-                                            <label for="AnganwadiGirls">Anganwadi Girls</label>
-                                            <small id="AnganwadiGirls-help">{{ formError("AnganwadiGirls"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Rain Water
+                                            Harvesting</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="AnganwadiWorker" pInputText autocomplete="off">
-                                            <label for="AnganwadiWorker">Anganwadi Worker</label>
-                                            <small id="AnganwadiWorker-help">{{ formError("AnganwadiWorker"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Playground
+                                            Available</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
+
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="ResidentialType" pInputText autocomplete="off">
-                                            <label for="ResidentialType">Residential Type</label>
-                                            <small id="ResidentialType-help">{{ formError("ResidentialType"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
+
+
+                                </div>
+
+                                <div class="col-12 md:col-6">
+                                    <h5>Total Class Rooms</h5>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">In Good
+                                            Condition</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="ResidentialSchool" inputId="ResidentialSchool"></p-autoComplete>
-                                            <label for="ResidentialSchool">Residential School</label>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Needs Minor
+                                            Repair</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="IsthisAShiftSchool" inputId="IsthisAShiftSchool"></p-autoComplete>
-                                            <label for="IsthisAShiftSchool">Is this a Shift School</label>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Needs Major
+                                            Repair</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="IsSpecialSchoolforCWSN" inputId="IsSpecialSchoolforCWSN"></p-autoComplete>
-                                            <label for="IsSpecialSchoolforCWSN">Is Special School for CWSN</label>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Other Rooms</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="AvailabilityOfRamps" inputId="AvailabilityOfRamps"></p-autoComplete>
-                                            <label for="AvailabilityOfRamps">Availability of Ramps</label>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Library
+                                            Availability</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="AvailabilityOfHandrails" inputId="AvailabilityOfHandrails"></p-autoComplete>
-                                            <label for="AvailabilityOfHandrails">Availability of Handrails</label>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Separate Room for
+                                            HM</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="MinoritySchool" inputId="MinoritySchool"></p-autoComplete>
-                                            <label for="MinoritySchool">Minority School</label>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Furniture
+                                            Availability</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="ApproachableByAllWeatherRoad" inputId="ApproachableByAllWeatherRoad"></p-autoComplete>
-                                            <label for="ApproachableByAllWeatherRoad">Approachable By All Weather Road</label>
-                                        </span>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Electricity
+                                            Availability</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Solar Panel</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Medical
+                                            checkups</label>
+                                        <div class="col-12 md:col-6">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
                                     </div>
 
                                 </div>
+
                             </div>
                         </p-tabPanel>
 
-                        <p-tabPanel header="Infrastructure Info" class="line-height-3 m-0">
-                            <div class="grid p-fluid">
-
-                                <h5  class="mt-3">Class Rooms</h5>
-
-                                <div class="grid formgrid">
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="ResidentialType" pInputText autocomplete="off">
-                                            <label for="ResidentialType">Total Class Rooms</label>
-                                            <small id="ResidentialType-help">{{ formError("ResidentialType"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="ResidentialType" pInputText autocomplete="off">
-                                            <label for="ResidentialType">In Good Condition</label>
-                                            <small id="ResidentialType-help">{{ formError("ResidentialType"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="ResidentialType" pInputText autocomplete="off">
-                                            <label for="ResidentialType">Needs Minor Repair</label>
-                                            <small id="ResidentialType-help">{{ formError("ResidentialType"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="ResidentialType" pInputText autocomplete="off">
-                                            <label for="ResidentialType">Needs Major Repair</label>
-                                            <small id="ResidentialType-help">{{ formError("ResidentialType"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="ResidentialType" pInputText autocomplete="off">
-                                            <label for="ResidentialType">Other Rooms </label>
-                                            <small id="ResidentialType-help">{{ formError("ResidentialType"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-                                    
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="ResidentialType" pInputText autocomplete="off">
-                                            <label for="ResidentialType">Furniture Availability</label>
-                                            <small id="ResidentialType-help">{{ formError("ResidentialType"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="LibraryAvailability" inputId="LibraryAvailability"></p-autoComplete>
-                                            <label for="LibraryAvailability">Library Availability</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="ElectricityAvailability" inputId="ElectricityAvailability"></p-autoComplete>
-                                            <label for="ElectricityAvailability">Electricity Availability</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="PlaygroundAvailable" inputId="PlaygroundAvailable"></p-autoComplete>
-                                            <label for="PlaygroundAvailable">Playground Available</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="DrinkingWaterAvailable" inputId="DrinkingWaterAvailable"></p-autoComplete>
-                                            <label for="DrinkingWaterAvailable">Drinking Water Available</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="DrinkingWaterFunctional" inputId="DrinkingWaterFunctional"></p-autoComplete>
-                                            <label for="DrinkingWaterFunctional">Drinking Water Functional</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="RainWaterHarvesting" inputId="RainWaterHarvesting"></p-autoComplete>
-                                            <label for="RainWaterHarvesting">Rain Water Harvesting</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="SolarPanel" inputId="SolarPanel"></p-autoComplete>
-                                            <label for="SolarPanel">Solar Panel</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="MedicalCheckups" inputId="MedicalCheckups"></p-autoComplete>
-                                            <label for="MedicalCheckups">Medical Checkups</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="SeparateRoomforHM" inputId="SeparateRoomforHM"></p-autoComplete>
-                                            <label for="SeparateRoomforHM">Separate Room for HM</label>
-                                        </span>
-                                    </div>
-
-                                </div>
-
-                                <h5  class="mt-3">Toilets</h5>
-
-                                <div class="grid formgrid">
-                                    
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="TotalToiletsForBoys" pInputText autocomplete="off">
-                                            <label for="TotalToiletsForBoys">Total Toilets For Boys</label>
-                                            <small id="TotalToiletsForBoys-help">{{ formError("TotalToiletsForBoys"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="TotalToiletsForGirls" pInputText autocomplete="off">
-                                            <label for="TotalToiletsForGirls">Total Toilets For Girls</label>
-                                            <small id="TotalToiletsForGirls-help">{{ formError("TotalToiletsForGirls"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="FunctionalToiletsForBoys" pInputText autocomplete="off">
-                                            <label for="FunctionalToiletsForBoys">Functional Toilets For Boys</label>
-                                            <small id="FunctionalToiletsForBoys-help">{{ formError("FunctionalToiletsForBoys"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="FunctionalToiletsForGirls" pInputText autocomplete="off">
-                                            <label for="FunctionalToiletsForGirls">Functional Toilets For Girls</label>
-                                            <small id="FunctionalToiletsForGirls-help">{{ formError("FunctionalToiletsForGirls"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="FuncCWSNFriendlyForBoys" pInputText autocomplete="off">
-                                            <label for="FuncCWSNFriendlyForBoys">Func CWSN Friendly For Boys</label>
-                                            <small id="FuncCWSNFriendlyForBoys-help">{{ formError("FuncCWSNFriendlyForBoys"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="FuncCWSNFriendlyForGirls" pInputText autocomplete="off">
-                                            <label for="FuncCWSNFriendlyForGirls">Func CWSN Friendly For Girls</label>
-                                            <small id="FuncCWSNFriendlyForGirls-help">{{ formError("FuncCWSNFriendlyForGirls"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="UrinalForBoys" pInputText autocomplete="off">
-                                            <label for="UrinalForBoys">Urinal For Boys</label>
-                                            <small id="UrinalForBoys-help">{{ formError("UrinalForBoys"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="UrinalForGirls" pInputText autocomplete="off">
-                                            <label for="UrinalForGirls">Urinal For Girls</label>
-                                            <small id="UrinalForGirls-help">{{ formError("UrinalForGirls"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="HandwashNearToilet" inputId="HandwashNearToilet"></p-autoComplete>
-                                            <label for="HandwashNearToilet">Handwash Near Toilet</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3 mt-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="HandwashFacilityforMeal" inputId="HandwashFacilityforMeal"></p-autoComplete>
-                                            <label for="HandwashFacilityforMeal">Handwash Facility for Meal</label>
-                                        </span>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </p-tabPanel>
-
-                        <p-tabPanel header="Digital Facilities" class="line-height-3 m-0">
+                        <p-tabPanel header="Digital Facility Info" class="line-height-3 m-0">
                             <div class="grid p-fluid">
                                 <div class="grid formgrid">
                                     <div class="field col-12 md:col-3 mt-3">
@@ -955,7 +800,7 @@
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <input type="text" id="Printer" pInputText autocomplete="off">
                                             <label for="Printer">Printer</label>
@@ -964,7 +809,7 @@
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <input type="text" id="DigiBoard" pInputText autocomplete="off">
                                             <label for="DigiBoard">DigiBoard</label>
@@ -973,7 +818,7 @@
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <input type="text" id="DigiBoard" pInputText autocomplete="off">
                                             <label for="DigiBoard">Free text books for Primary</label>
@@ -982,7 +827,7 @@
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <input type="text" id="DigiBoard" pInputText autocomplete="off">
                                             <label for="DigiBoard">Transport for Primary</label>
@@ -991,7 +836,7 @@
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <input type="text" id="DigiBoard" pInputText autocomplete="off">
                                             <label for="DigiBoard">Free uniform for Primary</label>
@@ -1000,7 +845,7 @@
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <input type="text" id="DigiBoard" pInputText autocomplete="off">
                                             <label for="DigiBoard">Free text books for Up.Primary</label>
@@ -1009,7 +854,7 @@
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <input type="text" id="DigiBoard" pInputText autocomplete="off">
                                             <label for="DigiBoard">Transport for Up.Primary</label>
@@ -1018,7 +863,7 @@
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <input type="text" id="DigiBoard" pInputText autocomplete="off">
                                             <label for="DigiBoard">Free uniform for Up.Primary</label>
@@ -1027,20 +872,20 @@
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="ICTLab" inputId="ICTLab"></p-autoComplete>
+                                                (completeMethod)="filterCountry($event)" [dropdown]="true"
+                                                field="ICTLab" inputId="ICTLab"></p-autoComplete>
                                             <label for="ICTLab">ICT Lab</label>
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3 mt-3">
+                                    <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <p-autoComplete [suggestions]="InstitutionList"
-                                                (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" field="Internet" inputId="Internet"></p-autoComplete>
+                                                (completeMethod)="filterCountry($event)" [dropdown]="true"
+                                                field="Internet" inputId="Internet"></p-autoComplete>
                                             <label for="Internet">Internet</label>
                                         </span>
                                     </div>
@@ -1050,11 +895,248 @@
                         </p-tabPanel>
 
                         <p-tabPanel header="Teachers Info" class="line-height-3 m-0">
-                            <div class="grid p-fluid">
-                                <div class="grid formgrid">
-                                    
+
+                            <div class="grid">
+
+
+                                <div class="col-12 md:col-6">
+                                    <h5>Classes Taught</h5>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Primary</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Pr. & Up.Pr</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">H Sec only.</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Sec and H
+                                            Sec</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Pre- Pri &
+                                            Pri</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Up.Pr.</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Sec. only</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Up pri and
+                                            Sec.</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Pre-Primary
+                                            Only</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+
+
                                 </div>
+
+                                <div class="col-12 md:col-6">
+                                    <h5>Nature of Appointment</h5>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Regular</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Part-time</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Contract</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Male</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Female</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Transgender</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Total
+                                            Teachers</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-8 md:mb-0">No. of Total Teacher
+                                            Received Service Training</label>
+                                        <div class="col-12 md:col-4">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-8 md:mb-0">Total Teacher
+                                            Involve in Non Teaching Assignment</label>
+                                        <div class="col-12 md:col-4">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                               
+
+                                <div class="col-12 md:col-6">
+                                    <h5>Academic Qualification</h5>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Below
+                                            Graduate</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Graduate</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Post Graduate and
+                                            Above</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Total Teacher Trained in Computer</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Teachers Aged above 55</label>
+                                        <div class="col-12 md:col-6">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                   
+                                </div>
+
+
+                                <div class="col-12 md:col-6">
+                                    <h5>Teacher With Professional Qualification</h5>
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-8 md:mb-0">Diploma or Certificate in basic teachersï¿½ training</label>
+                                        <div class="col-12 md:col-4">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-8 md:mb-0">Bachelor of Elementary Education (B.El.Ed.)</label>
+                                        <div class="col-12 md:col-4">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-8 md:mb-0">B.Ed. or Equivalent</label>
+                                        <div class="col-12 md:col-4">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-8 md:mb-0">M.Ed. or Equivalent</label>
+                                        <div class="col-12 md:col-4">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-8 md:mb-0">Diploma/degree in special Education</label>
+                                        <div class="col-12 md:col-4">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field grid">
+                                        <label htmlFor="name3" class="col-12 mb-2 md:col-8 md:mb-0">Pursuing any Relevant Professional Course</label>
+                                        <div class="col-12 md:col-4">
+                                            <input pInputText id="name3" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
+
                         </p-tabPanel>
 
                     </p-tabView>

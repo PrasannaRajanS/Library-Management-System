@@ -11,7 +11,7 @@ export class HttpService {
 
   private baseAPIURL: string = "";
   constructor(private _httpClient: HttpClient) {
-    this.baseAPIURL = APIConfig.FISCAL_API_BASE_URL;
+    this.baseAPIURL = APIConfig.API_BASE_URL;
   }
 
   globalPost(url: string, data: any): any {
