@@ -4,14 +4,11 @@ import { CommonModule } from '@angular/common';
 import { EmployeeAddRoutingModule } from './employee-add-routing.module';
 import { EmployeeAddComponent } from './employee-add.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { ChipModule } from 'primeng/chip';
+
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FileUploadModule } from 'primeng/fileupload';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-import { InputSwitchModule } from 'primeng/inputswitch';
-import { EditorModule } from 'primeng/editor';
 import { ToolbarModule } from 'primeng/toolbar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { AccordionModule } from 'primeng/accordion';
@@ -31,6 +28,7 @@ import { MessageService } from 'primeng/api';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
 
+
 @NgModule({
   declarations: [
     EmployeeAddComponent
@@ -41,7 +39,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     FormsModule,
 	ReactiveFormsModule,
 
-    ToolbarModule,
+    // Prime ng 
+		ToolbarModule,
 		ButtonModule,
 		RippleModule,
 		SplitButtonModule,
@@ -61,6 +60,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 		TableModule,
 		RadioButtonModule,
 		ToastModule
+
   ],
   providers:[
 	UtilService,
