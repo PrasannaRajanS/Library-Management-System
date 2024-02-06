@@ -4,13 +4,17 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Table } from 'primeng/table';
+import { IStatePMS } from 'src/app/+pms/services/interfaces/IStatePMS';
+
 import { IEmployee } from 'src/app/+pms/services/interfaces/IEmployee';
+
 import { YupPMSValidation } from 'src/app/+pms/services/validation-schemas/yup-pms-validation';
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
 
 import { UtilService } from 'src/app/shared/util.service';
 
 import * as yup from 'yup';
+import { ICountryPMS } from 'src/app/+pms/services/interfaces/ICountryPMS';
 
 interface Product {
     name: string;
@@ -95,6 +99,13 @@ public buttonText:string="Save";
     selectedItems: any[] = [];
     items: any[] = [];
 
+    // AutoComplete By mj tamil
+    filteredStateList: IStatePMS[] = [];
+    StateList: IStatePMS[] = [];
+
+    CoutryList: ICountryPMS[] = [];
+    filteredCoutryList: ICountryPMS[] = [];
+
     //#region UI Validation Variables
     //  Step 1
     EmployeeForm: FormGroup<YupFormControls<IEmployee>>;
@@ -120,7 +131,8 @@ public buttonText:string="Save";
         presentAddress3: null,
         presentCity: null,
         presentState: null,
-        presentCountry: null,
+        presentCountryId: null,
+        selectedPresentCountry: null,
         presentPIN: null,
 
         // Permanent Address
@@ -165,9 +177,11 @@ public buttonText:string="Save";
         EPFNo: null,
 
 
+
         // Family Information
 
         selectedGender:null,
+
 
 
 
@@ -249,6 +263,49 @@ public buttonText:string="Save";
         );
     }
 
+
+    // auto complete state
+
+    // Filter
+
+    filterState(event: AutoCompleteCompleteEvent) {
+        let filtered: any[] = [];
+        let query = event.query;
+
+        for (let i = 0; i < (this.StateList as any[]).length; i++) {
+            let _stateList = (this.StateList as any[])[i];
+            if (
+                _stateList.stateName
+                    .toLowerCase()
+                    .indexOf(query.toLowerCase()) == 0
+            ) {
+                filtered.push(_stateList);
+            }
+        }
+        this.filteredStateList = filtered;
+    }
+
+    //
+
+    onSelectState() {
+        if (
+            this.EmployeeForm.value['presentState'] != undefined &&
+            this.EmployeeForm.value['presentState'] != null
+        ) {
+            let _countryId: number =
+                this.EmployeeForm.value['presentState'].countryId;
+            this.EmployeeForm.get('selectedPresentCountry')?.setValue(this.CoutryList.find((c) => c.countryId === _countryId));
+        } else {
+            this.EmployeeForm.get('selectedPresentCountry')?.setValue(null)
+        }
+    }
+
+    onClearState() {
+        console.log('OnClearState', this.EmployeeForm);
+        this.EmployeeForm.get('presentCountry')?.reset();
+    }
+    
+
     // Save
 
     Save(){
@@ -266,4 +323,5 @@ public buttonText:string="Save";
     RedirecttoList(){
         this.router.navigate(['/apps/pms/employee/employee-list'])
     }
+
 }
