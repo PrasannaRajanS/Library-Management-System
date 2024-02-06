@@ -12,12 +12,14 @@ export interface IEmployee {
 
     // Present Address
 
+
     presentAddress1?: string | null | undefined;
     presentAddress2?: string | null | undefined;
     presentAddress3?: string | null | undefined;
     presentCity?: string | null | undefined;
-    presentState?: string | null | undefined;
-    presentCountry?: string | null | undefined;
+    presentState?: any | null | undefined;
+    presentCountryId?: number | null | undefined;
+    selectedPresentCountry?: object | null | undefined;
     presentPIN?: number | null | undefined;
 
     // Permanent Address
