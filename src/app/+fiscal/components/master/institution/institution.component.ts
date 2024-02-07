@@ -20,6 +20,9 @@ import { IState } from 'src/app/+fiscal/services/interfaces/IState';
 import { IOrganization } from 'src/app/+fiscal/services/interfaces/IOrganization';
 import { ILabel, IMedium, ISchoolCategory, ISchoolType } from 'src/app/+fiscal/services/interfaces/ICommon';
 import { AppConstant } from 'src/app/config/app.contant';
+import { ICountry } from 'src/app/+fiscal/services/interfaces/ICountry';
+import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
+import { APIConfig } from 'src/app/config/api.config';
 
 
 @Component({
@@ -30,6 +33,8 @@ import { AppConstant } from 'src/app/config/app.contant';
 export class InstitutionComponent {
 
   StateList: IState[] = [];
+  filteredStateList: IState[] = []
+
   OrganizationList: IOrganization[] = [];
   SchoolCategoryList: ISchoolCategory[] = [];
   SchoolTypeList: ISchoolType[] = [];
@@ -48,6 +53,12 @@ export class InstitutionComponent {
   item: IInstitution = {};
   items: IInstitution[] = []
   InstitutionList: IInstitution[] = [];
+
+  CoutryList: ICountry[] = [];
+  filteredCoutryList: ICountry[] = [];
+
+  
+
 
   public userDetails: any;
 
@@ -99,6 +110,7 @@ export class InstitutionComponent {
     city: null,
     addressStateId: null,
     countryId: null,
+    selectedCountry:null,
     pinCode: null,
     fax: null,
     mobileNumber1: null,
@@ -178,6 +190,8 @@ export class InstitutionComponent {
     console.log(this.PrePrimaryList);
 
     this.LoadApplication;
+    this.GetCountries();
+    this.GetStates();
 
   }
 
@@ -322,11 +336,82 @@ export class InstitutionComponent {
     }
   }
 
+  public GetStates(){
 
-  filterCountry($event: any) {
-
+    try {
+      this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_STATES)
+      .subscribe({
+        next:(result:any) => {
+          this.StateList = result.states;
+        },
+        error: (err: HttpErrorResponse) => console.log(err)
+        
+      })
+    } catch (error) {
+      
+    }
   }
 
+  filterState( event:AutoCompleteCompleteEvent){
+    let filtered: any[] = [];
+    let query = event.query;
+
+    for (let i = 0; i < (this.StateList as any[]).length; i++) {
+      let _stateList = (this.StateList as any[])[i];
+      if (_stateList.stateName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(_stateList);
+      }
+    }
+    this.filteredStateList = filtered;
+  }
+
+  onSelectState(){
+    if (this.InstitutionFrom.value['selectedState'] != undefined && this.InstitutionFrom.value['selectedState'] != null) {
+      let _countryId: number = this.InstitutionFrom.value['selectedState'].countryId
+      this.InstitutionFrom.get("selectedCountry")?.setValue(this.CoutryList.find(c => c.countryId === _countryId))
+
+    } else {
+      this.InstitutionFrom.get("selectedCountry")?.setValue(null);
+    }
+  }
+
+  onClearState(){
+    console.log('onClearState',this.InstitutionFrom);
+    this.InstitutionFrom.get("selectedCountry")?.reset();
+  }
+
+  public GetCountries(){
+    try {
+      this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_COUNTRIES)
+      .subscribe(
+        {
+          next:(result : any) =>{
+            this.CoutryList = result.countries;
+          },
+          error: (err: HttpErrorResponse) => console.log(err)
+          
+        }
+      )
+    } catch (error) {
+      
+    }
+  }
+
+  filterCountry(event: AutoCompleteCompleteEvent) {
+
+    let filtered: any[] = [];
+    let query = event.query;
+
+    for( let i = 0 ; i < (this.CoutryList as any[]).length; i++){
+      let _countriesList = (this.CoutryList as any[])[i];
+      if(_countriesList.countryName.toLowerCase().indexOf(query.toLowerCase()) == 0){
+        filtered.push(_countriesList);
+      }
+    }
+    this.filteredCoutryList = filtered
+  }
+
+  
   RedirecttoList() {
     this.router.navigate(['/apps/fiscal/institution-list'])
   }

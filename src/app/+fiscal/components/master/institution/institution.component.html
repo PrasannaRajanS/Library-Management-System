@@ -288,18 +288,19 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList" formControlName="stateId"
-                                                [minLength]="0" [dropdown]="true" [forceSelection]="true" field="state"
+                                            <p-autoComplete [suggestions]="filteredStateList" formControlName="selectedState"  
+                                                [minLength]="0" [dropdown]="true" [forceSelection]="true" field="stateName"
+                                                (onSelect)="onSelectState()"  (onClear)="onClearState()" (completeMethod)="filterState($event)"
                                                 inputId="state"></p-autoComplete>
                                             <label for="state">State</label>
                                         </span>
-                                        <small id="state-help">{{ formError("stateId" ,InstitutionFrom)}}</small>
+                                        <small id="state-help">{{ formError("selectedState" ,InstitutionFrom)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList" formControlName="countryId"
-                                                [minLength]="0" [dropdown]="true" [forceSelection]="true" field="state"
+                                            <p-autoComplete [suggestions]="filteredCoutryList" formControlName="selectedCountry" (completeMethod)="filterCountry($event)"
+                                                [minLength]="0" [dropdown]="true" [forceSelection]="true" field="countryName"
                                                 inputId="country"></p-autoComplete>
                                             <label for="country">Country</label>
                                         </span>
