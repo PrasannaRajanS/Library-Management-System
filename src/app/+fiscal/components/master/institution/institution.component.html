@@ -216,7 +216,7 @@
                                         <span class="p-float-label">
                                             <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                             <label for="ddlPrePrimary ">Pre Primary</label>
                                         </span>
@@ -399,7 +399,7 @@
                                         <label htmlFor="establishment" class="col-12 mb-2 md:col-6 md:mb-0">Year of
                                             Establishment</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="establishment" type="text" maxlength="4" pKeyFilter="int" pTooltip="Enter your username" tooltipPosition="right"/>
+                                            <input pInputText id="establishment" type="text" maxlength="4" pKeyFilter="int" pTooltip="Enter your username" tooltipPosition="right" placeholder="YYYY"/>
                                         </div>
                                     </div>
 
@@ -407,7 +407,7 @@
                                         <label htmlFor="recognitionPri" class="col-12 mb-2 md:col-6 md:mb-0">Year of
                                             Recognition-Pri.</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="recognitionPri" type="text" maxlength="4" pKeyFilter="int" />
+                                            <input pInputText id="recognitionPri" type="text" maxlength="4" pKeyFilter="int" placeholder="YYYY" />
                                         </div>
                                     </div>
 
@@ -415,7 +415,7 @@
                                         <label htmlFor="recognitionUprPri" class="col-12 mb-2 md:col-6 md:mb-0">Year of
                                             Recognition-Upr.Pri.</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="recognitionUprPri" type="text" maxlength="4" pKeyFilter="int" />
+                                            <input pInputText id="recognitionUprPri" type="text" maxlength="4" pKeyFilter="int" placeholder="YYYY" />
                                         </div>
                                     </div>
 
@@ -423,7 +423,7 @@
                                         <label htmlFor="recognitionSec" class="col-12 mb-2 md:col-6 md:mb-0">Year of
                                             Recognition-Sec.</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="recognitionSec" type="text" maxlength="4" pKeyFilter="int" />
+                                            <input pInputText id="recognitionSec" type="text" maxlength="4" pKeyFilter="int" placeholder="YYYY" />
                                         </div>
                                     </div>
 
@@ -431,7 +431,7 @@
                                         <label htmlFor="recognitionHigherSec" class="col-12 mb-2 md:col-6 md:mb-0">Year of
                                             Recognition-Higher Sec.</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="recognitionHigherSec" type="text" maxlength="4" pKeyFilter="int" />
+                                            <input pInputText id="recognitionHigherSec" type="text" maxlength="4" pKeyFilter="int" placeholder="YYYY" />
                                         </div>
                                     </div>
 
@@ -439,7 +439,7 @@
                                         <label htmlFor="boardSec" class="col-12 mb-2 md:col-6 md:mb-0">Affiliation
                                             Board-Sec</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="boardSec" type="text" />
+                                            <input pInputText id="boardSec" type="text" placeholder="YYYY" />
                                         </div>
                                     </div>
 
@@ -447,7 +447,7 @@
                                         <label htmlFor="boardHSec" class="col-12 mb-2 md:col-6 md:mb-0">Affiliation
                                             Board-HSec</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="boardHSec" type="text" />
+                                            <input pInputText id="boardHSec" type="text" placeholder="YYYY" />
                                         </div>
                                     </div>
 
@@ -456,7 +456,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlMinoritySchool" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -469,7 +469,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlShiftSchool" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -480,7 +480,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlBuildingStatus" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -491,7 +491,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlBoundarywall" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -500,7 +500,7 @@
                                         <label htmlFor="buildingBlocks" class="col-12 mb-2 md:col-6 md:mb-0">No.of Building
                                             Blocks</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="buildingBlocks" type="text"  pKeyFilter="int" />
+                                            <input pInputText id="buildingBlocks" type="text"  pKeyFilter="int" placeholder="00"/>
                                         </div>
                                     </div>
 
@@ -508,7 +508,7 @@
                                         <label htmlFor="BuildingBlocks" class="col-12 mb-2 md:col-6 md:mb-0">Pucca Building
                                             Blocks</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="BuildingBlocks" type="text"  pKeyFilter="int" />
+                                            <input pInputText id="BuildingBlocks" type="text"  pKeyFilter="int"  placeholder="00" />
                                         </div>
                                     </div>
 
@@ -518,7 +518,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlSpecialSchool" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -529,7 +529,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlRamps" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -539,7 +539,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlHandrails" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -551,38 +551,38 @@
                                         <label htmlFor="ExcludingCWSN" class="col-12 mb-2 md:col-6 md:mb-0">Total(Excluding
                                             CWSN)</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="ExcludingCWSN" type="text" placeholder="Boys"  pKeyFilter="int" />
+                                            <input pInputText id="ExcludingCWSN" type="text" placeholder="00"  pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="ExcludingCWSN" type="text" placeholder="Girls"  pKeyFilter="int" />
+                                            <input pInputText id="ExcludingCWSN" type="text" placeholder="00"  pKeyFilter="int" />
                                         </div>
                                     </div>
                                     <div class="field grid">
                                         <label htmlFor="Functional" class="col-12 mb-2 md:col-6 md:mb-0">Functional</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="Functional" type="text" placeholder="Boys"  pKeyFilter="int" />
+                                            <input pInputText id="Functional" type="text" placeholder="00"  pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="Functional" type="text" placeholder="Girls"  pKeyFilter="int" />
+                                            <input pInputText id="Functional" type="text" placeholder="00"  pKeyFilter="int" />
                                         </div>
                                     </div>
                                     <div class="field grid">
                                         <label htmlFor="CWSNFriendly" class="col-12 mb-2 md:col-6 md:mb-0">Func. CWSN
                                             Friendly</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="CWSNFriendly" type="text" placeholder="Boys"  pKeyFilter="int" />
+                                            <input pInputText id="CWSNFriendly" type="text" placeholder="00"  pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="CWSNFriendly" type="text" placeholder="Girls"  pKeyFilter="int" />
+                                            <input pInputText id="CWSNFriendly" type="text" placeholder="00"  pKeyFilter="int" />
                                         </div>
                                     </div>
                                     <div class="field grid">
                                         <label htmlFor="Urinal" class="col-12 mb-2 md:col-6 md:mb-0">Urinal</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="Urinal" type="text" placeholder="Boys"  pKeyFilter="int" />
+                                            <input pInputText id="Urinal" type="text" placeholder="00"  pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="Urinal" type="text" placeholder="Girls"  pKeyFilter="int" />
+                                            <input pInputText id="Urinal" type="text" placeholder="00"  pKeyFilter="int" />
                                         </div>
                                     </div>
 
@@ -592,7 +592,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlHandwashNearToilet" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -604,7 +604,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlFacilityforMeal" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -615,7 +615,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlDrinkingWaterAvailable" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -626,7 +626,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlDrinkingWaterFunctional" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -637,7 +637,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlRainWaterHarvesting" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -648,7 +648,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlPlaygroundAvailable" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
 
@@ -664,7 +664,7 @@
                                         <label htmlFor="goodCondition" class="col-12 mb-2 md:col-6 md:mb-0">In Good
                                             Condition</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="goodCondition" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="goodCondition" type="text" placeholder=""  pKeyFilter="int"  placeholder="00" />
                                         </div>
                                     </div>
 
@@ -672,7 +672,7 @@
                                         <label htmlFor="minorRepair" class="col-12 mb-2 md:col-6 md:mb-0">Needs Minor
                                             Repair</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="minorRepair" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="minorRepair" type="text" placeholder=""  pKeyFilter="int"  placeholder="00" />
                                         </div>
                                     </div>
 
@@ -680,14 +680,14 @@
                                         <label htmlFor="majorRepair" class="col-12 mb-2 md:col-6 md:mb-0">Needs Major
                                             Repair</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="majorRepair" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="majorRepair" type="text" placeholder=""  pKeyFilter="int"  placeholder="00" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
                                         <label htmlFor="OtherRooms" class="col-12 mb-2 md:col-6 md:mb-0">Other Rooms</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="OtherRooms" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="OtherRooms" type="text" placeholder=""  pKeyFilter="int"  placeholder="00" />
                                         </div>
 
                                     </div>
@@ -698,7 +698,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlLibraryAvailability" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -709,7 +709,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlSeparateRoomforHM" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -720,7 +720,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlFurnitureAvailability" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -731,7 +731,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlElectricityAvailability" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -741,7 +741,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlSolarPanel" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -752,7 +752,7 @@
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlMedicalcheckups" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
