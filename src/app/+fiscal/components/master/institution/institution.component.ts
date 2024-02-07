@@ -175,6 +175,12 @@ export class InstitutionComponent {
     this.SchoolTypeList = [{ schoolTypeId: 1, schoolType: 'Co-educational' }, { schoolTypeId: 2, schoolType: 'Non Co-educational' }];
 
     this.MediumList = [{ mediumId: 1, medium: 'Tamil' },{ mediumId: 2, medium: 'English' }];
+    
+  //   const selectedPrePrimaryControl = this.InstitutionFrom.controls['selectedPrePrimary'] as FormControl;
+  //   if (this.InstitutionFrom.controls['selectedPrePrimary']) {
+  //     selectedPrePrimaryControl.setValue("1"); // Assuming "1" corresponds to "Yes"
+  // }
+
     console.log(this.PrePrimaryList);
 
     this.LoadApplication;
