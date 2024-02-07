@@ -10,7 +10,7 @@ export interface IInstitution {
 
     // Basic Info
     stateId?: number | null | undefined;
-    selectedState?: object | null | undefined;
+    selectedState?: any | null | undefined;
     district?: string | null | undefined;
     block?: string | null | undefined;
     cluster?: string | null | undefined;
@@ -67,6 +67,8 @@ export interface IInstitution {
     city?: string | null | undefined;
     addressStateId?: string | null | undefined;
     countryId?: string | null | undefined;
+    selectedCountry?: object | null | undefined;
+
     
     pinCode?: string | null | undefined;
     fax?: string | null | undefined;
