@@ -216,7 +216,7 @@
                                         <span class="p-float-label">
                                             <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
                                                 [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="true" [showClear]="true">
+                                                 [showClear]="true">
                                             </p-dropdown>
                                             <label for="ddlPrePrimary ">Pre Primary</label>
                                         </span>
@@ -767,6 +767,37 @@
                                 <div class="grid formgrid">
                                     <div class="field col-12 md:col-3 mt-3">
                                         <span class="p-float-label">
+                                            <p-dropdown id="ddlICTLab" formControlName="selectedPrePrimary"
+                                            [options]="PrePrimaryList" optionLabel="label"
+                                            [autoDisplayFirst]="false" [showClear]="true">
+                                        </p-dropdown>
+                                            <label for="ddlICTLab">ICT Lab</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3  mt-3">
+                                        <span class="p-float-label">
+                                            <p-dropdown id="ddlInternet" formControlName="selectedPrePrimary"
+                                            [options]="PrePrimaryList" optionLabel="label"
+                                            [autoDisplayFirst]="false" [showClear]="true">
+                                        </p-dropdown>
+                                            <label for="ddlInternet">Internet Connection</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3  mt-3">
+                                        <span class="p-float-label">
+                                            <p-dropdown id="ddlInternet" formControlName="selectedPrePrimary"
+                                            [options]="PrePrimaryList" optionLabel="label"
+                                            [autoDisplayFirst]="false" [showClear]="true">
+                                        </p-dropdown>
+                                            <label for="ddlInternet">DTH Connection</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="field col-12 md:col-3 mt-3">
+                                        <span class="p-float-label">
                                             <input type="text" id="desktop" pInputText autocomplete="off"  pKeyFilter="int">
                                             <label for="desktop">Desktop</label>
                                             <small id="desktop-help">{{ formError("desktop"
@@ -819,79 +850,7 @@
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id=" booksforPrimary" pInputText autocomplete="off"  pKeyFilter="int">
-                                            <label for="booksforPrimary">Free text books for Primary</label>
-                                            <small id="booksforPrimary-help">{{ formError("booksforPrimary"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="transportforPrimary" pInputText autocomplete="off"  pKeyFilter="int">
-                                            <label for="transportforPrimary">Transport for Primary</label>
-                                            <small id="transportforPrimary-help">{{ formError("transportforPrimary"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="uniformforPrimary" pInputText autocomplete="off"  pKeyFilter="int">
-                                            <label for="uniformforPrimary">Free uniform for Primary</label>
-                                            <small id="uniformforPrimary-help">{{ formError("uniformforPrimary"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="booksforUpPrimary" pInputText autocomplete="off"  pKeyFilter="int">
-                                            <label for="booksforUpPrimary">Free text books for Up.Primary</label>
-                                            <small id="booksforUpPrimary-help">{{ formError("booksforUpPrimary"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="transportforUpPrimary" pInputText autocomplete="off"  pKeyFilter="int">
-                                            <label for="transportforUpPrimary">Transport for Up.Primary</label>
-                                            <small id="transportforUpPrimary-help">{{ formError("transportforUpPrimary"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3">
-                                        <span class="p-float-label">
-                                            <input type="text" id="uniformforUpPrimary" pInputText autocomplete="off"   pKeyFilter="int">
-                                            <label for="uniformforUpPrimary">Free uniform for Up.Primary</label>
-                                            <small id="uniformforUpPrimary-help">{{ formError("uniformforUpPrimary"
-                                                ,InstitutionFrom)}}</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3">
-                                        <span class="p-float-label">
-                                            <p-dropdown id="ddlICTLab" formControlName="selectedPrePrimary"
-                                            [options]="PrePrimaryList" optionLabel="label"
-                                            [autoDisplayFirst]="false" [showClear]="true">
-                                        </p-dropdown>
-                                            <label for="ddlICTLab">ICT Lab</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="field col-12 md:col-3">
-                                        <span class="p-float-label">
-                                            <p-dropdown id="ddlInternet" formControlName="selectedPrePrimary"
-                                            [options]="PrePrimaryList" optionLabel="label"
-                                            [autoDisplayFirst]="false" [showClear]="true">
-                                        </p-dropdown>
-                                            <label for="ddlInternet">Internet</label>
-                                        </span>
-                                    </div>
+                                  
 
                                 </div>
                             </div>
@@ -1095,7 +1054,7 @@
                                 <div class="col-12 md:col-6">
                                     <h5>Teacher With Professional Qualification</h5>
                                     <div class="field grid">
-                                        <label htmlFor="diplomaTeachersTraining" class="col-12 mb-2 md:col-8 md:mb-0">Diploma or Certificate in basic teachersï¿½ training</label>
+                                        <label htmlFor="diplomaTeachersTraining" class="col-12 mb-2 md:col-8 md:mb-0">Diploma or Certificate in basic teachers training</label>
                                         <div class="col-12 md:col-4">
                                             <input pInputText id="diplomaTeachersTraining" type="text" placeholder=""  pKeyFilter="int" />
                                         </div>

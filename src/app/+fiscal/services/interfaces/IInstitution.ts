@@ -1,126 +1,130 @@
 
 
 export interface IInstitution {
-    institutionId?: number | null | undefined;
-    institutionName?: string | null | undefined;
-    organizationId?: number | null | undefined;
-    selectedOrganization?: object | null | undefined;
-    shortName?: string | null | undefined;
+    InstitutionId?: number | null | undefined;
+    OrganizationId?: number | null | undefined;
+    Name?: string | null | undefined;
+    ShortName?: string | null | undefined;
     UDISECode?: string | null | undefined;
-
-    // Basic Info
-    stateId?: number | null | undefined;
-    selectedState?: any | null | undefined;
-    district?: string | null | undefined;
-    block?: string | null | undefined;
-    cluster?: string | null | undefined;
-    ward?: string | null | undefined;
-    mohalla?: string | null | undefined;
-    pincode?: number | null | undefined;
-    panchayat?: string | null | undefined;
-    municipality?: string | null | undefined;
-
-    categoryId?: number | null | undefined;
-    selectedCategory?: object | null | undefined;
-
-    stateManagement?: string | null | undefined;
-    nationalManagement?: string | null | undefined;
-
-    schoolTypeId?: number | null | undefined;
-    selectedschoolType?: object | null | undefined;
-    classFrom?: number | null | undefined;
-    classTo?: number | null | undefined;
-
-    selectedPrePrimary?: object | null | undefined;
-    selectedMedium?: object | null | undefined;
-    // basicLocation?: string | null | undefined;
-    // basicPincode?: number | null | undefined;
-    // basicMunicipality?: string | null | undefined;
-    // basicBlock?: string | null | undefined;
-    // 
-    // basicPanchayat?: string | null | undefined;
-    // basicMohalla?: string | null | undefined;
-    
-    // basicSchoolType?: string | null | undefined;
-    // basicSchoolCategory?: string | null | undefined;
-    // basicSchoolManagement?: string | null | undefined;
-    // basicClassFrom?: number | null | undefined;
-    // basicClassTo?: number | null | undefined;
-    // basicMedium1?: string | null | undefined;
-    // basicMedium2?: string | null | undefined;
-    // basicMedium3?: string | null | undefined;
-    // basicMedium4?: string | null | undefined;
-    // basicPrePrimary?: any | null | undefined;
-
-
-
-
-
-    // affiliatedCode?: string | null | undefined;
-    // category?: string | null | undefined;
-
-    // Address Details
-    address1?: string | null | undefined;
-    address2?: string | null | undefined;
-    address3?: string | null | undefined;
-    address4?: string | null | undefined;
-    city?: string | null | undefined;
-    addressStateId?: string | null | undefined;
-    countryId?: string | null | undefined;
-    selectedCountry?: object | null | undefined;
-
-    
-    pinCode?: string | null | undefined;
-    fax?: string | null | undefined;
-    mobileNumber1?: string | null | undefined;
-    mobileNumber2?: string | null | undefined;
-    phoneNumber1?: string | null | undefined;
-    phoneNumber2?: string | null | undefined;
-    primaryEmail?: string | null | undefined;
-    secondaryEmail?: string | null | undefined;
-    website?: string | null | undefined;
-
-    
-
-    // // Management Info
-
-    // YearOfEstablishment?: Date | null | undefined;
-    // YearofRecognitionPri?: Date | null | undefined;
-    // YearOfRecognitionUprPri?: Date | null | undefined;
-    // YearOfRecognitionSec?: Date | null | undefined;
-    // YearOfRecognitionHigherSec?: Date | null | undefined;
-
-    // isActive?: boolean | null | undefined;
-    // userId?: number | null | undefined;
-    // ipAddress?: string | null | undefined;
-
+    //
+    StateId?: number | null | undefined;
+    City?: string | null | undefined;
+    Block?: string | null | undefined;
+    LocationId?: number | null | undefined;
+    Cluster?: string | null | undefined;
+    Ward?: string | null | undefined;
+    Mahalla?: string | null | undefined;
+    PINCode?: number | null | undefined;
+    Panchayat?: string | null | undefined;
+    Municipality?: string | null | undefined;
+    SchoolCategoryId?: number | null | undefined;
+    StateManagementId?: number | null | undefined;
+    NationalManagementId?: number | null | undefined;
+    SchoolTypeId?: number | null | undefined;
+    ClassFrom?: number | null | undefined;
+    ClassTo?: number | null | undefined;
+    IsPrePrimary?: boolean | null | undefined;
+    MediumofInstruction?: string | null | undefined;
+    //
+    RegAddress1?: string | null | undefined;
+    RegAddress2?: string | null | undefined;
+    RegAddress3?: string | null | undefined;
+    RegAddress4?: string | null | undefined;
+    RegCity?: string | null | undefined;
+    RegStateId?: number | null | undefined;
+    RegCountryId?: number | null | undefined;
+    RegPINCode?: number | null | undefined;
+    MobileNumber1?: string | null | undefined;
+    MobileNumber2?: string | null | undefined;
+    PhoneNumber1?: string | null | undefined;
+    PhoneNumber2?: string | null | undefined;
+    Fax?: string | null | undefined;
+    PrimaryEmail?: string | null | undefined;
+    SecondaryEmail?: string | null | undefined;
+    Website?: string | null | undefined;
+    //
+    YearofEstablishment?: number | null | undefined;
+    YearofRecognition_Primary?: number | null | undefined;
+    YearofRecognition_UpperPrimary?: number | null | undefined;
+    YearofRecognition_Secondary?: number | null | undefined;
+    YearofRecognition_HigherSecondary?: number | null | undefined;
+    AffiliationBoard_Secondary?: number | null | undefined;
+    AffiliationBoard_HigherSecondary?: number | null | undefined;
+    IsMinoritySchool?: boolean | null | undefined;
+    IsthisaShiftSchool?: boolean | null | undefined;
+    BuildingStatusId?: number | null | undefined;
+    BoundaryWallId?: number | null | undefined;
+    NoofBuildingBlocks?: number | null | undefined;
+    NoofPuccaBuildingBlocks?: number | null | undefined;
+    IsSpecialSchoolforCWSN?: boolean
+    AvailabilityofRamps?: boolean | null | undefined;
+    AvailabilityofHandrails?: boolean | null | undefined;
+    TotalNoOfToilets_Boys?: number | null | undefined;
+    TotalNoOfToilets_Girls?: number | null | undefined;
+    Functional_Boys?: number | null | undefined;
+    FunctionalCWSNFriendly_Boys?: number | null | undefined;
+    FunctionalCWSNFriendly_Girls?: number | null | undefined;
+    Urinal_Boys?: number | null | undefined;
+    Urinal_Girls?: number | null | undefined;
+    HandwashNearToilet?: boolean | null | undefined;
+    HandwashFacilityforMeal?: boolean | null | undefined;
+    DrinkingWaterAvailable?: boolean | null | undefined;
+    DrinkingWaterFunctional?: boolean | null | undefined;
+    RainWaterHarvesting?: boolean | null | undefined;
+    PlaygroundAvailable?: boolean | null | undefined;
+    NoofBuildingsInGoodCondition?: boolean | null | undefined;
+    NoofBuildingNeedsMinorRepair?: number | null | undefined;
+    NoofBuildingNeedsMajorRepair?: number | null | undefined;
+    OtherRooms?: number | null | undefined;
+    LibraryAvailability?: boolean | null | undefined;
+    SeparateRoomforHM?: boolean | null | undefined;
+    FurnitureAvailability?: boolean | null | undefined;
+    ElectricityAvailability?: boolean | null | undefined;
+    SolarPanel?: boolean | null | undefined;
+    Medicalcheckups?: boolean | null | undefined;
+    //
+    ICTLab?: boolean | null | undefined;
+    InternetConnection?: boolean | null | undefined;
+    DTHConnection?: boolean | null | undefined;
+    NoofDesktop?: number | null | undefined;
+    NoofLaptop?: number | null | undefined;
+    NoofTablet?: number | null | undefined;
+    NoofPrinter?: number | null | undefined;
+    NoofProjector?: number | null | undefined;
+    NoofDigiBoard?: number | null | undefined;
+    //
+    NoofTeachers_Primary?: number | null | undefined;
+    NoofTeachers_PrimaryandUpperPrimary?: number | null | undefined;
+    NoofTeachers_HigerSecondaryOnly?: number | null | undefined;
+    NoofTeachers_SecondaryandHigerSecondary?: number | null | undefined;
+    NoofTeachers_PrePrimaryandPrimary?: number | null | undefined;
+    NoofTeachers_UpperPrimary?: number | null | undefined;
+    NoofTeachers_SecondaryOnly?: number | null | undefined;
+    NoofTeachers_UpperPrimaryandSecondary?: number | null | undefined;
+    NoofTeachers_PrePrimaryOnly?: number | null | undefined;
+    NoofTeachers_Regular?: number | null | undefined;
+    NoofTeachers_Parttime?: number | null | undefined;
+    NoofTeachers_Contract?: number | null | undefined;
+    NoofTeachers_Male?: number | null | undefined;
+    NoofTeachers_Female?: number | null | undefined;
+    NoofTeachers_Transgender?: number | null | undefined;
+    TotalNoofTeachers?: number | null | undefined;
+    NoofTotalTeacherReceivedServiceTraining?: number | null | undefined;
+    TotalTeacherInvolveinNonTeachingAssignment?: number | null | undefined;
+    NoofTeachers_BelowGraduate?: number | null | undefined;
+    NoofTeachers_Graduate?: number | null | undefined;
+    NoofTeachers_PostGraduateandAbove?: number | null | undefined;
+    NoofTotalTeachersTrainedinComputer?: number | null | undefined;
+    NoofTeachers_AgedAbove55?: number | null | undefined;
+    NoofTeachers_DiplomaorCertificateinbasicteacherstraining?: number | null | undefined;
+    NoofTeachers_BachelorofElementaryEducation?: number | null | undefined;
+    NoofTeachers_BEdorEquivalent?: number | null | undefined;
+    NoofTeachers_MEdorEquivalent?: number | null | undefined;
+    NoofTeachers_DiplomaorDegreeinSpecialEducation?: number | null | undefined;
+    NoofTeachers_PursuinganyRelevantProfessionalCourse?: number | null | undefined;
+    //
+    IsActive?: boolean | null | undefined;
+    UserId?: number | null | undefined;
+    IPAddress?: string | null | undefined;
 
 }
-
-
-
-// addressOne
-// addressTwo
-// addressThree
-// addressFour
-// city
-// stateId
-// countryId
-// pinCode
-// fax
-// mobileNumber1
-// mobileNumber2
-// phoneNumber1
-// phoneNumber2
-// primaryEmail
-// secondaryEmail
-// website
-
-
-// organizationId
-// organizationName
-// nameOfSchool
-// shortName
-// schoolUDiseCode
-// affiliatedCode
-// category

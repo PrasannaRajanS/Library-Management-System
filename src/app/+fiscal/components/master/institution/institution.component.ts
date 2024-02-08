@@ -41,7 +41,6 @@ export class InstitutionComponent {
   MediumList: IMedium[] = [];
 
   PrePrimaryList: any = [];
-
   OrganizationId: number = 0;
   InstitutionId: any = 0;
 
@@ -99,7 +98,7 @@ export class InstitutionComponent {
     selectedschoolType:null,
     classFrom:null,
     classTo:null,
-    selectedPrePrimary:null,
+    selectedPrePrimary: { label: 'Yes', labelId: '1' },
     selectedMedium:null,
     
     // Address Info
