@@ -44,17 +44,17 @@
                 <ng-template pTemplate="body" let-item>
                     <tr>
                         <td style="width:1%; min-width:10rem;">
-                            {{item.institutionId}}
+                            {{item.InstitutionId}}
                         </td>
 
                         <td style="width:24%; min-width:10rem;">
                             <span class="p-column-title">Name</span>
-                            {{item.institutionName}}
+                            {{item.InstitutionName}}
                         </td>
 
                         <td style="width:15%; min-width:10rem;">
                             <span class="p-column-title">Name</span>
-                            {{item.nameOfSchool}}
+                            {{item.Name}}
                         </td>
 
                         <!-- <td style="width:15%; min-width:10rem;">
@@ -89,7 +89,7 @@
         <p-dialog [(visible)]="deleteDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
             <div class="flex align-items-center justify-content-center">
                 <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span *ngIf="item">Are you sure you want to delete <b>{{item.institutionName}}</b>?</span>
+                <span *ngIf="item">Are you sure you want to delete <b>{{item.InstitutionName}}</b>?</span>
             </div>
 
             <ng-template pTemplate="footer">
