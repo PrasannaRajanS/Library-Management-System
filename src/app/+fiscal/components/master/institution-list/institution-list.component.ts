@@ -67,7 +67,7 @@ export class InstitutionListComponent {
   Edit(item: any) {
     console.log('Edit', item.institutionId);
 
-    this.router.navigate(['/apps/fiscal/institution/', item.institutionId]);
+    this.router.navigate(['/apps/fiscal/institution/', item.InstitutionId]);
   }
 
   Delete(data: any) {
@@ -77,17 +77,17 @@ export class InstitutionListComponent {
 
   confirmDelete() {
     this.deleteDialog = false;
-    let deletedItem: any[] = this.items.filter((val) => val.institutionId === this.item.institutionId);
+    let deletedItem: any[] = this.items.filter((val) => val.InstitutionId === this.item.InstitutionId);
 
     console.log('deletedItem', deletedItem);
 
     if (deletedItem != null && deletedItem.length > 0) {
       var passSaveParams: any = {};
 
-      passSaveParams.institutionId = deletedItem[0].institutionId
-      passSaveParams.isActive = false;
-      passSaveParams.userId = this.userDetails ? this.userDetails.userId : 0;
-      passSaveParams.ipAddress = '192.168.1.1';
+      passSaveParams.InstitutionId = deletedItem[0].institutionId
+      passSaveParams.IsActive = false;
+      passSaveParams.UserId = this.userDetails ? this.userDetails.userId : 0;
+      passSaveParams.IPAddress = '192.168.1.1';
 
       this.httpService.globalPost(
         FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.DELETE,
