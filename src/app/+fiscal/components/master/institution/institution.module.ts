@@ -18,7 +18,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CalendarModule } from 'primeng/calendar';
 import { TooltipModule } from 'primeng/tooltip';
 
-
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 
 
@@ -42,7 +42,8 @@ import { TooltipModule } from 'primeng/tooltip';
     DropdownModule,
     AutoCompleteModule,
     CalendarModule,
-    TooltipModule 
+    TooltipModule,
+    KeyFilterModule
  
 
   ],
