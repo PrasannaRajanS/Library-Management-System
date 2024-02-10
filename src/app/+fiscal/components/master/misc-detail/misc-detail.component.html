@@ -24,7 +24,7 @@
             </div>
             <div class="field col-12 md:col-4">
                 <span class="p-float-label">
-                    <!-- <input id="name" pInputText formControlName="name" autocomplete="off"> -->
+                  
                     <p-autoComplete #nameAutocomplete formControlName="selectedMiscName"
                         [suggestions]="filteredMiscList" (completeMethod)="filterMisc($event)" field="name"
                         [forceSelection]="true" [dropdown]="true"

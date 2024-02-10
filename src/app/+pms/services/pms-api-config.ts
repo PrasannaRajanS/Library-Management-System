@@ -5,13 +5,21 @@ export const PMSAPIConfig = {
         API_URL:{
             PMS:{
                 EMPLOYEE:{
-                    SAVE:"",
-                    UPDATE:"",
-                    DELETE:"",
-                    LIST:""
+                    SAVE: "/Misc/Create",
+                    UPDATE: "/Misc/Update",
+                    DELETE: "/Misc/Delete",
+                    LIST: "/Misc/GetMisc"
+                },
+                MISC:{
+                    SAVE: "/Misc/Create",
+                    UPDATE: "/Misc/Update",
+                    DELETE: "/Misc/Delete",
+                    LIST: "/Misc/GetMisc"
                 },
             }
         }
     }
     
 }
+
+

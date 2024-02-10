@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IMisc } from 'src/app/+fiscal/services/interfaces/IMisc';
+
 import { Customer } from 'src/app/demo/api/customer';
+import { IMisc } from 'src/app/shared/interface/IMisc';
 
 @Injectable({
     providedIn: 'root',

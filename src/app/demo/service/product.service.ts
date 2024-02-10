@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IAcademicYear } from 'src/app/+fiscal/services/interfaces/IAcademicYear';
 import { IInstitution } from 'src/app/+fiscal/services/interfaces/IInstitution';
-import { IMisc } from 'src/app/+fiscal/services/interfaces/IMisc';
+
 import { IOrganization } from 'src/app/+fiscal/services/interfaces/IOrganization';
 
 import { Product } from 'src/app/demo/api/product';
+import { IMisc } from 'src/app/shared/interface/IMisc';
 
 
 

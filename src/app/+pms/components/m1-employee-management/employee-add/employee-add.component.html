@@ -140,15 +140,15 @@
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">                                             
-                                                <p-autoComplete id="presentState"
-                                                formControlName="presentState"
+                                                <p-autoComplete id="selectedPresentState"
+                                                formControlName="selectedPresentState"
                                                     [suggestions]="filteredStateList"
                                                      (completeMethod)="filterState($event)"
                                                     [minLength]="0" [dropdown]="true" 
                                                     [forceSelection]="true"
                                                     (onSelect)="onSelectState()"
                                                     field="stateName" [showClear]="true" (onClear)="onClearState()"></p-autoComplete>
-                                                <label for="presentState">State</label>
+                                                <label for="selectedPresentState">State</label>
                                             </span>
                                         </div>
 
@@ -164,6 +164,7 @@
                                                      [dropdown]="true" 
                                                     [forceSelection]="true"                                                   
                                                     field="countryName"
+                                                    [showClear]="true"
                                                      ></p-autoComplete>
     
                                                 <label for="selectedPresentCountry">Country</label>
@@ -189,7 +190,7 @@
                                             <!-- Span no need here -->
                                             <span class="p-float-label">
                                                 <input id=""  type="checkbox" value="Same as Present">
-                                                <label for="firstname2"></label>
+                                                <label for="firstname2">Same as Present</label>
                                             </span>
 
 
