@@ -60,7 +60,7 @@ export class InstitutionComponent {
   CoutryList: ICountry[] = [];
   filteredCoutryList: ICountry[] = [];
 
-  
+
 
 
   public userDetails: any;
@@ -72,171 +72,171 @@ export class InstitutionComponent {
   //#region UI Validation Declarations
 
   //  Step 1
-  InstitutionFrom: FormGroup<YupFormControls<IInstitution>>;
+  InstitutionForm: FormGroup<YupFormControls<IInstitution>>;
 
   //  Step 2
   initialValues: IInstitution = {
 
-    InstitutionId : null,
-    InstitutionName : null,
-    OrganizationId : null,
-    SelectedOrganization : null,
-    Name : null,
-    ShortName : null,
-    UDISECode : null,
+    institutionId: null,
+    institutionName: null,
+    organizationId: null,
+    selectedOrganization: null,
+    name: null,
+    shortName: null,
+    UDISECode: null,
     //
-    StateId : null,
-    SelectedState : null,
-    City : null,
-    Block : null,
-    LocationId : null,
-    SelectedLocation : null,
-    Cluster : null,
-    Ward : null,
-    Mohalla : null,
-    PINCode : null,
-    Panchayat : null,
-    Municipality : null,
-    SchoolCategoryId : null,
-    SelectedCategory : null,
-    StateManagementId : null,
-    StateManagement : null,
-    NationalManagementId : null,
-    NationalManagement : null,
-    SchoolTypeId : null,
-    SelectedschoolType : null,
-    ClassFrom : null,
-    ClassTo : null,
-    IsPrePrimary : null,
-    SelectedPrePrimary : { label: 'Yes', labelId: '1' },
-    MediumofInstruction : null,
-    SelectedMedium : null,
+    stateId: null,
+    selectedState: null,
+    city: null,
+    block: null,
+    locationId: null,
+    selectedLocation: null,
+    cluster: null,
+    ward: null,
+    mohalla: null,
+    pinCode: null,
+    panchayat: null,
+    municipality: null,
+    schoolCategoryId: null,
+    selectedCategory: null,
+    stateManagementId: null,
+    stateManagement: null,
+    nationalManagementId: null,
+    nationalManagement: null,
+    schoolTypeId: null,
+    selectedschoolType: null,
+    classFrom: null,
+    classTo: null,
+    isPrePrimary: null,
+    selectedPrePrimary: { label: 'Yes', labelId: '1' },
+    mediumId: null,
+    selectedMedium: null,
     //
-    RegAddress1 : null,
-    RegAddress2 : null,
-    RegAddress3 : null,
-    RegAddress4 : null,
-    RegCity : null,
-    RegStateId : null,
-    RegSelectedState : null,
-    RegCountryId : null,
-    RegSelectedCountry:null,
-    RegPINCode : null,
-    MobileNumber1 : null,
-    MobileNumber2 : null,
-    PhoneNumber1 : null,
-    PhoneNumber2 : null,
-    Fax : null,
-    PrimaryEmail : null,
-    SecondaryEmail : null,
-    Website : null,
+    regAddress1: null,
+    regAddress2: null,
+    regAddress3: null,
+    regAddress4: null,
+    regCity: null,
+    regStateId: null,
+    regSelectedState: null,
+    regCountryId: null,
+    regSelectedCountry: null,
+    regPINCode: null,
+    mobileNumber1: null,
+    mobileNumber2: null,
+    phoneNumber1: null,
+    phoneNumber2: null,
+    fax: null,
+    primaryEmail: null,
+    secondaryEmail: null,
+    website: null,
     //
-    YearofEstablishment : null,
-    YearofRecognition_Primary : null,
-    YearofRecognition_UpperPrimary : null,
-    YearofRecognition_Secondary : null,
-    YearofRecognition_HigherSecondary : null,
-    AffiliationBoard_Secondary : null,
-    AffiliationBoard_HigherSecondary : null,
-    IsMinoritySchool : null,
-    SelectedMinoritySchool : { label: 'Yes', labelId: '1' },
-    IsthisaShiftSchool : null,
-    SelectedIsthisaShiftSchool : { label: 'No', labelId: '0' },
-    BuildingStatusId : null,
-    SelectedBuildingStatus : { label: 'Yes', labelId: '1' },
-    BoundaryWallId : null,
-    SelectedBoundaryWall : { label: 'Yes', labelId: '1' },
-    NoofBuildingBlocks : null,
-    NoofPuccaBuildingBlocks : null,
-    IsSpecialSchoolforCWSN : null,
-    SelectedIsSpecialSchoolforCWSN : { label: 'No', labelId: '0' },
-    AvailabilityofRamps : null,
-    SelectedAvailabilityofRamps : { label: 'No', labelId: '0' },
-    AvailabilityofHandrails : null,
-    SelectedAvailabilityofHandrails : { label: 'No', labelId: '0' },
-    TotalNoOfToilets_Boys : null,
-    TotalNoOfToilets_Girls : null,
-    Functional_Boys : null,
-    Functional_Girls : null,
-    FunctionalCWSNFriendly_Boys : null,
-    FunctionalCWSNFriendly_Girls : null,
-    Urinal_Boys : null,
-    Urinal_Girls : null,
-    HandwashNearToilet : null,
-    SelectedHandwashNearToilet : { label: 'Yes', labelId: '1' },
-    HandwashFacilityforMeal : null,
-    SelectedHandwashFacilityforMeal : { label: 'Yes', labelId: '1' },
-    DrinkingWaterAvailable : null,
-    SelectedDrinkingWaterAvailable : { label: 'Yes', labelId: '1' },
-    DrinkingWaterFunctional : null,
-    SelectedDrinkingWaterFunctional : { label: 'Yes', labelId: '1' },
-    RainWaterHarvesting : null,
-    SelectedRainWaterHarvesting : { label: 'Yes', labelId: '1' },
-    PlaygroundAvailable : null,
-    SelectedPlaygroundAvailable : { label: 'Yes', labelId: '1' },
-    NoofBuildingsInGoodCondition : null,
-    NoofBuildingNeedsMinorRepair : null,
-    NoofBuildingNeedsMajorRepair : null,
-    OtherRooms : null,
-    LibraryAvailability : null,
-    SelectedLibraryAvailability : { label: 'Yes', labelId: '1' },
-    SeparateRoomforHM : null,
-    SelectedSeparateRoomforHM : { label: 'Yes', labelId: '1' },
-    FurnitureAvailability : null,
-    SelectedFurnitureAvailability : { label: 'Yes', labelId: '1' },
-    ElectricityAvailability : null,
-    SelectedElectricityAvailability : { label: 'Yes', labelId: '1' },
-    SolarPanel : null,
-    SelectedSolarPanel : { label: 'No', labelId: '0' },
-    Medicalcheckups : null,
-    SelectedMedicalcheckups : null,
+    yearofEstablishment: null,
+    yearofRecognition_Primary: null,
+    yearofRecognition_UpperPrimary: null,
+    yearofRecognition_Secondary: null,
+    yearofRecognition_HigherSecondary: null,
+    affiliationBoard_Secondary: null,
+    affiliationBoard_HigherSecondary: null,
+    isMinoritySchool: null,
+    selectedMinoritySchool: { label: 'Yes', labelId: '1' },
+    isthisaShiftSchool: null,
+    selectedIsthisaShiftSchool: { label: 'No', labelId: '0' },
+    buildingStatusId: null,
+    selectedBuildingStatus: { label: 'Yes', labelId: '1' },
+    boundaryWallId: null,
+    selectedBoundaryWall: { label: 'Yes', labelId: '1' },
+    noofBuildingBlocks: null,
+    noofPuccaBuildingBlocks: null,
+    isSpecialSchoolforCWSN: null,
+    selectedIsSpecialSchoolforCWSN: { label: 'No', labelId: '0' },
+    availabilityofRamps: null,
+    selectedAvailabilityofRamps: { label: 'No', labelId: '0' },
+    availabilityofHandrails: null,
+    selectedAvailabilityofHandrails: { label: 'No', labelId: '0' },
+    totalNoOfToilets_Boys: null,
+    totalNoOfToilets_Girls: null,
+    functional_Boys: null,
+    functional_Girls: null,
+    functionalCWSNFriendly_Boys: null,
+    functionalCWSNFriendly_Girls: null,
+    urinal_Boys: null,
+    urinal_Girls: null,
+    handwashNearToilet: null,
+    selectedHandwashNearToilet: { label: 'Yes', labelId: '1' },
+    handwashFacilityforMeal: null,
+    selectedHandwashFacilityforMeal: { label: 'Yes', labelId: '1' },
+    drinkingWaterAvailable: null,
+    selectedDrinkingWaterAvailable: { label: 'Yes', labelId: '1' },
+    drinkingWaterFunctional: null,
+    selectedDrinkingWaterFunctional: { label: 'Yes', labelId: '1' },
+    rainWaterHarvesting: null,
+    selectedRainWaterHarvesting: { label: 'Yes', labelId: '1' },
+    playgroundAvailable: null,
+    selectedPlaygroundAvailable: { label: 'Yes', labelId: '1' },
+    noofBuildingsInGoodCondition: null,
+    noofBuildingNeedsMinorRepair: null,
+    noofBuildingNeedsMajorRepair: null,
+    otherRooms: null,
+    libraryAvailability: null,
+    selectedLibraryAvailability: { label: 'Yes', labelId: '1' },
+    separateRoomforHM: null,
+    selectedSeparateRoomforHM: { label: 'Yes', labelId: '1' },
+    furnitureAvailability: null,
+    selectedFurnitureAvailability: { label: 'Yes', labelId: '1' },
+    electricityAvailability: null,
+    selectedElectricityAvailability: { label: 'Yes', labelId: '1' },
+    solarPanel: null,
+    selectedSolarPanel: { label: 'No', labelId: '0' },
+    medicalcheckups: null,
+    selectedMedicalcheckups: { label: 'Yes', labelId: '1' },
     //
-    ICTLab : null,
-    SelectedICTLab : { label: 'Yes', labelId: '1' },
-    InternetConnection : null,
-    SelectedInternetConnection : { label: 'Yes', labelId: '1' },
-    DTHConnection : null,
-    SelectedDTHConnection : { label: 'Yes', labelId: '1' },
-    NoofDesktop : null,
-    NoofLaptop : null,
-    NoofTablet : null,
-    NoofPrinter : null,
-    NoofProjector : null,
-    NoofDigiBoard : null,
+    iCTLab: null,
+    selectedICTLab: { label: 'Yes', labelId: '1' },
+    internetConnection: null,
+    selectedInternetConnection: { label: 'Yes', labelId: '1' },
+    dTHConnection: null,
+    selectedDTHConnection: { label: 'No', labelId: '0' },
+    noofDesktop: null,
+    noofLaptop: null,
+    noofTablet: null,
+    noofPrinter: null,
+    noofProjector: null,
+    noofDigiBoard: null,
     //
-    NoofTeachers_Primary : null,
-    NoofTeachers_PrimaryandUpperPrimary : null,
-    NoofTeachers_HigerSecondaryOnly : null,
-    NoofTeachers_SecondaryandHigerSecondary : null,
-    NoofTeachers_PrePrimaryandPrimary : null,
-    NoofTeachers_UpperPrimary : null,
-    NoofTeachers_SecondaryOnly : null,
-    NoofTeachers_UpperPrimaryandSecondary : null,
-    NoofTeachers_PrePrimaryOnly : null,
-    NoofTeachers_Regular : null,
-    NoofTeachers_Parttime : null,
-    NoofTeachers_Contract : null,
-    NoofTeachers_Male : null,
-    NoofTeachers_Female : null,
-    NoofTeachers_Transgender : null,
-    TotalNoofTeachers : null,
-    NoofTotalTeacherReceivedServiceTraining : null,
-    TotalTeacherInvolveinNonTeachingAssignment : null,
-    NoofTeachers_BelowGraduate : null,
-    NoofTeachers_Graduate : null,
-    NoofTeachers_PostGraduateandAbove : null,
-    NoofTotalTeachersTrainedinComputer : null,
-    NoofTeachers_AgedAbove55 : null,
-    NoofTeachers_DiplomaorCertificateinbasicteacherstraining : null,
-    NoofTeachers_BachelorofElementaryEducation : null,
-    NoofTeachers_BEdorEquivalent : null,
-    NoofTeachers_MEdorEquivalent : null,
-    NoofTeachers_DiplomaorDegreeinSpecialEducation : null,
-    NoofTeachers_PursuinganyRelevantProfessionalCourse : null,
+    noofTeachers_Primary: null,
+    noofTeachers_PrimaryandUpperPrimary: null,
+    noofTeachers_HigerSecondaryOnly: null,
+    noofTeachers_SecondaryandHigerSecondary: null,
+    noofTeachers_PrePrimaryandPrimary: null,
+    noofTeachers_UpperPrimary: null,
+    noofTeachers_SecondaryOnly: null,
+    noofTeachers_UpperPrimaryandSecondary: null,
+    noofTeachers_PrePrimaryOnly: null,
+    noofTeachers_Regular: null,
+    noofTeachers_Parttime: null,
+    noofTeachers_Contract: null,
+    noofTeachers_Male: null,
+    noofTeachers_Female: null,
+    noofTeachers_Transgender: null,
+    totalNoofTeachers: null,
+    noofTotalTeacherReceivedServiceTraining: null,
+    totalTeacherInvolveinNonTeachingAssignment: null,
+    noofTeachers_BelowGraduate: null,
+    noofTeachers_Graduate: null,
+    noofTeachers_PostGraduateandAbove: null,
+    noofTotalTeachersTrainedinComputer: null,
+    noofTeachers_AgedAbove55: null,
+    noofTeachers_DiplomaorCertificateinbasicteacherstraining: null,
+    noofTeachers_BachelorofElementaryEducation: null,
+    noofTeachers_BEdorEquivalent: null,
+    noofTeachers_MEdorEquivalent: null,
+    noofTeachers_DiplomaorDegreeinSpecialEducation: null,
+    noofTeachers_PursuinganyRelevantProfessionalCourse: null,
     //
-    IsActive : null,
-    UserId : null,
-    IPAddress : null
+    isActive: null,
+    userId: null,
+    ipAddress: null
 
 
   };
@@ -257,8 +257,8 @@ export class InstitutionComponent {
     private httpService: HttpService,
 
   ) {
-    this.InstitutionFrom = FormHandler.controls<IInstitution>(this.initialValues);
-    this.InstitutionFrom.setValidators(FormHandler.validate<IInstitution>(this.validationSchema))
+    this.InstitutionForm = FormHandler.controls<IInstitution>(this.initialValues);
+    this.InstitutionForm.setValidators(FormHandler.validate<IInstitution>(this.validationSchema))
   }
 
   ngOnInit() {
@@ -267,12 +267,12 @@ export class InstitutionComponent {
     this.SchoolCategoryList = [{ categoryId: 1, categoryName: 'Pr. with Up.Pr.' }, { categoryId: 2, categoryName: 'Pr. with Up.Pr. sec. and H.Sec.' }];
     this.SchoolTypeList = [{ schoolTypeId: 1, schoolType: 'Co-educational' }, { schoolTypeId: 2, schoolType: 'Non Co-educational' }];
 
-    this.MediumList = [{ mediumId: 1, medium: 'Tamil' },{ mediumId: 2, medium: 'English' }];
-    
-  //   const selectedPrePrimaryControl = this.InstitutionFrom.controls['selectedPrePrimary'] as FormControl;
-  //   if (this.InstitutionFrom.controls['selectedPrePrimary']) {
-  //     selectedPrePrimaryControl.setValue("1"); // Assuming "1" corresponds to "Yes"
-  // }
+    this.MediumList = [{ mediumId: 1, medium: 'Tamil' }, { mediumId: 2, medium: 'English' }];
+
+    //   const selectedPrePrimaryControl = this.InstitutionForm.controls['selectedPrePrimary'] as FormControl;
+    //   if (this.InstitutionForm.controls['selectedPrePrimary']) {
+    //     selectedPrePrimaryControl.setValue("1"); // Assuming "1" corresponds to "Yes"
+    // }
 
     console.log(this.PrePrimaryList);
 
@@ -326,7 +326,7 @@ export class InstitutionComponent {
 
     this.buttonText = "Save";
     this.IsUpdate = false;
-    this.InstitutionFrom.reset();
+    this.InstitutionForm.reset();
 
   }
 
@@ -337,72 +337,134 @@ export class InstitutionComponent {
       let passSaveParams: any = {};
       if (this.IsUpdate) { //  UPDATE
 
-        // passSaveParams.institutionId = this.InstitutionId;
-        // passSaveParams.institutionName = this.InstitutionFrom.value['institutionName']
-        // // passSaveParams.organizationId = this.OrganizationId;
-        // // passSaveParams.organizationName = this.InstitutionFrom.value['organizationName']
-        // passSaveParams.nameOfSchool = this.InstitutionFrom.value['nameOfSchool']
-        // passSaveParams.shortName = this.InstitutionFrom.value['shortName']
-        // passSaveParams.schoolUDISECode = this.InstitutionFrom.value['schoolUDISECode']
-        // passSaveParams.affiliatedCode = this.InstitutionFrom.value['affiliatedCode']
-        // passSaveParams.category = this.InstitutionFrom.value['category']
+        // passSaveParams.InstitutionId = this.InstitutionId;
+        // passSaveParams.InstitutionName = this.InstitutionForm.value['institutionName']
+        // // passSaveParams.OrganizationId = this.OrganizationId;
+        // // passSaveParams.organizationName = this.InstitutionForm.value['organizationName']
+        // passSaveParams.Name = this.InstitutionForm.value['nameOfSchool']
+        // passSaveParams.ShortName = this.InstitutionForm.value['shortName']
+        // passSaveParams.UDISECode = this.InstitutionForm.value['schoolUDISECode']
+        // passSaveParams.affiliatedCode = this.InstitutionForm.value['affiliatedCode']
+        // passSaveParams.category = this.InstitutionForm.value['category']
 
-        // passSaveParams.addressOne = this.InstitutionFrom.value['address1']
-        // passSaveParams.addressTwo = this.InstitutionFrom.value['address2']
-        // passSaveParams.addressThree = this.InstitutionFrom.value['address3']
-        // passSaveParams.addressFour = this.InstitutionFrom.value['address4']
-        // passSaveParams.cityId = this.InstitutionFrom.value['cityId']
-        // passSaveParams.stateId = this.InstitutionFrom.value['stateId']
-        // passSaveParams.countryId = this.InstitutionFrom.value['countryId']
-        // passSaveParams.pinCode = this.InstitutionFrom.value['pinCode']
-        // passSaveParams.fax = this.InstitutionFrom.value['fax']
-        // passSaveParams.mobileNumber1 = this.InstitutionFrom.value['mobileNumber1']
-        // passSaveParams.mobileNumber2 = this.InstitutionFrom.value['mobileNumber2']
-        // passSaveParams.phoneNumber1 = this.InstitutionFrom.value['phoneNumber1']
-        // passSaveParams.phoneNumber2 = this.InstitutionFrom.value['phoneNumber2']
-        // passSaveParams.primaryEmail = this.InstitutionFrom.value['primaryEmail']
-        // passSaveParams.secondaryEmail = this.InstitutionFrom.value['secondaryEmail']
-        // passSaveParams.website = this.InstitutionFrom.value['website']
+        // passSaveParams.RegAddress1 = this.InstitutionForm.value['address1']
+        // passSaveParams.RegAddress2 = this.InstitutionForm.value['address2']
+        // passSaveParams.RegAddress3 = this.InstitutionForm.value['address3']
+        // passSaveParams.RegAddress4 = this.InstitutionForm.value['address4']
+        // passSaveParams.RegCity = this.InstitutionForm.value['cityId']
+        // passSaveParams.RegStateId = this.InstitutionForm.value['stateId']
+        // passSaveParams.RegCountryId = this.InstitutionForm.value['countryId']
+        // passSaveParams.RegPINCode = this.InstitutionForm.value['pinCode']
+        // passSaveParams.Fax = this.InstitutionForm.value['fax']
+        // passSaveParams.MobileNumber1 = this.InstitutionForm.value['mobileNumber1']
+        // passSaveParams.MobileNumber2 = this.InstitutionForm.value['mobileNumber2']
+        // passSaveParams.PhoneNumber1 = this.InstitutionForm.value['phoneNumber1']
+        // passSaveParams.PhoneNumber2 = this.InstitutionForm.value['phoneNumber2']
+        // passSaveParams.PrimaryEmail = this.InstitutionForm.value['primaryEmail']
+        // passSaveParams.SecondaryEmail = this.InstitutionForm.value['secondaryEmail']
+        // passSaveParams.Website = this.InstitutionForm.value['website']
 
-        passSaveParams.IsActive = true
-        passSaveParams.UserId = this.userDetails ? this.userDetails.UserId : 0
-        passSaveParams.IPAddress = "192.168.1.1";
+        passSaveParams.isActive = true
+        passSaveParams.userId = this.userDetails ? this.userDetails.UserId : 0
+        passSaveParams.ipAddress = "192.168.1.1";
 
         _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.UPDATE
 
       }
       else { //  SAVE
 
-        // passSaveParams.institutionId = this.InstitutionId;
-        // passSaveParams.institutionName = this.InstitutionFrom.value['institutionName']
-        // // passSaveParams.organizationId = this.OrganizationId;
-        // // passSaveParams.organizationName = this.InstitutionFrom.value['organizationName']
-        // passSaveParams.nameOfSchool = this.InstitutionFrom.value['nameOfSchool']
-        // passSaveParams.shortName = this.InstitutionFrom.value['shortName']
-        // passSaveParams.schoolUDISECode = this.InstitutionFrom.value['schoolUDISECode']
-        // passSaveParams.affiliatedCode = this.InstitutionFrom.value['affiliatedCode']
-        // passSaveParams.category = this.InstitutionFrom.value['category']
+        passSaveParams.institutionId = this.InstitutionId;
+        passSaveParams.institutionName = this.InstitutionForm.value['institutionName']
+        passSaveParams.selectedOrganization = this.InstitutionForm.value['selectedOrganization']
+        passSaveParams.name = this.InstitutionForm.value['name']
+        passSaveParams.shortName = this.InstitutionForm.value['shortName']
+        passSaveParams.UDISECode = this.InstitutionForm.value['UDISECode']
 
-        // passSaveParams.addressOne = this.InstitutionFrom.value['address1']
-        // passSaveParams.addressTwo = this.InstitutionFrom.value['address2']
-        // passSaveParams.addressThree = this.InstitutionFrom.value['address3']
-        // passSaveParams.addressFour = this.InstitutionFrom.value['address4']
-        // passSaveParams.cityId = this.InstitutionFrom.value['cityId']
-        // passSaveParams.stateId = this.InstitutionFrom.value['stateId']
-        // passSaveParams.countryId = this.InstitutionFrom.value['countryId']
-        // passSaveParams.pinCode = this.InstitutionFrom.value['pinCode']
-        // passSaveParams.fax = this.InstitutionFrom.value['fax']
-        // passSaveParams.mobileNumber1 = this.InstitutionFrom.value['mobileNumber1']
-        // passSaveParams.mobileNumber2 = this.InstitutionFrom.value['mobileNumber2']
-        // passSaveParams.phoneNumber1 = this.InstitutionFrom.value['phoneNumber1']
-        // passSaveParams.phoneNumber2 = this.InstitutionFrom.value['phoneNumber2']
-        // passSaveParams.primaryEmail = this.InstitutionFrom.value['primaryEmail']
-        // passSaveParams.secondaryEmail = this.InstitutionFrom.value['secondaryEmail']
-        // passSaveParams.website = this.InstitutionFrom.value['website']
+        passSaveParams.stateId = this.InstitutionForm.value['selectedState'] != null ? this.InstitutionForm.value['selectedState'] : ''; // .StateId : 0; not added
+        passSaveParams.city = this.InstitutionForm.value['city'] != null ? this.InstitutionForm.value['city'] : '';
+        passSaveParams.block = this.InstitutionForm.value['block'] != null ? this.InstitutionForm.value['block'] : '';
+        passSaveParams.selectedLocation = this.InstitutionForm.value['selectedLocation'] != null ? this.InstitutionForm.value['selectedLocation'] : '';  // .LocationId : 0; not added
+        passSaveParams.cluster = this.InstitutionForm.value['cluster'] != null ? this.InstitutionForm.value['cluster'] : '';
+        passSaveParams.ward = this.InstitutionForm.value['ward'] != null ? this.InstitutionForm.value['ward'] : '';
+        passSaveParams.mohalla = this.InstitutionForm.value['mohalla'] != null ? this.InstitutionForm.value['mohalla'] : '';
+        passSaveParams.pinCode = this.InstitutionForm.value['pinCode'] != null ? +(this.InstitutionForm.value['pinCode']) : 0;
+        passSaveParams.panchayat = this.InstitutionForm.value['panchayat'] != null ? this.InstitutionForm.value['panchayat'] : '';
+        passSaveParams.municipality = this.InstitutionForm.value['municipality'] != null ? this.InstitutionForm.value['municipality'] : '';
+        passSaveParams.selectedCategory = this.InstitutionForm.value['selectedCategory'] != null ? this.InstitutionForm.value['selectedCategory'] : '';
+        passSaveParams.stateManagement = this.InstitutionForm.value['stateManagement'] != null ? this.InstitutionForm.value['stateManagement'] : '';
+        passSaveParams.nationalManagement = this.InstitutionForm.value['nationalManagement'] != null ? this.InstitutionForm.value['nationalManagement'] : '';
+        passSaveParams.selectedschoolType = this.InstitutionForm.value['selectedschoolType'] != null ? this.InstitutionForm.value['selectedschoolType'] : '';
+        passSaveParams.classFrom = this.InstitutionForm.value['classFrom'] != null ? this.InstitutionForm.value['classFrom'] : '';
+        passSaveParams.classTo = this.InstitutionForm.value['classTo'] != null ? this.InstitutionForm.value['classTo'] : '';
+        passSaveParams.selectedPrePrimary = this.InstitutionForm.value['selectedPrePrimary'] != null ? this.InstitutionForm.value['selectedPrePrimary'] : '';
+        passSaveParams.selectedMedium = this.InstitutionForm.value['selectedMedium'] != null ? this.InstitutionForm.value['selectedMedium'] : '';
 
-        passSaveParams.IsActive = true
-        passSaveParams.UserId = this.userDetails ? this.userDetails.UserId : 0
-        passSaveParams.IPAddress = "192.168.1.1";
+        passSaveParams.regAddress1 = this.InstitutionForm.value['regAddress1'] != null ? this.InstitutionForm.value['regAddress1'] : '';
+        passSaveParams.regAddress2 = this.InstitutionForm.value['regAddress2'] != null ? this.InstitutionForm.value['regAddress2'] : '';
+        passSaveParams.regAddress3 = this.InstitutionForm.value['regAddress3'] != null ? this.InstitutionForm.value['regAddress3'] : '';
+        passSaveParams.regAddress4 = this.InstitutionForm.value['regAddress4'] != null ? this.InstitutionForm.value['regAddress4'] : '';
+        passSaveParams.regCity = this.InstitutionForm.value['regCity'] != null ? this.InstitutionForm.value['regCity'] : '';
+        passSaveParams.regStateId = this.InstitutionForm.value['regSelectedState'] != null ? this.InstitutionForm.value['regSelectedState'] : '';  // .RegStateId : 0; not added
+        passSaveParams.regCountryId = this.InstitutionForm.value['regSelectedCountry'] != null ? this.InstitutionForm.value['regSelectedCountry'] : ''; // .RegCountryId : 0; not added
+        passSaveParams.regPINCode = this.InstitutionForm.value['regPINCode'] != null ? +(this.InstitutionForm.value['regPINCode']) : 0;
+        passSaveParams.mobileNumber1 = this.InstitutionForm.value['mobileNumber1'] != null ? this.InstitutionForm.value['mobileNumber1'] : '';
+        passSaveParams.mobileNumber2 = this.InstitutionForm.value['mobileNumber2'] != null ? this.InstitutionForm.value['mobileNumber2'] : '';
+        passSaveParams.phoneNumber1 = this.InstitutionForm.value['phoneNumber1'] != null ? this.InstitutionForm.value['phoneNumber1'] : '';
+        passSaveParams.phoneNumber2 = this.InstitutionForm.value['phoneNumber2'] != null ? this.InstitutionForm.value['phoneNumber2'] : '';
+        passSaveParams.fax = this.InstitutionForm.value['fax'] != null ? this.InstitutionForm.value['fax'] : '';
+        passSaveParams.primaryEmail = this.InstitutionForm.value['primaryEmail'] != null ? this.InstitutionForm.value['primaryEmail'] : '';
+        passSaveParams.secondaryEmail = this.InstitutionForm.value['secondaryEmail'] != null ? this.InstitutionForm.value['secondaryEmail'] : '';
+        passSaveParams.website = this.InstitutionForm.value['website'] != null ? this.InstitutionForm.value['website'] : '';
+
+        passSaveParams.yearofEstablishment = this.InstitutionForm.value['yearofEstablishment'] != null ? this.InstitutionForm.value['yearofEstablishment'] : '';
+        passSaveParams.yearofRecognition_Primary = this.InstitutionForm.value['yearofRecognition_Primary'] != null ? this.InstitutionForm.value['yearofRecognition_Primary'] : '';
+        passSaveParams.yearofRecognition_UpperPrimary = this.InstitutionForm.value['yearofRecognition_UpperPrimary'] != null ? this.InstitutionForm.value['yearofRecognition_UpperPrimary'] : '';
+        passSaveParams.yearofRecognition_Secondary = this.InstitutionForm.value['yearofRecognition_Secondary'] != null ? this.InstitutionForm.value['yearofRecognition_Secondary'] : '';
+        passSaveParams.yearofRecognition_HigherSecondary = this.InstitutionForm.value['yearofRecognition_HigherSecondary'] != null ? this.InstitutionForm.value['yearofRecognition_HigherSecondary'] : '';
+        passSaveParams.affiliationBoard_Secondary = this.InstitutionForm.value['affiliationBoard_Secondary'] != null ? this.InstitutionForm.value['affiliationBoard_Secondary'] : '';
+        passSaveParams.affiliationBoard_HigherSecondary = this.InstitutionForm.value['affiliationBoard_HigherSecondary'] != null ? this.InstitutionForm.value['affiliationBoard_HigherSecondary'] : '';
+        passSaveParams.selectedMinoritySchool = this.InstitutionForm.value['selectedMinoritySchool'] != null ? this.InstitutionForm.value['selectedMinoritySchool'] : '';
+        passSaveParams.selectedIsthisaShiftSchool = this.InstitutionForm.value['selectedIsthisaShiftSchool'] != null ? this.InstitutionForm.value['selectedIsthisaShiftSchool'] : '';
+        passSaveParams.selectedBuildingStatus = this.InstitutionForm.value['selectedBuildingStatus'] != null ? this.InstitutionForm.value['selectedBuildingStatus'] : '';
+        passSaveParams.SelectedBoundaryWall = this.InstitutionForm.value['selectedBoundaryWall'] != null ? this.InstitutionForm.value['selectedBoundaryWall'] : '';
+        passSaveParams.noofBuildingBlocks = this.InstitutionForm.value['noofBuildingBlocks'] != null ? this.InstitutionForm.value['noofBuildingBlocks'] : '';
+        passSaveParams.noofPuccaBuildingBlocks = this.InstitutionForm.value['noofPuccaBuildingBlocks'] != null ? this.InstitutionForm.value['noofPuccaBuildingBlocks'] : '';
+        passSaveParams.selectedIsSpecialSchoolforCWSN = this.InstitutionForm.value['selectedIsSpecialSchoolforCWSN'] != null ? this.InstitutionForm.value['selectedIsSpecialSchoolforCWSN'] : '';
+        passSaveParams.selectedAvailabilityofRamps = this.InstitutionForm.value['selectedAvailabilityofRamps'] != null ? this.InstitutionForm.value['selectedAvailabilityofRamps'] : '';
+        passSaveParams.selectedAvailabilityofHandrails = this.InstitutionForm.value['selectedAvailabilityofHandrails'] != null ? this.InstitutionForm.value['selectedAvailabilityofHandrails'] : '';
+        passSaveParams.totalNoOfToilets_Boys = this.InstitutionForm.value['totalNoOfToilets_Boys'] != null ? this.InstitutionForm.value['totalNoOfToilets_Boys'] : '';
+        passSaveParams.totalNoOfToilets_Girls = this.InstitutionForm.value['totalNoOfToilets_Girls'] != null ? this.InstitutionForm.value['totalNoOfToilets_Girls'] : '';
+        passSaveParams.functional_Boys = this.InstitutionForm.value['functional_Boys'] != null ? this.InstitutionForm.value['functional_Boys'] : '';
+        passSaveParams.functional_Girls = this.InstitutionForm.value['functional_Girls'] != null ? this.InstitutionForm.value['functional_Girls'] : '';
+        passSaveParams.functionalCWSNFriendly_Boys = this.InstitutionForm.value['functionalCWSNFriendly_Boys'] != null ? this.InstitutionForm.value['functionalCWSNFriendly_Boys'] : '';
+        passSaveParams.functionalCWSNFriendly_Girls = this.InstitutionForm.value['functionalCWSNFriendly_Girls'] != null ? this.InstitutionForm.value['functionalCWSNFriendly_Girls'] : '';
+        passSaveParams.urinal_Boys = this.InstitutionForm.value['urinal_Boys'] != null ? this.InstitutionForm.value['urinal_Boys'] : '';
+        passSaveParams.urinal_Girls = this.InstitutionForm.value['urinal_Girls'] != null ? this.InstitutionForm.value['urinal_Girls'] : '';
+        passSaveParams.selectedHandwashNearToilet = this.InstitutionForm.value['selectedHandwashNearToilet'] != null ? this.InstitutionForm.value['selectedHandwashNearToilet'] : '';
+        passSaveParams.selectedHandwashFacilityforMeal = this.InstitutionForm.value['selectedHandwashFacilityforMeal'] != null ? this.InstitutionForm.value['selectedHandwashFacilityforMeal'] : '';
+        passSaveParams.selectedDrinkingWaterAvailable = this.InstitutionForm.value['selectedDrinkingWaterAvailable'] != null ? this.InstitutionForm.value['selectedDrinkingWaterAvailable'] : '';
+        passSaveParams.selectedDrinkingWaterFunctional = this.InstitutionForm.value['selectedDrinkingWaterFunctional'] != null ? this.InstitutionForm.value['selectedDrinkingWaterFunctional'] : '';
+        passSaveParams.selectedRainWaterHarvesting = this.InstitutionForm.value['selectedRainWaterHarvesting'] != null ? this.InstitutionForm.value['selectedRainWaterHarvesting'] : '';
+        passSaveParams.selectedPlaygroundAvailable = this.InstitutionForm.value['selectedPlaygroundAvailable'] != null ? this.InstitutionForm.value['selectedPlaygroundAvailable'] : '';
+        passSaveParams.noofBuildingsInGoodCondition = this.InstitutionForm.value['noofBuildingsInGoodCondition'] != null ? this.InstitutionForm.value['noofBuildingsInGoodCondition'] : '';
+        passSaveParams.noofBuildingNeedsMinorRepair = this.InstitutionForm.value['noofBuildingNeedsMinorRepair'] != null ? this.InstitutionForm.value['noofBuildingNeedsMinorRepair'] : '';
+        passSaveParams.noofBuildingNeedsMajorRepair = this.InstitutionForm.value['noofBuildingNeedsMajorRepair'] != null ? this.InstitutionForm.value['noofBuildingNeedsMajorRepair'] : '';
+        passSaveParams.otherRooms = this.InstitutionForm.value['otherRooms'] != null ? this.InstitutionForm.value['otherRooms'] : '';
+        passSaveParams.selectedLibraryAvailability = this.InstitutionForm.value['selectedLibraryAvailability'] != null ? this.InstitutionForm.value['selectedLibraryAvailability'] : '';
+        passSaveParams.selectedSeparateRoomforHM = this.InstitutionForm.value['selectedSeparateRoomforHM'] != null ? this.InstitutionForm.value['selectedSeparateRoomforHM'] : '';
+        passSaveParams.selectedFurnitureAvailability = this.InstitutionForm.value['selectedFurnitureAvailability'] != null ? this.InstitutionForm.value['selectedFurnitureAvailability'] : '';
+        passSaveParams.selectedElectricityAvailability = this.InstitutionForm.value['selectedElectricityAvailability'] != null ? this.InstitutionForm.value['selectedElectricityAvailability'] : '';
+        passSaveParams.selectedSolarPanel = this.InstitutionForm.value['selectedSolarPanel'] != null ? this.InstitutionForm.value['selectedSolarPanel'] : '';
+        passSaveParams.selectedMedicalcheckups = this.InstitutionForm.value['selectedMedicalcheckups'] != null ? this.InstitutionForm.value['selectedMedicalcheckups'] : '';
+
+        // passSaveParams.selectedICTLab =
+
+
+
+
+        passSaveParams.isActive = true
+        passSaveParams.userId = this.userDetails ? this.userDetails.UserId : 0
+        passSaveParams.ipAddress = "192.168.1.1";
 
         _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.SAVE
 
@@ -423,86 +485,84 @@ export class InstitutionComponent {
     }
   }
 
-  public GetStates(){
+  public GetStates() {
 
-    // try {
-    //   this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_STATES)
-    //   .subscribe({
-    //     next:(result:any) => {
-    //       this.StateList = result.states;
-    //     },
-    //     error: (err: HttpErrorResponse) => console.log(err)
-        
-    //   })
-    // } catch (error) {
-      
+    try {
+      this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_STATES)
+        .subscribe({
+          next: (result: any) => {
+            this.StateList = result.states;
+          },
+          error: (err: HttpErrorResponse) => console.log(err)
+
+        })
+    } catch (error) {
+
+    }
+  }
+
+  filterState(event: AutoCompleteCompleteEvent) {
+    let filtered: any[] = [];
+    let query = event.query;
+
+    for (let i = 0; i < (this.StateList as any[]).length; i++) {
+      let _stateList = (this.StateList as any[])[i];
+      if (_stateList.stateName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(_stateList);
+      }
+    }
+    this.filteredStateList = filtered;
+  }
+
+  onSelectState() {
+    // if (this.InstitutionForm.value['regSelectedState'] != undefined && this.InstitutionForm.value['regSelectedState'] != null) {
+    //   let _countryId: number = this.InstitutionForm.value['regSelectedState'].countryId
+    //   this.InstitutionForm.get("regSelectedCountry")?.setValue(this.CoutryList.find(c => c.countryId === _countryId))
+
+    // } else {
+    //   this.InstitutionForm.get("regSelectedCountry")?.setValue(null);
     // }
   }
 
-  filterState( event:AutoCompleteCompleteEvent){
-    // let filtered: any[] = [];
-    // let query = event.query;
-
-    // for (let i = 0; i < (this.StateList as any[]).length; i++) {
-    //   let _stateList = (this.StateList as any[])[i];
-    //   if (_stateList.stateName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-    //     filtered.push(_stateList);
-    //   }
-    // }
-    // this.filteredStateList = filtered;
+  onClearState() {
+    console.log('onClearState', this.InstitutionForm);
+    this.InstitutionForm.get("regSelectedCountry")?.reset();
   }
 
-  onSelectState(){
-  //   if (this.InstitutionFrom.value['selectedState'] != undefined && this.InstitutionFrom.value['selectedState'] != null) {
-  //     let _countryId: number = this.InstitutionFrom.value['selectedState'].countryId
-  //     this.InstitutionFrom.get("selectedCountry")?.setValue(this.CoutryList.find(c => c.countryId === _countryId))
 
-  //   } else {
-  //     this.InstitutionFrom.get("selectedCountry")?.setValue(null);
-  //   }
-  // }
 
-  // onClearState(){
-  //   console.log('onClearState',this.InstitutionFrom);
-  //   this.InstitutionFrom.get("selectedCountry")?.reset();
-  }
+  public GetCountries() {
+    try {
+      this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_COUNTRIES)
+        .subscribe(
+          {
+            next: (result: any) => {
+              this.CoutryList = result.countries;
+            },
+            error: (err: HttpErrorResponse) => console.log(err)
 
-  onClearState(){
+          }
+        )
+    } catch (error) {
 
-  }
-
-  public GetCountries(){
-    // try {
-    //   this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_COUNTRIES)
-    //   .subscribe(
-    //     {
-    //       next:(result : any) =>{
-    //         this.CoutryList = result.countries;
-    //       },
-    //       error: (err: HttpErrorResponse) => console.log(err)
-          
-    //     }
-    //   )
-    // } catch (error) {
-      
-    // }
+    }
   }
 
   filterCountry(event: AutoCompleteCompleteEvent) {
 
-    // let filtered: any[] = [];
-    // let query = event.query;
+    let filtered: any[] = [];
+    let query = event.query;
 
-    // for( let i = 0 ; i < (this.CoutryList as any[]).length; i++){
-    //   let _countriesList = (this.CoutryList as any[])[i];
-    //   if(_countriesList.countryName.toLowerCase().indexOf(query.toLowerCase()) == 0){
-    //     filtered.push(_countriesList);
-    //   }
-    // }
-    // this.filteredCoutryList = filtered
+    for (let i = 0; i < (this.CoutryList as any[]).length; i++) {
+      let _countriesList = (this.CoutryList as any[])[i];
+      if (_countriesList.countryName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(_countriesList);
+      }
+    }
+    this.filteredCoutryList = filtered
   }
 
-  
+
   RedirecttoList() {
     this.router.navigate(['/apps/fiscal/institution-list'])
   }

@@ -67,7 +67,7 @@ export class InstitutionListComponent {
   Edit(item: any) {
     console.log('Edit', item.institutionId);
 
-    this.router.navigate(['/apps/fiscal/institution/', item.InstitutionId]);
+    this.router.navigate(['/apps/fiscal/institution/', item.institutionId]);
   }
 
   Delete(data: any) {
@@ -77,7 +77,7 @@ export class InstitutionListComponent {
 
   confirmDelete() {
     this.deleteDialog = false;
-    let deletedItem: any[] = this.items.filter((val) => val.InstitutionId === this.item.InstitutionId);
+    let deletedItem: any[] = this.items.filter((val) => val.institutionId === this.item.institutionId);
 
     console.log('deletedItem', deletedItem);
 

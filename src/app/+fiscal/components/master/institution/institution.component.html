@@ -10,7 +10,7 @@
 
         <ng-template pTemplate="right">
             <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" (click)="Save()"
-                [disabled]="!InstitutionFrom.valid">{{buttonText}}</button>
+                [disabled]="!InstitutionForm.valid">{{buttonText}}</button>
             <button pButton pRipple label="List" icon="pi pi-align-justify" class="p-button-primary mr-2"
                 (click)="RedirecttoList()"></button>
             <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
@@ -22,43 +22,43 @@
     <p-toast></p-toast>
 
 
-    <form [formGroup]="InstitutionFrom" style="margin-top: 10px;">
+    <form [formGroup]="InstitutionForm" style="margin-top: 10px;">
 
         <div class="grid p-fluid mt-3">
 
             <div class="field col-12 md:col-3 m-0 pb-0">
                 <span class="p-float-label">
-                    <p-autoComplete [suggestions]="OrganizationList" formControlName="SelectedOrganization"
+                    <p-autoComplete [suggestions]="OrganizationList" formControlName="selectedOrganization"
                         [minLength]="0" [dropdown]="true" [forceSelection]="true"
                         field="OrganizationName"></p-autoComplete>
                     <label for="institutionName">Organization Name<span class="mandatory">*</span></label>
                 </span>
-                <small id="institutionName-help">{{ formError("SelectedOrganization" ,InstitutionFrom)}}</small>
+                <small id="institutionName-help">{{ formError("selectedOrganization" ,InstitutionForm)}}</small>
             </div>
 
             <div class="field col-12 md:col-3  m-0 pb-0">
                 <span class="p-float-label">
-                    <input type="text" id="institutionName" pInputText formControlName="InstitutionName"
+                    <input type="text" id="institutionName" pInputText formControlName="institutionName"
                         autocomplete="off">
                     <label for="institutionName">Name of School<span class="mandatory">*</span></label>
                 </span>
-                <small id="institutionName-help">{{ formError("InstitutionName" ,InstitutionFrom)}}</small>
+                <small id="institutionName-help">{{ formError("institutionName" ,InstitutionForm)}}</small>
             </div>
 
             <div class="field col-12 md:col-3  m-0 pb-0">
                 <span class="p-float-label">
-                    <input type="text" id="shortName" pInputText formControlName="ShortName" autocomplete="off">
+                    <input type="text" id="shortName" pInputText formControlName="shortName" autocomplete="off">
                     <label for="shortName">Short Name<span class="mandatory">*</span></label>
                 </span>
-                <small id="shortName-help">{{ formError("ShortName" ,InstitutionFrom)}}</small>
+                <small id="shortName-help">{{ formError("shortName" ,InstitutionForm)}}</small>
             </div>
 
             <div class="field col-12 md:col-3  m-0 pb-0">
                 <span class="p-float-label">
-                    <input type="text" id="UDISECode" pInputText formControlName="UDISECode" autocomplete="off">
+                    <input type="text" id="UDISECode" pInputText formControlName="UDISECode" autocomplete="off" pKeyFilter="int">
                     <label for="UDISECode"> School U-DISE Code<span class="mandatory">*</span></label>
                 </span>
-                <small id="UDISECode-help">{{ formError("UDISECode" ,InstitutionFrom)}}</small>
+                <small id="UDISECode-help">{{ formError("UDISECode" ,InstitutionForm)}}</small>
             </div>
 
 
@@ -77,7 +77,7 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="StateList" formControlName="SelectedState"
+                                            <p-autoComplete [suggestions]="StateList" formControlName="selectedState"
                                                 [minLength]="0" [dropdown]="true" [forceSelection]="true"
                                                 field="stateName" inputId="selectedState"></p-autoComplete>
                                             <label for="selectedState">State</label>
@@ -86,7 +86,7 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="district" pInputText formControlName="City"
+                                            <input type="text" id="district" pInputText formControlName="city"
                                                 autocomplete="off">
                                             <label for="district">District / City</label>
                                         </span>
@@ -94,7 +94,7 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="block" pInputText formControlName="Block"
+                                            <input type="text" id="block" pInputText formControlName="block"
                                                 autocomplete="off">
                                             <label for="block">Block</label>
                                         </span>
@@ -103,7 +103,7 @@
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <p-dropdown id="Location" [options]="InstitutionList"
-                                                optionLabel="applicationName" formControlName="SelectedLocation"
+                                                optionLabel="applicationName" formControlName="selectedLocation"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
                                             <label for="Location">Location</label>
@@ -112,7 +112,7 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="cluster" formControlName="Cluster" pInputText
+                                            <input type="text" id="cluster" formControlName="cluster" pInputText
                                                 autocomplete="off">
                                             <label for="cluster">Cluster</label>
                                         </span>
@@ -120,7 +120,7 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="ward" formControlName="Ward" pInputText
+                                            <input type="text" id="ward" formControlName="ward" pInputText
                                                 autocomplete="off">
                                             <label for="ward">Ward</label>
                                         </span>
@@ -128,7 +128,7 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="mohalla" formControlName="Mohalla" pInputText
+                                            <input type="text" id="mohalla" formControlName="mohalla" pInputText
                                                 autocomplete="off">
                                             <label for="mohalla">Mohalla</label>
                                         </span>
@@ -136,16 +136,16 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="pinCode" formControlName="PINCode" pInputText
-                                                autocomplete="off" pKeyFilter="int"  maxlength="6">
+                                            <input type="text" id="pinCode" formControlName="pinCode" pInputText
+                                                autocomplete="off" pKeyFilter="int" maxlength="6">
                                             <label for="pinCode">PINCode</label>
                                         </span>
-                                        <small id="pinCode-help">{{ formError("PINCode" ,InstitutionFrom)}}</small>
+                                        <small id="pinCode-help">{{ formError("PINCode" ,InstitutionForm)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="panchayat" formControlName="Panchayat" pInputText
+                                            <input type="text" id="panchayat" formControlName="panchayat" pInputText
                                                 autocomplete="off">
                                             <label for="panchayat">Panchayat</label>
                                         </span>
@@ -153,7 +153,7 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="municipality" formControlName="Municipality"
+                                            <input type="text" id="municipality" formControlName="municipality"
                                                 pInputText autocomplete="off">
                                             <label for="municipality">Municipality</label>
                                         </span>
@@ -162,7 +162,7 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-dropdown id="ddlSchoolCategory" formControlName="SelectedCategory"
+                                            <p-dropdown id="ddlSchoolCategory" formControlName="selectedCategory"
                                                 [options]="SchoolCategoryList" optionLabel="categoryName"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
@@ -172,7 +172,7 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="stateManagement" formControlName="StateManagement"
+                                            <input type="text" id="stateManagement" formControlName="stateManagement"
                                                 pInputText autocomplete="off">
                                             <label for="stateManagement">State Management</label>
                                         </span>
@@ -180,15 +180,15 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="NationalManagement"
-                                                formControlName="NationalManagement" pInputText autocomplete="off">
+                                            <input type="text" id="nationalManagement"
+                                                formControlName="nationalManagement" pInputText autocomplete="off">
                                             <label for="nationalManagement">National Management</label>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-dropdown id="ddlSchoolType" formControlName="SelectedschoolType"
+                                            <p-dropdown id="ddlSchoolType" formControlName="selectedschoolType"
                                                 [options]="SchoolTypeList" optionLabel="schoolType"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
@@ -198,15 +198,15 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="classFrom" formControlName="ClassFrom" pInputText
-                                                autocomplete="off" pInputText  pKeyFilter="int">
+                                            <input type="text" id="classFrom" formControlName="classFrom" pInputText
+                                                autocomplete="off" pInputText pKeyFilter="int">
                                             <label for="classFrom">Class From</label>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="txtClassTo" formControlName="ClassTo" pInputText
+                                            <input type="text" id="txtClassTo" formControlName="classTo" pInputText
                                                 autocomplete="off" pKeyFilter="int">
                                             <label for="txtClassTo">Class To</label>
                                         </span>
@@ -214,9 +214,8 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-dropdown id="ddlPrePrimary" formControlName="SelectedPrePrimary"
-                                                [options]="PrePrimaryList" optionLabel="label"
-                                                 [showClear]="true">
+                                            <p-dropdown id="ddlPrePrimary" formControlName="selectedPrePrimary"
+                                                [options]="PrePrimaryList" optionLabel="label" [showClear]="true">
                                             </p-dropdown>
                                             <label for="ddlPrePrimary ">Pre Primary</label>
                                         </span>
@@ -224,7 +223,7 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-dropdown id="ddlMedium" formControlName="SelectedMedium"
+                                            <p-dropdown id="ddlMedium" formControlName="selectedMedium"
                                                 [options]="MediumList" optionLabel="medium" [autoDisplayFirst]="false"
                                                 [showClear]="true">
                                             </p-dropdown>
@@ -241,149 +240,155 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="address_1" formControlName="RegAddress1" pInputText
+                                            <input type="text" id="address_1" formControlName="regAddress1" pInputText
                                                 autocomplete="off">
                                             <label for="address_1">Address 1</label>
                                         </span>
-                                        <small id="address_1-help">{{ formError("RegAddress1" ,InstitutionFrom)}}</small>
+                                        <small id="address_1-help">{{ formError("regAddress1"
+                                            ,InstitutionForm)}}</small>
                                     </div>
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="address_2" formControlName="RegAddress2" pInputText
+                                            <input type="text" id="address_2" formControlName="regAddress2" pInputText
                                                 autocomplete="off">
                                             <label for="address_2">Address 2</label>
                                         </span>
-                                        <small id="address_2-help">{{ formError("RegAddress2" ,InstitutionFrom)}}</small>
+                                        <small id="address_2-help">{{ formError("regAddress2"
+                                            ,InstitutionForm)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="address_3" formControlName="RegAddress3" pInputText
+                                            <input type="text" id="address_3" formControlName="regAddress3" pInputText
                                                 autocomplete="off">
                                             <label for="address_3">Address 3</label>
                                         </span>
-                                        <small id="address_3-help">{{ formError("RegAddress3"
-                                            ,InstitutionFrom)}}</small>
+                                        <small id="address_3-help">{{ formError("regAddress3"
+                                            ,InstitutionForm)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="address_4" formControlName="RegAddress4" pInputText
+                                            <input type="text" id="address_4" formControlName="regAddress4" pInputText
                                                 autocomplete="off">
                                             <label for="address_4">Address 4</label>
                                         </span>
-                                        <small id="address_4-help">{{ formError("RegAddress4"
-                                            ,InstitutionFrom)}}</small>
+                                        <small id="address_4-help">{{ formError("regAddress4"
+                                            ,InstitutionForm)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="InstitutionList" formControlName="RegCity"
-                                                [minLength]="0" [dropdown]="true" [forceSelection]="true" field="city"
-                                                inputId="city"></p-autoComplete>
+                                            <input type="text" id="city" pInputText formControlName="regCity"
+                                                autocomplete="off">
                                             <label for="city">City</label>
                                         </span>
-                                        <small id="city-help">{{ formError("cityId" ,InstitutionFrom)}}</small>
+                                        <small id="city-help">{{ formError("regCity" ,InstitutionForm)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="filteredStateList" formControlName="RegSelectedState"  
-                                                [minLength]="0" [dropdown]="true" [forceSelection]="true" field="stateName"
-                                                (onSelect)="onSelectState()"  (onClear)="onClearState()" (completeMethod)="filterState($event)"
+                                            <p-autoComplete [suggestions]="filteredStateList"
+                                                formControlName="regSelectedState" [minLength]="0" [dropdown]="true"
+                                                [forceSelection]="true" field="stateName" (onSelect)="onSelectState()"
+                                                (onClear)="onClearState()" (completeMethod)="filterState($event)"
                                                 inputId="state"></p-autoComplete>
                                             <label for="state">State</label>
                                         </span>
-                                        <small id="state-help">{{ formError("selectedState" ,InstitutionFrom)}}</small>
+                                        <small id="state-help">{{ formError("regSelectedState"
+                                            ,InstitutionForm)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="filteredCoutryList" formControlName="RegSelectedCountry" (completeMethod)="filterCountry($event)"
-                                                [minLength]="0" [dropdown]="true" [forceSelection]="true" field="countryName"
+                                            <p-autoComplete [suggestions]="filteredCoutryList"
+                                                formControlName="regSelectedCountry"
+                                                (completeMethod)="filterCountry($event)" [minLength]="0"
+                                                [dropdown]="true" [forceSelection]="true" field="countryName"
                                                 inputId="country"></p-autoComplete>
                                             <label for="country">Country</label>
                                         </span>
-                                        <small id="country-help">{{ formError("RegCountryId" ,InstitutionFrom)}}</small>
+                                        <small id="country-help">{{ formError("regSelectedCountry"
+                                            ,InstitutionForm)}}</small>
                                     </div>
 
 
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="fax" formControlName="Fax" pInputText
+                                            <input type="text" id="fax" formControlName="fax" pInputText
                                                 autocomplete="off">
                                             <label for="fax">Fax</label>
                                         </span>
-                                        <small id="fax-help">{{ formError("Fax" ,InstitutionFrom)}}</small>
+                                        <small id="fax-help">{{ formError("fax" ,InstitutionForm)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="mobileNumber1" formControlName="MobileNumber1"
+                                            <input type="text" id="mobileNumber1" formControlName="mobileNumber1"
                                                 pInputText autocomplete="off" pKeyFilter="int">
                                             <label for="mobileNumber1">Mobile Number 1</label>
                                         </span>
-                                        <small id="mobileNumber1-help">{{ formError("MobileNumber1"
-                                            ,InstitutionFrom)}}</small>
+                                        <small id="mobileNumber1-help">{{ formError("mobileNumber1"
+                                            ,InstitutionForm)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="mobileNumber2" formControlName="MobileNumber2"
+                                            <input type="text" id="mobileNumber2" formControlName="mobileNumber2"
                                                 pInputText autocomplete="off" pKeyFilter="int">
                                             <label for="mobileNumber2">Mobile Number 2</label>
                                         </span>
-                                        <small id="mobileNumber2-help">{{ formError("MobileNumber2"
-                                            ,InstitutionFrom)}}</small>
+                                        <small id="mobileNumber2-help">{{ formError("mobileNumber2"
+                                            ,InstitutionForm)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="phoneNumber1" formControlName="PhoneNumber1"
+                                            <input type="text" id="phoneNumber1" formControlName="phoneNumber1"
                                                 pInputText autocomplete="off" pKeyFilter="int">
                                             <label for="phoneNumber1">Phone Number 1</label>
                                         </span>
-                                        <small id="phoneNumber1-help">{{ formError("PhoneNumber1"
-                                            ,InstitutionFrom)}}</small>
+                                        <small id="phoneNumber1-help">{{ formError("phoneNumber1"
+                                            ,InstitutionForm)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="phoneNumber2" formControlName="PhoneNumber2"
+                                            <input type="text" id="phoneNumber2" formControlName="phoneNumber2"
                                                 pInputText autocomplete="off" pKeyFilter="int">
                                             <label for="phoneNumber2">Phone Number 2</label>
-                                            <small id="phoneNumber2-help">{{ formError("PhoneNumber2"
-                                                ,InstitutionFrom)}}</small>
+                                            <small id="phoneNumber2-help">{{ formError("phoneNumber2"
+                                                ,InstitutionForm)}}</small>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="primaryEmail" formControlName="PrimaryEmail"
+                                            <input type="text" id="primaryEmail" formControlName="primaryEmail"
                                                 pInputText autocomplete="off">
                                             <label for="primaryEmail">Primary Email</label>
-                                            <small id="primaryEmail-help">{{ formError("PrimaryEmail"
-                                                ,InstitutionFrom)}}</small>
+                                            <small id="primaryEmail-help">{{ formError("primaryEmail"
+                                                ,InstitutionForm)}}</small>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="secondaryEmail" formControlName="SecondaryEmail"
+                                            <input type="text" id="secondaryEmail" formControlName="secondaryEmail"
                                                 pInputText autocomplete="off">
                                             <label for="secondaryEmail">Secondary Email</label>
-                                            <small id="secondaryEmail-help">{{ formError("SecondaryEmail"
-                                                ,InstitutionFrom)}}</small>
+                                            <small id="secondaryEmail-help">{{ formError("secondaryEmail"
+                                                ,InstitutionForm)}}</small>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="website" formControlName="Website" pInputText
+                                            <input type="text" id="website" formControlName="website" pInputText
                                                 autocomplete="off">
                                             <label for="website">Website</label>
-                                            <small id="website-help">{{ formError("Website" ,InstitutionFrom)}}</small>
+                                            <small id="website-help">{{ formError("website" ,InstitutionForm)}}</small>
                                         </span>
                                     </div>
                                 </div>
@@ -399,7 +404,10 @@
                                         <label htmlFor="establishment" class="col-12 mb-2 md:col-6 md:mb-0">Year of
                                             Establishment</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="establishment" formControlName="YearofEstablishment" type="text" maxlength="4" pKeyFilter="int" pTooltip="Enter your username" tooltipPosition="right" placeholder="YYYY"/>
+                                            <input pInputText id="establishment" formControlName="yearofEstablishment"
+                                                type="text" maxlength="4" pKeyFilter="int"
+                                                pTooltip="Year of Establishment" tooltipPosition="right"
+                                                placeholder="YYYY" />
                                         </div>
                                     </div>
 
@@ -407,7 +415,10 @@
                                         <label htmlFor="recognitionPri" class="col-12 mb-2 md:col-6 md:mb-0">Year of
                                             Recognition-Pri.</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="recognitionPri" formControlName="YearofRecognition_Primary" type="text" maxlength="4" pKeyFilter="int" placeholder="YYYY" />
+                                            <input pInputText id="recognitionPri"
+                                                formControlName="yearofRecognition_Primary" type="text" maxlength="4"
+                                                pKeyFilter="int" pTooltip="Year of Recognition-Pri"
+                                                tooltipPosition="right" placeholder="YYYY" />
                                         </div>
                                     </div>
 
@@ -415,7 +426,10 @@
                                         <label htmlFor="recognitionUprPri" class="col-12 mb-2 md:col-6 md:mb-0">Year of
                                             Recognition-Upr.Pri.</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="recognitionUprPri" formControlName="YearofRecognition_UpperPrimary" type="text" maxlength="4" pKeyFilter="int" placeholder="YYYY" />
+                                            <input pInputText id="recognitionUprPri"
+                                                formControlName="yearofRecognition_UpperPrimary" type="text"
+                                                maxlength="4" pKeyFilter="int" pTooltip="Year of Recognition-Upr.Pri"
+                                                tooltipPosition="right" placeholder="YYYY" />
                                         </div>
                                     </div>
 
@@ -423,15 +437,22 @@
                                         <label htmlFor="recognitionSec" class="col-12 mb-2 md:col-6 md:mb-0">Year of
                                             Recognition-Sec.</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="recognitionSec" formControlName="YearofRecognition_Secondary" type="text" maxlength="4" pKeyFilter="int" placeholder="YYYY" />
+                                            <input pInputText id="recognitionSec"
+                                                formControlName="yearofRecognition_Secondary" type="text" maxlength="4"
+                                                pKeyFilter="int" pTooltip="Year of Recognition Sec"
+                                                tooltipPosition="right" placeholder="YYYY" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="recognitionHigherSec" class="col-12 mb-2 md:col-6 md:mb-0">Year of
+                                        <label htmlFor="recognitionHigherSec" class="col-12 mb-2 md:col-6 md:mb-0">Year
+                                            of
                                             Recognition-Higher Sec.</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="recognitionHigherSec" formControlName="YearofRecognition_HigherSecondary" type="text" maxlength="4" pKeyFilter="int" placeholder="YYYY" />
+                                            <input pInputText id="recognitionHigherSec"
+                                                formControlName="yearofRecognition_HigherSecondary" type="text"
+                                                maxlength="4" pKeyFilter="int" pTooltip="Year of Recognition Higher Sec"
+                                                tooltipPosition="right" placeholder="YYYY" />
                                         </div>
                                     </div>
 
@@ -439,7 +460,9 @@
                                         <label htmlFor="boardSec" class="col-12 mb-2 md:col-6 md:mb-0">Affiliation
                                             Board-Sec</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="boardSec" formControlName="AffiliationBoard_Secondary" type="text" placeholder="YYYY" />
+                                            <input pInputText id="boardSec" formControlName="affiliationBoard_Secondary"
+                                                type="text" pTooltip="Affiliation Board-Sec" tooltipPosition="right"
+                                                placeholder="YYYY" />
                                         </div>
                                     </div>
 
@@ -447,14 +470,18 @@
                                         <label htmlFor="boardHSec" class="col-12 mb-2 md:col-6 md:mb-0">Affiliation
                                             Board-HSec</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="boardHSec" formControlName="AffiliationBoard_HigherSecondary" type="text" placeholder="YYYY" />
+                                            <input pInputText id="boardHSec"
+                                                formControlName="affiliationBoard_HigherSecondary" type="text"
+                                                pTooltip="Affiliation Board-HSec" tooltipPosition="right"
+                                                placeholder="YYYY" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="ddlMinoritySchool" class="col-12 mb-2 md:col-6 md:mb-0">Minority School</label>
+                                        <label htmlFor="ddlMinoritySchool" class="col-12 mb-2 md:col-6 md:mb-0">Minority
+                                            School</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlMinoritySchool" formControlName="SelectedMinoritySchool"
+                                            <p-dropdown id="ddlMinoritySchool" formControlName="selectedMinoritySchool"
                                                 [options]="PrePrimaryList" optionLabel="label"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
@@ -464,10 +491,11 @@
                                 </div>
                                 <div class="col-12 md:col-6">
                                     <div class="field grid">
-                                        <label htmlFor="ddlShiftSchool" class="col-12 mb-2 md:col-6 md:mb-0">Is this a Shift
+                                        <label htmlFor="ddlShiftSchool" class="col-12 mb-2 md:col-6 md:mb-0">Is this a
+                                            Shift
                                             School?</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlShiftSchool" formControlName="SelectedIsthisaShiftSchool"
+                                            <p-dropdown id="ddlShiftSchool" formControlName="selectedIsthisaShiftSchool"
                                                 [options]="PrePrimaryList" optionLabel="label"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
@@ -478,7 +506,7 @@
                                         <label htmlFor="ddlBuildingStatus" class="col-12 mb-2 md:col-6 md:mb-0">Building
                                             Status</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlBuildingStatus" formControlName="SelectedBuildingStatus"
+                                            <p-dropdown id="ddlBuildingStatus" formControlName="selectedBuildingStatus"
                                                 [options]="PrePrimaryList" optionLabel="label"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
@@ -489,7 +517,7 @@
                                         <label htmlFor="ddlBoundarywall" class="col-12 mb-2 md:col-6 md:mb-0">Boundary
                                             wall</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlBoundarywall" formControlName="SelectedBoundaryWall"
+                                            <p-dropdown id="ddlBoundarywall" formControlName="selectedBuildingStatus"
                                                 [options]="PrePrimaryList" optionLabel="label"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
@@ -497,26 +525,34 @@
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="buildingBlocks" class="col-12 mb-2 md:col-6 md:mb-0">No.of Building
+                                        <label htmlFor="buildingBlocks" class="col-12 mb-2 md:col-6 md:mb-0">No.of
+                                            Building
                                             Blocks</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="buildingBlocks" formControlName="NoofBuildingBlocks" type="text"  pKeyFilter="int" placeholder="00"/>
+                                            <input pInputText id="buildingBlocks" formControlName="noofBuildingBlocks"
+                                                type="text" pKeyFilter="int" pTooltip="No of Building Blocks"
+                                                tooltipPosition="left" placeholder="00" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="BuildingBlocks" class="col-12 mb-2 md:col-6 md:mb-0">Pucca Building
+                                        <label htmlFor="BuildingBlocks" class="col-12 mb-2 md:col-6 md:mb-0">Pucca
+                                            Building
                                             Blocks</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="BuildingBlocks" formControlName="NoofPuccaBuildingBlocks" type="text"  pKeyFilter="int"  placeholder="00" />
+                                            <input pInputText id="BuildingBlocks"
+                                                formControlName="noofPuccaBuildingBlocks" type="text" pKeyFilter="int"
+                                                pTooltip="No of Pucca Building Blocks" tooltipPosition="left" placeholder="00" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="ddlSpecialSchool" class="col-12 mb-2 md:col-6 md:mb-0">Is Special School
+                                        <label htmlFor="ddlSpecialSchool" class="col-12 mb-2 md:col-6 md:mb-0">Is
+                                            Special School
                                             for CWSN?</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlSpecialSchool" formControlName="SelectedIsSpecialSchoolforCWSN"
+                                            <p-dropdown id="ddlSpecialSchool"
+                                                formControlName="selectedIsSpecialSchoolforCWSN"
                                                 [options]="PrePrimaryList" optionLabel="label"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
@@ -527,17 +563,19 @@
                                         <label htmlFor="ddlRamps" class="col-12 mb-2 md:col-6 md:mb-0">Availability of
                                             Ramps</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlRamps" formControlName="SelectedAvailabilityofRamps"
+                                            <p-dropdown id="ddlRamps" formControlName="selectedAvailabilityofRamps"
                                                 [options]="PrePrimaryList" optionLabel="label"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
                                     <div class="field grid">
-                                        <label htmlFor="ddlHandrails" class="col-12 mb-2 md:col-6 md:mb-0">Availability of
+                                        <label htmlFor="ddlHandrails" class="col-12 mb-2 md:col-6 md:mb-0">Availability
+                                            of
                                             Handrails</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlHandrails" formControlName="SelectedAvailabilityofHandrails"
+                                            <p-dropdown id="ddlHandrails"
+                                                formControlName="selectedAvailabilityofHandrails"
                                                 [options]="PrePrimaryList" optionLabel="label"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
@@ -548,61 +586,85 @@
                                 <div class="col-12 md:col-6">
                                     <h5>Toilets</h5>
                                     <div class="field grid">
-                                        <label htmlFor="ExcludingCWSN" class="col-12 mb-2 md:col-6 md:mb-0">Total(Excluding
+                                        <label htmlFor="ExcludingCWSN"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Total(Excluding
                                             CWSN)</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="ExcludingCWSN" formControlName="TotalNoOfToilets_Boys" type="text" placeholder="00"  pKeyFilter="int" />
+                                            <input pInputText id="ExcludingCWSN" formControlName="totalNoOfToilets_Boys"
+                                                type="text" placeholder="00" pTooltip="Total No Of Toilets Boys"
+                                                tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="ExcludingCWSN" formControlName="TotalNoOfToilets_Girls" type="text" placeholder="00"  pKeyFilter="int" />
+                                            <input pInputText id="ExcludingCWSN"
+                                                formControlName="totalNoOfToilets_Girls" type="text" placeholder="00"
+                                                pTooltip="Total No Of Toilets Girls" tooltipPosition="top"
+                                                pKeyFilter="int" />
                                         </div>
                                     </div>
                                     <div class="field grid">
-                                        <label htmlFor="Functional" class="col-12 mb-2 md:col-6 md:mb-0">Functional</label>
+                                        <label htmlFor="Functional"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Functional</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="Functional" formControlName="Functional_Boys" type="text" placeholder="00"  pKeyFilter="int" />
+                                            <input pInputText id="Functional" formControlName="functional_Boys"
+                                                type="text" placeholder="00" pTooltip="functional Boys"
+                                                tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="Functional" formControlName="Functional_Girls" type="text" placeholder="00"  pKeyFilter="int" />
+                                            <input pInputText id="Functional" formControlName="functional_Girls"
+                                                type="text" placeholder="00" pTooltip="Functional Girls"
+                                                tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                     </div>
                                     <div class="field grid">
                                         <label htmlFor="CWSNFriendly" class="col-12 mb-2 md:col-6 md:mb-0">Func. CWSN
                                             Friendly</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="CWSNFriendly" formControlName="FunctionalCWSNFriendly_Boys" type="text" placeholder="00"  pKeyFilter="int" />
+                                            <input pInputText id="CWSNFriendly"
+                                                formControlName="functionalCWSNFriendly_Boys" type="text"
+                                                placeholder="00" pTooltip="Functional CWSN Friendly Boys"
+                                                tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="CWSNFriendly" formControlName="FunctionalCWSNFriendly_Girls" type="text" placeholder="00"  pKeyFilter="int" />
+                                            <input pInputText id="CWSNFriendly"
+                                                formControlName="functionalCWSNFriendly_Girls" type="text"
+                                                placeholder="00" pTooltip="Functional CWSN Friendly Girls"
+                                                tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                     </div>
                                     <div class="field grid">
                                         <label htmlFor="Urinal" class="col-12 mb-2 md:col-6 md:mb-0">Urinal</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="Urinal" formControlName="Urinal_Boys" type="text" placeholder="00"  pKeyFilter="int" />
+                                            <input pInputText id="Urinal" formControlName="urinal_Boys" type="text"
+                                                placeholder="00" pTooltip="Urinal Boys" tooltipPosition="top"
+                                                pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="Urinal" formControlName="Urinal_Girls" type="text" placeholder="00"  pKeyFilter="int" />
+                                            <input pInputText id="Urinal" formControlName="urinal_Girls" type="text"
+                                                placeholder="00" pTooltip="Urinal Girls" tooltipPosition="top"
+                                                pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="ddlHandwashNearToilet" class="col-12 mb-2 md:col-6 md:mb-0">Handwash Near
+                                        <label htmlFor="ddlHandwashNearToilet"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Handwash Near
                                             Toilet</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlHandwashNearToilet" formControlName="SelectedHandwashNearToilet"
-                                                [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            <p-dropdown id="ddlHandwashNearToilet"
+                                                formControlName="selectedHandwashNearToilet" [options]="PrePrimaryList"
+                                                optionLabel="label" [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
 
 
                                     <div class="field grid">
-                                        <label htmlFor="ddlFacilityforMeal" class="col-12 mb-2 md:col-6 md:mb-0">Handwash Facility
+                                        <label htmlFor="ddlFacilityforMeal"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Handwash Facility
                                             for Meal</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlFacilityforMeal" formControlName="SelectedHandwashFacilityforMeal"
+                                            <p-dropdown id="ddlFacilityforMeal"
+                                                formControlName="selectedHandwashFacilityforMeal"
                                                 [options]="PrePrimaryList" optionLabel="label"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
@@ -610,10 +672,12 @@
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="ddlDrinkingWaterAvailable" class="col-12 mb-2 md:col-6 md:mb-0">Drinking Water
+                                        <label htmlFor="ddlDrinkingWaterAvailable"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Drinking Water
                                             Available</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlDrinkingWaterAvailable" formControlName="SelectedDrinkingWaterAvailable"
+                                            <p-dropdown id="ddlDrinkingWaterAvailable"
+                                                formControlName="selectedDrinkingWaterAvailable"
                                                 [options]="PrePrimaryList" optionLabel="label"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
@@ -621,10 +685,12 @@
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="ddlDrinkingWaterFunctional" class="col-12 mb-2 md:col-6 md:mb-0">Drinking Water
+                                        <label htmlFor="ddlDrinkingWaterFunctional"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Drinking Water
                                             Functional</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlDrinkingWaterFunctional" formControlName="SelectedDrinkingWaterFunctional"
+                                            <p-dropdown id="ddlDrinkingWaterFunctional"
+                                                formControlName="selectedDrinkingWaterFunctional"
                                                 [options]="PrePrimaryList" optionLabel="label"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
@@ -632,23 +698,25 @@
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="ddlRainWaterHarvesting" class="col-12 mb-2 md:col-6 md:mb-0">Rain Water
+                                        <label htmlFor="ddlRainWaterHarvesting"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Rain Water
                                             Harvesting</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlRainWaterHarvesting" formControlName="SelectedRainWaterHarvesting"
-                                                [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            <p-dropdown id="ddlRainWaterHarvesting"
+                                                formControlName="selectedRainWaterHarvesting" [options]="PrePrimaryList"
+                                                optionLabel="label" [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="ddlPlaygroundAvailable" class="col-12 mb-2 md:col-6 md:mb-0">Playground
+                                        <label htmlFor="ddlPlaygroundAvailable"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Playground
                                             Available</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlPlaygroundAvailable" formControlName="SelectedPlaygroundAvailable"
-                                                [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            <p-dropdown id="ddlPlaygroundAvailable"
+                                                formControlName="selectedPlaygroundAvailable" [options]="PrePrimaryList"
+                                                optionLabel="label" [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
                                         </div>
 
@@ -664,7 +732,10 @@
                                         <label htmlFor="goodCondition" class="col-12 mb-2 md:col-6 md:mb-0">In Good
                                             Condition</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="goodCondition" formControlName="NoofBuildingsInGoodCondition" type="text" placeholder=""  pKeyFilter="int"  placeholder="00" />
+                                            <input pInputText id="goodCondition"
+                                                formControlName="noofBuildingsInGoodCondition" type="text"
+                                                pKeyFilter="int" pTooltip="No of Buildings In Good Condition"
+                                                tooltipPosition="left" placeholder="00" />
                                         </div>
                                     </div>
 
@@ -672,7 +743,10 @@
                                         <label htmlFor="minorRepair" class="col-12 mb-2 md:col-6 md:mb-0">Needs Minor
                                             Repair</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="minorRepair" formControlName="NoofBuildingNeedsMinorRepair" type="text" placeholder=""  pKeyFilter="int"  placeholder="00" />
+                                            <input pInputText id="minorRepair"
+                                                formControlName="noofBuildingNeedsMinorRepair" type="text"
+                                                pKeyFilter="int" pTooltip="No of Building Needs Minor Repair"
+                                                tooltipPosition="left" placeholder="00" />
                                         </div>
                                     </div>
 
@@ -680,45 +754,55 @@
                                         <label htmlFor="majorRepair" class="col-12 mb-2 md:col-6 md:mb-0">Needs Major
                                             Repair</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="majorRepair" formControlName="NoofBuildingNeedsMajorRepair" type="text" placeholder=""  pKeyFilter="int"  placeholder="00" />
+                                            <input pInputText id="majorRepair"
+                                                formControlName="noofBuildingNeedsMajorRepair" type="text"
+                                                pKeyFilter="int" pTooltip="No of Building Needs Major Repair"
+                                                tooltipPosition="left" placeholder="00" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="OtherRooms" class="col-12 mb-2 md:col-6 md:mb-0">Other Rooms</label>
+                                        <label htmlFor="OtherRooms" class="col-12 mb-2 md:col-6 md:mb-0">Other
+                                            Rooms</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="OtherRooms" formControlName="OtherRooms" type="text" placeholder=""  pKeyFilter="int"  placeholder="00" />
+                                            <input pInputText id="OtherRooms" formControlName="otherRooms" type="text"
+                                                pKeyFilter="int" pTooltip="No of other Rooms" tooltipPosition="left"
+                                                placeholder="00" />
                                         </div>
 
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="ddlLibraryAvailability" class="col-12 mb-2 md:col-6 md:mb-0">Library
+                                        <label htmlFor="ddlLibraryAvailability"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Library
                                             Availability</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlLibraryAvailability" formControlName="SelectedLibraryAvailability"
-                                                [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            <p-dropdown id="ddlLibraryAvailability"
+                                                formControlName="selectedLibraryAvailability" [options]="PrePrimaryList"
+                                                optionLabel="label" [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="ddlSeparateRoomforHM" class="col-12 mb-2 md:col-6 md:mb-0">Separate Room for
+                                        <label htmlFor="ddlSeparateRoomforHM"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Separate Room for
                                             HM</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlSeparateRoomforHM" formControlName="SelectedSeparateRoomforHM"
-                                                [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            <p-dropdown id="ddlSeparateRoomforHM"
+                                                formControlName="selectedSeparateRoomforHM" [options]="PrePrimaryList"
+                                                optionLabel="label" [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="ddlFurnitureAvailability" class="col-12 mb-2 md:col-6 md:mb-0">Furniture
+                                        <label htmlFor="ddlFurnitureAvailability"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Furniture
                                             Availability</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlFurnitureAvailability" formControlName="SelectedFurnitureAvailability"
+                                            <p-dropdown id="ddlFurnitureAvailability"
+                                                formControlName="selectedFurnitureAvailability"
                                                 [options]="PrePrimaryList" optionLabel="label"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
@@ -726,10 +810,12 @@
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="ddlElectricityAvailability" class="col-12 mb-2 md:col-6 md:mb-0">Electricity
+                                        <label htmlFor="ddlElectricityAvailability"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Electricity
                                             Availability</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlElectricityAvailability" formControlName="SelectedElectricityAvailability"
+                                            <p-dropdown id="ddlElectricityAvailability"
+                                                formControlName="selectedElectricityAvailability"
                                                 [options]="PrePrimaryList" optionLabel="label"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
@@ -737,9 +823,10 @@
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="ddlSolarPanel" class="col-12 mb-2 md:col-6 md:mb-0">Solar Panel</label>
+                                        <label htmlFor="ddlSolarPanel" class="col-12 mb-2 md:col-6 md:mb-0">Solar
+                                            Panel</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlSolarPanel" formControlName="SelectedSolarPanel"
+                                            <p-dropdown id="ddlSolarPanel" formControlName="selectedSolarPanel"
                                                 [options]="PrePrimaryList" optionLabel="label"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
@@ -750,9 +837,9 @@
                                         <label htmlFor="ddlMedicalcheckups" class="col-12 mb-2 md:col-6 md:mb-0">Medical
                                             checkups</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlMedicalcheckups" formControlName="SelectedMedicalcheckups"
-                                                [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            <p-dropdown id="ddlMedicalcheckups"
+                                                formControlName="selectedMedicalcheckups" [options]="PrePrimaryList"
+                                                optionLabel="label" [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -767,30 +854,30 @@
                                 <div class="grid formgrid">
                                     <div class="field col-12 md:col-3 mt-3">
                                         <span class="p-float-label">
-                                            <p-dropdown id="ddlICTLab" formControlName="SelectedICTLab"
-                                            [options]="PrePrimaryList" optionLabel="label"
-                                            [autoDisplayFirst]="false" [showClear]="true">
-                                        </p-dropdown>
+                                            <p-dropdown id="ddlICTLab" formControlName="selectedICTLab"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
                                             <label for="ddlICTLab">ICT Lab</label>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3  mt-3">
                                         <span class="p-float-label">
-                                            <p-dropdown id="ddlInternet" formControlName="SelectedInternetConnection"
-                                            [options]="PrePrimaryList" optionLabel="label"
-                                            [autoDisplayFirst]="false" [showClear]="true">
-                                        </p-dropdown>
+                                            <p-dropdown id="ddlInternet" formControlName="selectedInternetConnection"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
                                             <label for="ddlInternet">Internet Connection</label>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3  mt-3">
                                         <span class="p-float-label">
-                                            <p-dropdown id="ddlInternet" formControlName="SelectedDTHConnection"
-                                            [options]="PrePrimaryList" optionLabel="label"
-                                            [autoDisplayFirst]="false" [showClear]="true">
-                                        </p-dropdown>
+                                            <p-dropdown id="ddlInternet" formControlName="selectedDTHConnection"
+                                                [options]="PrePrimaryList" optionLabel="label"
+                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
                                             <label for="ddlInternet">DTH Connection</label>
                                         </span>
                                     </div>
@@ -798,59 +885,65 @@
 
                                     <div class="field col-12 md:col-3 mt-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="desktop" formControlName="NoofDesktop" pInputText autocomplete="off"  pKeyFilter="int">
+                                            <input type="text" id="desktop" formControlName="noofDesktop" pInputText
+                                                autocomplete="off" pKeyFilter="int">
                                             <label for="desktop">Desktop</label>
-                                            <small id="desktop-help">{{ formError("desktop"
-                                                ,InstitutionFrom)}}</small>
+                                            <small id="desktop-help">{{ formError("noofDesktop"
+                                                ,InstitutionForm)}}</small>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3 mt-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="laptop" formControlName="NoofLaptop" pInputText autocomplete="off"  pKeyFilter="int">
+                                            <input type="text" id="laptop" formControlName="noofLaptop" pInputText
+                                                autocomplete="off" pKeyFilter="int">
                                             <label for="laptop">Laptop</label>
-                                            <small id="laptop-help">{{ formError("laptop"
-                                                ,InstitutionFrom)}}</small>
+                                            <small id="laptop-help">{{ formError("noofLaptop"
+                                                ,InstitutionForm)}}</small>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3 mt-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="projector" formControlName="NoofProjector" pInputText autocomplete="off"  pKeyFilter="int">
+                                            <input type="text" id="projector" formControlName="noofProjector" pInputText
+                                                autocomplete="off" pKeyFilter="int">
                                             <label for="projector">Projector</label>
-                                            <small id="projector-help">{{ formError("projector"
-                                                ,InstitutionFrom)}}</small>
+                                            <small id="projector-help">{{ formError("noofProjector"
+                                                ,InstitutionForm)}}</small>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3 mt-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="tablet" formControlName="NoofTablet" pInputText autocomplete="off"  pKeyFilter="int">
+                                            <input type="text" id="tablet" formControlName="noofTablet" pInputText
+                                                autocomplete="off" pKeyFilter="int">
                                             <label for="tablet">Tablet</label>
-                                            <small id="tablet-help">{{ formError("tablet"
-                                                ,InstitutionFrom)}}</small>
+                                            <small id="tablet-help">{{ formError("noofTablet"
+                                                ,InstitutionForm)}}</small>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="printer" formControlName="NoofPrinter" pInputText autocomplete="off"  pKeyFilter="int">
+                                            <input type="text" id="printer" formControlName="noofPrinter" pInputText
+                                                autocomplete="off" pKeyFilter="int">
                                             <label for="printer">Printer</label>
-                                            <small id="printer-help">{{ formError("printer"
-                                                ,InstitutionFrom)}}</small>
+                                            <small id="printer-help">{{ formError("noofPrinter"
+                                                ,InstitutionForm)}}</small>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="DigiBoard" formControlName="NoofDigiBoard" pInputText autocomplete="off"  pKeyFilter="int">
+                                            <input type="text" id="DigiBoard" formControlName="noofDigiBoard" pInputText
+                                                autocomplete="off" pKeyFilter="int">
                                             <label for="DigiBoard">DigiBoard</label>
-                                            <small id="DigiBoard-help">{{ formError("DigiBoard"
-                                                ,InstitutionFrom)}}</small>
+                                            <small id="DigiBoard-help">{{ formError("noofDigiBoard"
+                                                ,InstitutionForm)}}</small>
                                         </span>
                                     </div>
 
-                                  
+
 
                                 </div>
                             </div>
@@ -866,21 +959,34 @@
                                     <div class="field grid">
                                         <label htmlFor="primary" class="col-12 mb-2 md:col-6 md:mb-0">Primary</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="primary" formControlName="NoofTeachers_Primary" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="primary" formControlName="noofTeachers_Primary"
+                                                type="text" placeholder="00" maxlength="2"
+                                                pTooltip="No of Primary Teachers " tooltipPosition="left"
+                                                pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="primaryUpperPrimary" class="col-12 mb-2 md:col-6 md:mb-0">Pr. & Up.Pr</label>
+                                        <label htmlFor="primaryUpperPrimary" class="col-12 mb-2 md:col-6 md:mb-0">Pr. &
+                                            Up.Pr</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="primaryUpperPrimary" formControlName="NoofTeachers_PrimaryandUpperPrimary" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="primaryUpperPrimary"
+                                                formControlName="noofTeachers_PrimaryandUpperPrimary" type="text"
+                                                placeholder="00" maxlength="2"
+                                                pTooltip="No of Primary and UpperPrimary Teachers "
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="highSeconly" class="col-12 mb-2 md:col-6 md:mb-0">H Sec only.</label>
+                                        <label htmlFor="highSeconly" class="col-12 mb-2 md:col-6 md:mb-0">H Sec
+                                            only.</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="highSeconly" formControlName="NoofTeachers_HigerSecondaryOnly" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="highSeconly"
+                                                formControlName="noofTeachers_HigerSecondaryOnly" type="text"
+                                                placeholder="00" maxlength="2"
+                                                pTooltip="No of Higher Secondary Teachers " tooltipPosition="left"
+                                                pKeyFilter="int" />
                                         </div>
                                     </div>
 
@@ -888,7 +994,11 @@
                                         <label htmlFor="secandHSec" class="col-12 mb-2 md:col-6 md:mb-0">Sec and H
                                             Sec</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="secandHSec" formControlName="NoofTeachers_SecondaryandHigerSecondary" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="secandHSec"
+                                                formControlName="noofTeachers_SecondaryandHigerSecondary" type="text"
+                                                placeholder="00" maxlength="2"
+                                                pTooltip="No of Secondary and Higher Secondary Teachers "
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
@@ -896,21 +1006,32 @@
                                         <label htmlFor="prePri_Pri" class="col-12 mb-2 md:col-6 md:mb-0">Pre- Pri &
                                             Pri</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="prePri_Pri" formControlName="NoofTeachers_PrePrimaryandPrimary" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="prePri_Pri"
+                                                formControlName="noofTeachers_PrePrimaryandPrimary" type="text"
+                                                placeholder="00" maxlength="2"
+                                                pTooltip="No of Pre-Primary and Primary Teachers "
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="upperPrimary" class="col-12 mb-2 md:col-6 md:mb-0">Up.Pr.</label>
+                                        <label htmlFor="upperPrimary"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Up.Pr.</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="upperPrimary" formControlName="NoofTeachers_UpperPrimary" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="upperPrimary"
+                                                formControlName="noofTeachers_UpperPrimary" type="text" placeholder="00"
+                                                maxlength="2" pTooltip="No of UpperPrimary Teachers "
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
                                         <label htmlFor="seconly" class="col-12 mb-2 md:col-6 md:mb-0">Sec. only</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="seconly" formControlName="NoofTeachers_SecondaryOnly" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="seconly" formControlName="noofTeachers_SecondaryOnly"
+                                                type="text" placeholder="00" maxlength="2"
+                                                pTooltip="No of Secondary Teachers " tooltipPosition="left"
+                                                pKeyFilter="int" />
                                         </div>
                                     </div>
 
@@ -918,7 +1039,11 @@
                                         <label htmlFor="upPri_Sec" class="col-12 mb-2 md:col-6 md:mb-0">Up pri and
                                             Sec.</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="upPri_Sec" formControlName="NoofTeachers_UpperPrimaryandSecondary" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="upPri_Sec"
+                                                formControlName="noofTeachers_UpperPrimaryandSecondary" type="text"
+                                                placeholder="00" maxlength="2"
+                                                pTooltip="No of UpperPrimary and Secondary Teachers "
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
@@ -926,7 +1051,10 @@
                                         <label htmlFor="prePrimaryOnly" class="col-12 mb-2 md:col-6 md:mb-0">Pre-Primary
                                             Only</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="prePrimaryOnly" formControlName="NoofTeachers_PrePrimaryOnly" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="prePrimaryOnly"
+                                                formControlName="noofTeachers_PrePrimaryOnly" type="text"
+                                                placeholder="00" maxlength="2" pTooltip="No of Pre-Primary Teachers "
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
@@ -939,28 +1067,39 @@
                                     <div class="field grid">
                                         <label htmlFor="regular" class="col-12 mb-2 md:col-6 md:mb-0">Regular</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="regular" formControlName="NoofTeachers_Regular" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="regular" formControlName="noofTeachers_Regular"
+                                                type="text" placeholder="00" maxlength="2"
+                                                pTooltip="No of Regular Teachers " tooltipPosition="left"
+                                                pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
                                         <label htmlFor="parttime" class="col-12 mb-2 md:col-6 md:mb-0">Part-time</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="parttime" formControlName="NoofTeachers_Parttime" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="parttime" formControlName="noofTeachers_Parttime"
+                                                type="text" placeholder="00" maxlength="2"
+                                                pTooltip="No of Part-time Teachers " tooltipPosition="left"
+                                                pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
                                         <label htmlFor="contract" class="col-12 mb-2 md:col-6 md:mb-0">Contract</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="contract" formControlName="NoofTeachers_Contract" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="contract" formControlName="noofTeachers_Contract"
+                                                type="text" placeholder="00" maxlength="2"
+                                                pTooltip="No of Contract Teachers " tooltipPosition="left"
+                                                pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
                                         <label htmlFor="male" class="col-12 mb-2 md:col-6 md:mb-0">Male</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="male" formControlName="NoofTeachers_Male" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="male" formControlName="noofTeachers_Male" type="text"
+                                                placeholder="00" maxlength="2" pTooltip="No of Male Teachers "
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
 
                                     </div>
@@ -968,14 +1107,21 @@
                                     <div class="field grid">
                                         <label htmlFor="female" class="col-12 mb-2 md:col-6 md:mb-0">Female</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="female" formControlName="NoofTeachers_Female" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="female" formControlName="noofTeachers_Female"
+                                                type="text" placeholder="00" maxlength="2"
+                                                pTooltip="No of Female Teachers " tooltipPosition="left"
+                                                pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="transgender" class="col-12 mb-2 md:col-6 md:mb-0">Transgender</label>
+                                        <label htmlFor="transgender"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Transgender</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="transgender" formControlName="NoofTeachers_Transgender" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="transgender"
+                                                formControlName="noofTeachers_Transgender" type="text" placeholder="00"
+                                                maxlength="2" pTooltip="No of Transgender Teachers "
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
@@ -985,28 +1131,37 @@
                                         <label htmlFor="totalTeachers" class="col-12 mb-2 md:col-6 md:mb-0">Total
                                             Teachers</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="totalTeachers" formControlName="TotalNoofTeachers" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="totalTeachers" formControlName="totalNoofTeachers"
+                                                type="text" placeholder="00" maxlength="2"
+                                                pTooltip="No of Total Teachers Teachers " tooltipPosition="left"
+                                                pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="receivedServiceTraining" class="col-12 mb-2 md:col-8 md:mb-0">No. of Total Teacher
+                                        <label htmlFor="receivedServiceTraining"
+                                            class="col-12 mb-2 md:col-8 md:mb-0">No. of Total Teacher
                                             Received Service Training</label>
                                         <div class="col-12 md:col-4">
-                                            <input pInputText id="receivedServiceTraining" formControlName="NoofTotalTeacherReceivedServiceTraining" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="receivedServiceTraining"
+                                                formControlName="noofTotalTeacherReceivedServiceTraining" type="text"
+                                                placeholder="00" maxlength="2" pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="nonTeachingAssignmen" class="col-12 mb-2 md:col-8 md:mb-0">Total Teacher
+                                        <label htmlFor="nonTeachingAssignmen" class="col-12 mb-2 md:col-8 md:mb-0">Total
+                                            Teacher
                                             Involve in Non Teaching Assignment</label>
                                         <div class="col-12 md:col-4">
-                                            <input pInputText id="nonTeachingAssignmen" formControlName="TotalTeacherInvolveinNonTeachingAssignment" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="nonTeachingAssignmen"
+                                                formControlName="totalTeacherInvolveinNonTeachingAssignment" type="text"
+                                                placeholder="00" maxlength="2" pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                 </div>
-                               
+
 
                                 <div class="col-12 md:col-6">
                                     <h5>Academic Qualification</h5>
@@ -1014,14 +1169,20 @@
                                         <label htmlFor="belowGraduate" class="col-12 mb-2 md:col-6 md:mb-0">Below
                                             Graduate</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="belowGraduate" formControlName="NoofTeachers_BelowGraduate" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="belowGraduate"
+                                                formControlName="noofTeachers_BelowGraduate" type="text"
+                                                placeholder="00" maxlength="2" pTooltip="No of Teachers Below Graduate"
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
                                         <label htmlFor="graduate" class="col-12 mb-2 md:col-6 md:mb-0">Graduate</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="graduate" formControlName="NoofTeachers_Graduate" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="graduate" formControlName="noofTeachers_Graduate"
+                                                type="text" placeholder="00" maxlength="2"
+                                                pTooltip="No of Teachers Graduate" tooltipPosition="left"
+                                                pKeyFilter="int" />
                                         </div>
                                     </div>
 
@@ -1029,69 +1190,108 @@
                                         <label htmlFor="pg_Above" class="col-12 mb-2 md:col-6 md:mb-0">Post Graduate and
                                             Above</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="pg_Above" formControlName="NoofTeachers_PostGraduateandAbove" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="pg_Above"
+                                                formControlName="noofTeachers_PostGraduateandAbove" type="text"
+                                                placeholder="00" maxlength="2" pTooltip="No of Post Graduate and Above"
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor=" trainedinCompute" class="col-12 mb-2 md:col-6 md:mb-0">Total Teacher Trained in Computer</label>
+                                        <label htmlFor=" trainedinCompute" class="col-12 mb-2 md:col-6 md:mb-0">Total
+                                            Teacher Trained in Computer</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="trainedinCompute" formControlName="NoofTotalTeachersTrainedinComputer" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="trainedinCompute"
+                                                formControlName="noofTotalTeachersTrainedinComputer" type="text"
+                                                placeholder="00" maxlength="2" pTooltip="No of Total Teachers Trained in Computer"
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="agedabove55" class="col-12 mb-2 md:col-6 md:mb-0">Teachers Aged above 55</label>
+                                        <label htmlFor="agedabove55" class="col-12 mb-2 md:col-6 md:mb-0">Teachers Aged
+                                            above 55</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="agedabove55" formControlName="NoofTeachers_AgedAbove55" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="agedabove55"
+                                                formControlName="noofTeachers_AgedAbove55" type="text" placeholder="00"
+                                                maxlength="2"pTooltip="No of Teachers Aged Above 55"
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
-                                   
+
                                 </div>
 
 
                                 <div class="col-12 md:col-6">
                                     <h5>Teacher With Professional Qualification</h5>
                                     <div class="field grid">
-                                        <label htmlFor="diplomaTeachersTraining" class="col-12 mb-2 md:col-8 md:mb-0">Diploma or Certificate in basic teachers training</label>
+                                        <label htmlFor="diplomaTeachersTraining"
+                                            class="col-12 mb-2 md:col-8 md:mb-0">Diploma or Certificate in basic
+                                            teachers training</label>
                                         <div class="col-12 md:col-4">
-                                            <input pInputText id="diplomaTeachersTraining" formControlName="NoofTeachers_DiplomaorCertificateinbasicteacherstraining" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="diplomaTeachersTraining"
+                                                formControlName="noofTeachers_DiplomaorCertificateinbasicteacherstraining"
+                                                type="text" placeholder="00" maxlength="2"  pTooltip="No of Teachers Diplomaor Certificate in basic Teachers Training"
+                                                tooltipPosition="left"  pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="elementaryEducation" class="col-12 mb-2 md:col-8 md:mb-0">Bachelor of Elementary Education (B.El.Ed.)</label>
+                                        <label htmlFor="elementaryEducation"
+                                            class="col-12 mb-2 md:col-8 md:mb-0">Bachelor of Elementary Education
+                                            (B.El.Ed.)</label>
                                         <div class="col-12 md:col-4">
-                                            <input pInputText id="elementaryEducation" formControlName="NoofTeachers_BachelorofElementaryEducation" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="elementaryEducation"
+                                                formControlName="noofTeachers_BachelorofElementaryEducation" type="text"
+                                                placeholder="00" maxlength="2" pTooltip="No of Teachers Bachelor of Elementary Education"
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="B_Ed_Equivalent" class="col-12 mb-2 md:col-8 md:mb-0">B.Ed. or Equivalent</label>
+                                        <label htmlFor="B_Ed_Equivalent" class="col-12 mb-2 md:col-8 md:mb-0">B.Ed. or
+                                            Equivalent</label>
                                         <div class="col-12 md:col-4">
-                                            <input pInputText id="B_Ed_Equivalent" formControlName="NoofTeachers_BEdorEquivalent" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="B_Ed_Equivalent"
+                                                formControlName="noofTeachers_BEdorEquivalent" type="text"
+                                                placeholder="00" maxlength="2"  pTooltip="No of Teachers BEd or Equivalent"
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="M_Ed_Equivalent" class="col-12 mb-2 md:col-8 md:mb-0">M.Ed. or Equivalent</label>
+                                        <label htmlFor="M_Ed_Equivalent" class="col-12 mb-2 md:col-8 md:mb-0">M.Ed. or
+                                            Equivalent</label>
                                         <div class="col-12 md:col-4">
-                                            <input pInputText id="M_Ed_Equivalent" formControlName="NoofTeachers_MEdorEquivalent" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="M_Ed_Equivalent"
+                                                formControlName="noofTeachers_MEdorEquivalent" type="text"
+                                                placeholder="00" maxlength="2" pTooltip="No of Teachers MEd or Equivalent"
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="diploma_degreeSplEdu" class="col-12 mb-2 md:col-8 md:mb-0">Diploma/degree in special Education</label>
+                                        <label htmlFor="diploma_degreeSplEdu"
+                                            class="col-12 mb-2 md:col-8 md:mb-0">Diploma/degree in special
+                                            Education</label>
                                         <div class="col-12 md:col-4">
-                                            <input pInputText id="diploma_degreeSplEdu" formControlName="NoofTeachers_DiplomaorDegreeinSpecialEducation" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="diploma_degreeSplEdu"
+                                                formControlName="noofTeachers_DiplomaorDegreeinSpecialEducation"
+                                                type="text" placeholder="00" maxlength="2" pTooltip="No of Teachers Diploma or Degree in Special Education"
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="pursuingRelevantCourse" class="col-12 mb-2 md:col-8 md:mb-0">Pursuing any Relevant Professional Course</label>
+                                        <label htmlFor="pursuingRelevantCourse"
+                                            class="col-12 mb-2 md:col-8 md:mb-0">Pursuing any Relevant Professional
+                                            Course</label>
                                         <div class="col-12 md:col-4">
-                                            <input pInputText id="pursuingRelevantCourse" formControlName="NoofTeachers_PursuinganyRelevantProfessionalCourse" type="text" placeholder=""  pKeyFilter="int" />
+                                            <input pInputText id="pursuingRelevantCourse"
+                                                formControlName="noofTeachers_PursuinganyRelevantProfessionalCourse"
+                                                type="text" placeholder="00" maxlength="2" pTooltip=" No of Teachers Pursuingany Relevant Professional Course"
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
                                 </div>
