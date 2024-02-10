@@ -236,6 +236,7 @@ export const YupFiscalValidation = Object.freeze({
     name: yup.string().nullable().required('Name is required'),
     description: yup.string().nullable().required('Description is required'),
     selectedMiscName: yup.object().nullable().notRequired(),
+    keyWord:yup.string().nullable().notRequired(),
     isActive: yup.boolean().nullable(),
     unitId: yup.boolean().nullable(),
     userId: yup.number().nullable(),
