@@ -3,11 +3,12 @@ export interface IMisc {
     name?: string | null | undefined;
     description?: string | null | undefined;
 
-    selectedMiscName?: any | null | undefined;
+    selectedMiscName?: object | null | undefined;
     isActive?: boolean | null | undefined;
     unitId?: boolean | null | undefined;
     userId?: number | null | undefined;
     ipAddress?: string | null | undefined;
+    keyWord?:string | null | undefined;
 }
 
 export interface IMiscDetails {

@@ -24,11 +24,13 @@ export const FiscalAPIConfig = {
                     LIST: "/academicyear/GetAcademicYears"
                 },
                 
-                Misc: {
-                    SAVE: "/Misc/Create",
-                    UPDATE: "/Misc/Update",
-                    DELETE: "/Misc/Delete",
-                    LIST: "/Misc/GetMisc"
+                MISC: {
+                    SAVE: "/Fiscal/Miscellaneous/Create",
+                    UPDATE: "/Fiscal/Miscellaneous/Update",
+                    DELETE: "/Fiscal/Miscellaneous/Delete",
+                    LIST: "/Fiscal/Miscellaneous/GetAllMiscs",
+                    EDIT:"/Fiscal/Miscellaneous/GetMiscById",
+                    CREATE:"/Fiscal/Miscellaneous/MiscDetailCreate",
                 },
             }
         }
@@ -36,3 +38,9 @@ export const FiscalAPIConfig = {
 }
 
 
+// /Fiscal/Miscellaneous/Create
+// /Fiscal/Miscellaneous/Update
+// /Fiscal/Miscellaneous/Delete
+// /Fiscal/Miscellaneous/GetAllMiscs
+// /Fiscal/Miscellaneous/GetMiscById
+// /Fiscal/Miscellaneous/MiscDetailCreate

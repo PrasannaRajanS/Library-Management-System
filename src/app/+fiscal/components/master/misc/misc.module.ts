@@ -11,6 +11,8 @@ import { MessageService } from 'primeng/api';
 import { UtilService } from 'src/app/shared/util.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { ProductService } from 'src/app/demo/service/product.service';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
@@ -24,7 +26,11 @@ import { ProductService } from 'src/app/demo/service/product.service';
     ButtonModule,
     ToastModule,
     ReactiveFormsModule,
-    InputTextModule
+    InputTextModule,
+
+    // grid
+    TableModule,
+    DialogModule
   ],
   providers:[
     MessageService,

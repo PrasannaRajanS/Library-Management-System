@@ -11,6 +11,9 @@ import * as _ from 'lodash';
 import { MessageService } from 'primeng/api';
 import { FiscalValidation } from 'src/app/+fiscal/services/fiscal-validation';
 import { IMisc, IMiscDetails } from 'src/app/shared/interface/IMisc';
+import { HttpService } from 'src/app/+fiscal/services/http.service';
+import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-misc-detail',
@@ -29,6 +32,7 @@ export class MiscDetailComponent {
 
   miscdetails: IMiscDetails[] = [];
   cols: any[] = [];
+  items:IMisc[]=[];
   // item:IMiscDetails={};
 
   selectedItems: IMiscDetails[] = [];
@@ -60,28 +64,12 @@ export class MiscDetailComponent {
     private customerService: CustomerService,
     private utilService: UtilService,
     private messageService: MessageService,
+    private httpService :HttpService
   ) {
     this.MiscDetailForm = FormHandler.controls<IMiscDetails>(this.initialValues);
 
 
-    this.MiscList = [
-      {
-        "miscId": 1,
-        "name": "Blood Group",
-        "description": "Sky is white, Blood is red "
-      },
-      {
-        "miscId": 2,
-        "name": "Gender",
-        "description": "Male and female both are equal "
-      },
-      {
-        "miscId": 3,
-        "name": "Cuddalore",
-        "description": "the First see port in tamilnadu"
-      }
-
-    ];
+    
   }
 
   clearItem(autocomplete: any) {
@@ -90,6 +78,7 @@ export class MiscDetailComponent {
   }
   ngOnInit() {
     // this.customerService.getMiscDetailcLarge().then(miscdetails => this.miscdetails=miscdetails)
+    this.GetAll();
   }
 
   onGlobalFilter(table: Table, event: Event) {
@@ -108,6 +97,8 @@ export class MiscDetailComponent {
   Save() {
 
   }
+
+
 
   public AddRows() {
 
@@ -176,12 +167,28 @@ export class MiscDetailComponent {
 
   }
 
+  public GetAll() {
+    try {
+        this.httpService
+            .globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST+'?keyWord=Fiscal')
+            .subscribe({
+                next: (result: any) => {
+                    this.items = result.miscs;
+                    console.log('GetAll', this.items);
+                },
+                error: (err: HttpErrorResponse) => console.log(err),
+            });
+    } catch (error) {}
+}
+
+
+
   filterMisc(event: AutoCompleteCompleteEvent) {
     let filtered: any[] = [];
     let query = event.query;
-    for (let i = 0; i < (this.MiscList as any[]).length; i++) {
+    for (let i = 0; i < (this.items as any[]).length; i++) {
 
-      let misc = (this.MiscList as any[])[i];
+      let misc = (this.items as any[])[i];
 
       if (misc.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
         filtered.push(misc);
@@ -192,19 +199,6 @@ export class MiscDetailComponent {
 
   }
 
-  //   filterCountry(event: AutoCompleteCompleteEvent) {
-  //     let filtered: any[] = [];
-  //     let query = event.query;
-
-  //     for (let i = 0; i < (this.countries as any[]).length; i++) {
-  //         let country = (this.countries as any[])[i];
-  //         if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-  //             filtered.push(country);
-  //         }
-  //     }
-
-  //     this.filteredCountries = filtered;
-  // }
 
   Clear() {
 
