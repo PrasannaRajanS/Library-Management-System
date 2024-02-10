@@ -241,6 +241,16 @@ export const YupFiscalValidation = Object.freeze({
     userId: yup.number().nullable(),
     ipAddress: yup.string().nullable()
   }),
+  // PMSMISC: yup.object().shape({
+  //   PMSMiscId: yup.number().nullable(),
+  //   PMSMiscName: yup.string().nullable().required('Name is required'),
+  //   PMSMiscDescription: yup.string().nullable().required('Description is required'),
+  //   selectedPMSMiscName: yup.object().nullable().notRequired(),
+  //   isActive: yup.boolean().nullable(),
+  //   unitId: yup.boolean().nullable(),
+  //   userId: yup.number().nullable(),
+  //   ipAddress: yup.string().nullable()
+  // }),
 
 });
 

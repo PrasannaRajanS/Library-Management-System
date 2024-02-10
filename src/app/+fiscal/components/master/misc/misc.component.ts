@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
-import { IMisc } from 'src/app/+fiscal/services/interfaces/IMisc';
+
 import { YupFiscalValidation } from 'src/app/+fiscal/services/validation-schemas/yup-validation-schema';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
+import { IMisc } from 'src/app/shared/interface/IMisc';
 import { UtilService } from 'src/app/shared/util.service';
 
 import * as yup from "yup";
@@ -58,11 +59,11 @@ export class MiscComponent {
         this.MiscForm.setValidators(FormHandler.validate<IMisc>(this.validationSchema));
     }
 
-    GetAll() {
-        this.productService.getMisc().then((data) => {
-            this.items = data;
-        });
-    }
+    // GetAll() {
+    //     this.productService.getMisc().then((data) => {
+    //         this.items = data;
+    //     });
+    // }
 
     Save() {
         try {
@@ -102,6 +103,6 @@ export class MiscComponent {
         this.buttonText = 'Save';
         this.IsUpdate = false;
         this.MiscForm.reset();
-        this.GetAll();
+        // this.GetAll();
     }
 }

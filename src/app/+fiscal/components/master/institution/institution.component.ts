@@ -16,13 +16,17 @@ import { HttpService } from 'src/app/+admin/services/http.service';
 import * as yup from "yup";
 import { YupFiscalValidation } from 'src/app/+fiscal/services/validation-schemas/yup-validation-schema';
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
-import { IState } from 'src/app/+fiscal/services/interfaces/IState';
+
 import { IOrganization } from 'src/app/+fiscal/services/interfaces/IOrganization';
 import { ILabel, IMedium, ISchoolCategory, ISchoolType } from 'src/app/+fiscal/services/interfaces/ICommon';
 import { AppConstant } from 'src/app/config/app.contant';
+
+import { IState } from 'src/app/shared/interface/IState';
+
 import { ICountry } from 'src/app/+fiscal/services/interfaces/ICountry';
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { APIConfig } from 'src/app/config/api.config';
+
 
 
 @Component({

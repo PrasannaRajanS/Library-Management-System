@@ -18,7 +18,7 @@ export interface IEmployee {
     presentAddress3?: string | null | undefined;
     presentCity?: string | null | undefined;
 
-    presentState?: any | null | undefined;
+    selectedPresentState?: any | null | undefined;
 
     presentCountryId?: number | null | undefined;
     selectedPresentCountry?: object | null | undefined;

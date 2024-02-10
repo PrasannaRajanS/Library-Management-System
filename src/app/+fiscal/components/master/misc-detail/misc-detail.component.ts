@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {  FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { Table } from 'primeng/table';
-import { IMisc, IMiscDetails } from 'src/app/+fiscal/services/interfaces/IMisc';
+
 import { CustomerService } from 'src/app/demo/service/customer.service';
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
 import { UtilService } from 'src/app/shared/util.service';
 import * as _ from 'lodash';
 import { MessageService } from 'primeng/api';
 import { FiscalValidation } from 'src/app/+fiscal/services/fiscal-validation';
+import { IMisc, IMiscDetails } from 'src/app/shared/interface/IMisc';
 
 @Component({
   selector: 'app-misc-detail',
@@ -23,6 +24,7 @@ export class MiscDetailComponent {
   filteredMiscList: IMisc[] = []; //  List of items array
   MiscList: IMisc[] = []; //  List of items array
   //#endregion
+
 
 
   miscdetails: IMiscDetails[] = [];
@@ -66,12 +68,12 @@ export class MiscDetailComponent {
       {
         "miscId": 1,
         "name": "Blood Group",
-        "description": ""
+        "description": "Sky is white, Blood is red "
       },
       {
         "miscId": 2,
         "name": "Gender",
-        "description": ""
+        "description": "Male and female both are equal "
       },
       {
         "miscId": 3,

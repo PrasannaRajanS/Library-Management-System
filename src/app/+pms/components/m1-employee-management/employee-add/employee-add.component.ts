@@ -7,9 +7,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Table } from 'primeng/table';
 
 import { APIConfig } from 'src/app/config/api.config';
-import { IStatePMS } from 'src/app/+pms/services/interfaces/IStatePMS';
 import { IEmployee } from 'src/app/+pms/services/interfaces/IEmployee';
-import { ICountryPMS } from 'src/app/+pms/services/interfaces/ICountryPMS';
+
 
 import * as yup from 'yup';
 import { YupPMSValidation } from 'src/app/+pms/services/validation-schemas/yup-pms-validation';
@@ -17,6 +16,8 @@ import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
 
 import { UtilService } from 'src/app/shared/util.service';
 import { PMSHttpService } from 'src/app/+pms/services/pms-http.service';
+import { IState } from 'src/app/shared/interface/IState';
+import { ICountry } from 'src/app/shared/interface/ICountry';
 
 
 
@@ -102,11 +103,11 @@ export class EmployeeAddComponent {
     items: any[] = [];
 
     // AutoComplete By mj tamil
-    filteredStateList: IStatePMS[] = [];
-    StateList: IStatePMS[] = [];
+    filteredStateList: IState[] = [];
+    StateList: IState[] = [];
 
-    CoutryList: ICountryPMS[] = [];
-    filteredCoutryList: ICountryPMS[] = [];
+    CoutryList: ICountry[] = [];
+    filteredCoutryList: ICountry[] = [];
 
     //#region UI Validation Variables
     //  Step 1
@@ -132,7 +133,7 @@ export class EmployeeAddComponent {
         presentAddress2: null,
         presentAddress3: null,
         presentCity: null,
-        presentState: null,
+        selectedPresentState: null,
 
         presentCountryId: null,
         selectedPresentCountry: null,
@@ -292,6 +293,7 @@ export class EmployeeAddComponent {
      filterCountry(event: AutoCompleteCompleteEvent) {
         let filtered: any[] = [];
         let query = event.query;
+        
 
         for (let i = 0; i < (this.CoutryList as any[]).length; i++) {
             let _countriesList = (this.CoutryList as any[])[i];
@@ -336,6 +338,8 @@ export class EmployeeAddComponent {
         let filtered: any[] = [];
         let query = event.query;
 
+     
+
         for (let i = 0; i < (this.StateList as any[]).length; i++) {
             let _stateList = (this.StateList as any[])[i];
             if (
@@ -353,11 +357,11 @@ export class EmployeeAddComponent {
 
     onSelectState() {
         if (
-            this.EmployeeForm.value['presentState'] != undefined &&
-            this.EmployeeForm.value['presentState'] != null
+            this.EmployeeForm.value['selectedPresentState'] != undefined &&
+            this.EmployeeForm.value['selectedPresentState'] != null
         ) {
             let _countryId: number =
-                this.EmployeeForm.value['presentState'].countryId;
+                this.EmployeeForm.value['selectedPresentState'].countryId;
             this.EmployeeForm.get('selectedPresentCountry')?.setValue(
                 this.CoutryList.find((c) => c.countryId === _countryId)
             );

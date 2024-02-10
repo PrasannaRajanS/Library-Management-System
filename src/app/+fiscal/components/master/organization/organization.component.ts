@@ -17,11 +17,12 @@ import { YupFiscalValidation } from 'src/app/+fiscal/services/validation-schemas
 import * as yup from 'yup';
 
 import { UtilService } from 'src/app/shared/util.service';
-import { ICountry } from 'src/app/+fiscal/services/interfaces/ICountry';
-import { IState } from 'src/app/+fiscal/services/interfaces/IState';
+
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { HttpService } from 'src/app/+fiscal/services/http.service';
 import { APIConfig } from 'src/app/config/api.config';
+import { ICountry } from 'src/app/shared/interface/ICountry';
+import { IState } from 'src/app/shared/interface/IState';
 
 
 @Component({

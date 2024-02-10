@@ -3,6 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { MiscDetailRoutingModule } from './misc-detail-routing.module';
 import { MiscDetailComponent } from './misc-detail.component';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UtilService } from 'src/app/shared/util.service';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { TableModule } from 'primeng/table';
+import { CheckboxModule } from 'primeng/checkbox';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -11,7 +21,20 @@ import { MiscDetailComponent } from './misc-detail.component';
   ],
   imports: [
     CommonModule,
-    MiscDetailRoutingModule
-  ]
+    MiscDetailRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+
+    ToolbarModule,
+    ToastModule,
+    ButtonModule,
+    InputTextModule,
+    AutoCompleteModule,
+    TableModule,
+    CheckboxModule
+    
+  ],
+  providers:[UtilService,
+  MessageService]
 })
 export class MiscDetailModule { }

@@ -22,7 +22,7 @@ export const YupPMSValidation = Object.freeze({
         presentAddress2: yup.string().notRequired(),
         presentAddress3: yup.string().notRequired(),
         presentCity: yup.string().notRequired(),
-        presentState: yup.object().nullable().notRequired(),
+        selectedPresentState: yup.object().nullable().notRequired(),
         presentCountryId: yup.number().nullable().notRequired(),
         selectedPresentCountry: yup.object().nullable().notRequired(),
         presentPIN: yup.number().notRequired(),
