@@ -36,9 +36,9 @@ export class MiscDetailComponent {
 initialValues: IMiscDetails ={
   miscDtlId: null,
     miscId: null,
-    miscName: null,
+    miscDtlName: null,
     selectedMiscName: null,
-    MiscDtlDescription: null,
+    miscDtlDesc: null,
 
     userId: null,
     unitId: null,
@@ -134,7 +134,7 @@ this.filteredMiscList=filtered
       try {
         let Description: any[] = [];
         Description = _.filter(this.miscdetails, va =>{
-          return va.MiscDtlDescription == "";
+          return va.miscDtlDesc == "";
         })
 
         this.isValidation = true;
@@ -177,7 +177,7 @@ this.filteredMiscList=filtered
 
   RemoveRows(data:any, index:number ){
 
-    this.miscdetails[0].MiscDtlDescription='';
+    this.miscdetails[0].miscDtlDesc='';
 
   }
 
