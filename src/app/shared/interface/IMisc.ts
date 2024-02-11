@@ -15,8 +15,8 @@ export interface IMiscDetails {
 
     miscDtlId?: number | null | undefined;
     miscId?: number | null | undefined;
-    miscName?: number | null | undefined;
-    MiscDtlDescription?: string | null | undefined;
+    miscDtlName?: string | null | undefined;
+    miscDtlDesc?: string | null | undefined;
     selectedMiscName?:any | null | undefined;
     edit?: boolean | null | undefined;
 
