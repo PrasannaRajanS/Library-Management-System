@@ -11,6 +11,9 @@ import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { PMSValidation } from 'src/app/+pms/services/pms-validation';
 import { IMisc, IMiscDetails } from 'src/app/shared/interface/IMisc';
+import { HttpService } from 'src/app/+fiscal/services/http.service';
+import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -57,38 +60,26 @@ selectedItems:IMiscDetails[]=[];
 selectedMiscName:IMisc={};
 MiscList:IMisc[]=[]
   
+
+// Grid 
+items:IMisc[]=[];
+
+
 constructor(
   private router:Router,
   private utilService:UtilService,
-  private messageService:MessageService
+  private messageService:MessageService,
+  private httpService:HttpService,
    
 ){
 
   this.PMSMiscDetailForm = FormHandler.controls<IMiscDetails>(this.initialValues);
-
-  this.MiscList = [
-    {
-      "miscId": 1,
-      "name": "பெயர்",
-      "description": "அவன் பெயர் ஜான்"
-    },
-    {
-      "miscId": 2,
-      "name": "வயது",
-      "description": "வயது வெறும் எண்"
-    },
-    {
-      "miscId": 3,
-      "name": "முகவரி",
-      "description": "யாதும் ஊரே யாவரும் கேளிர்"
-    },
-
-
-  ];
 }
 
 
-
+ngOnInit(){
+  this.GetAll();
+}
 
   Save(){
 
@@ -106,8 +97,8 @@ constructor(
     let filtered:any[]=[];
     let query = event.query;
 
-    for( let  i=0; i<(this.MiscList as any[]).length;i++){
-      let misc =(this.MiscList as any[])[i];
+    for( let  i=0; i<(this.items as any[]).length;i++){
+      let misc =(this.items as any[])[i];
       if(misc.name.toLowerCase().indexOf(query.toUpperCase())==0){
         filtered.push(misc);
       }
@@ -185,5 +176,19 @@ this.filteredMiscList=filtered
     this.messageService.add({severity:_severity, summary:_summary, detail:_message , life:3000});
     return;
  }
+
+ public GetAll() {
+  try {
+      this.httpService
+          .globalGet(   FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST + '?keyWord=Fiscal'   )
+          .subscribe({
+              next: (result: any) => {
+                  this.items = result.miscs;  
+                  //    console.log('GetAll', this.items);
+              },
+              error: (err: HttpErrorResponse) => console.log(err),
+          });
+  } catch (error) {}
+}
 
 }

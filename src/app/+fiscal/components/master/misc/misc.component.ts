@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Table } from 'primeng/table';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { IMisc } from 'src/app/shared/interface/IMisc';
 import { YupFiscalValidation } from 'src/app/+fiscal/services/validation-schemas/yup-validation-schema';
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
 import * as yup from 'yup';
-
 import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
+import { AdminValidation } from 'src/app/+admin/services/admin-validation';
 
 import { UtilService } from 'src/app/shared/util.service';
-import { ProductService } from 'src/app/demo/service/product.service';
 import { MessageService } from 'primeng/api';
 import { HttpService } from 'src/app/+admin/services/http.service';
-import { AdminValidation } from 'src/app/+admin/services/admin-validation';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Table } from 'primeng/table';
+
+
+
 
 @Component({
     selector: 'app-misc',
@@ -22,24 +23,21 @@ import { Table } from 'primeng/table';
     styleUrls: ['./misc.component.scss'],
 })
 export class MiscComponent {
-    public miscId: number | null | undefined = 0;
 
+    public miscId: number | null | undefined = 0;
     public userDetails: any;
     public unitDetails: any;
     public buttonText: string = 'Save';
-
     private IsUpdate: boolean = false;
 
     MiscForm: FormGroup<YupFormControls<IMisc>>;
 
     //#region List Variables
     deleteDialog: boolean = false;
-
     cols: any[] = [];
     item: IMisc = {};
     items: IMisc[] = [];
     selectedItems: IMisc[] = [];
-
     IPAddress:string="192.168.0.0";
 
     initialValues: IMisc = {
@@ -64,13 +62,10 @@ export class MiscComponent {
     constructor(
         private messageService: MessageService,
         private utilService: UtilService,
-        private productService: ProductService,
         private httpService: HttpService
     ) {
         this.MiscForm = FormHandler.controls<IMisc>(this.initialValues);
-        this.MiscForm.setValidators(
-            FormHandler.validate<IMisc>(this.validationSchema)
-        );
+        this.MiscForm.setValidators(FormHandler.validate<IMisc>(this.validationSchema) );
     }
 
 
@@ -85,7 +80,7 @@ export class MiscComponent {
                 .subscribe({
                     next: (result: any) => {
                         this.items = result.miscs;
-                        console.log('GetAll', this.items);
+                        // console.log('GetAll', this.items);
                     },
                     error: (err: HttpErrorResponse) => console.log(err),
                 });
@@ -98,6 +93,9 @@ export class MiscComponent {
             let passSaveParams: any = {};
 
             if (this.IsUpdate) {
+
+                
+                
                 //  UPDATE
 
                 passSaveParams.miscId = this.miscId;
@@ -151,12 +149,7 @@ export class MiscComponent {
         this.GetAll();
     }
     private notificationsService(_severity: any, _summary: any, _message: any) {
-        this.messageService.add({
-            severity: _severity,
-            summary: _summary,
-            detail: _message,
-            life: 3000,
-        });
+        this.messageService.add({  severity: _severity, summary: _summary, detail: _message, life: 3000, });
         return;
     }
 
@@ -203,8 +196,7 @@ export class MiscComponent {
                 .globalPost(
                     FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.DELETE,
                     JSON.stringify(passSaveParams)
-                )
-                .subscribe({
+                )    .subscribe({
                     next: (result: any) => {
                         this.Clear();
                         this.notificationsService(
@@ -219,4 +211,6 @@ export class MiscComponent {
 
         this.item = {};
     }
+
+
 }
