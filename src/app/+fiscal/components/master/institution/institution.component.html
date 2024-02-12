@@ -55,10 +55,10 @@
 
             <div class="field col-12 md:col-3  m-0 pb-0">
                 <span class="p-float-label">
-                    <input type="text" id="UDISECode" pInputText formControlName="UDISECode" autocomplete="off" pKeyFilter="int">
+                    <input type="text" id="UDISECode" pInputText formControlName="udiseCode" autocomplete="off" pKeyFilter="int">
                     <label for="UDISECode"> School U-DISE Code<span class="mandatory">*</span></label>
                 </span>
-                <small id="UDISECode-help">{{ formError("UDISECode" ,InstitutionForm)}}</small>
+                <small id="UDISECode-help">{{ formError("udiseCode" ,InstitutionForm)}}</small>
             </div>
 
 
@@ -78,7 +78,8 @@
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <p-autoComplete [suggestions]="StateList" formControlName="selectedState"
-                                                [minLength]="0" [dropdown]="true" [forceSelection]="true"
+                                                [minLength]="0" [dropdown]="true" [forceSelection]="true" (onSelect)="onSelectState()"
+                                                (onClear)="onClearState()" (completeMethod)="filterState($event)"
                                                 field="stateName" inputId="selectedState"></p-autoComplete>
                                             <label for="selectedState">State</label>
                                         </span>

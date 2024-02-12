@@ -57,7 +57,7 @@ export const YupFiscalValidation = Object.freeze({
     selectedOrganization: yup.object().required('Organization Name is required'),
     name: yup.string().nullable().notRequired(),
     shortName: yup.string().required('Short Name is required'),
-    UDISECode: yup.string().required('UDISE Code is required'),
+    udiseCode: yup.string().required('UDISE Code is required'),
 
     stateId: yup.number().nullable().notRequired(),
     selectedState: yup.object().nullable().notRequired(),
@@ -84,7 +84,7 @@ export const YupFiscalValidation = Object.freeze({
     isPrePrimary: yup.boolean().nullable(),
     selectedPrePrimary: yup.object().nullable().notRequired(),
 
-    mediumId: yup.boolean().nullable(),
+    mediumofInstruction: yup.boolean().nullable(),
     selectedMedium: yup.object().nullable().notRequired(),
 
     // Address Details
