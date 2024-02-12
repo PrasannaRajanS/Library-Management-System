@@ -8,10 +8,10 @@ export interface IInstitution {
     selectedOrganization?: object | null | undefined
     name?: string | null | undefined;
     shortName?: string | null | undefined;
-    UDISECode?: string | null | undefined;
+    udiseCode?: string | null | undefined;
     //
     stateId?: number | null | undefined;
-    selectedState?: object | null | undefined
+    selectedState?: any | null | undefined
     city?: string | null | undefined;
     block?: string | null | undefined;
     locationId?: number | null | undefined;
@@ -34,7 +34,7 @@ export interface IInstitution {
     classTo?: number | null | undefined;
     isPrePrimary?: boolean | null | undefined;
     selectedPrePrimary?: object | null | undefined;
-    mediumId?: boolean | null | undefined;
+    mediumofInstruction?: boolean | null | undefined;
     selectedMedium?: object | null | undefined;
     //
     regAddress1?: string | null | undefined;
@@ -43,7 +43,7 @@ export interface IInstitution {
     regAddress4?: string | null | undefined;
     regCity?: string | null | undefined;
     regStateId?: number | null | undefined;
-    regSelectedState?: object | null | undefined;
+    regSelectedState?: any | null | undefined;
     regCountryId?: number | null | undefined;
     regSelectedCountry?: object | null | undefined;
     regPINCode?: number | null | undefined;
