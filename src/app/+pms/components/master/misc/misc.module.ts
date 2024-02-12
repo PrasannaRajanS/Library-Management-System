@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UtilService } from 'src/app/shared/util.service';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
@@ -25,7 +27,10 @@ import { InputTextModule } from 'primeng/inputtext';
     ToolbarModule,
     ToastModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    TableModule,
+    DialogModule
+
   
   ],
   providers:[

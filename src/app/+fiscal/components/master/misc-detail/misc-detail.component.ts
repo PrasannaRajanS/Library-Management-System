@@ -50,7 +50,7 @@ export class MiscDetailComponent {
     private DeleteTypeDtls: Array<any> = [];
     public TypeDtlLists = [];
 
-
+    
     MiscDetailForm: FormGroup<YupFormControls<IMiscDetails>>;
 
     initialValues: IMiscDetails = {
@@ -78,9 +78,7 @@ export class MiscDetailComponent {
         private messageService: MessageService,
         private httpService: HttpService
     ) {
-        this.MiscDetailForm = FormHandler.controls<IMiscDetails>(
-            this.initialValues
-        );
+        this.MiscDetailForm = FormHandler.controls<IMiscDetails>( this.initialValues);
     }
 
     clearItem(autocomplete: any) {
@@ -88,19 +86,14 @@ export class MiscDetailComponent {
         autocomplete.handleDropdownClick();
     }
     ngOnInit() {
-        // this.customerService.getMiscDetailcLarge().then(miscdetails => this.miscdetails=miscdetails)
         this.GetAll();
     }
 
     onGlobalFilter(table: Table, event: Event) {
-        table.filterGlobal(
-            (event.target as HTMLInputElement).value,
-            'contains'
-        );
+        table.filterGlobal((event.target as HTMLInputElement).value,  'contains' );
     }
-    navigateToCreateUser() {
-        this.router.navigate(['/apps/fiscal/misc']);
-    }
+
+
     formError = (controlName: string, formName: any) => {
         return this.utilService.formError(controlName, formName);
     };
@@ -114,9 +107,7 @@ export class MiscDetailComponent {
             if (this.IsUpdate) {
                 passSaveParams.miscDtlList = {};
                 passSaveParams.miscDtlList.miscDtl = this.miscdetails;
-                passSaveParams.miscDtlList.userId = this.userDetails
-                    ? this.userDetails.userId
-                    : 0;
+                passSaveParams.miscDtlList.userId = this.userDetails ? this.userDetails.userId  : 0;
                 passSaveParams.miscDtlList.ipAddress = '192.168.1.1';
 
                 _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.UPDATE;
@@ -126,9 +117,7 @@ export class MiscDetailComponent {
             else {
                 passSaveParams.miscDtlList = {};
                 passSaveParams.miscDtlList.miscDtl = this.miscdetails;
-                passSaveParams.miscDtlList.userId = this.userDetails
-                    ? this.userDetails.userId
-                    : 0;
+                passSaveParams.miscDtlList.userId = this.userDetails  ? this.userDetails.userId : 0;
                 passSaveParams.miscDtlList.ipAddress = '192.168.1.1';
 
                 _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.CREATE;
@@ -141,9 +130,7 @@ export class MiscDetailComponent {
                 .subscribe({
                     next: (result: any) => {
                         this.notificationsService(
-                            AdminValidation.NOTIFICATION_SUCCESS,
-                            'Success Message',
-                            result.message
+                            AdminValidation.NOTIFICATION_SUCCESS,  'Success Message', result.message
                         );
                         this.Clear();
                     },
@@ -184,8 +171,7 @@ export class MiscDetailComponent {
 
                     let dataBind: any = {};
                     dataBind.miscDtlId = 0;
-                    dataBind.miscId =  this.MiscDetailForm.value['selectedMiscName'] != null
-                            ? this.MiscDetailForm.value['selectedMiscName'].miscId : 0;
+                    dataBind.miscId =  this.MiscDetailForm.value['selectedMiscName'] != null  ? this.MiscDetailForm.value['selectedMiscName'].miscId : 0;
                     dataBind.miscDtlName = ''; // Detail Name
                     dataBind.miscDtlDesc = ''; // Detail Description
                     dataBind.isActive = true;
@@ -207,9 +193,7 @@ export class MiscDetailComponent {
 
         } else {
             this.notificationsService(
-                FiscalValidation.NOTIFICATION_VALIDATION,
-                'Validation Message',
-                'Please Select Misc Name'
+                FiscalValidation.NOTIFICATION_VALIDATION, 'Validation Message', 'Please Select Misc Name'
             );
         }
     }
@@ -217,9 +201,7 @@ export class MiscDetailComponent {
     RemoveRows(data: any, index: number)
      {
         try {
-                    if(+(data.miscDtlId)!=0){
-                        this.DeleteTypeDtls.push(data);
-                    }
+                    if(+(data.miscDtlId)!=0){   this.DeleteTypeDtls.push(data);   }
                     this.TypeDtlLists.splice(index,1);
                     this.TypeDtlLists=[...this.TypeDtlLists]
         } catch (error) {
@@ -235,14 +217,11 @@ export class MiscDetailComponent {
     public GetAll() {
         try {
             this.httpService
-                .globalGet(
-                    FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST +
-                        '?keyWord=Fiscal'
-                )
+                .globalGet(   FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST + '?keyWord=Fiscal'   )
                 .subscribe({
                     next: (result: any) => {
-                        this.items = result.miscs;
-                        console.log('GetAll', this.items);
+                        this.items = result.miscs;  
+                        //    console.log('GetAll', this.items);
                     },
                     error: (err: HttpErrorResponse) => console.log(err),
                 });
@@ -269,12 +248,10 @@ export class MiscDetailComponent {
     }
 
     private notificationsService(_severity: any, _summary: any, _message: any) {
-        this.messageService.add({
-            severity: _severity,
-            summary: _summary,
-            detail: _message,
-            life: 3000,
-        });
+        this.messageService.add({ severity: _severity,  summary: _summary, detail: _message,   life: 3000, });
         return;
+    }
+    navigateToCreateUser() {
+        this.router.navigate(['/apps/fiscal/misc']);
     }
 }

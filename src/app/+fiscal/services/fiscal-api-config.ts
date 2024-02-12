@@ -37,10 +37,3 @@ export const FiscalAPIConfig = {
     }
 }
 
-
-// /Fiscal/Miscellaneous/Create
-// /Fiscal/Miscellaneous/Update
-// /Fiscal/Miscellaneous/Delete
-// /Fiscal/Miscellaneous/GetAllMiscs
-// /Fiscal/Miscellaneous/GetMiscById
-// /Fiscal/Miscellaneous/MiscDetailCreate
