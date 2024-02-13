@@ -77,10 +77,11 @@ export class MiscComponent {
         try {
             this.httpService
                 .globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST+'?keyWord=Fiscal')
+                
                 .subscribe({
                     next: (result: any) => {
                         this.items = result.miscs;
-                        // console.log('GetAll', this.items);
+                        console.log('GetAll', this.items);
                     },
                     error: (err: HttpErrorResponse) => console.log(err),
                 });
@@ -112,7 +113,7 @@ export class MiscComponent {
             } else {
                 //  SAVE
 
-                passSaveParams.miscId = this.miscId;
+                passSaveParams.miscId = 0;
                 passSaveParams.name = this.MiscForm.value['name'];
                 passSaveParams.description = this.MiscForm.value['description'];
 
@@ -189,6 +190,8 @@ export class MiscComponent {
             passSaveParams.name = deletedItem[0].name;
             passSaveParams.description = deletedItem[0].description;
             passSaveParams.isActive = false;
+            passSaveParams.ipAddress=this.IPAddress;
+            passSaveParams.keyWord="Fiscal"
 
             console.log(passSaveParams);
 
