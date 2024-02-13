@@ -147,22 +147,51 @@ export class AppMenuComponent implements OnInit {
                     },
                 ]
             },
+
             {
-                label: 'Student',
-                icon: 'pi pi-home',
+                label: 'SCHOOL',
+                icon: 'pi pi-fw pi-align-left',
                 items: [
                     {
-                        label: 'Add Student',
-                        icon: 'pi pi-fw pi-home',
-                        routerLink: ['/apps/students/student-add']
+                        label: 'Master',
+                        icon: 'pi pi-fw pi-align-left',
+                        items: [
+                            {
+                                label: 'Misc',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/apps/pms/master/misc']
+                            },
+                            {
+                                label: 'Misc Detail',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/apps/pms/master/misc-detail']
+                            },
+                            {
+                                label: 'Period',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/apps/master/period']
+                            },
+                        ]
                     },
                     {
-                        label: 'Student List',
-                        icon: 'pi pi-fw pi-chart-pie',
-                        routerLink: ['/apps/students/student-list']
+                        label: 'Student Module',
+                        icon: 'pi pi-fw pi-align-left',
+                        items: [
+                            {
+                                label: 'Add Student',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/apps/students/student-add']
+                            },
+                            {
+                                label: 'Student List',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/apps/students/student-list']
+                            },
+                        ]
                     }
                 ]
             },
+            
             {
                 label: 'Dashboards',
                 icon: 'pi pi-home',

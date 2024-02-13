@@ -25,15 +25,16 @@
     <form [formGroup]="InstitutionForm" style="margin-top: 10px;">
 
         <div class="grid p-fluid mt-3">
-
             <div class="field col-12 md:col-3 m-0 pb-0">
                 <span class="p-float-label">
-                    <p-autoComplete [suggestions]="OrganizationList" formControlName="selectedOrganization"
-                        [minLength]="0" [dropdown]="true" [forceSelection]="true"
-                        field="OrganizationName"></p-autoComplete>
-                    <label for="institutionName">Organization Name<span class="mandatory">*</span></label>
+                    <p-autoComplete [suggestions]="filteredOrganization" formControlName="selectedOrganization"
+                        [minLength]="0" [dropdown]="true" [forceSelection]="true" field="organization"
+                        (completeMethod)="filterOrganization($event)"
+                        (onSelect)="onSelectOrganization()"
+                         [showClear]="true"></p-autoComplete>
+                    <label for="organization">Organization<span class="mandatory">*</span></label>
                 </span>
-                <small id="institutionName-help">{{ formError("selectedOrganization" ,InstitutionForm)}}</small>
+                <small id="organization-help">{{ formError("selectedOrganization" ,InstitutionForm)}}</small>
             </div>
 
             <div class="field col-12 md:col-3  m-0 pb-0">
@@ -55,10 +56,11 @@
 
             <div class="field col-12 md:col-3  m-0 pb-0">
                 <span class="p-float-label">
-                    <input type="text" id="UDISECode" pInputText formControlName="udiseCode" autocomplete="off" pKeyFilter="int">
+                    <input type="text" id="UDISECode" pInputText formControlName="UDISECode" autocomplete="off"
+                        pKeyFilter="int">
                     <label for="UDISECode"> School U-DISE Code<span class="mandatory">*</span></label>
                 </span>
-                <small id="UDISECode-help">{{ formError("udiseCode" ,InstitutionForm)}}</small>
+                <small id="UDISECode-help">{{ formError("UDISECode" ,InstitutionForm)}}</small>
             </div>
 
 
@@ -77,10 +79,12 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete [suggestions]="StateList" formControlName="selectedState"
-                                                [minLength]="0" [dropdown]="true" [forceSelection]="true" (onSelect)="onSelectState()"
-                                                (onClear)="onClearState()" (completeMethod)="filterState($event)"
-                                                field="stateName" inputId="selectedState"></p-autoComplete>
+                                            <p-autoComplete [suggestions]="filteredStateList" formControlName="selectedState"
+                                                [minLength]="0" [dropdown]="true" [forceSelection]="true"
+                                                field="stateName" inputId="selectedState"
+                                                (completeMethod)="filterState($event)"
+                                                (onSelect)="onSelectState()"
+                                                ></p-autoComplete>
                                             <label for="selectedState">State</label>
                                         </span>
                                     </div>
@@ -103,8 +107,8 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-dropdown id="Location" [options]="InstitutionList"
-                                                optionLabel="applicationName" formControlName="selectedLocation"
+                                            <p-dropdown id="Location" [options]="LocationList"
+                                                optionLabel="location" formControlName="selectedLocation"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
                                             <label for="Location">Location</label>
@@ -141,7 +145,6 @@
                                                 autocomplete="off" pKeyFilter="int" maxlength="6">
                                             <label for="pinCode">PINCode</label>
                                         </span>
-                                        <small id="pinCode-help">{{ formError("PINCode" ,InstitutionForm)}}</small>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
@@ -167,30 +170,34 @@
                                                 [options]="SchoolCategoryList" optionLabel="categoryName"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
-                                            <label for="ddlSchoolCategory">School Category </label>
+                                            <label for="ddlSchoolCategory">School Category</label>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="stateManagement" formControlName="stateManagement"
-                                                pInputText autocomplete="off">
-                                            <label for="stateManagement">State Management</label>
+                                            <p-dropdown id="ddlstateManagement" formControlName="stateManagement"
+                                            [options]="StateManagementList" optionLabel="stateManagementName"
+                                            [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                            <label for="ddlstateManagement">State Management</label>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="nationalManagement"
-                                                formControlName="nationalManagement" pInputText autocomplete="off">
-                                            <label for="nationalManagement">National Management</label>
+                                            <p-dropdown id="ddlnationalManagementt" formControlName="nationalManagement"
+                                            [options]="NationalManagementList" optionLabel="nationalManagementName"
+                                            [autoDisplayFirst]="false" [showClear]="true">
+                                            </p-dropdown>
+                                            <label for="ddlnationalManagementt">National Management</label>
                                         </span>
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <p-dropdown id="ddlSchoolType" formControlName="selectedschoolType"
-                                                [options]="SchoolTypeList" optionLabel="schoolType"
+                                            <p-dropdown id="ddlSchoolType" formControlName="selectedSchoolType"
+                                                [options]="SchoolTypeList" optionLabel="typeName"
                                                 [autoDisplayFirst]="false" [showClear]="true">
                                             </p-dropdown>
                                             <label for="ddlSchoolType">School Type</label>
@@ -225,10 +232,20 @@
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
                                             <p-dropdown id="ddlMedium" formControlName="selectedMedium"
-                                                [options]="MediumList" optionLabel="medium" [autoDisplayFirst]="false"
+                                                [options]="MediumofInstructionList" optionLabel="instruction" [autoDisplayFirst]="false"
                                                 [showClear]="true">
                                             </p-dropdown>
                                             <label for="ddlMedium ">Medium</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <p-dropdown id="ddlBoard" formControlName="selectedBoard"
+                                                [options]="BoardList" optionLabel="boardName" [autoDisplayFirst]="false"
+                                                [showClear]="true">
+                                            </p-dropdown>
+                                            <label for="ddlBoard">Board</label>
                                         </span>
                                     </div>
                                 </div>
@@ -245,8 +262,7 @@
                                                 autocomplete="off">
                                             <label for="address_1">Address 1</label>
                                         </span>
-                                        <small id="address_1-help">{{ formError("regAddress1"
-                                            ,InstitutionForm)}}</small>
+                                       
                                     </div>
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
@@ -254,8 +270,7 @@
                                                 autocomplete="off">
                                             <label for="address_2">Address 2</label>
                                         </span>
-                                        <small id="address_2-help">{{ formError("regAddress2"
-                                            ,InstitutionForm)}}</small>
+                                        
                                     </div>
 
                                     <div class="field col-12 md:col-3">
@@ -264,8 +279,7 @@
                                                 autocomplete="off">
                                             <label for="address_3">Address 3</label>
                                         </span>
-                                        <small id="address_3-help">{{ formError("regAddress3"
-                                            ,InstitutionForm)}}</small>
+                                        
                                     </div>
 
                                     <div class="field col-12 md:col-3">
@@ -274,8 +288,7 @@
                                                 autocomplete="off">
                                             <label for="address_4">Address 4</label>
                                         </span>
-                                        <small id="address_4-help">{{ formError("regAddress4"
-                                            ,InstitutionForm)}}</small>
+                                        
                                     </div>
 
                                     <div class="field col-12 md:col-3">
@@ -284,7 +297,7 @@
                                                 autocomplete="off">
                                             <label for="city">City</label>
                                         </span>
-                                        <small id="city-help">{{ formError("regCity" ,InstitutionForm)}}</small>
+                                       
                                     </div>
 
                                     <div class="field col-12 md:col-3">
@@ -296,8 +309,7 @@
                                                 inputId="state"></p-autoComplete>
                                             <label for="state">State</label>
                                         </span>
-                                        <small id="state-help">{{ formError("regSelectedState"
-                                            ,InstitutionForm)}}</small>
+                                       
                                     </div>
 
                                     <div class="field col-12 md:col-3">
@@ -309,19 +321,16 @@
                                                 inputId="country"></p-autoComplete>
                                             <label for="country">Country</label>
                                         </span>
-                                        <small id="country-help">{{ formError("regSelectedCountry"
-                                            ,InstitutionForm)}}</small>
+                                      
                                     </div>
-
-
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="fax" formControlName="fax" pInputText
+                                            <input type="text" id="regPINCode" formControlName="regPINCode" pInputText
                                                 autocomplete="off">
-                                            <label for="fax">Fax</label>
+                                            <label for="regPINCode">PIN Code</label>
                                         </span>
-                                        <small id="fax-help">{{ formError("fax" ,InstitutionForm)}}</small>
+                                       
                                     </div>
 
                                     <div class="field col-12 md:col-3">
@@ -330,8 +339,7 @@
                                                 pInputText autocomplete="off" pKeyFilter="int">
                                             <label for="mobileNumber1">Mobile Number 1</label>
                                         </span>
-                                        <small id="mobileNumber1-help">{{ formError("mobileNumber1"
-                                            ,InstitutionForm)}}</small>
+                                       
                                     </div>
 
                                     <div class="field col-12 md:col-3">
@@ -340,8 +348,7 @@
                                                 pInputText autocomplete="off" pKeyFilter="int">
                                             <label for="mobileNumber2">Mobile Number 2</label>
                                         </span>
-                                        <small id="mobileNumber2-help">{{ formError("mobileNumber2"
-                                            ,InstitutionForm)}}</small>
+                                       
                                     </div>
 
                                     <div class="field col-12 md:col-3">
@@ -350,8 +357,7 @@
                                                 pInputText autocomplete="off" pKeyFilter="int">
                                             <label for="phoneNumber1">Phone Number 1</label>
                                         </span>
-                                        <small id="phoneNumber1-help">{{ formError("phoneNumber1"
-                                            ,InstitutionForm)}}</small>
+                                        
                                     </div>
 
                                     <div class="field col-12 md:col-3">
@@ -359,9 +365,17 @@
                                             <input type="text" id="phoneNumber2" formControlName="phoneNumber2"
                                                 pInputText autocomplete="off" pKeyFilter="int">
                                             <label for="phoneNumber2">Phone Number 2</label>
-                                            <small id="phoneNumber2-help">{{ formError("phoneNumber2"
-                                                ,InstitutionForm)}}</small>
+                                            
                                         </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-3">
+                                        <span class="p-float-label">
+                                            <input type="text" id="fax" formControlName="fax" pInputText
+                                                autocomplete="off">
+                                            <label for="fax">Fax</label>
+                                        </span>
+                                       
                                     </div>
 
                                     <div class="field col-12 md:col-3">
@@ -369,8 +383,7 @@
                                             <input type="text" id="primaryEmail" formControlName="primaryEmail"
                                                 pInputText autocomplete="off">
                                             <label for="primaryEmail">Primary Email</label>
-                                            <small id="primaryEmail-help">{{ formError("primaryEmail"
-                                                ,InstitutionForm)}}</small>
+                                            
                                         </span>
                                     </div>
 
@@ -379,8 +392,7 @@
                                             <input type="text" id="secondaryEmail" formControlName="secondaryEmail"
                                                 pInputText autocomplete="off">
                                             <label for="secondaryEmail">Secondary Email</label>
-                                            <small id="secondaryEmail-help">{{ formError("secondaryEmail"
-                                                ,InstitutionForm)}}</small>
+                                            
                                         </span>
                                     </div>
 
@@ -389,7 +401,7 @@
                                             <input type="text" id="website" formControlName="website" pInputText
                                                 autocomplete="off">
                                             <label for="website">Website</label>
-                                            <small id="website-help">{{ formError("website" ,InstitutionForm)}}</small>
+                                           
                                         </span>
                                     </div>
                                 </div>
@@ -508,8 +520,8 @@
                                             Status</label>
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlBuildingStatus" formControlName="selectedBuildingStatus"
-                                                [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [options]="BuildingStatusList" optionLabel="buildingStatusName"
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -518,9 +530,9 @@
                                         <label htmlFor="ddlBoundarywall" class="col-12 mb-2 md:col-6 md:mb-0">Boundary
                                             wall</label>
                                         <div class="col-12 md:col-6">
-                                            <p-dropdown id="ddlBoundarywall" formControlName="selectedBuildingStatus"
-                                                [options]="PrePrimaryList" optionLabel="label"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                            <p-dropdown id="ddlBoundarywall" formControlName="selectedBoundaryWall"
+                                                [options]="BoundarywallList" optionLabel="boundarywallName"
+                                                [autoDisplayFirst]="true" [showClear]="true">
                                             </p-dropdown>
                                         </div>
                                     </div>
@@ -543,7 +555,8 @@
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="BuildingBlocks"
                                                 formControlName="noofPuccaBuildingBlocks" type="text" pKeyFilter="int"
-                                                pTooltip="No of Pucca Building Blocks" tooltipPosition="left" placeholder="00" />
+                                                pTooltip="No of Pucca Building Blocks" tooltipPosition="left"
+                                                placeholder="00" />
                                         </div>
                                     </div>
 
@@ -1204,7 +1217,8 @@
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="trainedinCompute"
                                                 formControlName="noofTotalTeachersTrainedinComputer" type="text"
-                                                placeholder="00" maxlength="2" pTooltip="No of Total Teachers Trained in Computer"
+                                                placeholder="00" maxlength="2"
+                                                pTooltip="No of Total Teachers Trained in Computer"
                                                 tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
@@ -1215,7 +1229,7 @@
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="agedabove55"
                                                 formControlName="noofTeachers_AgedAbove55" type="text" placeholder="00"
-                                                maxlength="2"pTooltip="No of Teachers Aged Above 55"
+                                                maxlength="2" pTooltip="No of Teachers Aged Above 55"
                                                 tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
@@ -1233,8 +1247,9 @@
                                         <div class="col-12 md:col-4">
                                             <input pInputText id="diplomaTeachersTraining"
                                                 formControlName="noofTeachers_DiplomaorCertificateinbasicteacherstraining"
-                                                type="text" placeholder="00" maxlength="2"  pTooltip="No of Teachers Diplomaor Certificate in basic Teachers Training"
-                                                tooltipPosition="left"  pKeyFilter="int" />
+                                                type="text" placeholder="00" maxlength="2"
+                                                pTooltip="No of Teachers Diplomaor Certificate in basic Teachers Training"
+                                                tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
 
@@ -1245,7 +1260,8 @@
                                         <div class="col-12 md:col-4">
                                             <input pInputText id="elementaryEducation"
                                                 formControlName="noofTeachers_BachelorofElementaryEducation" type="text"
-                                                placeholder="00" maxlength="2" pTooltip="No of Teachers Bachelor of Elementary Education"
+                                                placeholder="00" maxlength="2"
+                                                pTooltip="No of Teachers Bachelor of Elementary Education"
                                                 tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
@@ -1256,8 +1272,9 @@
                                         <div class="col-12 md:col-4">
                                             <input pInputText id="B_Ed_Equivalent"
                                                 formControlName="noofTeachers_BEdorEquivalent" type="text"
-                                                placeholder="00" maxlength="2"  pTooltip="No of Teachers BEd or Equivalent"
-                                                tooltipPosition="left" pKeyFilter="int" />
+                                                placeholder="00" maxlength="2"
+                                                pTooltip="No of Teachers BEd or Equivalent" tooltipPosition="left"
+                                                pKeyFilter="int" />
                                         </div>
                                     </div>
 
@@ -1267,8 +1284,9 @@
                                         <div class="col-12 md:col-4">
                                             <input pInputText id="M_Ed_Equivalent"
                                                 formControlName="noofTeachers_MEdorEquivalent" type="text"
-                                                placeholder="00" maxlength="2" pTooltip="No of Teachers MEd or Equivalent"
-                                                tooltipPosition="left" pKeyFilter="int" />
+                                                placeholder="00" maxlength="2"
+                                                pTooltip="No of Teachers MEd or Equivalent" tooltipPosition="left"
+                                                pKeyFilter="int" />
                                         </div>
                                     </div>
 
@@ -1279,7 +1297,8 @@
                                         <div class="col-12 md:col-4">
                                             <input pInputText id="diploma_degreeSplEdu"
                                                 formControlName="noofTeachers_DiplomaorDegreeinSpecialEducation"
-                                                type="text" placeholder="00" maxlength="2" pTooltip="No of Teachers Diploma or Degree in Special Education"
+                                                type="text" placeholder="00" maxlength="2"
+                                                pTooltip="No of Teachers Diploma or Degree in Special Education"
                                                 tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>
@@ -1291,7 +1310,8 @@
                                         <div class="col-12 md:col-4">
                                             <input pInputText id="pursuingRelevantCourse"
                                                 formControlName="noofTeachers_PursuinganyRelevantProfessionalCourse"
-                                                type="text" placeholder="00" maxlength="2" pTooltip=" No of Teachers Pursuingany Relevant Professional Course"
+                                                type="text" placeholder="00" maxlength="2"
+                                                pTooltip=" No of Teachers Pursuingany Relevant Professional Course"
                                                 tooltipPosition="left" pKeyFilter="int" />
                                         </div>
                                     </div>

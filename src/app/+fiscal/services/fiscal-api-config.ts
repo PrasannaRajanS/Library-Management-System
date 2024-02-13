@@ -11,11 +11,12 @@ export const FiscalAPIConfig = {
                     
                 },
                 Institution: {
-                    SAVE: "/Institution/Create",
-                    UPDATE: "/Institution/Update",
-                    DELETE: "/Institution/Delete",
-                    LIST: "/Institution/GetInstitution",
-                    EDIT:"/Institution/GetInstitutionById"
+                    SAVE: "/Fiscal/Institution/Create",
+                    UPDATE: "/Fiscal/Institution/Update",
+                    DELETE: "/Fiscal/Institution/Delete",
+                    LIST: "/Fiscal/Institution/GetInstitution",
+                    EDIT:"/Fiscal/Institution/GetInstitutionById",
+                    DATA:"/Fiscal/Institution/GetInstitutionsData"
                 },
                 ACADEMIC_YEAR: {
                     SAVE: "/academicyear/Create",

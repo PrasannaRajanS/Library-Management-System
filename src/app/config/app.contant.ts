@@ -6,11 +6,11 @@ export const AppConstant = Object.freeze({
     DDL_YES_NO: [
         {
             label: "Yes",
-            labelId: "1",
+            labelId: true,
         },
         {
             label: "No",
-            labelId: "0",
+            labelId: false,
         }
     ]
 });

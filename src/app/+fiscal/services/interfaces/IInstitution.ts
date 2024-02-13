@@ -1,41 +1,39 @@
-
-
-
 export interface IInstitution {
     institutionId?: number | null | undefined;
     institutionName?: string | null | undefined
     organizationId?: number | null | undefined;
-    selectedOrganization?: object | null | undefined
+    selectedOrganization?: any | null | undefined
     name?: string | null | undefined;
     shortName?: string | null | undefined;
-    udiseCode?: string | null | undefined;
+    UDISECode?: string | null | undefined;
     //
     stateId?: number | null | undefined;
     selectedState?: any | null | undefined
     city?: string | null | undefined;
     block?: string | null | undefined;
     locationId?: number | null | undefined;
-    selectedLocation?: object | null | undefined
+    selectedLocation?: any | null | undefined
     cluster?: string | null | undefined;
     ward?: string | null | undefined;
     mohalla?: string | null | undefined;
     pinCode?: number | null | undefined;
     panchayat?: string | null | undefined;
     municipality?: string | null | undefined;
-    schoolCategoryId?: number | null | undefined;
-    selectedCategory?: object | null | undefined;
+    categoryId?: number | null | undefined;
+    selectedCategory?: any | null | undefined;
     stateManagementId?: number | null | undefined;
-    stateManagement?: object | null | undefined;
+    stateManagement?: any | null | undefined;
     nationalManagementId?: number | null | undefined;
-    nationalManagement?: object | null | undefined;
-    schoolTypeId?: number | null | undefined;
-    selectedschoolType?: object | null | undefined;
+    nationalManagement?: any | null | undefined;
+    typeId?: number | null | undefined;
+    selectedSchoolType?: any | null | undefined;
     classFrom?: number | null | undefined;
     classTo?: number | null | undefined;
     isPrePrimary?: boolean | null | undefined;
-    selectedPrePrimary?: object | null | undefined;
-    mediumofInstruction?: boolean | null | undefined;
-    selectedMedium?: object | null | undefined;
+    selectedPrePrimary?: any | null | undefined;
+    mediumId?: boolean | null | undefined;
+    selectedMedium?: any | null | undefined;
+    selectedBoard?: any | null | undefined;
     //
     regAddress1?: string | null | undefined;
     regAddress2?: string | null | undefined;
@@ -45,7 +43,7 @@ export interface IInstitution {
     regStateId?: number | null | undefined;
     regSelectedState?: any | null | undefined;
     regCountryId?: number | null | undefined;
-    regSelectedCountry?: object | null | undefined;
+    regSelectedCountry?: any | null | undefined;
     regPINCode?: number | null | undefined;
     mobileNumber1?: string | null | undefined;
     mobileNumber2?: string | null | undefined;
@@ -64,21 +62,21 @@ export interface IInstitution {
     affiliationBoard_Secondary?: number | null | undefined;
     affiliationBoard_HigherSecondary?: number | null | undefined;
     isMinoritySchool?: boolean | null | undefined;
-    selectedMinoritySchool?: object | null | undefined;
+    selectedMinoritySchool?: any | null | undefined;
     isthisaShiftSchool?: boolean | null | undefined;
-    selectedIsthisaShiftSchool?: object | null | undefined;
+    selectedIsthisaShiftSchool?: any | null | undefined;
     buildingStatusId?: number | null | undefined;
-    selectedBuildingStatus?: object | null | undefined;
+    selectedBuildingStatus?: any | null | undefined;
     boundaryWallId?: number | null | undefined;
-    selectedBoundaryWall?: object | null | undefined;
+    selectedBoundaryWall?: any | null | undefined;
     noofBuildingBlocks?: number | null | undefined;
     noofPuccaBuildingBlocks?: number | null | undefined;
     isSpecialSchoolforCWSN?: boolean | null | undefined;
-    selectedIsSpecialSchoolforCWSN?: object | null | undefined;
+    selectedIsSpecialSchoolforCWSN?: any | null | undefined;
     availabilityofRamps?: boolean | null | undefined;
-    selectedAvailabilityofRamps?: object | null | undefined;
+    selectedAvailabilityofRamps?: any | null | undefined;
     availabilityofHandrails?: boolean | null | undefined;
-    selectedAvailabilityofHandrails?: object | null | undefined;
+    selectedAvailabilityofHandrails?: any | null | undefined;
     totalNoOfToilets_Boys?: number | null | undefined;
     totalNoOfToilets_Girls?: number | null | undefined;
     functional_Boys?: number | null | undefined;
@@ -88,40 +86,40 @@ export interface IInstitution {
     urinal_Boys?: number | null | undefined;
     urinal_Girls?: number | null | undefined;
     handwashNearToilet?: boolean | null | undefined;
-    selectedHandwashNearToilet?: object | null | undefined;
+    selectedHandwashNearToilet?: any | null | undefined;
     handwashFacilityforMeal?: boolean | null | undefined;
-    selectedHandwashFacilityforMeal?: object | null | undefined;
+    selectedHandwashFacilityforMeal?: any | null | undefined;
     drinkingWaterAvailable?: boolean | null | undefined;
-    selectedDrinkingWaterAvailable?: object | null | undefined;
+    selectedDrinkingWaterAvailable?: any | null | undefined;
     drinkingWaterFunctional?: boolean | null | undefined;
-    selectedDrinkingWaterFunctional?: object | null | undefined;
+    selectedDrinkingWaterFunctional?: any | null | undefined;
     rainWaterHarvesting?: boolean | null | undefined;
-    selectedRainWaterHarvesting?: object | null | undefined;
+    selectedRainWaterHarvesting?: any | null | undefined;
     playgroundAvailable?: boolean | null | undefined;
-    selectedPlaygroundAvailable?: object | null | undefined;
+    selectedPlaygroundAvailable?: any | null | undefined;
     noofBuildingsInGoodCondition?: number | null | undefined;
     noofBuildingNeedsMinorRepair?: number | null | undefined;
     noofBuildingNeedsMajorRepair?: number | null | undefined;
     otherRooms?: number | null | undefined;
     libraryAvailability?: boolean | null | undefined;
-    selectedLibraryAvailability?: object | null | undefined;
+    selectedLibraryAvailability?: any | null | undefined;
     separateRoomforHM?: boolean | null | undefined;
-    selectedSeparateRoomforHM?: object | null | undefined;
+    selectedSeparateRoomforHM?: any | null | undefined;
     furnitureAvailability?: boolean | null | undefined;
-    selectedFurnitureAvailability?: object | null | undefined;
+    selectedFurnitureAvailability?: any | null | undefined;
     electricityAvailability?: boolean | null | undefined;
-    selectedElectricityAvailability?: object | null | undefined;
+    selectedElectricityAvailability?: any | null | undefined;
     solarPanel?: boolean | null | undefined;
-    selectedSolarPanel?: object | null | undefined;
+    selectedSolarPanel?: any | null | undefined;
     medicalcheckups?: boolean | null | undefined;
-    selectedMedicalcheckups?: object | null | undefined;
+    selectedMedicalcheckups?: any | null | undefined;
     //
     iCTLab?: boolean | null | undefined;
-    selectedICTLab?: object | null | undefined;
+    selectedICTLab?: any | null | undefined;
     internetConnection?: boolean | null | undefined;
-    selectedInternetConnection?: object | null | undefined;
+    selectedInternetConnection?: any | null | undefined;
     dTHConnection?: boolean | null | undefined;
-    selectedDTHConnection?: object | null | undefined;
+    selectedDTHConnection?: any | null | undefined;
     noofDesktop?: number | null | undefined;
     noofLaptop?: number | null | undefined;
     noofTablet?: number | null | undefined;
@@ -164,6 +162,8 @@ export interface IInstitution {
     ipAddress?: string | null | undefined;
 
 }
+
+
 
 
 

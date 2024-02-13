@@ -15,6 +15,7 @@ const routes: Routes = [
             { path: 'fiscal', data: { breadcrumb: 'Fiscal' }, loadChildren: () => import('./+fiscal/components/fiscal.module').then(m => m.FiscalModule) },
             { path: 'pms', data: { breadcrumb: 'PMS' }, loadChildren: () => import('./+pms/components/pms.module').then(m => m.PmsModule) },
             { path: 'students', data: { breadcrumb: 'Students' }, loadChildren: () => import('./+school/+students/components/students.module').then(m => m.StudentsModule) },
+            { path: 'master', data: { breadcrumb: 'Master' }, loadChildren: () => import('./+school/+master/master.module').then(m => m.MasterModule) },
 
             { path: 'dashboard', loadChildren: () => import('./demo/components/dashboards/dashboards.module').then(m => m.DashboardsModule) },
             { path: 'uikit', data: { breadcrumb: 'UI Kit' }, loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
