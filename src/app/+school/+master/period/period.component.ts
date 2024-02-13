@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class PeriodComponent {
 
+  buttonText:string = "Save"
+
+  Save(){
+
+  }
+
+  Clear(){
+    
+  }
 }
