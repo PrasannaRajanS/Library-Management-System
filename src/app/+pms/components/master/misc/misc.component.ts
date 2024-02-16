@@ -10,13 +10,13 @@ import * as yup from "yup";
 import { AdminValidation } from 'src/app/+admin/services/admin-validation';
 
 
-import { HttpService } from 'src/app/+admin/services/http.service';
 import { UtilService } from 'src/app/shared/util.service';
 import { MessageService } from 'primeng/api';
 
 
 
 import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 @Component({
     selector: 'app-misc',
@@ -81,7 +81,7 @@ export class MiscComponent {
     constructor(
       // for vaildation
       private utilService:UtilService,
-      private httpService:HttpService,
+      private httpService:CommonHttpService,
       private messageService : MessageService
     ) {
       // step 3

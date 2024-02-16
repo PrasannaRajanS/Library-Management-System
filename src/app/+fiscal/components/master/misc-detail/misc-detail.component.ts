@@ -10,10 +10,10 @@ import * as _ from 'lodash';
 import { MessageService } from 'primeng/api';
 import { FiscalValidation } from 'src/app/+fiscal/services/fiscal-validation';
 import { IMisc, IMiscDetails } from 'src/app/shared/interface/IMisc';
-import { HttpService } from 'src/app/+fiscal/services/http.service';
 import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AdminValidation } from 'src/app/+admin/services/admin-validation';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 @Component({
     selector: 'app-misc-detail',
@@ -73,7 +73,7 @@ export class MiscDetailComponent {
         private customerService: CustomerService,
         private utilService: UtilService,
         private messageService: MessageService,
-        private httpService: HttpService
+        private httpService: CommonHttpService
     ) {
         this.MiscDetailForm = FormHandler.controls<IMiscDetails>(
             this.initialValues );

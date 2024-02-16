@@ -15,9 +15,9 @@ import { YupPMSValidation } from 'src/app/+pms/services/validation-schemas/yup-p
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
 
 import { UtilService } from 'src/app/shared/util.service';
-import { PMSHttpService } from 'src/app/+pms/services/pms-http.service';
 import { IState } from 'src/app/shared/interface/IState';
 import { ICountry } from 'src/app/shared/interface/ICountry';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 
 
@@ -203,7 +203,7 @@ export class EmployeeAddComponent {
 
     constructor(private utilService: UtilService,       
          private router: Router,
-         private httpService : PMSHttpService) {
+         private httpService : CommonHttpService) {
         this.EmployeeForm = FormHandler.controls<IEmployee>(this.initialValues);
         this.EmployeeForm.setValidators(
             FormHandler.validate<IEmployee>(this.validationSchema)

@@ -7,7 +7,6 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
-import { HttpService } from 'src/app/+admin/services/http.service';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
@@ -35,7 +34,6 @@ import { ToastModule } from 'primeng/toast';
     
   ],
   providers:[
-    HttpService,
     ProductService,
     MessageService
   ]
