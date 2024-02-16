@@ -258,35 +258,35 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="address_1" formControlName="regAddress1" pInputText
+                                            <input type="text" id="address1" formControlName="regAddress1" pInputText
                                                 autocomplete="off">
-                                            <label for="address_1">Address 1</label>
+                                            <label for="address1">Address 1</label>
                                         </span>
                                        
                                     </div>
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="address_2" formControlName="regAddress2" pInputText
+                                            <input type="text" id="address2" formControlName="regAddress2" pInputText
                                                 autocomplete="off">
-                                            <label for="address_2">Address 2</label>
+                                            <label for="address2">Address 2</label>
                                         </span>
                                         
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="address_3" formControlName="regAddress3" pInputText
+                                            <input type="text" id="address3" formControlName="regAddress3" pInputText
                                                 autocomplete="off">
-                                            <label for="address_3">Address 3</label>
+                                            <label for="address3">Address 3</label>
                                         </span>
                                         
                                     </div>
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="address_4" formControlName="regAddress4" pInputText
+                                            <input type="text" id="address4" formControlName="regAddress4" pInputText
                                                 autocomplete="off">
-                                            <label for="address_4">Address 4</label>
+                                            <label for="address4">Address 4</label>
                                         </span>
                                         
                                     </div>
@@ -429,7 +429,7 @@
                                             Recognition-Pri.</label>
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="recognitionPri"
-                                                formControlName="yearofRecognition_Primary" type="text" maxlength="4"
+                                                formControlName="yearofRecognitionPrimary" type="text" maxlength="4"
                                                 pKeyFilter="int" pTooltip="Year of Recognition-Pri"
                                                 tooltipPosition="right" placeholder="YYYY" />
                                         </div>
@@ -440,7 +440,7 @@
                                             Recognition-Upr.Pri.</label>
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="recognitionUprPri"
-                                                formControlName="yearofRecognition_UpperPrimary" type="text"
+                                                formControlName="yearofRecognitionUpperPrimary" type="text"
                                                 maxlength="4" pKeyFilter="int" pTooltip="Year of Recognition-Upr.Pri"
                                                 tooltipPosition="right" placeholder="YYYY" />
                                         </div>
@@ -451,7 +451,7 @@
                                             Recognition-Sec.</label>
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="recognitionSec"
-                                                formControlName="yearofRecognition_Secondary" type="text" maxlength="4"
+                                                formControlName="yearofRecognitionSecondary" type="text" maxlength="4"
                                                 pKeyFilter="int" pTooltip="Year of Recognition Sec"
                                                 tooltipPosition="right" placeholder="YYYY" />
                                         </div>
@@ -463,7 +463,7 @@
                                             Recognition-Higher Sec.</label>
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="recognitionHigherSec"
-                                                formControlName="yearofRecognition_HigherSecondary" type="text"
+                                                formControlName="yearofRecognitionHigherSecondary" type="text"
                                                 maxlength="4" pKeyFilter="int" pTooltip="Year of Recognition Higher Sec"
                                                 tooltipPosition="right" placeholder="YYYY" />
                                         </div>
@@ -473,7 +473,7 @@
                                         <label htmlFor="boardSec" class="col-12 mb-2 md:col-6 md:mb-0">Affiliation
                                             Board-Sec</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="boardSec" formControlName="affiliationBoard_Secondary"
+                                            <input pInputText id="boardSec" formControlName="affiliationBoardSecondary"
                                                 type="text" pTooltip="Affiliation Board-Sec" tooltipPosition="right"
                                                 placeholder="YYYY" />
                                         </div>
@@ -484,7 +484,7 @@
                                             Board-HSec</label>
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="boardHSec"
-                                                formControlName="affiliationBoard_HigherSecondary" type="text"
+                                                formControlName="affiliationBoardHigherSecondary" type="text"
                                                 pTooltip="Affiliation Board-HSec" tooltipPosition="right"
                                                 placeholder="YYYY" />
                                         </div>
@@ -516,8 +516,7 @@
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="ddlBuildingStatus" class="col-12 mb-2 md:col-6 md:mb-0">Building
-                                            Status</label>
+                                        <label htmlFor="ddlBuildingStatus" class="col-12 mb-2 md:col-6 md:mb-0">Building Status</label>
                                         <div class="col-12 md:col-6">
                                             <p-dropdown id="ddlBuildingStatus" formControlName="selectedBuildingStatus"
                                                 [options]="BuildingStatusList" optionLabel="buildingStatusName"
@@ -600,17 +599,16 @@
                                 <div class="col-12 md:col-6">
                                     <h5>Toilets</h5>
                                     <div class="field grid">
-                                        <label htmlFor="NoOfToilets_Boys"
-                                            class="col-12 mb-2 md:col-6 md:mb-0">Total(Excluding
-                                            CWSN)</label>
+                                        <label htmlFor="NoOfToiletsBoys"
+                                            class="col-12 mb-2 md:col-6 md:mb-0">Total(Excluding CWSN)</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="NoOfToilets_Boys" formControlName="totalNoOfToilets_Boys"
+                                            <input pInputText id="NoOfToiletsBoys" formControlName="totalNoOfToiletsBoys"
                                                 type="text" placeholder="00" pTooltip="Total No Of Toilets Boys"
                                                 tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="NoOfToilets_Girls"
-                                                formControlName="totalNoOfToilets_Girls" type="text" placeholder="00"
+                                            <input pInputText id="NoOfToiletsGirls"
+                                                formControlName="totalNoOfToiletsGirls" type="text" placeholder="00"
                                                 pTooltip="Total No Of Toilets Girls" tooltipPosition="top"
                                                 pKeyFilter="int" />
                                         </div>
@@ -619,41 +617,41 @@
                                         <label htmlFor="Functional"
                                             class="col-12 mb-2 md:col-6 md:mb-0">Functional</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="Functional" formControlName="functional_Boys"
+                                            <input pInputText id="Functional" formControlName="functionalBoys"
                                                 type="text" placeholder="00" pTooltip="functional Boys"
                                                 tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="functional_Girls" formControlName="functional_Girls"
+                                            <input pInputText id="functionalGirls" formControlName="functionalGirls"
                                                 type="text" placeholder="00" pTooltip="Functional Girls"
                                                 tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                     </div>
                                     <div class="field grid">
-                                        <label htmlFor="CWSNFriendly_Boys" class="col-12 mb-2 md:col-6 md:mb-0">Func. CWSN
+                                        <label htmlFor="CWSNFriendlyBoys" class="col-12 mb-2 md:col-6 md:mb-0">Func. CWSN
                                             Friendly</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="CWSNFriendly_Boys"
-                                                formControlName="functionalCWSNFriendly_Boys" type="text"
+                                            <input pInputText id="CWSNFriendlyBoys"
+                                                formControlName="functionalCWSNFriendlyBoys" type="text"
                                                 placeholder="00" pTooltip="Functional CWSN Friendly Boys"
                                                 tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="CWSNFriendly_Girls"
-                                                formControlName="functionalCWSNFriendly_Girls" type="text"
+                                            <input pInputText id="CWSNFriendlyGirls"
+                                                formControlName="functionalCWSNFriendlyGirls" type="text"
                                                 placeholder="00" pTooltip="Functional CWSN Friendly Girls"
                                                 tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                     </div>
                                     <div class="field grid">
-                                        <label htmlFor="urinal_Boys" class="col-12 mb-2 md:col-6 md:mb-0">Urinal</label>
+                                        <label htmlFor="urinalBoys" class="col-12 mb-2 md:col-6 md:mb-0">Urinal</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="urinal_Boys" formControlName="urinal_Boys" type="text"
+                                            <input pInputText id="urinalBoys" formControlName="urinalBoys" type="text"
                                                 placeholder="00" pTooltip="Urinal Boys" tooltipPosition="top"
                                                 pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="urinal_Girls" formControlName="urinal_Girls" type="text"
+                                            <input pInputText id="urinalGirls" formControlName="urinalGirls" type="text"
                                                 placeholder="00" pTooltip="Urinal Girls" tooltipPosition="top"
                                                 pKeyFilter="int" />
                                         </div>
@@ -902,8 +900,6 @@
                                             <input type="text" id="desktop" formControlName="noofDesktop" pInputText
                                                 autocomplete="off" pKeyFilter="int">
                                             <label for="desktop">Desktop</label>
-                                            <small id="desktop-help">{{ formError("noofDesktop"
-                                                ,InstitutionForm)}}</small>
                                         </span>
                                     </div>
 
@@ -912,8 +908,7 @@
                                             <input type="text" id="laptop" formControlName="noofLaptop" pInputText
                                                 autocomplete="off" pKeyFilter="int">
                                             <label for="laptop">Laptop</label>
-                                            <small id="laptop-help">{{ formError("noofLaptop"
-                                                ,InstitutionForm)}}</small>
+                                          
                                         </span>
                                     </div>
 
@@ -922,8 +917,7 @@
                                             <input type="text" id="projector" formControlName="noofProjector" pInputText
                                                 autocomplete="off" pKeyFilter="int">
                                             <label for="projector">Projector</label>
-                                            <small id="projector-help">{{ formError("noofProjector"
-                                                ,InstitutionForm)}}</small>
+                                          
                                         </span>
                                     </div>
 
@@ -932,8 +926,7 @@
                                             <input type="text" id="tablet" formControlName="noofTablet" pInputText
                                                 autocomplete="off" pKeyFilter="int">
                                             <label for="tablet">Tablet</label>
-                                            <small id="tablet-help">{{ formError("noofTablet"
-                                                ,InstitutionForm)}}</small>
+                                         
                                         </span>
                                     </div>
 
@@ -942,8 +935,7 @@
                                             <input type="text" id="printer" formControlName="noofPrinter" pInputText
                                                 autocomplete="off" pKeyFilter="int">
                                             <label for="printer">Printer</label>
-                                            <small id="printer-help">{{ formError("noofPrinter"
-                                                ,InstitutionForm)}}</small>
+                                       
                                         </span>
                                     </div>
 
@@ -952,8 +944,7 @@
                                             <input type="text" id="DigiBoard" formControlName="noofDigiBoard" pInputText
                                                 autocomplete="off" pKeyFilter="int">
                                             <label for="DigiBoard">DigiBoard</label>
-                                            <small id="DigiBoard-help">{{ formError("noofDigiBoard"
-                                                ,InstitutionForm)}}</small>
+                                         
                                         </span>
                                     </div>
 
@@ -973,7 +964,7 @@
                                     <div class="field grid">
                                         <label htmlFor="primary" class="col-12 mb-2 md:col-6 md:mb-0">Primary</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="primary" formControlName="noofTeachers_Primary"
+                                            <input pInputText id="primary" formControlName="noofTeachersPrimary"
                                                 type="text" placeholder="00" maxlength="2"
                                                 pTooltip="No of Primary Teachers " tooltipPosition="left"
                                                 pKeyFilter="int" />
@@ -985,7 +976,7 @@
                                             Up.Pr</label>
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="primaryUpperPrimary"
-                                                formControlName="noofTeachers_PrimaryandUpperPrimary" type="text"
+                                                formControlName="noofTeachersPrimaryandUpperPrimary" type="text"
                                                 placeholder="00" maxlength="2"
                                                 pTooltip="No of Primary and UpperPrimary Teachers "
                                                 tooltipPosition="left" pKeyFilter="int" />
@@ -997,7 +988,7 @@
                                             only.</label>
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="highSeconly"
-                                                formControlName="noofTeachers_HigerSecondaryOnly" type="text"
+                                                formControlName="noofTeachersHigerSecondaryOnly" type="text"
                                                 placeholder="00" maxlength="2"
                                                 pTooltip="No of Higher Secondary Teachers " tooltipPosition="left"
                                                 pKeyFilter="int" />
@@ -1009,7 +1000,7 @@
                                             Sec</label>
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="secandHSec"
-                                                formControlName="noofTeachers_SecondaryandHigerSecondary" type="text"
+                                                formControlName="noofTeachersSecondaryandHigerSecondary" type="text"
                                                 placeholder="00" maxlength="2"
                                                 pTooltip="No of Secondary and Higher Secondary Teachers "
                                                 tooltipPosition="left" pKeyFilter="int" />
@@ -1017,11 +1008,11 @@
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="prePri_Pri" class="col-12 mb-2 md:col-6 md:mb-0">Pre- Pri &
+                                        <label htmlFor="prePriPri" class="col-12 mb-2 md:col-6 md:mb-0">Pre- Pri &
                                             Pri</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="prePri_Pri"
-                                                formControlName="noofTeachers_PrePrimaryandPrimary" type="text"
+                                            <input pInputText id="prePriPri"
+                                                formControlName="noofTeachersPrePrimaryandPrimary" type="text"
                                                 placeholder="00" maxlength="2"
                                                 pTooltip="No of Pre-Primary and Primary Teachers "
                                                 tooltipPosition="left" pKeyFilter="int" />
@@ -1033,7 +1024,7 @@
                                             class="col-12 mb-2 md:col-6 md:mb-0">Up.Pr.</label>
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="upperPrimary"
-                                                formControlName="noofTeachers_UpperPrimary" type="text" placeholder="00"
+                                                formControlName="noofTeachersUpperPrimary" type="text" placeholder="00"
                                                 maxlength="2" pTooltip="No of UpperPrimary Teachers "
                                                 tooltipPosition="left" pKeyFilter="int" />
                                         </div>
@@ -1042,7 +1033,7 @@
                                     <div class="field grid">
                                         <label htmlFor="seconly" class="col-12 mb-2 md:col-6 md:mb-0">Sec. only</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="seconly" formControlName="noofTeachers_SecondaryOnly"
+                                            <input pInputText id="seconly" formControlName="noofTeachersSecondaryOnly"
                                                 type="text" placeholder="00" maxlength="2"
                                                 pTooltip="No of Secondary Teachers " tooltipPosition="left"
                                                 pKeyFilter="int" />
@@ -1050,11 +1041,11 @@
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="upPri_Sec" class="col-12 mb-2 md:col-6 md:mb-0">Up pri and
+                                        <label htmlFor="upPriSec" class="col-12 mb-2 md:col-6 md:mb-0">Up pri and
                                             Sec.</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="upPri_Sec"
-                                                formControlName="noofTeachers_UpperPrimaryandSecondary" type="text"
+                                            <input pInputText id="upPriSec"
+                                                formControlName="noofTeachersUpperPrimaryandSecondary" type="text"
                                                 placeholder="00" maxlength="2"
                                                 pTooltip="No of UpperPrimary and Secondary Teachers "
                                                 tooltipPosition="left" pKeyFilter="int" />
@@ -1066,7 +1057,7 @@
                                             Only</label>
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="prePrimaryOnly"
-                                                formControlName="noofTeachers_PrePrimaryOnly" type="text"
+                                                formControlName="noofTeachersPrePrimaryOnly" type="text"
                                                 placeholder="00" maxlength="2" pTooltip="No of Pre-Primary Teachers "
                                                 tooltipPosition="left" pKeyFilter="int" />
                                         </div>
@@ -1081,7 +1072,7 @@
                                     <div class="field grid">
                                         <label htmlFor="regular" class="col-12 mb-2 md:col-6 md:mb-0">Regular</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="regular" formControlName="noofTeachers_Regular"
+                                            <input pInputText id="regular" formControlName="noofTeachersRegular"
                                                 type="text" placeholder="00" maxlength="2"
                                                 pTooltip="No of Regular Teachers " tooltipPosition="left"
                                                 pKeyFilter="int" />
@@ -1091,7 +1082,7 @@
                                     <div class="field grid">
                                         <label htmlFor="parttime" class="col-12 mb-2 md:col-6 md:mb-0">Part-time</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="parttime" formControlName="noofTeachers_Parttime"
+                                            <input pInputText id="parttime" formControlName="noofTeachersParttime"
                                                 type="text" placeholder="00" maxlength="2"
                                                 pTooltip="No of Part-time Teachers " tooltipPosition="left"
                                                 pKeyFilter="int" />
@@ -1101,7 +1092,7 @@
                                     <div class="field grid">
                                         <label htmlFor="contract" class="col-12 mb-2 md:col-6 md:mb-0">Contract</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="contract" formControlName="noofTeachers_Contract"
+                                            <input pInputText id="contract" formControlName="noofTeachersContract"
                                                 type="text" placeholder="00" maxlength="2"
                                                 pTooltip="No of Contract Teachers " tooltipPosition="left"
                                                 pKeyFilter="int" />
@@ -1111,7 +1102,7 @@
                                     <div class="field grid">
                                         <label htmlFor="male" class="col-12 mb-2 md:col-6 md:mb-0">Male</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="male" formControlName="noofTeachers_Male" type="text"
+                                            <input pInputText id="male" formControlName="noofTeachersMale" type="text"
                                                 placeholder="00" maxlength="2" pTooltip="No of Male Teachers "
                                                 tooltipPosition="left" pKeyFilter="int" />
                                         </div>
@@ -1121,7 +1112,7 @@
                                     <div class="field grid">
                                         <label htmlFor="female" class="col-12 mb-2 md:col-6 md:mb-0">Female</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="female" formControlName="noofTeachers_Female"
+                                            <input pInputText id="female" formControlName="noofTeachersFemale"
                                                 type="text" placeholder="00" maxlength="2"
                                                 pTooltip="No of Female Teachers " tooltipPosition="left"
                                                 pKeyFilter="int" />
@@ -1133,7 +1124,7 @@
                                             class="col-12 mb-2 md:col-6 md:mb-0">Transgender</label>
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="transgender"
-                                                formControlName="noofTeachers_Transgender" type="text" placeholder="00"
+                                                formControlName="noofTeachersTransgender" type="text" placeholder="00"
                                                 maxlength="2" pTooltip="No of Transgender Teachers "
                                                 tooltipPosition="left" pKeyFilter="int" />
                                         </div>
@@ -1184,7 +1175,7 @@
                                             Graduate</label>
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="belowGraduate"
-                                                formControlName="noofTeachers_BelowGraduate" type="text"
+                                                formControlName="noofTeachersBelowGraduate" type="text"
                                                 placeholder="00" maxlength="2" pTooltip="No of Teachers Below Graduate"
                                                 tooltipPosition="left" pKeyFilter="int" />
                                         </div>
@@ -1193,7 +1184,7 @@
                                     <div class="field grid">
                                         <label htmlFor="graduate" class="col-12 mb-2 md:col-6 md:mb-0">Graduate</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="graduate" formControlName="noofTeachers_Graduate"
+                                            <input pInputText id="graduate" formControlName="noofTeachersGraduate"
                                                 type="text" placeholder="00" maxlength="2"
                                                 pTooltip="No of Teachers Graduate" tooltipPosition="left"
                                                 pKeyFilter="int" />
@@ -1201,11 +1192,11 @@
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="pg_Above" class="col-12 mb-2 md:col-6 md:mb-0">Post Graduate and
+                                        <label htmlFor="pgAbove" class="col-12 mb-2 md:col-6 md:mb-0">Post Graduate and
                                             Above</label>
                                         <div class="col-12 md:col-6">
-                                            <input pInputText id="pg_Above"
-                                                formControlName="noofTeachers_PostGraduateandAbove" type="text"
+                                            <input pInputText id="pgAbove"
+                                                formControlName="noofTeachersPostGraduateandAbove" type="text"
                                                 placeholder="00" maxlength="2" pTooltip="No of Post Graduate and Above"
                                                 tooltipPosition="left" pKeyFilter="int" />
                                         </div>
@@ -1228,7 +1219,7 @@
                                             above 55</label>
                                         <div class="col-12 md:col-6">
                                             <input pInputText id="agedabove55"
-                                                formControlName="noofTeachers_AgedAbove55" type="text" placeholder="00"
+                                                formControlName="noofTeachersAgedAbove55" type="text" placeholder="00"
                                                 maxlength="2" pTooltip="No of Teachers Aged Above 55"
                                                 tooltipPosition="left" pKeyFilter="int" />
                                         </div>
@@ -1246,7 +1237,7 @@
                                             teachers training</label>
                                         <div class="col-12 md:col-4">
                                             <input pInputText id="diplomaTeachersTraining"
-                                                formControlName="noofTeachers_DiplomaorCertificateinbasicteacherstraining"
+                                                formControlName="noofTeachersDiplomaorCertificateinbasicteacherstraining"
                                                 type="text" placeholder="00" maxlength="2"
                                                 pTooltip="No of Teachers Diplomaor Certificate in basic Teachers Training"
                                                 tooltipPosition="left" pKeyFilter="int" />
@@ -1259,7 +1250,7 @@
                                             (B.El.Ed.)</label>
                                         <div class="col-12 md:col-4">
                                             <input pInputText id="elementaryEducation"
-                                                formControlName="noofTeachers_BachelorofElementaryEducation" type="text"
+                                                formControlName="noofTeachersBachelorofElementaryEducation" type="text"
                                                 placeholder="00" maxlength="2"
                                                 pTooltip="No of Teachers Bachelor of Elementary Education"
                                                 tooltipPosition="left" pKeyFilter="int" />
@@ -1267,11 +1258,11 @@
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="B_Ed_Equivalent" class="col-12 mb-2 md:col-8 md:mb-0">B.Ed. or
+                                        <label htmlFor="BEdEquivalent" class="col-12 mb-2 md:col-8 md:mb-0">B.Ed. or
                                             Equivalent</label>
                                         <div class="col-12 md:col-4">
-                                            <input pInputText id="B_Ed_Equivalent"
-                                                formControlName="noofTeachers_BEdorEquivalent" type="text"
+                                            <input pInputText id="BEdEquivalent"
+                                                formControlName="noofTeachersBEdorEquivalent" type="text"
                                                 placeholder="00" maxlength="2"
                                                 pTooltip="No of Teachers BEd or Equivalent" tooltipPosition="left"
                                                 pKeyFilter="int" />
@@ -1279,11 +1270,11 @@
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="M_Ed_Equivalent" class="col-12 mb-2 md:col-8 md:mb-0">M.Ed. or
+                                        <label htmlFor="MEdEquivalent" class="col-12 mb-2 md:col-8 md:mb-0">M.Ed. or
                                             Equivalent</label>
                                         <div class="col-12 md:col-4">
-                                            <input pInputText id="M_Ed_Equivalent"
-                                                formControlName="noofTeachers_MEdorEquivalent" type="text"
+                                            <input pInputText id="MEdEquivalent"
+                                                formControlName="noofTeachersMEdorEquivalent" type="text"
                                                 placeholder="00" maxlength="2"
                                                 pTooltip="No of Teachers MEd or Equivalent" tooltipPosition="left"
                                                 pKeyFilter="int" />
@@ -1291,12 +1282,12 @@
                                     </div>
 
                                     <div class="field grid">
-                                        <label htmlFor="diploma_degreeSplEdu"
+                                        <label htmlFor="diplomadegreeSplEdu"
                                             class="col-12 mb-2 md:col-8 md:mb-0">Diploma/degree in special
                                             Education</label>
                                         <div class="col-12 md:col-4">
-                                            <input pInputText id="diploma_degreeSplEdu"
-                                                formControlName="noofTeachers_DiplomaorDegreeinSpecialEducation"
+                                            <input pInputText id="diplomadegreeSplEdu"
+                                                formControlName="noofTeachersDiplomaorDegreeinSpecialEducation"
                                                 type="text" placeholder="00" maxlength="2"
                                                 pTooltip="No of Teachers Diploma or Degree in Special Education"
                                                 tooltipPosition="left" pKeyFilter="int" />
@@ -1309,7 +1300,7 @@
                                             Course</label>
                                         <div class="col-12 md:col-4">
                                             <input pInputText id="pursuingRelevantCourse"
-                                                formControlName="noofTeachers_PursuinganyRelevantProfessionalCourse"
+                                                formControlName="noofTeachersPursuinganyRelevantProfessionalCourse"
                                                 type="text" placeholder="00" maxlength="2"
                                                 pTooltip=" No of Teachers Pursuingany Relevant Professional Course"
                                                 tooltipPosition="left" pKeyFilter="int" />

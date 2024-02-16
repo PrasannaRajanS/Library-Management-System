@@ -14,7 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { UtilService } from 'src/app/shared/util.service';
 
 @NgModule({
@@ -37,6 +37,6 @@ import { UtilService } from 'src/app/shared/util.service';
 		DialogModule
 
 	],
-	providers: [UtilService, MessageService, ConfirmationService]
+	providers: [UtilService, ConfirmationService]
 })
 export class InstitutionListModule { }

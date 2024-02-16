@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { HttpErrorResponse } from '@angular/common/http';
-import { ProductService } from 'src/app/demo/service/product.service';
 
 import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
 import { IInstitution } from 'src/app/+fiscal/services/interfaces/IInstitution';
 
 import { Table } from 'primeng/table';
 import { CommonHttpService } from 'src/app/shared-services/common-http.service';
+import { FiscalValidation } from 'src/app/+fiscal/services/fiscal-validation';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class InstitutionListComponent {
   constructor(
     private router: Router,
     private httpService: CommonHttpService,
-    private productService: ProductService
+    private messageService: MessageService
   ) {
 
   }
@@ -65,7 +66,6 @@ export class InstitutionListComponent {
 
   Edit(item: any) {
     console.log('Edit', item.institutionId);
-
     this.router.navigate(['/apps/fiscal/institution/', item.institutionId]);
   }
 
@@ -83,7 +83,7 @@ export class InstitutionListComponent {
     if (deletedItem != null && deletedItem.length > 0) {
       var passSaveParams: any = {};
 
-      passSaveParams.InstitutionId = deletedItem[0].institutionId
+      passSaveParams.InstitutionId = deletedItem[0].institutionId;
       passSaveParams.IsActive = false;
       passSaveParams.UserId = this.userDetails ? this.userDetails.userId : 0;
       passSaveParams.IPAddress = '192.168.1.1';
@@ -95,15 +95,28 @@ export class InstitutionListComponent {
         .subscribe({
           next: (result: any) => {
 
+            console.log('confirmDelete',result)
+
+            this.notificationsService(FiscalValidation.NOTIFICATION_SUCCESS, 'Success Message', result.message)
+            this.GetAll();
+
           },
           error: (err: HttpErrorResponse) => console.log(err),
 
-        })
+        });
     }
 
     this.item = {};
 
   }
+
+  
+  private notificationsService(_severity: any, _summary: any, _message: any) {
+    this.messageService.add({ severity: _severity, summary: _summary, detail: _message, life: 3000 });
+    return;
+  }
+
+
   AddPage() {
     this.router.navigate(['/apps/fiscal/institution'])
   }
