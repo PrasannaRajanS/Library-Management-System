@@ -49,3 +49,8 @@ export interface IBoundarywall {
     boundarywallName?: string | null | undefined;
 }
 
+export interface ILabel {
+    labelId?: boolean | null | undefined;
+    label?: string | null | undefined;
+}
+

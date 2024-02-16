@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, retry, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { APIConfig } from 'src/app/config/api.config';
@@ -34,7 +34,7 @@ export class CommonHttpService {
 
   }
 
-  // Error handling
+  // #region Error handling
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -48,6 +48,38 @@ export class CommonHttpService {
     return throwError(() => {
       return errorMessage;
     });
+  }
+  // #endregion
+
+
+
+  public globalPostService(url: string, data: any): any {
+    return this._httpClient.post(url, data).toPromise().catch(e => {
+      console.log("error happend", e);
+      if (e.status == 401) {
+        console.log(e.statusText);
+      }
+    });
+  }
+
+  public globalGetWithOutParamaterService(url: string): any {
+    return this._httpClient.get<any>(url).toPromise();
+  }
+
+  public globalllGetService(url: string, data: any): any {
+    const params = new HttpParams({ fromObject: data });
+    let querystring = "?" + params;
+    return this._httpClient.get(url + querystring).toPromise().
+      catch(e => {
+        console.log("error happend", e);
+      });
+  }
+
+  public globalGetServiceByUrl(url: string, data: any) {
+    return this._httpClient.get(url + data).toPromise().
+      catch(e => {
+        console.log("error Shappend", e);
+      });
   }
 
 }

@@ -5,11 +5,10 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 
-import { ProductService } from 'src/app/demo/service/product.service';
 import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
 import { FiscalValidation } from 'src/app/+fiscal/services/fiscal-validation';
 import { IOrganization } from 'src/app/+fiscal/services/interfaces/IOrganization';
-import { HttpService } from 'src/app/+fiscal/services/http.service';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 @Component({
   selector: 'app-organization-list',
@@ -31,7 +30,7 @@ export class OrganizationListComponent {
 
   constructor(
     private router: Router,
-    private httpService: HttpService,
+    private httpService: CommonHttpService,
     private messageService: MessageService
   ) { }
 

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PMSHttpService } from './pms-http.service';
+import { FiscalService } from './fiscal-service';
 
-describe('CommonHttpService', () => {
-  let service: PMSHttpService;
+describe('FiscalService', () => {
+  let service: FiscalService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PMSHttpService);
+    service = TestBed.inject(FiscalService);
   });
 
   it('should be created', () => {

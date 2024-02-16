@@ -5,7 +5,6 @@ import { IApplication } from './../../services/interfaces/IApplication';
 import { AdminAPIConfig } from '../../services/admin-api-config';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { HttpService } from '../../services/http.service';
 import { UtilService } from "../../../shared/util.service";
 import { MessageService } from 'primeng/api';
 import { AdminValidation } from '../../services/admin-validation';
@@ -16,6 +15,7 @@ import { IRolePageAssociate } from '../../services/interfaces/IRolePageAssociate
 import { YupAdminValidation } from '../../services/validation-schemas/yup-page-creation';
 import * as yup from "yup";
 import { IRole } from '../../services/interfaces/IRole';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 @Component({
   selector: 'app-role-page-associate',
@@ -64,7 +64,7 @@ export class RolePageAssociateComponent {
 
   constructor(
     private utilService: UtilService,
-    private httpService: HttpService,
+    private httpService: CommonHttpService,
     private messageService: MessageService
   ) {
     this.RolePageAssociateForm = FormHandler.controls<IRolePageAssociate>(this.initialValues);

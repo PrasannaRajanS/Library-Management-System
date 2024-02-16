@@ -6,7 +6,6 @@ import { IApplication } from './../../services/interfaces/IApplication';
 //#endregion
 //#region Services
 import { UtilService } from 'src/app/shared/util.service';
-import { HttpService } from '../../services/http.service';
 import { MessageService } from 'primeng/api';
 //#endregion
 
@@ -20,6 +19,7 @@ import { Table } from 'primeng/table';
 import { AdminAPIConfig } from '../../services/admin-api-config';
 import { AdminValidation } from '../../services/admin-validation';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 
 @Component({
@@ -66,7 +66,7 @@ export class ApplicationCreationComponent {
 
     constructor(
         private utilService: UtilService,
-        private httpService: HttpService,
+        private httpService: CommonHttpService,
         private messageService: MessageService
     ) {
         this.ApplicationCreationForm = FormHandler.controls<IApplication>(this.initialValues);  //  Step 5

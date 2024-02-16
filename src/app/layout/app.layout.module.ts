@@ -29,6 +29,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
     declarations: [
@@ -40,7 +42,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
         AppMenuComponent,
         AppSidebarComponent,
         AppMenuitemComponent,
-        AppFooterComponent
+        AppFooterComponent,
+        LoaderComponent
     ],
     imports: [
         BrowserModule,
@@ -62,9 +65,11 @@ import { ConfirmationService, MessageService } from 'primeng/api';
         AppConfigModule,
         DropdownModule,
         DialogModule,
-        ToastModule
+        ToastModule,
+        NgxSpinnerModule
+
     ],
     schemas:[NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA],
-    providers:[MessageService, ConfirmationService]
+    providers:[MessageService, ConfirmationService,NgxSpinnerService]
 })
 export class AppLayoutModule { }

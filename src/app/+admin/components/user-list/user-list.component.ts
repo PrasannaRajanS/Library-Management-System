@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { IUser } from '../../services/interfaces/IUser';
 import { UtilService } from 'src/app/shared/util.service';
-import { HttpService } from '../../services/http.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { AdminAPIConfig } from '../../services/admin-api-config';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Table } from 'primeng/table';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 @Component({
   selector: 'app-user-list',
@@ -30,7 +30,7 @@ export class UserListComponent {
 
   constructor(
     private utilService: UtilService,
-    private httpService: HttpService,
+    private httpService: CommonHttpService,
     private messageService: MessageService,
     private router: Router,
   ) {

@@ -3,7 +3,6 @@ import { FormGroup } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { UtilService } from 'src/app/shared/util.service';
-import { HttpService } from '../../services/http.service';
 import { MessageService } from 'primeng/api';
 import { AdminAPIConfig } from '../../services/admin-api-config';
 import { IRole } from '../../services/interfaces/IRole';
@@ -17,6 +16,7 @@ import { AdminValidation } from '../../services/admin-validation';
 
 import { Table } from 'primeng/table';
 import { IApplication } from './../../services/interfaces/IApplication';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 @Component({
   selector: 'app-role-creation',
@@ -68,7 +68,7 @@ export class RoleCreationComponent {
 
   constructor(
     private utilService: UtilService,
-    private httpService: HttpService,
+    private httpService: CommonHttpService,
     private messageService: MessageService
   ) {
     this.RoleCreationForm = FormHandler.controls<IRole>(this.initialValues);

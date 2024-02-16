@@ -5,7 +5,7 @@ export interface IInstitution {
     selectedOrganization?: any | null | undefined
     name?: string | null | undefined;
     shortName?: string | null | undefined;
-    UDISECode?: string | null | undefined;
+    udiseCode?: string | null | undefined;
     //
     stateId?: number | null | undefined;
     selectedState?: any | null | undefined
@@ -15,23 +15,23 @@ export interface IInstitution {
     selectedLocation?: any | null | undefined
     cluster?: string | null | undefined;
     ward?: string | null | undefined;
-    mohalla?: string | null | undefined;
+    mahalla?: string | null | undefined;
     pinCode?: number | null | undefined;
     panchayat?: string | null | undefined;
     municipality?: string | null | undefined;
-    categoryId?: number | null | undefined;
+    schoolCategoryId?: number | null | undefined;
     selectedCategory?: any | null | undefined;
     stateManagementId?: number | null | undefined;
     stateManagement?: any | null | undefined;
     nationalManagementId?: number | null | undefined;
     nationalManagement?: any | null | undefined;
-    typeId?: number | null | undefined;
+    schoolTypeId?: number | null | undefined;
     selectedSchoolType?: any | null | undefined;
     classFrom?: number | null | undefined;
     classTo?: number | null | undefined;
     isPrePrimary?: boolean | null | undefined;
     selectedPrePrimary?: any | null | undefined;
-    mediumId?: boolean | null | undefined;
+    instructionId?: boolean | null | undefined;
     selectedMedium?: any | null | undefined;
     selectedBoard?: any | null | undefined;
     //

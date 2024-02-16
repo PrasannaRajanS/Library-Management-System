@@ -3,10 +3,10 @@ import { IPageCreation } from '../../services/interfaces/IPageCreation';
 import { Table } from 'primeng/table';
 import { AdminAPIConfig } from '../../services/admin-api-config';
 import { UtilService } from 'src/app/shared/util.service';
-import { HttpService } from '../../services/http.service';
 import { MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 @Component({
   selector: 'app-page-list',
@@ -29,7 +29,7 @@ export class PageListComponent {
 
   constructor(
     private utilService: UtilService,
-    private httpService: HttpService,
+    private httpService: CommonHttpService,
     private messageService: MessageService,
     private router: Router,
   ) {

@@ -5,7 +5,6 @@ import { FormGroup } from '@angular/forms';
 
 import { UtilService } from 'src/app/shared/util.service';
 import { MessageService } from 'primeng/api';
-import { HttpService } from '../../services/http.service';
 
 import { AdminAPIConfig } from '../../services/admin-api-config';
 import { IModule } from '../../services/interfaces/IModule';
@@ -17,6 +16,7 @@ import * as yup from "yup";
 import { YupAdminValidation } from '../../services/validation-schemas/yup-page-creation';
 import { AdminValidation } from '../../services/admin-validation';
 import { Table } from 'primeng/table';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 //#endregion
 
 @Component({
@@ -70,7 +70,7 @@ export class ModuleCreationComponent {
 
   constructor(
     private utilService: UtilService,
-    private httpService: HttpService,
+    private httpService: CommonHttpService,
     private messageService: MessageService
   ) {
     this.ModuleCreationForm = FormHandler.controls<IModule>(this.initialValues);

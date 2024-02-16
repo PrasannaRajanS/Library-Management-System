@@ -5,7 +5,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import * as _ from 'lodash';
 
 import { UtilService } from 'src/app/shared/util.service';
-import { HttpService } from '../../services/http.service';
 import { MessageService } from 'primeng/api';
 
 import { AdminAPIConfig } from '../../services/admin-api-config';
@@ -19,6 +18,7 @@ import * as yup from "yup";
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { IRole } from '../../services/interfaces/IRole';
 import { AdminValidation } from '../../services/admin-validation';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 @Component({
     selector: 'app-user-creation',
@@ -95,7 +95,7 @@ export class UserCreationComponent {
 
     constructor(
         private UtilService: UtilService,
-        private httpService: HttpService,
+        private httpService: CommonHttpService,
         private messageService: MessageService,
         private router: Router,
         private activatedRoute: ActivatedRoute,

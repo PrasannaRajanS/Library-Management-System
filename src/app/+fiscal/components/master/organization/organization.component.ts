@@ -19,10 +19,10 @@ import * as yup from 'yup';
 import { UtilService } from 'src/app/shared/util.service';
 
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
-import { HttpService } from 'src/app/+fiscal/services/http.service';
 import { APIConfig } from 'src/app/config/api.config';
 import { ICountry } from 'src/app/shared/interface/ICountry';
 import { IState } from 'src/app/shared/interface/IState';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 
 @Component({
@@ -108,7 +108,7 @@ export class OrganizationComponent {
 
   constructor(
     private utilService: UtilService,
-    private httpService: HttpService,
+    private httpService: CommonHttpService,
     private messageService: MessageService,
     private router:Router,
     private activatedRoute: ActivatedRoute,

@@ -11,12 +11,12 @@ import { IApplication } from './../../services/interfaces/IApplication';
 import { IModule } from '../../services/interfaces/IModule';
 import * as _ from 'lodash';
 import { AdminAPIConfig } from '../../services/admin-api-config';
-import { HttpService } from '../../services/http.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AdminValidation } from '../../services/admin-validation';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IMainPage } from '../../services/interfaces/IMainPage';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -96,7 +96,7 @@ export class PageCreationComponent {
 
   constructor(
     private UtilService: UtilService,
-    private httpService: HttpService,
+    private httpService: CommonHttpService,
     private messageService: MessageService,
     private router:Router,
     private activatedRoute: ActivatedRoute,

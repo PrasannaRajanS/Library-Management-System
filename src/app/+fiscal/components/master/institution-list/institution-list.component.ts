@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { HttpErrorResponse } from '@angular/common/http';
-import { HttpService } from 'src/app/+admin/services/http.service';
 import { ProductService } from 'src/app/demo/service/product.service';
 
 import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
 import { IInstitution } from 'src/app/+fiscal/services/interfaces/IInstitution';
 
 import { Table } from 'primeng/table';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 
 @Component({
@@ -30,7 +30,7 @@ export class InstitutionListComponent {
 
   constructor(
     private router: Router,
-    private httpService: HttpService,
+    private httpService: CommonHttpService,
     private productService: ProductService
   ) {
 
@@ -40,24 +40,23 @@ export class InstitutionListComponent {
     this.GetAll();
   }
 
+  
   public GetAll() {
-    this.productService.getInstitution().then((data) => {
-      this.items = data
-    })
-    // try {
-    //   this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.LIST)
-    //   .subscribe({
-    //     next: (result:any) =>{
-    //       this.items = result.pages;
-    //       console.log('GetAll',this.items);
 
-    //     },
-    //     error:(err: HttpErrorResponse)=> console.log(err)
+    try {
 
-    //   })
-    // } catch (error) {
+      this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.LIST)
+        .subscribe({
+          next: (result: any) => {
+            this.items = result.institutions;
+            console.log('GetAll', this.items);
+          },
+          error: (err: HttpErrorResponse) => console.log(err)
+        });
 
-    // }
+    } catch (error) {
+
+    }
   }
 
   onGlobalFilter(table: Table, event: Event) {

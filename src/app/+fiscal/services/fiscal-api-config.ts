@@ -14,7 +14,7 @@ export const FiscalAPIConfig = {
                     SAVE: "/Fiscal/Institution/Create",
                     UPDATE: "/Fiscal/Institution/Update",
                     DELETE: "/Fiscal/Institution/Delete",
-                    LIST: "/Fiscal/Institution/GetInstitution",
+                    LIST: "/Fiscal/Institution/GetAllInstitutions",
                     EDIT:"/Fiscal/Institution/GetInstitutionById",
                     DATA:"/Fiscal/Institution/GetInstitutionsData"
                 },

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AfterViewInit, Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
@@ -9,24 +9,24 @@ import { FiscalValidation } from 'src/app/+fiscal/services/fiscal-validation';
 import { IInstitution } from 'src/app/+fiscal/services/interfaces/IInstitution';
 
 import { UtilService } from 'src/app/shared/util.service';
-import { ProductService } from 'src/app/demo/service/product.service';
 import { MessageService } from 'primeng/api';
-import { HttpService } from 'src/app/+admin/services/http.service';
 
 import * as yup from "yup";
 import { YupFiscalValidation } from 'src/app/+fiscal/services/validation-schemas/yup-validation-schema';
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
 
-import { IAC_Organization, IBoard, IBoundarywall, IBuildingStatus, ILocation, IMediumofInstruction, INationalManagement, ISchoolCategory, ISchoolType, IStateManagement } from 'src/app/+fiscal/services/interfaces/ICommon';
-import { AppConstant } from 'src/app/config/app.contant';
+import { IAC_Organization, IBoard, IBoundarywall, IBuildingStatus, ILabel, ILocation, IMediumofInstruction, INationalManagement, ISchoolCategory, ISchoolType, IStateManagement } from 'src/app/+fiscal/services/interfaces/ICommon';
 
 import { IState } from 'src/app/shared/interface/IState';
 
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { APIConfig } from 'src/app/config/api.config';
 import { ICountry } from 'src/app/shared/interface/ICountry';
+import { AppConstant } from 'src/app/config/app.constant';
 
-
+import * as _ from 'lodash';
+import { FiscalService } from 'src/app/+fiscal/services/fiscal-service';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 
 @Component({
@@ -34,7 +34,7 @@ import { ICountry } from 'src/app/shared/interface/ICountry';
   templateUrl: './institution.component.html',
   styleUrls: ['./institution.component.scss']
 })
-export class InstitutionComponent {
+export class InstitutionComponent  {
 
   OrganizationList: IAC_Organization[] = [];
   filteredOrganization: IAC_Organization[] = [];
@@ -54,12 +54,14 @@ export class InstitutionComponent {
 
   MediumofInstructionList: IMediumofInstruction[] = [];
 
+  InstitutionsData:any;
+
   BoardList: IBoard[] = [];
 
   BuildingStatusList: IBuildingStatus[] = [];
   BoundarywallList: IBoundarywall[] = [];
 
-  PrePrimaryList: any = [];
+  PrePrimaryList: ILabel[] = [];
   OrganizationId: number = 0;
   InstitutionId: any = 0;
 
@@ -100,7 +102,7 @@ export class InstitutionComponent {
     selectedOrganization: null,
     name: null,
     shortName: null,
-    UDISECode: null,
+    udiseCode: null,
     //
     stateId: null,
     selectedState: null,
@@ -110,23 +112,23 @@ export class InstitutionComponent {
     selectedLocation: null,
     cluster: null,
     ward: null,
-    mohalla: null,
+    mahalla: null,
     pinCode: null,
     panchayat: null,
     municipality: null,
-    categoryId: null,
+    schoolCategoryId: null,
     selectedCategory: null,
     stateManagementId: null,
     stateManagement: null,
     nationalManagementId: null,
     nationalManagement: null,
-    typeId: null,
+    schoolTypeId: null,
     selectedSchoolType: null,
     classFrom: null,
     classTo: null,
     isPrePrimary: null,
     selectedPrePrimary: { label: 'Yes', labelId: true },
-    mediumId: null,
+    instructionId: null,
     selectedMedium: null,
     selectedBoard:null,
     //
@@ -271,52 +273,449 @@ export class InstitutionComponent {
     private utilService: UtilService,
     private router: Router,
     private messageService: MessageService,
-    private httpService: HttpService,
+    private fiscalService : FiscalService,
+    private httpService: CommonHttpService,
+    private activatedRoute: ActivatedRoute,
 
   ) {
+
+    this.PrePrimaryList = AppConstant.DDL_YES_NO;
+    // this.LoadInstitutionsData();
+  
+
     this.InstitutionForm = FormHandler.controls<IInstitution>(this.initialValues);
-    this.InstitutionForm.setValidators(FormHandler.validate<IInstitution>(this.validationSchema))
+    this.InstitutionForm.setValidators(FormHandler.validate<IInstitution>(this.validationSchema));
+    
+
+    //#region 
+    this.activatedRoute.params.subscribe((params: any) => {
+      if (params != undefined && !_.isEmpty(params)) {
+        this.InstitutionId = (+(params.id));
+        this.buttonText = "Update";
+        this.IsUpdate = true;
+      } else {
+        this.InstitutionId = 0;
+        this.IsUpdate = false;
+      }
+    });
+    //#endregion
+
+    // if (this.InstitutionId != undefined && this.InstitutionId != 0) {
+    //   this.GetInstitutionById(); //  Get Organization Detail based on Id
+    // }
+   
+
   }
 
-  ngOnInit() {
-    this.PrePrimaryList = AppConstant.DDL_YES_NO
 
-     this.LoadInstitutionsData();
-     this.GetStates();
-     this.GetCountries();
+  async ngOnInit(): Promise<void> {
+
+    this.GetStates();
+    this.GetCountries();
+
+    try {
+
+      const institutionData = await this.fiscalService.fetchInstitutionsData();
+
+      // Process the data here
+      this.OrganizationList = institutionData.institutionsData.orgList;
+      this.LocationList = institutionData.institutionsData.locList;
+      this.SchoolCategoryList = institutionData.institutionsData.categoryList;
+
+      this.StateManagementList = institutionData.institutionsData.smList;
+      this.NationalManagementList = institutionData.institutionsData.nmList;
+      this.SchoolTypeList = institutionData.institutionsData.typeList;
+      this.MediumofInstructionList = institutionData.institutionsData.instructionList;
+      this.BoardList = institutionData.institutionsData.boardList;
+
+      this.BuildingStatusList = institutionData.institutionsData.buildingList;
+      this.BoundarywallList = institutionData.institutionsData.boundaryList;
+
+    } catch (error) {
+      // Handle error
+    }
+
+
+    if (this.InstitutionId != undefined && this.InstitutionId != 0) {
+      try {
+        const data = await this.fiscalService.fetchInstitutionById(this.InstitutionId);
+        
+        this.InstitutionList = data.institutions;
+        console.log('Data from backend - fetchInstitutionById:', this.InstitutionList);
+
+        if (this.InstitutionList != undefined && this.InstitutionList.length > 0) {
+
+          this.InstitutionId = this.InstitutionList[0].institutionId;
+
+          console.log(JSON.stringify(this.SchoolCategoryList.find(app => app.categoryId === this.InstitutionList[0].schoolCategoryId)));
+
+          this.InstitutionId = this.InstitutionList[0].institutionId;
+          this.InstitutionForm.controls['selectedOrganization']?.setValue(this.OrganizationList.find(app => app.organizationId === this.InstitutionList[0].organizationId));
+          this.InstitutionForm.controls['institutionName']?.setValue(this.InstitutionList[0].name);
+          this.InstitutionForm.controls['shortName']?.setValue(this.InstitutionList[0].shortName);
+          this.InstitutionForm.controls['udiseCode']?.setValue(this.InstitutionList[0].udiseCode);
+
+
+          this.InstitutionForm.controls['selectedState']?.setValue(this.StateList.find(app => app.stateId === this.InstitutionList[0].stateId)); //selectedState
+          this.InstitutionForm.controls['city']?.setValue(this.InstitutionList[0].city);
+          this.InstitutionForm.controls['block']?.setValue(this.InstitutionList[0].block);
+          this.InstitutionForm.controls['selectedLocation']?.setValue(this.LocationList.find(app => app.locationId === this.InstitutionList[0].locationId));
+          this.InstitutionForm.controls['cluster']?.setValue(this.InstitutionList[0].cluster);
+          this.InstitutionForm.controls['ward']?.setValue(this.InstitutionList[0].ward);
+          this.InstitutionForm.controls['mahalla']?.setValue(this.InstitutionList[0].mahalla);
+          this.InstitutionForm.controls['pinCode']?.setValue(this.InstitutionList[0].pinCode);
+          this.InstitutionForm.controls['panchayat']?.setValue(this.InstitutionList[0].panchayat);
+          this.InstitutionForm.controls['municipality']?.setValue(this.InstitutionList[0].municipality);
+          this.InstitutionForm.controls['selectedCategory']?.setValue(this.SchoolCategoryList.find(app => app.categoryId === this.InstitutionList[0].schoolCategoryId));
+          this.InstitutionForm.controls['stateManagement']?.setValue(this.StateManagementList.find(app => app.stateManagementId === this.InstitutionList[0].stateManagementId));
+          this.InstitutionForm.controls['nationalManagement']?.setValue(this.NationalManagementList.find(app => app.nationalManagementId === this.InstitutionList[0].nationalManagementId));
+          this.InstitutionForm.controls['selectedSchoolType']?.setValue(this.SchoolTypeList.find(app => app.typeId === this.InstitutionList[0].schoolTypeId));
+          this.InstitutionForm.controls['classFrom']?.setValue(this.InstitutionList[0].classFrom);
+          this.InstitutionForm.controls['classTo']?.setValue(this.InstitutionList[0].classTo);
+          this.InstitutionForm.controls['selectedPrePrimary']?.setValue(this.PrePrimaryList.find(app => app.labelId === this.InstitutionList[0].isPrePrimary));
+          this.InstitutionForm.controls['selectedMedium']?.setValue(this.MediumofInstructionList.find(app => app.instructionId === this.InstitutionList[0].instructionId));
+          this.InstitutionForm.controls['selectedBoard']?.setValue(this.InstitutionList[0].selectedBoard);
+
+
+          this.InstitutionForm.controls['regAddress1']?.setValue(this.InstitutionList[0].regAddress1);
+          this.InstitutionForm.controls['regAddress2']?.setValue(this.InstitutionList[0].regAddress2);
+          this.InstitutionForm.controls['regAddress3']?.setValue(this.InstitutionList[0].regAddress3);
+          this.InstitutionForm.controls['regAddress4']?.setValue(this.InstitutionList[0].regAddress4);
+          this.InstitutionForm.controls['regCity']?.setValue(this.InstitutionList[0].regCity);
+          this.InstitutionForm.controls['regSelectedState']?.setValue(this.StateList.find(app => app.stateId === this.InstitutionList[0].regStateId)); // regSelectedState
+          this.InstitutionForm.controls['regSelectedCountry']?.setValue(this.CoutryList.find(app => app.countryId === this.InstitutionList[0].regCountryId)); // regSelectedCountry
+          this.InstitutionForm.controls['regPINCode']?.setValue(this.InstitutionList[0].regPINCode);
+          this.InstitutionForm.controls['mobileNumber1']?.setValue(this.InstitutionList[0].mobileNumber1);
+          this.InstitutionForm.controls['mobileNumber2']?.setValue(this.InstitutionList[0].mobileNumber2);
+          this.InstitutionForm.controls['phoneNumber1']?.setValue(this.InstitutionList[0].phoneNumber1);
+          this.InstitutionForm.controls['phoneNumber2']?.setValue(this.InstitutionList[0].phoneNumber2);
+          this.InstitutionForm.controls['fax']?.setValue(this.InstitutionList[0].fax);
+          this.InstitutionForm.controls['primaryEmail']?.setValue(this.InstitutionList[0].primaryEmail);
+          this.InstitutionForm.controls['secondaryEmail']?.setValue(this.InstitutionList[0].secondaryEmail);
+          this.InstitutionForm.controls['website']?.setValue(this.InstitutionList[0].website);
+
+
+          this.InstitutionForm.controls['yearofEstablishment']?.setValue(this.InstitutionList[0].yearofEstablishment);
+          this.InstitutionForm.controls['yearofRecognition_Primary']?.setValue(this.InstitutionList[0].yearofRecognition_Primary);
+          this.InstitutionForm.controls['yearofRecognition_UpperPrimary']?.setValue(this.InstitutionList[0].yearofRecognition_UpperPrimary);
+          this.InstitutionForm.controls['yearofRecognition_Secondary']?.setValue(this.InstitutionList[0].yearofRecognition_Secondary);
+          this.InstitutionForm.controls['yearofRecognition_HigherSecondary']?.setValue(this.InstitutionList[0].yearofRecognition_HigherSecondary);
+          this.InstitutionForm.controls['affiliationBoard_Secondary']?.setValue(this.InstitutionList[0].affiliationBoard_Secondary);
+          this.InstitutionForm.controls['affiliationBoard_HigherSecondary']?.setValue(this.InstitutionList[0].affiliationBoard_HigherSecondary);
+          this.InstitutionForm.controls['selectedMinoritySchool']?.setValue(this.InstitutionList[0].selectedMinoritySchool);
+          this.InstitutionForm.controls['selectedIsthisaShiftSchool']?.setValue(this.InstitutionList[0].selectedIsthisaShiftSchool);
+          this.InstitutionForm.controls['selectedBuildingStatus']?.setValue(this.InstitutionList[0].selectedBuildingStatus);
+          this.InstitutionForm.controls['selectedBoundaryWall']?.setValue(this.InstitutionList[0].selectedBoundaryWall);
+          this.InstitutionForm.controls['noofBuildingBlocks']?.setValue(this.InstitutionList[0].noofBuildingBlocks);
+          this.InstitutionForm.controls['noofPuccaBuildingBlocks']?.setValue(this.InstitutionList[0].noofPuccaBuildingBlocks);
+          this.InstitutionForm.controls['selectedIsSpecialSchoolforCWSN']?.setValue(this.InstitutionList[0].selectedIsSpecialSchoolforCWSN);
+          this.InstitutionForm.controls['selectedAvailabilityofRamps']?.setValue(this.InstitutionList[0].selectedAvailabilityofRamps);
+          this.InstitutionForm.controls['selectedAvailabilityofHandrails']?.setValue(this.InstitutionList[0].selectedAvailabilityofHandrails);
+
+
+          this.InstitutionForm.controls['totalNoOfToilets_Boys']?.setValue(this.InstitutionList[0].totalNoOfToilets_Boys);
+          this.InstitutionForm.controls['totalNoOfToilets_Girls']?.setValue(this.InstitutionList[0].totalNoOfToilets_Girls);
+          this.InstitutionForm.controls['functional_Boys']?.setValue(this.InstitutionList[0].functional_Boys);
+          this.InstitutionForm.controls['functional_Girls']?.setValue(this.InstitutionList[0].functional_Girls);
+          this.InstitutionForm.controls['functionalCWSNFriendly_Boys']?.setValue(this.InstitutionList[0].functionalCWSNFriendly_Boys);
+          this.InstitutionForm.controls['functionalCWSNFriendly_Girls']?.setValue(this.InstitutionList[0].functionalCWSNFriendly_Girls);
+          this.InstitutionForm.controls['urinal_Boys']?.setValue(this.InstitutionList[0].urinal_Boys);
+          this.InstitutionForm.controls['urinal_Girls']?.setValue(this.InstitutionList[0].urinal_Girls);
+          this.InstitutionForm.controls['selectedHandwashNearToilet']?.setValue(this.InstitutionList[0].selectedHandwashNearToilet);
+          this.InstitutionForm.controls['selectedHandwashFacilityforMeal']?.setValue(this.InstitutionList[0].selectedHandwashFacilityforMeal);
+          this.InstitutionForm.controls['selectedDrinkingWaterAvailable']?.setValue(this.InstitutionList[0].selectedDrinkingWaterAvailable);
+          this.InstitutionForm.controls['selectedDrinkingWaterFunctional']?.setValue(this.InstitutionList[0].selectedDrinkingWaterFunctional);
+          this.InstitutionForm.controls['selectedRainWaterHarvesting']?.setValue(this.InstitutionList[0].selectedRainWaterHarvesting);
+          this.InstitutionForm.controls['selectedPlaygroundAvailable']?.setValue(this.InstitutionList[0].selectedPlaygroundAvailable);
+
+
+          this.InstitutionForm.controls['noofBuildingsInGoodCondition']?.setValue(this.InstitutionList[0].noofBuildingsInGoodCondition);
+          this.InstitutionForm.controls['noofBuildingNeedsMinorRepair']?.setValue(this.InstitutionList[0].noofBuildingNeedsMinorRepair);
+          this.InstitutionForm.controls['noofBuildingNeedsMajorRepair']?.setValue(this.InstitutionList[0].noofBuildingNeedsMajorRepair);
+          this.InstitutionForm.controls['otherRooms']?.setValue(this.InstitutionList[0].otherRooms);
+          this.InstitutionForm.controls['selectedLibraryAvailability']?.setValue(this.InstitutionList[0].selectedLibraryAvailability);
+          this.InstitutionForm.controls['selectedSeparateRoomforHM']?.setValue(this.InstitutionList[0].selectedSeparateRoomforHM);
+          this.InstitutionForm.controls['selectedFurnitureAvailability']?.setValue(this.InstitutionList[0].selectedFurnitureAvailability);
+          this.InstitutionForm.controls['selectedElectricityAvailability']?.setValue(this.InstitutionList[0].selectedElectricityAvailability);
+          this.InstitutionForm.controls['selectedSolarPanel']?.setValue(this.InstitutionList[0].selectedSolarPanel);
+          this.InstitutionForm.controls['selectedMedicalcheckups']?.setValue(this.InstitutionList[0].selectedMedicalcheckups);
+
+          this.InstitutionForm.controls['selectedICTLab']?.setValue(this.InstitutionList[0].selectedICTLab);
+          this.InstitutionForm.controls['selectedInternetConnection']?.setValue(this.InstitutionList[0].selectedInternetConnection);
+          this.InstitutionForm.controls['selectedDTHConnection']?.setValue(this.InstitutionList[0].selectedDTHConnection);
+          this.InstitutionForm.controls['noofDesktop']?.setValue(this.InstitutionList[0].noofDesktop);
+          this.InstitutionForm.controls['noofLaptop']?.setValue(this.InstitutionList[0].noofLaptop);
+          this.InstitutionForm.controls['noofTablet']?.setValue(this.InstitutionList[0].noofTablet);
+          this.InstitutionForm.controls['noofPrinter']?.setValue(this.InstitutionList[0].noofPrinter);
+          this.InstitutionForm.controls['noofProjector']?.setValue(this.InstitutionList[0].noofProjector);
+          this.InstitutionForm.controls['noofDigiBoard']?.setValue(this.InstitutionList[0].noofDigiBoard);
+
+          this.InstitutionForm.controls['noofTeachers_Primary']?.setValue(this.InstitutionList[0].noofTeachers_Primary);
+          this.InstitutionForm.controls['noofTeachers_PrimaryandUpperPrimary']?.setValue(this.InstitutionList[0].noofTeachers_PrimaryandUpperPrimary);
+          this.InstitutionForm.controls['noofTeachers_HigerSecondaryOnly']?.setValue(this.InstitutionList[0].noofTeachers_HigerSecondaryOnly);
+          this.InstitutionForm.controls['noofTeachers_SecondaryandHigerSecondary']?.setValue(this.InstitutionList[0].noofTeachers_SecondaryandHigerSecondary);
+          this.InstitutionForm.controls['noofTeachers_PrePrimaryandPrimary']?.setValue(this.InstitutionList[0].noofTeachers_PrePrimaryandPrimary);
+          this.InstitutionForm.controls['noofTeachers_UpperPrimary']?.setValue(this.InstitutionList[0].noofTeachers_UpperPrimary);
+          this.InstitutionForm.controls['noofTeachers_SecondaryOnly']?.setValue(this.InstitutionList[0].noofTeachers_SecondaryOnly);
+          this.InstitutionForm.controls['noofTeachers_UpperPrimaryandSecondary']?.setValue(this.InstitutionList[0].noofTeachers_UpperPrimaryandSecondary);
+          this.InstitutionForm.controls['noofTeachers_PrePrimaryOnly']?.setValue(this.InstitutionList[0].noofTeachers_PrePrimaryOnly);
+          this.InstitutionForm.controls['noofTeachers_Regular']?.setValue(this.InstitutionList[0].noofTeachers_Regular);
+          this.InstitutionForm.controls['noofTeachers_Parttime']?.setValue(this.InstitutionList[0].noofTeachers_Parttime);
+          this.InstitutionForm.controls['noofTeachers_Contract']?.setValue(this.InstitutionList[0].noofTeachers_Contract);
+          this.InstitutionForm.controls['noofTeachers_Male']?.setValue(this.InstitutionList[0].noofTeachers_Male);
+          this.InstitutionForm.controls['noofTeachers_Female']?.setValue(this.InstitutionList[0].noofTeachers_Female);
+          this.InstitutionForm.controls['noofTeachers_Transgender']?.setValue(this.InstitutionList[0].noofTeachers_Transgender);
+          this.InstitutionForm.controls['totalNoofTeachers']?.setValue(this.InstitutionList[0].totalNoofTeachers);
+          this.InstitutionForm.controls['noofTotalTeacherReceivedServiceTraining']?.setValue(this.InstitutionList[0].noofTotalTeacherReceivedServiceTraining);
+          this.InstitutionForm.controls['totalTeacherInvolveinNonTeachingAssignment']?.setValue(this.InstitutionList[0].totalTeacherInvolveinNonTeachingAssignment);
+          this.InstitutionForm.controls['noofTeachers_BelowGraduate']?.setValue(this.InstitutionList[0].noofTeachers_BelowGraduate);
+          this.InstitutionForm.controls['noofTeachers_Graduate']?.setValue(this.InstitutionList[0].noofTeachers_Graduate);
+          this.InstitutionForm.controls['noofTeachers_PostGraduateandAbove']?.setValue(this.InstitutionList[0].noofTeachers_PostGraduateandAbove);
+          this.InstitutionForm.controls['noofTotalTeachersTrainedinComputer']?.setValue(this.InstitutionList[0].noofTotalTeachersTrainedinComputer);
+          this.InstitutionForm.controls['noofTeachers_AgedAbove55']?.setValue(this.InstitutionList[0].noofTeachers_AgedAbove55);
+          this.InstitutionForm.controls['noofTeachers_DiplomaorCertificateinbasicteacherstraining']?.setValue(this.InstitutionList[0].noofTeachers_DiplomaorCertificateinbasicteacherstraining);
+          this.InstitutionForm.controls['noofTeachers_BachelorofElementaryEducation']?.setValue(this.InstitutionList[0].noofTeachers_BachelorofElementaryEducation);
+          this.InstitutionForm.controls['noofTeachers_BEdorEquivalent']?.setValue(this.InstitutionList[0].noofTeachers_BEdorEquivalent);
+          this.InstitutionForm.controls['noofTeachers_MEdorEquivalent']?.setValue(this.InstitutionList[0].noofTeachers_MEdorEquivalent);
+          this.InstitutionForm.controls['noofTeachers_DiplomaorDegreeinSpecialEducation']?.setValue(this.InstitutionList[0].noofTeachers_DiplomaorDegreeinSpecialEducation);
+          this.InstitutionForm.controls['noofTeachers_PursuinganyRelevantProfessionalCourse']?.setValue(this.InstitutionList[0].noofTeachers_PursuinganyRelevantProfessionalCourse);
+
+          this.IsUpdate = true;
+          this.buttonText = "Update";
+        }
+
+        // Process the data here
+      } catch (error) {       
+        // Handle error
+      }
+    }
 
   }
 
-  public LoadInstitutionsData() {
+
+
+  private LoadInstitutionsData() {
+
+    try {
+
+      this.fiscalService.getInstituionsData().then((result: any) => {
+
+        console.log('LoadInstitutionsData', result.institutionsData.orgList);
+
+        this.OrganizationList = result.institutionsData.orgList;
+        this.LocationList = result.institutionsData.locList;
+        this.SchoolCategoryList = result.institutionsData.categoryList;
+
+        this.StateManagementList = result.institutionsData.smList;
+        this.NationalManagementList = result.institutionsData.nmList;
+        this.SchoolTypeList = result.institutionsData.typeList;
+        this.MediumofInstructionList = result.institutionsData.instructionList;
+        this.BoardList = result.institutionsData.boardList;
+
+        this.BuildingStatusList = result.institutionsData.buildingList;
+        this.BoundarywallList = result.institutionsData.boundaryList;
+      });
+
+    } catch (error) {
+      console.error('Error fetching data in component:', error);
+    }
+
+  }
+
+
+  public GetInstitutionById() {
+
+    try {
+
+      this.fiscalService.GetInstitutionById({ institutionId: this.InstitutionId }).then(result => {
+
+
+        console.log("GetInstitutionById",result);
+
+        this.InstitutionList = result.institutions;
+
+        if (this.InstitutionList != undefined && this.InstitutionList.length > 0) {
+
+          this.InstitutionId = this.InstitutionList[0].institutionId;
+
+          console.log(JSON.stringify(this.SchoolCategoryList.find(app => app.categoryId === this.InstitutionList[0].schoolCategoryId)));
+
+          this.InstitutionId = this.InstitutionList[0].institutionId;
+          this.InstitutionForm.controls['selectedOrganization']?.setValue(this.OrganizationList.find(app => app.organizationId === this.InstitutionList[0].organizationId));
+          this.InstitutionForm.controls['institutionName']?.setValue(this.InstitutionList[0].name);
+          this.InstitutionForm.controls['shortName']?.setValue(this.InstitutionList[0].shortName);
+          this.InstitutionForm.controls['udiseCode']?.setValue(this.InstitutionList[0].udiseCode);
+
+
+          this.InstitutionForm.controls['selectedState']?.setValue(this.StateList.find(app => app.stateId === this.InstitutionList[0].stateId)); //selectedState
+          this.InstitutionForm.controls['city']?.setValue(this.InstitutionList[0].city);
+          this.InstitutionForm.controls['block']?.setValue(this.InstitutionList[0].block);
+          this.InstitutionForm.controls['selectedLocation']?.setValue(this.LocationList.find(app => app.locationId === this.InstitutionList[0].locationId));
+          this.InstitutionForm.controls['cluster']?.setValue(this.InstitutionList[0].cluster);
+          this.InstitutionForm.controls['ward']?.setValue(this.InstitutionList[0].ward);
+          this.InstitutionForm.controls['mahalla']?.setValue(this.InstitutionList[0].mahalla);
+          this.InstitutionForm.controls['pinCode']?.setValue(this.InstitutionList[0].pinCode);
+          this.InstitutionForm.controls['panchayat']?.setValue(this.InstitutionList[0].panchayat);
+          this.InstitutionForm.controls['municipality']?.setValue(this.InstitutionList[0].municipality);
+          this.InstitutionForm.controls['selectedCategory']?.setValue(this.SchoolCategoryList.find(app => app.categoryId === this.InstitutionList[0].schoolCategoryId));
+          this.InstitutionForm.controls['stateManagement']?.setValue(this.StateManagementList.find(app => app.stateManagementId === this.InstitutionList[0].stateManagementId));
+          this.InstitutionForm.controls['nationalManagement']?.setValue(this.NationalManagementList.find(app => app.nationalManagementId === this.InstitutionList[0].nationalManagementId));
+          this.InstitutionForm.controls['selectedSchoolType']?.setValue(this.SchoolTypeList.find(app => app.typeId === this.InstitutionList[0].schoolTypeId));
+          this.InstitutionForm.controls['classFrom']?.setValue(this.InstitutionList[0].classFrom);
+          this.InstitutionForm.controls['classTo']?.setValue(this.InstitutionList[0].classTo);
+          this.InstitutionForm.controls['selectedPrePrimary']?.setValue(this.PrePrimaryList.find(app => app.labelId === this.InstitutionList[0].isPrePrimary));
+          this.InstitutionForm.controls['selectedMedium']?.setValue(this.MediumofInstructionList.find(app => app.instructionId === this.InstitutionList[0].instructionId));
+          this.InstitutionForm.controls['selectedBoard']?.setValue(this.InstitutionList[0].selectedBoard);
+
+
+          this.InstitutionForm.controls['regAddress1']?.setValue(this.InstitutionList[0].regAddress1);
+          this.InstitutionForm.controls['regAddress2']?.setValue(this.InstitutionList[0].regAddress2);
+          this.InstitutionForm.controls['regAddress3']?.setValue(this.InstitutionList[0].regAddress3);
+          this.InstitutionForm.controls['regAddress4']?.setValue(this.InstitutionList[0].regAddress4);
+          this.InstitutionForm.controls['regCity']?.setValue(this.InstitutionList[0].regCity);
+          this.InstitutionForm.controls['regSelectedState']?.setValue(this.StateList.find(app => app.stateId === this.InstitutionList[0].regStateId)); // regSelectedState
+          this.InstitutionForm.controls['regSelectedCountry']?.setValue(this.CoutryList.find(app => app.countryId === this.InstitutionList[0].regCountryId)); // regSelectedCountry
+          this.InstitutionForm.controls['regPINCode']?.setValue(this.InstitutionList[0].regPINCode);
+          this.InstitutionForm.controls['mobileNumber1']?.setValue(this.InstitutionList[0].mobileNumber1);
+          this.InstitutionForm.controls['mobileNumber2']?.setValue(this.InstitutionList[0].mobileNumber2);
+          this.InstitutionForm.controls['phoneNumber1']?.setValue(this.InstitutionList[0].phoneNumber1);
+          this.InstitutionForm.controls['phoneNumber2']?.setValue(this.InstitutionList[0].phoneNumber2);
+          this.InstitutionForm.controls['fax']?.setValue(this.InstitutionList[0].fax);
+          this.InstitutionForm.controls['primaryEmail']?.setValue(this.InstitutionList[0].primaryEmail);
+          this.InstitutionForm.controls['secondaryEmail']?.setValue(this.InstitutionList[0].secondaryEmail);
+          this.InstitutionForm.controls['website']?.setValue(this.InstitutionList[0].website);
+
+
+          this.InstitutionForm.controls['yearofEstablishment']?.setValue(this.InstitutionList[0].yearofEstablishment);
+          this.InstitutionForm.controls['yearofRecognition_Primary']?.setValue(this.InstitutionList[0].yearofRecognition_Primary);
+          this.InstitutionForm.controls['yearofRecognition_UpperPrimary']?.setValue(this.InstitutionList[0].yearofRecognition_UpperPrimary);
+          this.InstitutionForm.controls['yearofRecognition_Secondary']?.setValue(this.InstitutionList[0].yearofRecognition_Secondary);
+          this.InstitutionForm.controls['yearofRecognition_HigherSecondary']?.setValue(this.InstitutionList[0].yearofRecognition_HigherSecondary);
+          this.InstitutionForm.controls['affiliationBoard_Secondary']?.setValue(this.InstitutionList[0].affiliationBoard_Secondary);
+          this.InstitutionForm.controls['affiliationBoard_HigherSecondary']?.setValue(this.InstitutionList[0].affiliationBoard_HigherSecondary);
+          this.InstitutionForm.controls['selectedMinoritySchool']?.setValue(this.InstitutionList[0].selectedMinoritySchool);
+          this.InstitutionForm.controls['selectedIsthisaShiftSchool']?.setValue(this.InstitutionList[0].selectedIsthisaShiftSchool);
+          this.InstitutionForm.controls['selectedBuildingStatus']?.setValue(this.InstitutionList[0].selectedBuildingStatus);
+          this.InstitutionForm.controls['selectedBoundaryWall']?.setValue(this.InstitutionList[0].selectedBoundaryWall);
+          this.InstitutionForm.controls['noofBuildingBlocks']?.setValue(this.InstitutionList[0].noofBuildingBlocks);
+          this.InstitutionForm.controls['noofPuccaBuildingBlocks']?.setValue(this.InstitutionList[0].noofPuccaBuildingBlocks);
+          this.InstitutionForm.controls['selectedIsSpecialSchoolforCWSN']?.setValue(this.InstitutionList[0].selectedIsSpecialSchoolforCWSN);
+          this.InstitutionForm.controls['selectedAvailabilityofRamps']?.setValue(this.InstitutionList[0].selectedAvailabilityofRamps);
+          this.InstitutionForm.controls['selectedAvailabilityofHandrails']?.setValue(this.InstitutionList[0].selectedAvailabilityofHandrails);
+
+
+          this.InstitutionForm.controls['totalNoOfToilets_Boys']?.setValue(this.InstitutionList[0].totalNoOfToilets_Boys);
+          this.InstitutionForm.controls['totalNoOfToilets_Girls']?.setValue(this.InstitutionList[0].totalNoOfToilets_Girls);
+          this.InstitutionForm.controls['functional_Boys']?.setValue(this.InstitutionList[0].functional_Boys);
+          this.InstitutionForm.controls['functional_Girls']?.setValue(this.InstitutionList[0].functional_Girls);
+          this.InstitutionForm.controls['functionalCWSNFriendly_Boys']?.setValue(this.InstitutionList[0].functionalCWSNFriendly_Boys);
+          this.InstitutionForm.controls['functionalCWSNFriendly_Girls']?.setValue(this.InstitutionList[0].functionalCWSNFriendly_Girls);
+          this.InstitutionForm.controls['urinal_Boys']?.setValue(this.InstitutionList[0].urinal_Boys);
+          this.InstitutionForm.controls['urinal_Girls']?.setValue(this.InstitutionList[0].urinal_Girls);
+          this.InstitutionForm.controls['selectedHandwashNearToilet']?.setValue(this.InstitutionList[0].selectedHandwashNearToilet);
+          this.InstitutionForm.controls['selectedHandwashFacilityforMeal']?.setValue(this.InstitutionList[0].selectedHandwashFacilityforMeal);
+          this.InstitutionForm.controls['selectedDrinkingWaterAvailable']?.setValue(this.InstitutionList[0].selectedDrinkingWaterAvailable);
+          this.InstitutionForm.controls['selectedDrinkingWaterFunctional']?.setValue(this.InstitutionList[0].selectedDrinkingWaterFunctional);
+          this.InstitutionForm.controls['selectedRainWaterHarvesting']?.setValue(this.InstitutionList[0].selectedRainWaterHarvesting);
+          this.InstitutionForm.controls['selectedPlaygroundAvailable']?.setValue(this.InstitutionList[0].selectedPlaygroundAvailable);
+
+
+          this.InstitutionForm.controls['noofBuildingsInGoodCondition']?.setValue(this.InstitutionList[0].noofBuildingsInGoodCondition);
+          this.InstitutionForm.controls['noofBuildingNeedsMinorRepair']?.setValue(this.InstitutionList[0].noofBuildingNeedsMinorRepair);
+          this.InstitutionForm.controls['noofBuildingNeedsMajorRepair']?.setValue(this.InstitutionList[0].noofBuildingNeedsMajorRepair);
+          this.InstitutionForm.controls['otherRooms']?.setValue(this.InstitutionList[0].otherRooms);
+          this.InstitutionForm.controls['selectedLibraryAvailability']?.setValue(this.InstitutionList[0].selectedLibraryAvailability);
+          this.InstitutionForm.controls['selectedSeparateRoomforHM']?.setValue(this.InstitutionList[0].selectedSeparateRoomforHM);
+          this.InstitutionForm.controls['selectedFurnitureAvailability']?.setValue(this.InstitutionList[0].selectedFurnitureAvailability);
+          this.InstitutionForm.controls['selectedElectricityAvailability']?.setValue(this.InstitutionList[0].selectedElectricityAvailability);
+          this.InstitutionForm.controls['selectedSolarPanel']?.setValue(this.InstitutionList[0].selectedSolarPanel);
+          this.InstitutionForm.controls['selectedMedicalcheckups']?.setValue(this.InstitutionList[0].selectedMedicalcheckups);
+
+          this.InstitutionForm.controls['selectedICTLab']?.setValue(this.InstitutionList[0].selectedICTLab);
+          this.InstitutionForm.controls['selectedInternetConnection']?.setValue(this.InstitutionList[0].selectedInternetConnection);
+          this.InstitutionForm.controls['selectedDTHConnection']?.setValue(this.InstitutionList[0].selectedDTHConnection);
+          this.InstitutionForm.controls['noofDesktop']?.setValue(this.InstitutionList[0].noofDesktop);
+          this.InstitutionForm.controls['noofLaptop']?.setValue(this.InstitutionList[0].noofLaptop);
+          this.InstitutionForm.controls['noofTablet']?.setValue(this.InstitutionList[0].noofTablet);
+          this.InstitutionForm.controls['noofPrinter']?.setValue(this.InstitutionList[0].noofPrinter);
+          this.InstitutionForm.controls['noofProjector']?.setValue(this.InstitutionList[0].noofProjector);
+          this.InstitutionForm.controls['noofDigiBoard']?.setValue(this.InstitutionList[0].noofDigiBoard);
+
+          this.InstitutionForm.controls['noofTeachers_Primary']?.setValue(this.InstitutionList[0].noofTeachers_Primary);
+          this.InstitutionForm.controls['noofTeachers_PrimaryandUpperPrimary']?.setValue(this.InstitutionList[0].noofTeachers_PrimaryandUpperPrimary);
+          this.InstitutionForm.controls['noofTeachers_HigerSecondaryOnly']?.setValue(this.InstitutionList[0].noofTeachers_HigerSecondaryOnly);
+          this.InstitutionForm.controls['noofTeachers_SecondaryandHigerSecondary']?.setValue(this.InstitutionList[0].noofTeachers_SecondaryandHigerSecondary);
+          this.InstitutionForm.controls['noofTeachers_PrePrimaryandPrimary']?.setValue(this.InstitutionList[0].noofTeachers_PrePrimaryandPrimary);
+          this.InstitutionForm.controls['noofTeachers_UpperPrimary']?.setValue(this.InstitutionList[0].noofTeachers_UpperPrimary);
+          this.InstitutionForm.controls['noofTeachers_SecondaryOnly']?.setValue(this.InstitutionList[0].noofTeachers_SecondaryOnly);
+          this.InstitutionForm.controls['noofTeachers_UpperPrimaryandSecondary']?.setValue(this.InstitutionList[0].noofTeachers_UpperPrimaryandSecondary);
+          this.InstitutionForm.controls['noofTeachers_PrePrimaryOnly']?.setValue(this.InstitutionList[0].noofTeachers_PrePrimaryOnly);
+          this.InstitutionForm.controls['noofTeachers_Regular']?.setValue(this.InstitutionList[0].noofTeachers_Regular);
+          this.InstitutionForm.controls['noofTeachers_Parttime']?.setValue(this.InstitutionList[0].noofTeachers_Parttime);
+          this.InstitutionForm.controls['noofTeachers_Contract']?.setValue(this.InstitutionList[0].noofTeachers_Contract);
+          this.InstitutionForm.controls['noofTeachers_Male']?.setValue(this.InstitutionList[0].noofTeachers_Male);
+          this.InstitutionForm.controls['noofTeachers_Female']?.setValue(this.InstitutionList[0].noofTeachers_Female);
+          this.InstitutionForm.controls['noofTeachers_Transgender']?.setValue(this.InstitutionList[0].noofTeachers_Transgender);
+          this.InstitutionForm.controls['totalNoofTeachers']?.setValue(this.InstitutionList[0].totalNoofTeachers);
+          this.InstitutionForm.controls['noofTotalTeacherReceivedServiceTraining']?.setValue(this.InstitutionList[0].noofTotalTeacherReceivedServiceTraining);
+          this.InstitutionForm.controls['totalTeacherInvolveinNonTeachingAssignment']?.setValue(this.InstitutionList[0].totalTeacherInvolveinNonTeachingAssignment);
+          this.InstitutionForm.controls['noofTeachers_BelowGraduate']?.setValue(this.InstitutionList[0].noofTeachers_BelowGraduate);
+          this.InstitutionForm.controls['noofTeachers_Graduate']?.setValue(this.InstitutionList[0].noofTeachers_Graduate);
+          this.InstitutionForm.controls['noofTeachers_PostGraduateandAbove']?.setValue(this.InstitutionList[0].noofTeachers_PostGraduateandAbove);
+          this.InstitutionForm.controls['noofTotalTeachersTrainedinComputer']?.setValue(this.InstitutionList[0].noofTotalTeachersTrainedinComputer);
+          this.InstitutionForm.controls['noofTeachers_AgedAbove55']?.setValue(this.InstitutionList[0].noofTeachers_AgedAbove55);
+          this.InstitutionForm.controls['noofTeachers_DiplomaorCertificateinbasicteacherstraining']?.setValue(this.InstitutionList[0].noofTeachers_DiplomaorCertificateinbasicteacherstraining);
+          this.InstitutionForm.controls['noofTeachers_BachelorofElementaryEducation']?.setValue(this.InstitutionList[0].noofTeachers_BachelorofElementaryEducation);
+          this.InstitutionForm.controls['noofTeachers_BEdorEquivalent']?.setValue(this.InstitutionList[0].noofTeachers_BEdorEquivalent);
+          this.InstitutionForm.controls['noofTeachers_MEdorEquivalent']?.setValue(this.InstitutionList[0].noofTeachers_MEdorEquivalent);
+          this.InstitutionForm.controls['noofTeachers_DiplomaorDegreeinSpecialEducation']?.setValue(this.InstitutionList[0].noofTeachers_DiplomaorDegreeinSpecialEducation);
+          this.InstitutionForm.controls['noofTeachers_PursuinganyRelevantProfessionalCourse']?.setValue(this.InstitutionList[0].noofTeachers_PursuinganyRelevantProfessionalCourse);
+
+          this.IsUpdate = true;
+          this.buttonText = "Update";
+        }
+
+      });
+
+    } catch (error) {
+
+    }
+
+  }
+
+
+
+  public LoadInstitutionsData_V2() {
 
     try {
 
       this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.DATA)
         .subscribe({
           next: (result: any) => {
-            console.log('GetOrganizations', result.institutionsData);
-            this.OrganizationList = result.institutionsData.orgList;
-            this.LocationList = result.institutionsData.locList;
-            this.SchoolCategoryList =  result.institutionsData.categoryList;
 
-            this.StateManagementList =  result.institutionsData.smList;
-            this.NationalManagementList =  result.institutionsData.nmList;
-            this.SchoolTypeList =  result.institutionsData.typeList;
-            this.MediumofInstructionList =  result.institutionsData.instructionList;
-            this.BoardList =  result.institutionsData.boardList;
+              this.OrganizationList = result.institutionsData.orgList;
+              this.LocationList = result.institutionsData.locList;
+              this.SchoolCategoryList = result.institutionsData.categoryList;
 
-            this.BuildingStatusList =  result.institutionsData.buildingList;
-            this.BoundarywallList =  result.institutionsData.boundaryList;
+              this.StateManagementList = result.institutionsData.smList;
+              this.NationalManagementList = result.institutionsData.nmList;
+              this.SchoolTypeList = result.institutionsData.typeList;
+              this.MediumofInstructionList = result.institutionsData.instructionList;
+              this.BoardList = result.institutionsData.boardList;
 
+              this.BuildingStatusList = result.institutionsData.buildingList;
+              this.BoundarywallList = result.institutionsData.boundaryList;
 
-          },
-          error: (err: HttpErrorResponse) => console.log(err)
+          }
+
         });
 
     } catch (error) {
-
+      console.error('Error fetching data in component:', error);
     }
+
   }
+ 
 
   filterOrganization(event: AutoCompleteCompleteEvent) {
 
@@ -336,27 +735,10 @@ export class InstitutionComponent {
     console.log(this.InstitutionForm.value['selectedOrganization'])
   }
 
-  public LoadApplication() {
-    try {
-      this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.LIST)
-        .subscribe({
-          next: (result: any) => {
-
-          },
-          error: (err: HttpErrorResponse) => console.log(err)
-
-        })
-    } catch (error) {
-
-    }
-  }
-
   Clear() {
-
     this.buttonText = "Save";
     this.IsUpdate = false;
     this.InstitutionForm.reset();
-
   }
 
   Save() {
@@ -364,13 +746,14 @@ export class InstitutionComponent {
     try {
       let _apiUrl: string = '';
       let passSaveParams: any = {};
+
       if (this.IsUpdate) { //  UPDATE
 
         passSaveParams.institutionId = this.InstitutionId;
         passSaveParams.organizationId = this.InstitutionForm.value['selectedOrganization'] != null ? this.InstitutionForm.value['selectedOrganization'].organizationId: 0;
         passSaveParams.name = this.InstitutionForm.value['institutionName'] != null ? this.InstitutionForm.value['institutionName'] : '';
         passSaveParams.shortName = this.InstitutionForm.value['shortName'] != null ? this.InstitutionForm.value['shortName'] : '';
-        passSaveParams.udiseCode = this.InstitutionForm.value['UDISECode'] != null ? this.InstitutionForm.value['UDISECode'] : '';
+        passSaveParams.udiseCode = this.InstitutionForm.value['udiseCode'] != null ? this.InstitutionForm.value['udiseCode'] : '';
 
 
         passSaveParams.stateId = this.InstitutionForm.value['selectedState'] != null ? this.InstitutionForm.value['selectedState'].stateId : 0;
@@ -379,7 +762,7 @@ export class InstitutionComponent {
         passSaveParams.locationId = this.InstitutionForm.value['selectedLocation'] != null ? this.InstitutionForm.value['selectedLocation'].locationId : 0;
         passSaveParams.cluster = this.InstitutionForm.value['cluster'] != null ? this.InstitutionForm.value['cluster'] : '';
         passSaveParams.ward = this.InstitutionForm.value['ward'] != null ? this.InstitutionForm.value['ward'] : '';
-        passSaveParams.mahalla = this.InstitutionForm.value['mohalla'] != null ? this.InstitutionForm.value['mohalla'] : '';
+        passSaveParams.mahalla = this.InstitutionForm.value['mahalla'] != null ? this.InstitutionForm.value['mahalla'] : '';
         passSaveParams.pinCode = this.InstitutionForm.value['pinCode'] != null ? this.InstitutionForm.value['pinCode'] : 0;
         passSaveParams.panchayat = this.InstitutionForm.value['panchayat'] != null ? this.InstitutionForm.value['panchayat'] : '';
         passSaveParams.municipality = this.InstitutionForm.value['municipality'] != null ? this.InstitutionForm.value['municipality'] : '';
@@ -510,7 +893,7 @@ export class InstitutionComponent {
         passSaveParams.organizationId = this.InstitutionForm.value['selectedOrganization'] != null ? this.InstitutionForm.value['selectedOrganization'].organizationId: 0;
         passSaveParams.name = this.InstitutionForm.value['institutionName'] != null ? this.InstitutionForm.value['institutionName'] : '';
         passSaveParams.shortName = this.InstitutionForm.value['shortName'] != null ? this.InstitutionForm.value['shortName'] : '';
-        passSaveParams.udiseCode = this.InstitutionForm.value['UDISECode'] != null ? this.InstitutionForm.value['UDISECode'] : '';
+        passSaveParams.udiseCode = this.InstitutionForm.value['udiseCode'] != null ? this.InstitutionForm.value['udiseCode'] : '';
 
 
         passSaveParams.stateId = this.InstitutionForm.value['selectedState'] != null ? this.InstitutionForm.value['selectedState'].stateId : 0;
@@ -519,7 +902,7 @@ export class InstitutionComponent {
         passSaveParams.locationId = this.InstitutionForm.value['selectedLocation'] != null ? this.InstitutionForm.value['selectedLocation'].locationId : 0;
         passSaveParams.cluster = this.InstitutionForm.value['cluster'] != null ? this.InstitutionForm.value['cluster'] : '';
         passSaveParams.ward = this.InstitutionForm.value['ward'] != null ? this.InstitutionForm.value['ward'] : '';
-        passSaveParams.mahalla = this.InstitutionForm.value['mohalla'] != null ? this.InstitutionForm.value['mohalla'] : '';
+        passSaveParams.mahalla = this.InstitutionForm.value['mahalla'] != null ? this.InstitutionForm.value['mahalla'] : '';
         passSaveParams.pinCode = this.InstitutionForm.value['pinCode'] != null ? this.InstitutionForm.value['pinCode'] : 0;
         passSaveParams.panchayat = this.InstitutionForm.value['panchayat'] != null ? this.InstitutionForm.value['panchayat'] : '';
         passSaveParams.municipality = this.InstitutionForm.value['municipality'] != null ? this.InstitutionForm.value['municipality'] : '';
@@ -661,162 +1044,162 @@ export class InstitutionComponent {
     }
   }
 
-  public fnGetByInstitutionId(){
+  public GetInstitutionById_V1() {
 
     try {
 
-      this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.EDIT + '/?institutionId' + this.InstitutionId)
-      .subscribe({
-        next:(result: any) =>{
-          this.InstitutionId = result.institution;
-          console.log('fnGetByInstitutionId',this.InstitutionId);
+      this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.Institution.EDIT + '/?institutionId=' + this.InstitutionId)
+        .subscribe({
+          next: (result: any) => {
+            this.InstitutionList = result.institutions;
+            // console.log('GetInstitutionById', JSON.stringify(this.InstitutionList));
 
-          if (this.InstitutionList != undefined && this.InstitutionList.length > 0) {
-            this.InstitutionId = this.InstitutionList[0].institutionId;
+            if (this.InstitutionList != undefined && this.InstitutionList.length > 0) {
 
-            
+              this.InstitutionId = this.InstitutionList[0].institutionId;
 
-        this.InstitutionId = this.InstitutionList[0].institutionId;
-        this.InstitutionForm.controls['selectedOrganization']?.setValue(this.InstitutionList[0].name);
-        this.InstitutionForm.controls['institutionName']?.setValue(this.InstitutionList[0].institutionName);
-        this.InstitutionForm.controls['shortName']?.setValue(this.InstitutionList[0].shortName);
-        this.InstitutionForm.controls['UDISECode']?.setValue(this.InstitutionList[0].UDISECode);
+              console.log(JSON.stringify(this.SchoolCategoryList.find(app => app.categoryId === this.InstitutionList[0].schoolCategoryId)));
 
-
-        this.InstitutionForm.controls['selectedState']?.setValue(this.StateList.find(app => app.stateId === this.InstitutionList[0].stateId)); //selectedState
-        this.InstitutionForm.controls['city']?.setValue(this.InstitutionList[0].city);
-        this.InstitutionForm.controls['block']?.setValue(this.InstitutionList[0].block);
-        this.InstitutionForm.controls['selectedLocation']?.setValue(this.InstitutionList[0].selectedLocation);
-        this.InstitutionForm.controls['cluster']?.setValue(this.InstitutionList[0].cluster);
-        this.InstitutionForm.controls['ward']?.setValue(this.InstitutionList[0].ward);
-        this.InstitutionForm.controls['mohalla']?.setValue(this.InstitutionList[0].mohalla);
-        this.InstitutionForm.controls['pinCode']?.setValue(this.InstitutionList[0].pinCode);
-        this.InstitutionForm.controls['panchayat']?.setValue(this.InstitutionList[0].panchayat);
-        this.InstitutionForm.controls['municipality']?.setValue(this.InstitutionList[0].municipality);
-        this.InstitutionForm.controls['selectedCategory']?.setValue(this.InstitutionList[0].selectedCategory);
-        this.InstitutionForm.controls['stateManagement']?.setValue(this.InstitutionList[0].stateManagement);
-        this.InstitutionForm.controls['nationalManagement']?.setValue(this.InstitutionList[0].nationalManagement);
-        this.InstitutionForm.controls['selectedSchoolType']?.setValue(this.InstitutionList[0].selectedSchoolType);
-        this.InstitutionForm.controls['classFrom']?.setValue(this.InstitutionList[0].classFrom);
-        this.InstitutionForm.controls['classTo']?.setValue(this.InstitutionList[0].classTo);
-        this.InstitutionForm.controls['selectedPrePrimary']?.setValue(this.InstitutionList[0].selectedPrePrimary);
-        this.InstitutionForm.controls['selectedMedium']?.setValue(this.InstitutionList[0].selectedMedium);
-        this.InstitutionForm.controls['selectedBoard']?.setValue(this.InstitutionList[0].selectedBoard);
+              this.InstitutionId = this.InstitutionList[0].institutionId;
+              this.InstitutionForm.controls['selectedOrganization']?.setValue(this.OrganizationList.find(app => app.organizationId === this.InstitutionList[0].organizationId));
+              this.InstitutionForm.controls['institutionName']?.setValue(this.InstitutionList[0].name);
+              this.InstitutionForm.controls['shortName']?.setValue(this.InstitutionList[0].shortName);
+              this.InstitutionForm.controls['udiseCode']?.setValue(this.InstitutionList[0].udiseCode);
 
 
-        this.InstitutionForm.controls['regAddress1']?.setValue(this.InstitutionList[0].regAddress1);
-        this.InstitutionForm.controls['regAddress2']?.setValue(this.InstitutionList[0].regAddress2);
-        this.InstitutionForm.controls['regAddress3']?.setValue(this.InstitutionList[0].regAddress3);
-        this.InstitutionForm.controls['regAddress4']?.setValue(this.InstitutionList[0].regAddress4);
-        this.InstitutionForm.controls['regCity']?.setValue(this.InstitutionList[0].regCity);
-        this.InstitutionForm.controls['regSelectedState']?.setValue(this.StateList.find(app => app.stateId === this.InstitutionList[0].regStateId)); // regSelectedState
-        this.InstitutionForm.controls['regSelectedCountry']?.setValue(this.CoutryList.find(app => app.countryId === this.InstitutionList[0].regCountryId)); // regSelectedCountry
-        this.InstitutionForm.controls['regPINCode']?.setValue(this.InstitutionList[0].regPINCode);
-        this.InstitutionForm.controls['mobileNumber1']?.setValue(this.InstitutionList[0].mobileNumber1);
-        this.InstitutionForm.controls['mobileNumber2']?.setValue(this.InstitutionList[0].mobileNumber2);
-        this.InstitutionForm.controls['phoneNumber1']?.setValue(this.InstitutionList[0].phoneNumber1);
-        this.InstitutionForm.controls['phoneNumber2']?.setValue(this.InstitutionList[0].phoneNumber2);
-        this.InstitutionForm.controls['fax']?.setValue(this.InstitutionList[0].fax);
-        this.InstitutionForm.controls['primaryEmail']?.setValue(this.InstitutionList[0].primaryEmail);
-        this.InstitutionForm.controls['secondaryEmail']?.setValue(this.InstitutionList[0].secondaryEmail);
-        this.InstitutionForm.controls['website']?.setValue(this.InstitutionList[0].website);
+              this.InstitutionForm.controls['selectedState']?.setValue(this.StateList.find(app => app.stateId === this.InstitutionList[0].stateId)); //selectedState
+              this.InstitutionForm.controls['city']?.setValue(this.InstitutionList[0].city);
+              this.InstitutionForm.controls['block']?.setValue(this.InstitutionList[0].block);
+              this.InstitutionForm.controls['selectedLocation']?.setValue(this.LocationList.find(app => app.locationId === this.InstitutionList[0].locationId));
+              this.InstitutionForm.controls['cluster']?.setValue(this.InstitutionList[0].cluster);
+              this.InstitutionForm.controls['ward']?.setValue(this.InstitutionList[0].ward);
+              this.InstitutionForm.controls['mahalla']?.setValue(this.InstitutionList[0].mahalla);
+              this.InstitutionForm.controls['pinCode']?.setValue(this.InstitutionList[0].pinCode);
+              this.InstitutionForm.controls['panchayat']?.setValue(this.InstitutionList[0].panchayat);
+              this.InstitutionForm.controls['municipality']?.setValue(this.InstitutionList[0].municipality);
+              this.InstitutionForm.controls['selectedCategory']?.setValue(this.SchoolCategoryList.find(app => app.categoryId === this.InstitutionList[0].schoolCategoryId));
+              this.InstitutionForm.controls['stateManagement']?.setValue(this.StateManagementList.find(app => app.stateManagementId === this.InstitutionList[0].stateManagementId));
+              this.InstitutionForm.controls['nationalManagement']?.setValue(this.NationalManagementList.find(app => app.nationalManagementId === this.InstitutionList[0].nationalManagementId));
+              this.InstitutionForm.controls['selectedSchoolType']?.setValue(this.SchoolTypeList.find(app => app.typeId === this.InstitutionList[0].schoolTypeId));
+              this.InstitutionForm.controls['classFrom']?.setValue(this.InstitutionList[0].classFrom);
+              this.InstitutionForm.controls['classTo']?.setValue(this.InstitutionList[0].classTo);
+              this.InstitutionForm.controls['selectedPrePrimary']?.setValue(this.PrePrimaryList.find(app => app.labelId === this.InstitutionList[0].isPrePrimary));
+              this.InstitutionForm.controls['selectedMedium']?.setValue(this.MediumofInstructionList.find(app=>app.instructionId === this.InstitutionList[0].instructionId));
+              this.InstitutionForm.controls['selectedBoard']?.setValue(this.InstitutionList[0].selectedBoard);
 
 
-        this.InstitutionForm.controls['yearofEstablishment']?.setValue(this.InstitutionList[0].yearofEstablishment);
-        this.InstitutionForm.controls['yearofRecognition_Primary']?.setValue(this.InstitutionList[0].yearofRecognition_Primary);
-        this.InstitutionForm.controls['yearofRecognition_UpperPrimary']?.setValue(this.InstitutionList[0].yearofRecognition_UpperPrimary);
-        this.InstitutionForm.controls['yearofRecognition_Secondary']?.setValue(this.InstitutionList[0].yearofRecognition_Secondary);
-        this.InstitutionForm.controls['yearofRecognition_HigherSecondary']?.setValue(this.InstitutionList[0].yearofRecognition_HigherSecondary);
-        this.InstitutionForm.controls['affiliationBoard_Secondary']?.setValue(this.InstitutionList[0].affiliationBoard_Secondary);
-        this.InstitutionForm.controls['affiliationBoard_HigherSecondary']?.setValue(this.InstitutionList[0].affiliationBoard_HigherSecondary);
-        this.InstitutionForm.controls['selectedMinoritySchool']?.setValue(this.InstitutionList[0].selectedMinoritySchool);
-        this.InstitutionForm.controls['selectedIsthisaShiftSchool'] ?.setValue(this.InstitutionList[0].selectedIsthisaShiftSchool);
-        this.InstitutionForm.controls['selectedBuildingStatus'] ?.setValue(this.InstitutionList[0].selectedBuildingStatus);
-        this.InstitutionForm.controls['selectedBoundaryWall'] ?.setValue(this.InstitutionList[0].selectedBoundaryWall);
-        this.InstitutionForm.controls['noofBuildingBlocks'] ?.setValue(this.InstitutionList[0].noofBuildingBlocks);
-        this.InstitutionForm.controls['noofPuccaBuildingBlocks'] ?.setValue(this.InstitutionList[0].noofPuccaBuildingBlocks);
-        this.InstitutionForm.controls['selectedIsSpecialSchoolforCWSN'] ?.setValue(this.InstitutionList[0].selectedIsSpecialSchoolforCWSN);
-        this.InstitutionForm.controls['selectedAvailabilityofRamps'] ?.setValue(this.InstitutionList[0].selectedAvailabilityofRamps);
-        this.InstitutionForm.controls['selectedAvailabilityofHandrails'] ?.setValue(this.InstitutionList[0].selectedAvailabilityofHandrails);
+              this.InstitutionForm.controls['regAddress1']?.setValue(this.InstitutionList[0].regAddress1);
+              this.InstitutionForm.controls['regAddress2']?.setValue(this.InstitutionList[0].regAddress2);
+              this.InstitutionForm.controls['regAddress3']?.setValue(this.InstitutionList[0].regAddress3);
+              this.InstitutionForm.controls['regAddress4']?.setValue(this.InstitutionList[0].regAddress4);
+              this.InstitutionForm.controls['regCity']?.setValue(this.InstitutionList[0].regCity);
+              this.InstitutionForm.controls['regSelectedState']?.setValue(this.StateList.find(app => app.stateId === this.InstitutionList[0].regStateId)); // regSelectedState
+              this.InstitutionForm.controls['regSelectedCountry']?.setValue(this.CoutryList.find(app => app.countryId === this.InstitutionList[0].regCountryId)); // regSelectedCountry
+
+              this.InstitutionForm.controls['regPINCode']?.setValue(this.InstitutionList[0].regPINCode);
+              this.InstitutionForm.controls['mobileNumber1']?.setValue(this.InstitutionList[0].mobileNumber1);
+              this.InstitutionForm.controls['mobileNumber2']?.setValue(this.InstitutionList[0].mobileNumber2);
+              this.InstitutionForm.controls['phoneNumber1']?.setValue(this.InstitutionList[0].phoneNumber1);
+              this.InstitutionForm.controls['phoneNumber2']?.setValue(this.InstitutionList[0].phoneNumber2);
+              this.InstitutionForm.controls['fax']?.setValue(this.InstitutionList[0].fax);
+              this.InstitutionForm.controls['primaryEmail']?.setValue(this.InstitutionList[0].primaryEmail);
+              this.InstitutionForm.controls['secondaryEmail']?.setValue(this.InstitutionList[0].secondaryEmail);
+              this.InstitutionForm.controls['website']?.setValue(this.InstitutionList[0].website);
 
 
-        this.InstitutionForm.controls['totalNoOfToilets_Boys'] ?.setValue(this.InstitutionList[0].totalNoOfToilets_Boys);
-        this.InstitutionForm.controls['totalNoOfToilets_Girls'] ?.setValue(this.InstitutionList[0].totalNoOfToilets_Girls);
-        this.InstitutionForm.controls['functional_Boys'] ?.setValue(this.InstitutionList[0].functional_Boys);
-        this.InstitutionForm.controls['functional_Girls'] ?.setValue(this.InstitutionList[0].functional_Girls);
-        this.InstitutionForm.controls['functionalCWSNFriendly_Boys'] ?.setValue(this.InstitutionList[0].functionalCWSNFriendly_Boys);
-        this.InstitutionForm.controls['functionalCWSNFriendly_Girls'] ?.setValue(this.InstitutionList[0].functionalCWSNFriendly_Girls);
-        this.InstitutionForm.controls['urinal_Boys'] ?.setValue(this.InstitutionList[0].urinal_Boys);
-        this.InstitutionForm.controls['urinal_Girls'] ?.setValue(this.InstitutionList[0].urinal_Girls);
-        this.InstitutionForm.controls['selectedHandwashNearToilet'] ?.setValue(this.InstitutionList[0].selectedHandwashNearToilet);
-        this.InstitutionForm.controls['selectedHandwashFacilityforMeal'] ?.setValue(this.InstitutionList[0].selectedHandwashFacilityforMeal);
-        this.InstitutionForm.controls['selectedDrinkingWaterAvailable'] ?.setValue(this.InstitutionList[0].selectedDrinkingWaterAvailable);
-        this.InstitutionForm.controls['selectedDrinkingWaterFunctional']?.setValue(this.InstitutionList[0].selectedDrinkingWaterFunctional);
-        this.InstitutionForm.controls['selectedRainWaterHarvesting']  ?.setValue(this.InstitutionList[0].selectedRainWaterHarvesting);
-        this.InstitutionForm.controls['selectedPlaygroundAvailable']  ?.setValue(this.InstitutionList[0].selectedPlaygroundAvailable);
+              this.InstitutionForm.controls['yearofEstablishment']?.setValue(this.InstitutionList[0].yearofEstablishment);
+              this.InstitutionForm.controls['yearofRecognition_Primary']?.setValue(this.InstitutionList[0].yearofRecognition_Primary);
+              this.InstitutionForm.controls['yearofRecognition_UpperPrimary']?.setValue(this.InstitutionList[0].yearofRecognition_UpperPrimary);
+              this.InstitutionForm.controls['yearofRecognition_Secondary']?.setValue(this.InstitutionList[0].yearofRecognition_Secondary);
+              this.InstitutionForm.controls['yearofRecognition_HigherSecondary']?.setValue(this.InstitutionList[0].yearofRecognition_HigherSecondary);
+              this.InstitutionForm.controls['affiliationBoard_Secondary']?.setValue(this.InstitutionList[0].affiliationBoard_Secondary);
+              this.InstitutionForm.controls['affiliationBoard_HigherSecondary']?.setValue(this.InstitutionList[0].affiliationBoard_HigherSecondary);
+              this.InstitutionForm.controls['selectedMinoritySchool']?.setValue(this.InstitutionList[0].selectedMinoritySchool);
+              this.InstitutionForm.controls['selectedIsthisaShiftSchool']?.setValue(this.InstitutionList[0].selectedIsthisaShiftSchool);
+              this.InstitutionForm.controls['selectedBuildingStatus']?.setValue(this.InstitutionList[0].selectedBuildingStatus);
+              this.InstitutionForm.controls['selectedBoundaryWall']?.setValue(this.InstitutionList[0].selectedBoundaryWall);
+              this.InstitutionForm.controls['noofBuildingBlocks']?.setValue(this.InstitutionList[0].noofBuildingBlocks);
+              this.InstitutionForm.controls['noofPuccaBuildingBlocks']?.setValue(this.InstitutionList[0].noofPuccaBuildingBlocks);
+              this.InstitutionForm.controls['selectedIsSpecialSchoolforCWSN']?.setValue(this.InstitutionList[0].selectedIsSpecialSchoolforCWSN);
+              this.InstitutionForm.controls['selectedAvailabilityofRamps']?.setValue(this.InstitutionList[0].selectedAvailabilityofRamps);
+              this.InstitutionForm.controls['selectedAvailabilityofHandrails']?.setValue(this.InstitutionList[0].selectedAvailabilityofHandrails);
 
 
-        this.InstitutionForm.controls['noofBuildingsInGoodCondition'] ?.setValue(this.InstitutionList[0].noofBuildingsInGoodCondition);
-        this.InstitutionForm.controls['noofBuildingNeedsMinorRepair'] ?.setValue(this.InstitutionList[0].noofBuildingNeedsMinorRepair);
-        this.InstitutionForm.controls['noofBuildingNeedsMajorRepair'] ?.setValue(this.InstitutionList[0].noofBuildingNeedsMajorRepair);
-        this.InstitutionForm.controls['otherRooms'] ?.setValue(this.InstitutionList[0].otherRooms);
-        this.InstitutionForm.controls['selectedLibraryAvailability'] ?.setValue(this.InstitutionList[0].selectedLibraryAvailability);
-        this.InstitutionForm.controls['selectedSeparateRoomforHM'] ?.setValue(this.InstitutionList[0].selectedSeparateRoomforHM);
-        this.InstitutionForm.controls['selectedFurnitureAvailability'] ?.setValue(this.InstitutionList[0].selectedFurnitureAvailability);
-        this.InstitutionForm.controls['selectedElectricityAvailability'] ?.setValue(this.InstitutionList[0].selectedElectricityAvailability);
-        this.InstitutionForm.controls['selectedSolarPanel'] ?.setValue(this.InstitutionList[0].selectedSolarPanel);
-        this.InstitutionForm.controls['selectedMedicalcheckups'] ?.setValue(this.InstitutionList[0].selectedMedicalcheckups);
+              this.InstitutionForm.controls['totalNoOfToilets_Boys']?.setValue(this.InstitutionList[0].totalNoOfToilets_Boys);
+              this.InstitutionForm.controls['totalNoOfToilets_Girls']?.setValue(this.InstitutionList[0].totalNoOfToilets_Girls);
+              this.InstitutionForm.controls['functional_Boys']?.setValue(this.InstitutionList[0].functional_Boys);
+              this.InstitutionForm.controls['functional_Girls']?.setValue(this.InstitutionList[0].functional_Girls);
+              this.InstitutionForm.controls['functionalCWSNFriendly_Boys']?.setValue(this.InstitutionList[0].functionalCWSNFriendly_Boys);
+              this.InstitutionForm.controls['functionalCWSNFriendly_Girls']?.setValue(this.InstitutionList[0].functionalCWSNFriendly_Girls);
+              this.InstitutionForm.controls['urinal_Boys']?.setValue(this.InstitutionList[0].urinal_Boys);
+              this.InstitutionForm.controls['urinal_Girls']?.setValue(this.InstitutionList[0].urinal_Girls);
+              this.InstitutionForm.controls['selectedHandwashNearToilet']?.setValue(this.InstitutionList[0].selectedHandwashNearToilet);
+              this.InstitutionForm.controls['selectedHandwashFacilityforMeal']?.setValue(this.InstitutionList[0].selectedHandwashFacilityforMeal);
+              this.InstitutionForm.controls['selectedDrinkingWaterAvailable']?.setValue(this.InstitutionList[0].selectedDrinkingWaterAvailable);
+              this.InstitutionForm.controls['selectedDrinkingWaterFunctional']?.setValue(this.InstitutionList[0].selectedDrinkingWaterFunctional);
+              this.InstitutionForm.controls['selectedRainWaterHarvesting']?.setValue(this.InstitutionList[0].selectedRainWaterHarvesting);
+              this.InstitutionForm.controls['selectedPlaygroundAvailable']?.setValue(this.InstitutionList[0].selectedPlaygroundAvailable);
 
-        this.InstitutionForm.controls['selectedICTLab'] ?.setValue(this.InstitutionList[0].selectedICTLab);
-        this.InstitutionForm.controls['selectedInternetConnection'] ?.setValue(this.InstitutionList[0].selectedInternetConnection);
-        this.InstitutionForm.controls['selectedDTHConnection'] ?.setValue(this.InstitutionList[0].selectedDTHConnection);
-        this.InstitutionForm.controls['noofDesktop']?.setValue(this.InstitutionList[0].noofDesktop);
-        this.InstitutionForm.controls['noofLaptop'] ?.setValue(this.InstitutionList[0].noofLaptop);
-        this.InstitutionForm.controls['noofTablet'] ?.setValue(this.InstitutionList[0].noofTablet);
-        this.InstitutionForm.controls['noofPrinter']?.setValue(this.InstitutionList[0].noofPrinter);
-        this.InstitutionForm.controls['noofProjector'] ?.setValue(this.InstitutionList[0].noofProjector);
-        this.InstitutionForm.controls['noofDigiBoard'] ?.setValue(this.InstitutionList[0].noofDigiBoard);
 
-        this.InstitutionForm.controls['noofTeachers_Primary'] ?.setValue(this.InstitutionList[0].noofTeachers_Primary);
-        this.InstitutionForm.controls['noofTeachers_PrimaryandUpperPrimary'] ?.setValue(this.InstitutionList[0].noofTeachers_PrimaryandUpperPrimary);
-        this.InstitutionForm.controls['noofTeachers_HigerSecondaryOnly'] ?.setValue(this.InstitutionList[0].noofTeachers_HigerSecondaryOnly);
-        this.InstitutionForm.controls['noofTeachers_SecondaryandHigerSecondary'] ?.setValue(this.InstitutionList[0].noofTeachers_SecondaryandHigerSecondary);
-        this.InstitutionForm.controls['noofTeachers_PrePrimaryandPrimary'] ?.setValue(this.InstitutionList[0].noofTeachers_PrePrimaryandPrimary);
-        this.InstitutionForm.controls['noofTeachers_UpperPrimary'] ?.setValue(this.InstitutionList[0].noofTeachers_UpperPrimary);
-        this.InstitutionForm.controls['noofTeachers_SecondaryOnly'] ?.setValue(this.InstitutionList[0].noofTeachers_SecondaryOnly);
-        this.InstitutionForm.controls['noofTeachers_UpperPrimaryandSecondary'] ?.setValue(this.InstitutionList[0].noofTeachers_UpperPrimaryandSecondary);
-        this.InstitutionForm.controls['noofTeachers_PrePrimaryOnly'] ?.setValue(this.InstitutionList[0].noofTeachers_PrePrimaryOnly);
-        this.InstitutionForm.controls['noofTeachers_Regular'] ?.setValue(this.InstitutionList[0].noofTeachers_Regular);
-        this.InstitutionForm.controls['noofTeachers_Parttime']?.setValue(this.InstitutionList[0].noofTeachers_Parttime);
-        this.InstitutionForm.controls['noofTeachers_Contract']?.setValue(this.InstitutionList[0].noofTeachers_Contract);
-        this.InstitutionForm.controls['noofTeachers_Male'] ?.setValue(this.InstitutionList[0].noofTeachers_Male);
-        this.InstitutionForm.controls['noofTeachers_Female'] ?.setValue(this.InstitutionList[0].noofTeachers_Female);
-        this.InstitutionForm.controls['noofTeachers_Transgender'] ?.setValue(this.InstitutionList[0].noofTeachers_Transgender);
-        this.InstitutionForm.controls['totalNoofTeachers'] ?.setValue(this.InstitutionList[0].totalNoofTeachers);
-        this.InstitutionForm.controls['noofTotalTeacherReceivedServiceTraining'] ?.setValue(this.InstitutionList[0].noofTotalTeacherReceivedServiceTraining);
-        this.InstitutionForm.controls['totalTeacherInvolveinNonTeachingAssignment'] ?.setValue(this.InstitutionList[0].totalTeacherInvolveinNonTeachingAssignment);
-        this.InstitutionForm.controls['noofTeachers_BelowGraduate'] ?.setValue(this.InstitutionList[0].noofTeachers_BelowGraduate);
-        this.InstitutionForm.controls['noofTeachers_Graduate'] ?.setValue(this.InstitutionList[0].noofTeachers_Graduate);
-        this.InstitutionForm.controls['noofTeachers_PostGraduateandAbove'] ?.setValue(this.InstitutionList[0].noofTeachers_PostGraduateandAbove);
-        this.InstitutionForm.controls['noofTotalTeachersTrainedinComputer'] ?.setValue(this.InstitutionList[0].noofTotalTeachersTrainedinComputer);
-        this.InstitutionForm.controls['noofTeachers_AgedAbove55'] ?.setValue(this.InstitutionList[0].noofTeachers_AgedAbove55);
-        this.InstitutionForm.controls['noofTeachers_DiplomaorCertificateinbasicteacherstraining'] ?.setValue(this.InstitutionList[0].noofTeachers_DiplomaorCertificateinbasicteacherstraining);
-        this.InstitutionForm.controls['noofTeachers_BachelorofElementaryEducation'] ?.setValue(this.InstitutionList[0].noofTeachers_BachelorofElementaryEducation);
-        this.InstitutionForm.controls['noofTeachers_BEdorEquivalent'] ?.setValue(this.InstitutionList[0].noofTeachers_BEdorEquivalent);
-        this.InstitutionForm.controls['noofTeachers_MEdorEquivalent'] ?.setValue(this.InstitutionList[0].noofTeachers_MEdorEquivalent);
-        this.InstitutionForm.controls['noofTeachers_DiplomaorDegreeinSpecialEducation'] ?.setValue(this.InstitutionList[0].noofTeachers_DiplomaorDegreeinSpecialEducation);
-        this.InstitutionForm.controls['noofTeachers_PursuinganyRelevantProfessionalCourse'] ?.setValue(this.InstitutionList[0].noofTeachers_PursuinganyRelevantProfessionalCourse);
+              this.InstitutionForm.controls['noofBuildingsInGoodCondition']?.setValue(this.InstitutionList[0].noofBuildingsInGoodCondition);
+              this.InstitutionForm.controls['noofBuildingNeedsMinorRepair']?.setValue(this.InstitutionList[0].noofBuildingNeedsMinorRepair);
+              this.InstitutionForm.controls['noofBuildingNeedsMajorRepair']?.setValue(this.InstitutionList[0].noofBuildingNeedsMajorRepair);
+              this.InstitutionForm.controls['otherRooms']?.setValue(this.InstitutionList[0].otherRooms);
+              this.InstitutionForm.controls['selectedLibraryAvailability']?.setValue(this.InstitutionList[0].selectedLibraryAvailability);
+              this.InstitutionForm.controls['selectedSeparateRoomforHM']?.setValue(this.InstitutionList[0].selectedSeparateRoomforHM);
+              this.InstitutionForm.controls['selectedFurnitureAvailability']?.setValue(this.InstitutionList[0].selectedFurnitureAvailability);
+              this.InstitutionForm.controls['selectedElectricityAvailability']?.setValue(this.InstitutionList[0].selectedElectricityAvailability);
+              this.InstitutionForm.controls['selectedSolarPanel']?.setValue(this.InstitutionList[0].selectedSolarPanel);
+              this.InstitutionForm.controls['selectedMedicalcheckups']?.setValue(this.InstitutionList[0].selectedMedicalcheckups);
 
-        this.IsUpdate = true
-        this.buttonText = "Update"
+              this.InstitutionForm.controls['selectedICTLab']?.setValue(this.InstitutionList[0].selectedICTLab);
+              this.InstitutionForm.controls['selectedInternetConnection']?.setValue(this.InstitutionList[0].selectedInternetConnection);
+              this.InstitutionForm.controls['selectedDTHConnection']?.setValue(this.InstitutionList[0].selectedDTHConnection);
+              this.InstitutionForm.controls['noofDesktop']?.setValue(this.InstitutionList[0].noofDesktop);
+              this.InstitutionForm.controls['noofLaptop']?.setValue(this.InstitutionList[0].noofLaptop);
+              this.InstitutionForm.controls['noofTablet']?.setValue(this.InstitutionList[0].noofTablet);
+              this.InstitutionForm.controls['noofPrinter']?.setValue(this.InstitutionList[0].noofPrinter);
+              this.InstitutionForm.controls['noofProjector']?.setValue(this.InstitutionList[0].noofProjector);
+              this.InstitutionForm.controls['noofDigiBoard']?.setValue(this.InstitutionList[0].noofDigiBoard);
 
-            
+              this.InstitutionForm.controls['noofTeachers_Primary']?.setValue(this.InstitutionList[0].noofTeachers_Primary);
+              this.InstitutionForm.controls['noofTeachers_PrimaryandUpperPrimary']?.setValue(this.InstitutionList[0].noofTeachers_PrimaryandUpperPrimary);
+              this.InstitutionForm.controls['noofTeachers_HigerSecondaryOnly']?.setValue(this.InstitutionList[0].noofTeachers_HigerSecondaryOnly);
+              this.InstitutionForm.controls['noofTeachers_SecondaryandHigerSecondary']?.setValue(this.InstitutionList[0].noofTeachers_SecondaryandHigerSecondary);
+              this.InstitutionForm.controls['noofTeachers_PrePrimaryandPrimary']?.setValue(this.InstitutionList[0].noofTeachers_PrePrimaryandPrimary);
+              this.InstitutionForm.controls['noofTeachers_UpperPrimary']?.setValue(this.InstitutionList[0].noofTeachers_UpperPrimary);
+              this.InstitutionForm.controls['noofTeachers_SecondaryOnly']?.setValue(this.InstitutionList[0].noofTeachers_SecondaryOnly);
+              this.InstitutionForm.controls['noofTeachers_UpperPrimaryandSecondary']?.setValue(this.InstitutionList[0].noofTeachers_UpperPrimaryandSecondary);
+              this.InstitutionForm.controls['noofTeachers_PrePrimaryOnly']?.setValue(this.InstitutionList[0].noofTeachers_PrePrimaryOnly);
+              this.InstitutionForm.controls['noofTeachers_Regular']?.setValue(this.InstitutionList[0].noofTeachers_Regular);
+              this.InstitutionForm.controls['noofTeachers_Parttime']?.setValue(this.InstitutionList[0].noofTeachers_Parttime);
+              this.InstitutionForm.controls['noofTeachers_Contract']?.setValue(this.InstitutionList[0].noofTeachers_Contract);
+              this.InstitutionForm.controls['noofTeachers_Male']?.setValue(this.InstitutionList[0].noofTeachers_Male);
+              this.InstitutionForm.controls['noofTeachers_Female']?.setValue(this.InstitutionList[0].noofTeachers_Female);
+              this.InstitutionForm.controls['noofTeachers_Transgender']?.setValue(this.InstitutionList[0].noofTeachers_Transgender);
+              this.InstitutionForm.controls['totalNoofTeachers']?.setValue(this.InstitutionList[0].totalNoofTeachers);
+              this.InstitutionForm.controls['noofTotalTeacherReceivedServiceTraining']?.setValue(this.InstitutionList[0].noofTotalTeacherReceivedServiceTraining);
+              this.InstitutionForm.controls['totalTeacherInvolveinNonTeachingAssignment']?.setValue(this.InstitutionList[0].totalTeacherInvolveinNonTeachingAssignment);
+              this.InstitutionForm.controls['noofTeachers_BelowGraduate']?.setValue(this.InstitutionList[0].noofTeachers_BelowGraduate);
+              this.InstitutionForm.controls['noofTeachers_Graduate']?.setValue(this.InstitutionList[0].noofTeachers_Graduate);
+              this.InstitutionForm.controls['noofTeachers_PostGraduateandAbove']?.setValue(this.InstitutionList[0].noofTeachers_PostGraduateandAbove);
+              this.InstitutionForm.controls['noofTotalTeachersTrainedinComputer']?.setValue(this.InstitutionList[0].noofTotalTeachersTrainedinComputer);
+              this.InstitutionForm.controls['noofTeachers_AgedAbove55']?.setValue(this.InstitutionList[0].noofTeachers_AgedAbove55);
+              this.InstitutionForm.controls['noofTeachers_DiplomaorCertificateinbasicteacherstraining']?.setValue(this.InstitutionList[0].noofTeachers_DiplomaorCertificateinbasicteacherstraining);
+              this.InstitutionForm.controls['noofTeachers_BachelorofElementaryEducation']?.setValue(this.InstitutionList[0].noofTeachers_BachelorofElementaryEducation);
+              this.InstitutionForm.controls['noofTeachers_BEdorEquivalent']?.setValue(this.InstitutionList[0].noofTeachers_BEdorEquivalent);
+              this.InstitutionForm.controls['noofTeachers_MEdorEquivalent']?.setValue(this.InstitutionList[0].noofTeachers_MEdorEquivalent);
+              this.InstitutionForm.controls['noofTeachers_DiplomaorDegreeinSpecialEducation']?.setValue(this.InstitutionList[0].noofTeachers_DiplomaorDegreeinSpecialEducation);
+              this.InstitutionForm.controls['noofTeachers_PursuinganyRelevantProfessionalCourse']?.setValue(this.InstitutionList[0].noofTeachers_PursuinganyRelevantProfessionalCourse);
 
-          }
-        },
-        error: (err: HttpErrorResponse) => console.log('fnGetById',err)
+              this.IsUpdate = true;
+              this.buttonText = "Update";
+            }
+          },
+          error: (err: HttpErrorResponse) => console.log('fnGetById', err)
 
-      })
+        });
+
     } catch (error) {
 
     }
@@ -872,10 +1255,10 @@ export class InstitutionComponent {
   public GetCountries() {
     try {
       this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_COUNTRIES)
-        .subscribe(
-          {
+        .subscribe({
             next: (result: any) => {
               this.CoutryList = result.countries;
+              console.log('GetCountries', this.CoutryList);
             },
             error: (err: HttpErrorResponse) => console.log(err)
 

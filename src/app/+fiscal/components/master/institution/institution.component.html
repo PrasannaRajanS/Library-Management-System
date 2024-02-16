@@ -27,12 +27,12 @@
         <div class="grid p-fluid mt-3">
             <div class="field col-12 md:col-3 m-0 pb-0">
                 <span class="p-float-label">
-                    <p-autoComplete [suggestions]="filteredOrganization" formControlName="selectedOrganization"
+                    <p-autoComplete id="txtOrganization" [suggestions]="filteredOrganization" formControlName="selectedOrganization"
                         [minLength]="0" [dropdown]="true" [forceSelection]="true" field="organization"
                         (completeMethod)="filterOrganization($event)"
                         (onSelect)="onSelectOrganization()"
                          [showClear]="true"></p-autoComplete>
-                    <label for="organization">Organization<span class="mandatory">*</span></label>
+                    <label for="txtOrganization">Organization<span class="mandatory">*</span></label>
                 </span>
                 <small id="organization-help">{{ formError("selectedOrganization" ,InstitutionForm)}}</small>
             </div>
@@ -56,11 +56,11 @@
 
             <div class="field col-12 md:col-3  m-0 pb-0">
                 <span class="p-float-label">
-                    <input type="text" id="UDISECode" pInputText formControlName="UDISECode" autocomplete="off"
+                    <input type="text" id="udiseCode" pInputText formControlName="udiseCode" autocomplete="off"
                         pKeyFilter="int">
-                    <label for="UDISECode"> School U-DISE Code<span class="mandatory">*</span></label>
+                    <label for="udiseCode"> School U-DISE Code<span class="mandatory">*</span></label>
                 </span>
-                <small id="UDISECode-help">{{ formError("UDISECode" ,InstitutionForm)}}</small>
+                <small id="udiseCode-help">{{ formError("udiseCode" ,InstitutionForm)}}</small>
             </div>
 
 
@@ -133,9 +133,9 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <input type="text" id="mohalla" formControlName="mohalla" pInputText
+                                            <input type="text" id="mahalla" formControlName="mahalla" pInputText
                                                 autocomplete="off">
-                                            <label for="mohalla">Mohalla</label>
+                                            <label for="mahalla">Mohalla</label>
                                         </span>
                                     </div>
 
@@ -168,7 +168,7 @@
                                         <span class="p-float-label">
                                             <p-dropdown id="ddlSchoolCategory" formControlName="selectedCategory"
                                                 [options]="SchoolCategoryList" optionLabel="categoryName"
-                                                [autoDisplayFirst]="false" [showClear]="true">
+                                                [autoDisplayFirst]="false" [showClear]="true"  autoWidth="false"  [style]="{ minWidth: '60%', width: '100%' }">
                                             </p-dropdown>
                                             <label for="ddlSchoolCategory">School Category</label>
                                         </span>
@@ -600,16 +600,16 @@
                                 <div class="col-12 md:col-6">
                                     <h5>Toilets</h5>
                                     <div class="field grid">
-                                        <label htmlFor="ExcludingCWSN"
+                                        <label htmlFor="NoOfToilets_Boys"
                                             class="col-12 mb-2 md:col-6 md:mb-0">Total(Excluding
                                             CWSN)</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="ExcludingCWSN" formControlName="totalNoOfToilets_Boys"
+                                            <input pInputText id="NoOfToilets_Boys" formControlName="totalNoOfToilets_Boys"
                                                 type="text" placeholder="00" pTooltip="Total No Of Toilets Boys"
                                                 tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="ExcludingCWSN"
+                                            <input pInputText id="NoOfToilets_Girls"
                                                 formControlName="totalNoOfToilets_Girls" type="text" placeholder="00"
                                                 pTooltip="Total No Of Toilets Girls" tooltipPosition="top"
                                                 pKeyFilter="int" />
@@ -624,36 +624,36 @@
                                                 tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="Functional" formControlName="functional_Girls"
+                                            <input pInputText id="functional_Girls" formControlName="functional_Girls"
                                                 type="text" placeholder="00" pTooltip="Functional Girls"
                                                 tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                     </div>
                                     <div class="field grid">
-                                        <label htmlFor="CWSNFriendly" class="col-12 mb-2 md:col-6 md:mb-0">Func. CWSN
+                                        <label htmlFor="CWSNFriendly_Boys" class="col-12 mb-2 md:col-6 md:mb-0">Func. CWSN
                                             Friendly</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="CWSNFriendly"
+                                            <input pInputText id="CWSNFriendly_Boys"
                                                 formControlName="functionalCWSNFriendly_Boys" type="text"
                                                 placeholder="00" pTooltip="Functional CWSN Friendly Boys"
                                                 tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="CWSNFriendly"
+                                            <input pInputText id="CWSNFriendly_Girls"
                                                 formControlName="functionalCWSNFriendly_Girls" type="text"
                                                 placeholder="00" pTooltip="Functional CWSN Friendly Girls"
                                                 tooltipPosition="top" pKeyFilter="int" />
                                         </div>
                                     </div>
                                     <div class="field grid">
-                                        <label htmlFor="Urinal" class="col-12 mb-2 md:col-6 md:mb-0">Urinal</label>
+                                        <label htmlFor="urinal_Boys" class="col-12 mb-2 md:col-6 md:mb-0">Urinal</label>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="Urinal" formControlName="urinal_Boys" type="text"
+                                            <input pInputText id="urinal_Boys" formControlName="urinal_Boys" type="text"
                                                 placeholder="00" pTooltip="Urinal Boys" tooltipPosition="top"
                                                 pKeyFilter="int" />
                                         </div>
                                         <div class="col-12 md:col-3">
-                                            <input pInputText id="Urinal" formControlName="urinal_Girls" type="text"
+                                            <input pInputText id="urinal_Girls" formControlName="urinal_Girls" type="text"
                                                 placeholder="00" pTooltip="Urinal Girls" tooltipPosition="top"
                                                 pKeyFilter="int" />
                                         </div>
