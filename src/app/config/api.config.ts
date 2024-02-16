@@ -1,7 +1,7 @@
 export const APIConfig = {
      
-    //  API_BASE_URL: "http://academic-api.kangayaa.com",  
-     API_BASE_URL: "https://localhost:7189",
+     API_BASE_URL: "http://academic-api.kangayaa.com",  
+    //  API_BASE_URL: "https://localhost:7189",
 
     //  ADMIN_API_BASE_URL: "http://academic-api.kangayaa.com",
     //  FISCAL_API_BASE_URL: "http://academic-api.kangayaa.com/Fiscal/",
