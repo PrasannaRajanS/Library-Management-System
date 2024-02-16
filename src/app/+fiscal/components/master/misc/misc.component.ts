@@ -69,7 +69,7 @@ export class MiscComponent {
     constructor(
         private messageService: MessageService,
         private utilService: UtilService,
-        @Inject('MyCustomToken') private httpService: CommonHttpService
+        private httpService: CommonHttpService
     ) {
         // 3 Step 
         this.MiscForm = FormHandler.controls<IMisc>(this.initialValues);

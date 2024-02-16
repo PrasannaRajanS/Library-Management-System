@@ -23,6 +23,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class PeriodComponent {
 
+  TypeList: any[] = [{ typeId: '1', type: 'School Hours' },{ typeId: '2', type: 'Office Hours' },{ typeId: '3', type: 'Period' }];
+
   buttonText:string = "Save"
   PeriodId: number | null | undefined =0;
 
