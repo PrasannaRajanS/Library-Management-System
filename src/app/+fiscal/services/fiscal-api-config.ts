@@ -32,9 +32,10 @@ export const FiscalAPIConfig = {
                     LIST: "/Fiscal/Miscellaneous/GetAllMiscs",
                     EDIT:"/Fiscal/Miscellaneous/GetMiscById",
                     CREATE:"/Fiscal/Miscellaneous/MiscDetailCreate",
+                    DETAILS:"/Fiscal/Miscellaneous/GetAllMiscDetails",
+                    
                 },
             }
         }
     }
 }
-

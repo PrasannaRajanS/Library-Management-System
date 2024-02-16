@@ -11,10 +11,14 @@ export interface IMisc {
     keyWord?:string | null | undefined;
 }
 
+
+
 export interface IMiscDetails {
 
     miscDtlId?: number | null | undefined;
     miscId?: number | null | undefined;
+    // neeed ? 
+    miscName?:string|null|undefined;
     miscDtlName?: string | null | undefined;
     miscDtlDesc?: string | null | undefined;
     selectedMiscName?:any | null | undefined;

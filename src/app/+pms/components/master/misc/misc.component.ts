@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Table } from 'primeng/table';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { IMisc } from 'src/app/shared/interface/IMisc';
-
+import { YupFiscalValidation } from 'src/app/+fiscal/services/validation-schemas/yup-validation-schema';
+import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
+import * as yup from "yup";
 import { AdminValidation } from 'src/app/+admin/services/admin-validation';
-import { PMSAPIConfig } from 'src/app/+pms/services/pms-api-config';
+
 
 import { HttpService } from 'src/app/+admin/services/http.service';
 import { UtilService } from 'src/app/shared/util.service';
 import { MessageService } from 'primeng/api';
 
-import { YupFiscalValidation } from 'src/app/+fiscal/services/validation-schemas/yup-validation-schema';
-import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
-import { HttpErrorResponse } from '@angular/common/http';
-import * as yup from "yup";
-import { Table } from 'primeng/table';
+
+
 import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
 
 @Component({
@@ -28,13 +29,16 @@ export class MiscComponent {
 
 
     // save
-    buttonText: string = 'Save';
+   public buttonText: string = 'Save';
 
     // Update
     private IsUpdate:boolean=false;
+    // Once you get   keyword check is this need or not ?
     public PMSMiscId:string|null|undefined;
     public unitDetails:any;
     public userDetails:any;
+    public IPAddress:string ="192.168.1.1"
+
 
 
     // Grid
@@ -47,28 +51,32 @@ export class MiscComponent {
 
 
 
-    //  field values
+
+
+    // step 1  field values
     PMSMiscForm: FormGroup<YupFormControls<IMisc>>;
 
-    validationSchema:yup.ObjectSchema<IMisc>=YupFiscalValidation.MISC;
-    
-    
-
-    // field  initialValues 
+    // step 2 field  initialValues 
 
     initialValues: IMisc = {
       // why here zero instead of null
-      miscId: 0,
+        miscId: 0,
         name: null,
         description: null,
-        // selectedMiscName:null,
+        selectedMiscName:null,
+        keyWord:null,
         isActive:null,
         unitId:null,
         userId:null,
         ipAddress:null
     };
 
-    
+    // step 4
+    validationSchema:yup.ObjectSchema<IMisc>=YupFiscalValidation.MISC; 
+
+    formError=(controlName:string,formName:any)=>{
+      return  this.utilService.formError(controlName,formName)
+    }
 
     constructor(
       // for vaildation
@@ -76,27 +84,25 @@ export class MiscComponent {
       private httpService:HttpService,
       private messageService : MessageService
     ) {
+      // step 3
       // For Field:
         this.PMSMiscForm = FormHandler.controls<IMisc>(this.initialValues);
       // For Validation:
         this.PMSMiscForm.setValidators(FormHandler.validate<IMisc>(this.validationSchema))
     }
 
-    ngOnInit(){
-      this.GetAll();
-    }
-
-
-    formError=(controlName:string,formName:any)=>{
-      return  this.utilService.formError(controlName,formName)
-    }
+    // step 6
 
     Clear() {
       this.buttonText="Save";
       this.PMSMiscForm.reset();
+      this.IsUpdate=false;
+      this.GetAll();
+      
     }
-    
- 
+
+
+    // step 7
 
     Save() {
 
@@ -104,36 +110,37 @@ export class MiscComponent {
         let _apiUrl:string="";
         let passSaveParams:any={};
         
-        if (this.IsUpdate) {
-          console.log ( 'value of the update',this.IsUpdate);
+        if (this.IsUpdate) { 
+          // Update
           
           passSaveParams.PMSMiscId=this.PMSMiscId;
-          passSaveParams.PMSMiscName=this.PMSMiscForm.value['name'];
-          passSaveParams.PMSMiscDescription = this.PMSMiscForm.value['description'];
+          passSaveParams.PMSMiscName=this.PMSMiscForm.value['name'] !=null ? this.PMSMiscForm.value['name'] : ''  ;
+          passSaveParams.PMSMiscDescription = this.PMSMiscForm.value['description'] !=null?this.PMSMiscForm.value['description']:'' ;
 
-
+          passSaveParams.keyWord="";
           passSaveParams.isActive=true;
           passSaveParams.unitId = this.unitDetails ? this.unitDetails.unitId:0;
           passSaveParams.userId = this.userDetails ? this.userDetails.userId:0;
-          passSaveParams.ipAddress = '192.168.1.1';
+          passSaveParams.ipAddress = this.IPAddress;
 
           // Check MISC API
 
-          _apiUrl = PMSAPIConfig.API_CONFIG.API_URL.PMS.MISC.UPDATE;
+          _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.UPDATE;
 
 
         } else {
           passSaveParams.PMSMiscId=this.PMSMiscId;
-          passSaveParams.PMSMiscName=this.PMSMiscForm.value['name'];
-          passSaveParams.PMSMiscDescription=this.PMSMiscForm.value['description'];
+          passSaveParams.PMSMiscName=this.PMSMiscForm.value['name'] !=null?this.PMSMiscForm.value['name']:"";
+          passSaveParams.PMSMiscDescription=this.PMSMiscForm.value['description'] !=null? this.PMSMiscForm.value['description']:"";
 
+          passSaveParams.keyWord=""
           passSaveParams.isActive=true;
           passSaveParams.unitId=this.unitDetails ? this.unitDetails.unitId:0;
           passSaveParams.userId = this.userDetails ? this.userDetails.userId:0;
-          passSaveParams.ipAddress = '192.168.1.1';
+          passSaveParams.ipAddress = this.IPAddress;
 
           // Check MISC API
-          _apiUrl=PMSAPIConfig.API_CONFIG.API_URL.PMS.MISC.SAVE;
+          _apiUrl=FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.SAVE;
 
           
           
@@ -161,37 +168,45 @@ export class MiscComponent {
       }
     }
 
+    // step 8
+
+    private notificationsService(_severity:any,_summary:any,_message:any){
+      this.messageService.add({severity:_severity, summary:_summary,detail:_message , life:3000})
+      return
+      }
+
+       // step 9 Grid
+
+       public GetAll() {
+        try {
+            this.httpService
+                .globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST+'?keyWord=Fiscal')
+                .subscribe({
+                    next: (result: any) => {
+                        this.items = result.miscs;
+                        console.log('GetAll', this.items);
+                    },
+                    error: (err: HttpErrorResponse) => console.log(err),
+                });
+        } catch (error) {}
+    }
     
-   private notificationsService(_severity:any,_summary:any,_message:any){
-    this.messageService.add({severity:_severity, summary:_summary,detail:_message , life:3000})
-    return
+    // step 10
+
+    ngOnInit(){
+      this.GetAll();
     }
 
+    // Grid step 11
 
-    // Grid
-
-    public GetAll() {
-      try {
-          this.httpService
-              .globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST+'?keyWord=Fiscal')
-              .subscribe({
-                  next: (result: any) => {
-                      this.items = result.miscs;
-                      // console.log('GetAll', this.items);
-                  },
-                  error: (err: HttpErrorResponse) => console.log(err),
-              });
-      } catch (error) {}
-  }
-    
     onGlobalFilter(table: Table, event: Event) {
       table.filterGlobal(  (event.target as HTMLInputElement).value, 'contains');
   }
 
 
-  // Grid
+    // step 12
 
-  Edit(item: any){
+    Edit(item: any){
       console.log('Edit',item);
       this.miscId=item.miscId;
       this.PMSMiscForm.controls['name']?.setValue(item.name);
@@ -200,10 +215,14 @@ export class MiscComponent {
       this.buttonText="Update";
   }
 
+  // step 13
+
   Delete(data: any){
     this.deleteDialog = true;
     this.item={...data};
   }
+        
+  // step 14
 
   confirmDelete(){
     this.deleteDialog=false;
@@ -218,6 +237,8 @@ export class MiscComponent {
         passSaveParams.name= deletedItem[0].name;
         passSaveParams.description = deletedItem[0].description;
         passSaveParams.isActive = false;
+        passSaveParams.ipAddress=this.IPAddress;
+        passSaveParams.keyWord="";
         console.log(passSaveParams);
 
         this.httpService.globalPost(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.DELETE 
