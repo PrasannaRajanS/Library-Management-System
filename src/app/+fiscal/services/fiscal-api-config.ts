@@ -31,7 +31,7 @@ export const FiscalAPIConfig = {
                     DELETE: "/Fiscal/Miscellaneous/Delete",
                     LIST: "/Fiscal/Miscellaneous/GetAllMiscs",
                     EDIT:"/Fiscal/Miscellaneous/GetMiscById",
-                    CREATE:"/Fiscal/Miscellaneous/MiscDetailCreate",
+                    CREATE_UPDATE_DELETE:"/Fiscal/Miscellaneous/MiscDetailCreate",
                     DETAILS:"/Fiscal/Miscellaneous/GetAllMiscDetails",
                     
                 },

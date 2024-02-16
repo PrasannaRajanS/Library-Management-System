@@ -25,15 +25,14 @@
             <div class="field col-12 md:col-4">
                 <span class="p-float-label">
                   
-                    <p-autoComplete #nameAutocomplete formControlName="selectedMiscName"
-                        [suggestions]="filteredMiscList" (completeMethod)="filterMisc($event)" field="miscName"
+                    <p-autoComplete id="selectedMiscName" formControlName="selectedMiscName"
+                        [suggestions]="filteredMiscList" (completeMethod)="filterMisc($event)" field="name"
                         (onSelect)="onSelectMiscName()"
                         [forceSelection]="true" [dropdown]="true"
                         [inputStyle]="{'background':'#E8F0FE'}"></p-autoComplete>
-
-                    <label for="name">Name<span class="mandatory">*</span></label>
+                    <label for="selectedMiscName">Name<span class="mandatory">*</span></label>
                 </span>
-                <small id="name-help">{{ formError("name" ,MiscDetailForm)}}</small>
+                <small id="selectedMiscName-help">{{ formError("name" ,MiscDetailForm)}}</small>
             </div>
             <div class="field col-12 md:col-4">
             </div>
@@ -44,10 +43,10 @@
 
  <div class="card">
 
-    <p-table #dt [value]="filteredItems" [columns]="cols" resposiveLayout="scroll" [rows]="10"
+    <p-table #dt [value]="filteredMiscDetailList" [columns]="cols" resposiveLayout="scroll" [rows]="10"
         [globalFilterFields]="['miscDtlName','miscDtlDesc']" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]"
         [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [(selection)]="selectedItems" selectionMode="multiple" [rowHover]="true" dataKey="id">
+        [rowHover]="true" dataKey="id">
         <ng-template pTemplate="caption">
             <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                 <h4 class="m-0"> </h4>
@@ -75,10 +74,12 @@
         
         <ng-template pTemplate="body" let-item let-i="rowIndex">
             <tr>
+
                 <td style="width:10% !important" class="text-center">
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
                         (click)="RemoveRows(item,i)"></button>
                 </td>
+
                 <td style="width:10% !important" class="text-center">
                     <section>
                         <label class="checkbox">
@@ -87,6 +88,7 @@
                         </label>
                     </section>
                 </td>
+
                 <td style="width:5% !important" class="text-center">{{i+1}}</td>
 
                 <td style="width:30% !important">
@@ -98,6 +100,7 @@
                     <input pInputText type="text"  [disabled]="!item.edit" id="txtDescription"
                      name="txtDescription" [(ngModel)]="item.miscDtlDesc" style="width: 100% !important;">
                 </td>
+
                 <td style="width:10% !important" class="text-center">Admin</td>
                 <td style="width:10% !important" class="text-center">01.01.2024</td>
             </tr>
