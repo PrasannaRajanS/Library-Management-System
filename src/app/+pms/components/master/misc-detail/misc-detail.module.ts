@@ -13,6 +13,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { TableModule } from 'primeng/table';
 import { CheckboxModule } from 'primeng/checkbox';
 import { MessageService } from 'primeng/api';
+import { RippleModule } from 'primeng/ripple';
 
 
 @NgModule({
@@ -26,6 +27,8 @@ import { MessageService } from 'primeng/api';
     ReactiveFormsModule,
 
     ToolbarModule,
+    RippleModule,
+
     ToastModule,
     ButtonModule,
     InputTextModule,

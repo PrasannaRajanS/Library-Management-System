@@ -26,7 +26,8 @@
                 <span class="p-float-label">
                   
                     <p-autoComplete #nameAutocomplete formControlName="selectedMiscName"
-                        [suggestions]="filteredMiscList" (completeMethod)="filterMisc($event)" field="name"
+                        [suggestions]="filteredMiscList" (completeMethod)="filterMisc($event)" field="miscName"
+                        (onSelect)="onSelectMiscName()"
                         [forceSelection]="true" [dropdown]="true"
                         [inputStyle]="{'background':'#E8F0FE'}"></p-autoComplete>
 
@@ -41,8 +42,9 @@
 
 </div>
 
-<div class="card">
-    <p-table #dt [value]="miscdetails" [columns]="cols" resposiveLayout="scroll" [rows]="10"
+ <div class="card">
+
+    <p-table #dt [value]="filteredItems" [columns]="cols" resposiveLayout="scroll" [rows]="10"
         [globalFilterFields]="['miscDtlName','miscDtlDesc']" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]"
         [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [(selection)]="selectedItems" selectionMode="multiple" [rowHover]="true" dataKey="id">
@@ -59,42 +61,52 @@
         <ng-template pTemplate="header">
             <tr>
                 <th style="width:10% !important" class="text-center">
-                    <button pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-success mr-2"
-                        (click)="AddRows()"></button>
+                    <button pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-success mr-2" (click)="AddRows()"></button>
                 </th>
                 <th style="width:10% !important" class="text-center">Edit</th>
-                <th style="width:10% !important" class="text-center">S.No</th>
-                <th style="width:40% !important" class="text-center">Description
-                    <span class="mandatory">*</span>
+                <th style="width:5% !important" class="text-center">S.No</th>
+                <th style="width:30% !important" class="text-center">Detail Name <span class="mandatory">*</span> 
                 </th>
-                <th style="width:15% !important" class="text-center">Created By</th>
-                <th style="width:15% !important" class="text-center">Created Dt</th>
-            </tr>
+                <th style="width:25% !important" class="text-center">Description</th>
+                <th style="width:10% !important" class="text-center">Created By</th>
+                <th style="width:10% !important" class="text-center">Created Dt</th> 
+             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-miscdetails let-i="rowIndex">
+        
+        <ng-template pTemplate="body" let-item let-i="rowIndex">
             <tr>
                 <td style="width:10% !important" class="text-center">
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                        (click)="RemoveRows(miscdetails,i)"></button>
+                        (click)="RemoveRows(item,i)"></button>
                 </td>
                 <td style="width:10% !important" class="text-center">
                     <section>
                         <label class="checkbox">
-                            <p-checkbox name="chkEdit" id="chkEdit" [(ngModel)]="miscdetails.edit" [binary]="true"
-                                inputId="binary"></p-checkbox>
+                            <p-checkbox name="chkEdit" id="chkEdit" [(ngModel)]="item.edit" [binary]="true" inputId="binary"></p-checkbox>
                             <i></i>
                         </label>
                     </section>
                 </td>
-                <td style="width:10% !important" class="text-center">{{i+1}}</td>
-                <td style="width:40% !important">
-                    <input pInputText type="text"  [disabled]="!miscdetails.edit" id="txtDescription"
-                        name="txtDescription" [(ngModel)]="miscdetails.miscDtlName"
-                        style="width: 100% !important;">
+                <td style="width:5% !important" class="text-center">{{i+1}}</td>
+
+                <td style="width:30% !important">
+                    <input pInputText type="text"  [disabled]="!item.edit" id="txtmiscDtlName"
+                     name="txtmiscDtlName" [(ngModel)]="item.miscDtlName" style="width: 100% !important;">
                 </td>
-                <td style="width:15% !important">{{miscdetails.createdby}}</td>
-                <td style="width:15% !important">{{miscdetails.createdDate}}</td>
+
+                <td style="width:25% !important" class="text-center">
+                    <input pInputText type="text"  [disabled]="!item.edit" id="txtDescription"
+                     name="txtDescription" [(ngModel)]="item.miscDtlDesc" style="width: 100% !important;">
+                </td>
+                <td style="width:10% !important" class="text-center">Admin</td>
+                <td style="width:10% !important" class="text-center">01.01.2024</td>
             </tr>
         </ng-template>
+        
     </p-table>
 </div>
+
+
+
+
+

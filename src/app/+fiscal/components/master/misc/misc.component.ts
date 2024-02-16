@@ -30,7 +30,7 @@ export class MiscComponent {
     public buttonText: string = 'Save';
     private IsUpdate: boolean = false;
 
-    MiscForm: FormGroup<YupFormControls<IMisc>>;
+
 
     //#region List Variables
     deleteDialog: boolean = false;
@@ -39,6 +39,12 @@ export class MiscComponent {
     items: IMisc[] = [];
     selectedItems: IMisc[] = [];
     IPAddress:string="192.168.0.0";
+
+    // step1
+
+    MiscForm: FormGroup<YupFormControls<IMisc>>;
+
+    // step 2
 
     initialValues: IMisc = {
         miscId: 0,
@@ -53,55 +59,45 @@ export class MiscComponent {
         ipAddress: null,
     };
 
+    // step 4
     validationSchema: yup.ObjectSchema<IMisc> = YupFiscalValidation.MISC;
 
     formError = (controlName: string, formName: any) => {
-        return this.utilService.formError(controlName, formName);
-    };
+        return this.utilService.formError(controlName, formName);};
 
     constructor(
         private messageService: MessageService,
         private utilService: UtilService,
         private httpService: HttpService
     ) {
+        // 3 step 
         this.MiscForm = FormHandler.controls<IMisc>(this.initialValues);
+        // step 5
         this.MiscForm.setValidators(FormHandler.validate<IMisc>(this.validationSchema) );
     }
 
-
-    ngOnInit() {
+    // step 6
+    Clear() {
+        this.MiscForm.reset();
+        this.buttonText = 'Save';
+        this.IsUpdate = false;
         this.GetAll();
     }
 
-    public GetAll() {
-        try {
-            this.httpService
-                .globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST+'?keyWord=Fiscal')
-                
-                .subscribe({
-                    next: (result: any) => {
-                        this.items = result.miscs;
-                        console.log('GetAll', this.items);
-                    },
-                    error: (err: HttpErrorResponse) => console.log(err),
-                });
-        } catch (error) {}
-    }
 
+    // step 7
     Save() {
+
         try {
             let _apiUrl: string = '';
             let passSaveParams: any = {};
 
-            if (this.IsUpdate) {
-
-                
-                
+            if (this.IsUpdate) {  
                 //  UPDATE
 
                 passSaveParams.miscId = this.miscId;
-                passSaveParams.name = this.MiscForm.value['name'];
-                passSaveParams.description = this.MiscForm.value['description'];
+                passSaveParams.name = this.MiscForm.value['name'] !=null?this.MiscForm.value['name']:"";
+                passSaveParams.description = this.MiscForm.value['description'] !=null?this.MiscForm.value['description']:"";
 
                 passSaveParams.keyWord = "Fiscal";
                 passSaveParams.isActive = true;
@@ -114,8 +110,8 @@ export class MiscComponent {
                 //  SAVE
 
                 passSaveParams.miscId = 0;
-                passSaveParams.name = this.MiscForm.value['name'];
-                passSaveParams.description = this.MiscForm.value['description'];
+                passSaveParams.name = this.MiscForm.value['name']!=null?this.MiscForm.value['name']:"";
+                passSaveParams.description = this.MiscForm.value['description']!=null?this.MiscForm.value['description']:"";
 
                 passSaveParams.keyWord = "Fiscal";
                 passSaveParams.isActive = true;
@@ -131,11 +127,7 @@ export class MiscComponent {
                 .globalPost(_apiUrl, JSON.stringify(passSaveParams))
                 .subscribe({
                     next: (result: any) => {
-                        this.notificationsService(
-                            AdminValidation.NOTIFICATION_SUCCESS,
-                            'Success Message',
-                            result.message
-                        );
+                        this.notificationsService(  AdminValidation.NOTIFICATION_SUCCESS, 'Success Message', result.message);
                         this.Clear();
                     },
                     error: (err: HttpErrorResponse) => console.log(err),
@@ -143,44 +135,55 @@ export class MiscComponent {
         } catch (error) {}
     }
 
-    Clear() {
-        this.buttonText = 'Save';
-        this.IsUpdate = false;
-        this.MiscForm.reset();
-        this.GetAll();
-    }
-    private notificationsService(_severity: any, _summary: any, _message: any) {
-        this.messageService.add({  severity: _severity, summary: _summary, detail: _message, life: 3000, });
-        return;
-    }
+        // step 8
+        private notificationsService(_severity: any, _summary: any, _message: any) {
+            this.messageService.add({  severity: _severity, summary: _summary, detail: _message, life: 3000, });
+            return;
+        }
 
-    onGlobalFilter(table: Table, event: Event) {
-        table.filterGlobal(
-            (event.target as HTMLInputElement).value,
-            'contains'
-        );
-    }
 
-    Edit(item: any) {
-        console.log('Edit', item);
-        this.miscId = item.miscId;
-        this.MiscForm.controls['name']?.setValue(item.name);
-        this.MiscForm.controls['description']?.setValue(item.description);
+        // step 9
+       public GetAll() {
+           try {
+            this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST+'?keyWord=Fiscal') 
+                .subscribe({
+                    next: (result: any) => {
+                        this.items = result.miscs;
+                        console.log('GetAll', this.items);
+                    },
+                    error: (err: HttpErrorResponse) => console.log(err),
+                });
+             } catch (error) {}
+          }
+
+
+        // step 10
+        ngOnInit() { this.GetAll();}
+
+   
+        // step 11
+        onGlobalFilter(table: Table, event: Event) {
+        table.filterGlobal((event.target as HTMLInputElement).value,'contains');}
+
+        // step 12
+         Edit(data: any) {
+        console.log('Edit', data);
+        this.miscId = data.miscId;
+        this.MiscForm.controls['name']?.setValue(data.name);
+        this.MiscForm.controls['description']?.setValue(data.description);
         this.IsUpdate = true;
-        this.buttonText = 'Update';
-    }
+        this.buttonText = 'Update'; }
 
-    Delete(data: any) {
+        // step 13
+        Delete(data: any) {
         this.deleteDialog = true;
-        this.item = { ...data };
-    }
+        this.item = { ...data };   }
 
-    confirmDelete() {
+        // step 14
+         confirmDelete() {
         this.deleteDialog = false;
 
-        let deletedItem: any[] = this.items.filter(
-            (val) => val.miscId === this.item.miscId
-        );
+        let deletedItem: any[] = this.items.filter( (val) => val.miscId === this.item.miscId );
         console.log('deletedItem', deletedItem);
 
         if (deletedItem != null && deletedItem.length > 0) {
@@ -195,18 +198,11 @@ export class MiscComponent {
 
             console.log(passSaveParams);
 
-            this.httpService
-                .globalPost(
-                    FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.DELETE,
-                    JSON.stringify(passSaveParams)
-                )    .subscribe({
+            this.httpService.globalPost( FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.DELETE,
+                 JSON.stringify(passSaveParams)) .subscribe({
                     next: (result: any) => {
                         this.Clear();
-                        this.notificationsService(
-                            AdminValidation.NOTIFICATION_SUCCESS,
-                            'Success Message',
-                            result.message
-                        );
+                        this.notificationsService( AdminValidation.NOTIFICATION_SUCCESS,'Success Message',result.message );
                     },
                     error: (err: HttpErrorResponse) => console.log(err),
                 });
