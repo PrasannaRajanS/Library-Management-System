@@ -1,21 +1,176 @@
 <div class="card">
     <h4>PERIOD</h4>
 
-    <!-- <p-toolbar styleClass="mb-4">
+    <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
             <div class="my-2">
             </div>
         </ng-template>
 
         <ng-template pTemplate="right">
-            <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" (click)="Save()"
-                >{{buttonText}}</button>
+            <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2"
+            [disabled]="!PeriodForm.valid"    (click)="Save()">{{buttonText}}</button>
 
             <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
                 (click)="Clear()"></button>
         </ng-template>
-    </p-toolbar> -->
+    </p-toolbar>
 
-   
+    <p-toast></p-toast>
 
+    <form [formGroup]="PeriodForm" style="margin-top: 10px;">
+        <div class="grid p-fluid mt-3">
+            
+            <div class="field col-12 md:col-3">
+                <span class="p-float-label">
+                    <p-dropdown id="type" formControlName="type" 
+                        optionLabel="type" [autoDisplayFirst]="false" [showClear]="true" (onChange)="onChangeType($event)">
+                    </p-dropdown>
+                    <label for="type">Type<span class="mandatory">*</span></label>
+                </span>
+                <small id="application-help">{{formError("type",PeriodForm)}}</small>
+            </div>
+
+                <div class="field col-12 md:col-3  m-0 pb-0">
+                    <span class="p-float-label">
+                        <input type="text" id="Period" (keypress)="validateRomanNumeral($event)" pInputText formControlName="period" autocomplete="off">
+                        <label for="Period">Period<span class="mandatory">*</span></label>
+                    </span>
+                    <small id="Period-help">{{ formError("period" ,PeriodForm)}}</small>
+                </div>
+
+                <!-- <div class="field col-12 md:col-3  m-0 pb-0">
+                    <span class="p-float-label">
+                        <p-calendar id="startTime" [showTime]="true" [showSeconds]="true" formControlName="startTime"></p-calendar>
+                        <label for="startTime">Start Time<span class="mandatory">*</span></label>
+                    </span>
+                    <small id="startTime-help">{{ formError("startTime" ,PeriodForm)}}</small>
+                </div> -->
+
+                <div class="field col-12 md:col-3  m-0 pb-0">
+                    <span class="p-float-label">
+                        <input type="text" id="startTime" pInputText formControlName="startTime" autocomplete="off">
+                        <label for="startTime">Start Time<span class="mandatory">*</span></label>
+                    </span>
+                    <small id="startTime-help">{{ formError("startTime" ,PeriodForm)}}</small>
+                </div>
+
+                <div class="field col-12 md:col-3  m-0 pb-0">
+                    <span class="p-float-label">
+                        <input type="text" id="endTime" pInputText formControlName="endTime" autocomplete="off">
+                        <label for="endTime">End Time<span class="mandatory">*</span></label>
+                    </span>
+                    <small id="endTime-help">{{ formError("endTime" ,PeriodForm)}}</small>
+                </div>
+
+                <div class="field col-12 md:col-3  m-0 pb-0">
+                    <span class="p-float-label">
+                        <input type="text" id=" description" pInputText formControlName="description" autocomplete="off">
+                        <label for=" description"> Description</label>
+                    </span>
+                    <small id="description-help">{{ formError(" description" ,PeriodForm)}}</small>
+                </div>
+           
+        </div>
+    </form>
+
+
+    <div class="grid">
+        <div class="col-12">
+            <div class="card px-6 py-6">
+                <p-table #dt [value]="items" [columns]="cols" resposiveLayout="scroll" [rows]="10"
+                [globalFilterFields]="['type','period','startTime','endTime','description']" [rows]="10" [paginator]="true"
+                [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [(selection)]="selectedItems" selectionMode="multiple" [rowHover]="true" dataKey="id">
+
+                
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h4 class="m-0"> </h4>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."
+                                class="w-full sm:w-auto" />
+                        </span>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            S.No
+                        </th>
+                        <th pSortableColumn="type">Type<p-sortIcon field="type"></p-sortIcon></th>
+                        <th pSortableColumn="period">Period<p-sortIcon field="period"></p-sortIcon></th>
+                        <th pSortableColumn="startTime">Start Time<p-sortIcon field="startTime"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="endTime">End Time<p-sortIcon field="endTime"></p-sortIcon></th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-item>
+                    <tr>
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{item.periodId}}
+                        </td>
+
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{item.type}}
+                        </td>
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{item.period}}
+                        </td>
+
+                        <td style="width:15%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{item.startTime}}
+                        </td>
+                   
+                        
+                        <td style="width:15%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{item.endTime}}
+                        </td>
+
+
+                        <td style="width:15%; min-width:10rem;">
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success mr-2" (click)="Edit(item)"></button>
+
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                    (click)="Delete(item)"></button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </ng-template>
+
+            </p-table>
+            </div>
+
+            <p-dialog [(visible)]="deleteDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+                <div class="flex align-items-center justify-content-center">
+                    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                    <span *ngIf="item">Are you sure you want to delete <b>{{item.period}}</b>?</span>
+                </div>
+    
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"
+                        (click)="deleteDialog = false"></button>
+                    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes"
+                        (click)="confirmDelete()"></button>
+                </ng-template>
+            </p-dialog>
+        </div>
+    </div>
+    
 </div>

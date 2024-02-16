@@ -4,7 +4,7 @@ import { PeriodComponent } from './period.component';
 
 const routes: Routes = [
   {
-    path: '', component: PeriodComponent
+    path: '',data: { breadcrumb: 'Period'}, component: PeriodComponent 
   }
 ];
 

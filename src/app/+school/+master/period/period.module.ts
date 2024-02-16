@@ -4,12 +4,20 @@ import { CommonModule } from '@angular/common';
 import { PeriodRoutingModule } from './period-routing.module';
 import { PeriodComponent } from './period.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TableModule } from 'primeng/table';
+import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
-import { ToolbarModule } from 'primeng/toolbar';
-import { ToastModule } from 'primeng/toast';
+import { CalendarModule } from 'primeng/calendar';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { UtilService } from 'src/app/shared/util.service';
+import { MessageService } from 'primeng/api';
+
+
+
 
 
 @NgModule({
@@ -21,12 +29,19 @@ import { ToastModule } from 'primeng/toast';
     PeriodRoutingModule,
 
     ReactiveFormsModule,
-    TableModule,
-		ButtonModule,
-    InputTextModule,
     ToolbarModule,
+    ButtonModule,
     ToastModule,
+    InputTextModule,
     DropdownModule,
-  ]
+    CalendarModule,
+    InputNumberModule,
+    TableModule,
+    DialogModule,
+ 
+       
+  ],
+  providers:[UtilService,MessageService]
+  
 })
 export class PeriodModule { }
