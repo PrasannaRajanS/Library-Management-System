@@ -46,8 +46,6 @@ export class MiscDetailComponent {
     public IsUpdate: boolean = false;
     public miscId: number | undefined | null = 0;
     public userDetails: any;
-
-
     autocomplete: any;
     private isValidation: boolean = true;
     private ValidationMsg: string = '';

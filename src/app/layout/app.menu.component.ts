@@ -159,12 +159,12 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Misc',
                                 icon: 'pi pi-fw pi-align-left',
-                                routerLink: ['/apps/pms/master/misc']
+                                routerLink: ['/apps/master/misc']
                             },
                             {
                                 label: 'Misc Detail',
                                 icon: 'pi pi-fw pi-align-left',
-                                routerLink: ['/apps/pms/master/misc-detail']
+                                routerLink: ['/apps/master/misc-detail']
                             },
                             {
                                 label: 'Period',
