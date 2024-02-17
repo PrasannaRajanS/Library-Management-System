@@ -1,21 +1,19 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { Table } from 'primeng/table';
 
-import { CustomerService } from 'src/app/demo/service/customer.service';
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
 import { UtilService } from 'src/app/shared/util.service';
 import * as _ from 'lodash';
 import { MessageService } from 'primeng/api';
 
-import { PMSValidation } from 'src/app/+pms/services/pms-validation';
+import { FiscalValidation } from 'src/app/+fiscal/services/fiscal-validation';
 import { IMisc, IMiscDetails } from 'src/app/shared/interface/IMisc';
 import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FiscalValidation } from 'src/app/+fiscal/services/fiscal-validation';
 import { CommonHttpService } from 'src/app/shared-services/common-http.service';
+import { AdminValidation } from 'src/app/+admin/services/admin-validation';
 
 
 @Component({
@@ -34,11 +32,17 @@ export class MiscDetailComponent {
   private isValidation: boolean = true;
   private ValidationMsg: string = "";
 
+  autocomplete: any;
 
+
+  private DeletedMiscDtls: IMiscDetails[] = [];
 
   //  List of items array
   selectedMiscName: IMisc = {};
-  filteredMiscList: IMiscDetails[] = []
+  filteredMiscList: IMiscDetails[] = [];
+  miscItems:IMiscDetails[]=[];
+  filteredMiscDetailList:IMiscDetails[]=[];
+  miscDtlItems:IMiscDetails[]=[]
   MiscList: IMisc[] = []
 
 
@@ -48,8 +52,8 @@ export class MiscDetailComponent {
   items: IMiscDetails[] = [];
   item: IMiscDetails = {};
   // For Grid Agaisnt Load data
-  filteredItems: IMiscDetails[] = [];
-  selectedItems: IMiscDetails[] = [];
+  // filteredItems: IMiscDetails[] = [];
+  // selectedItems: IMiscDetails[] = [];
 
 
 
@@ -75,11 +79,10 @@ export class MiscDetailComponent {
 
 
   constructor(
-    private router: Router,
     private utilService: UtilService,
     private messageService: MessageService,
     private httpService: CommonHttpService,
-    private customerService: CustomerService,
+
 
   ) {
 
@@ -88,22 +91,38 @@ export class MiscDetailComponent {
 
   // step 1
 
-  public GetAll() {
+  public GetAllMiscs() {
     try {
       this.httpService
-        .globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.DETAILS + '?keyWord=Fiscal')
+        .globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST + '?keyWord=Fiscal')
         .subscribe({
           next: (result: any) => {
-            this.items = result.miscDtls;
-            this.filteredItems = this.items;
-            console.log('GetAll', this.items);
+            this.miscItems = result.miscs;
+            this.filteredMiscList = this.miscItems;
+            console.log('GetAll', this.filteredMiscList);
           },
           error: (err: HttpErrorResponse) => console.log(err),
         });
     } catch (error) { }
   }
+
+  public GetAllMiscDetails() {
+    try {
+        this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.DETAILS + '?keyWord=Fiscal')
+            .subscribe({
+                next: (result: any) => {
+                    this.miscDtlItems = result.miscDtls;
+                    this.filteredMiscDetailList = this.miscDtlItems;
+                    console.log('GetAllMiscDetails', this.filteredMiscDetailList);
+                },
+                error: (err: HttpErrorResponse) => console.log(err),
+            });
+    } catch (error) { }
+}
+
   ngOnInit() {
-    this.GetAll();
+    this.GetAllMiscs();
+    this.GetAllMiscDetails();
   }
 
   // step 2
@@ -111,10 +130,10 @@ export class MiscDetailComponent {
   filterMisc(event: AutoCompleteCompleteEvent) {
     let filtered: any[] = [];
     let query = event.query;
-    for (let i = 0; i < (this.items as any[]).length; i++) {
-      let misc = (this.items as any[])[i];
+    for (let i = 0; i < (this.miscItems as any[]).length; i++) {
+      let misc = (this.miscItems as any[])[i];
 
-      if (misc.miscName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+      if (misc.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
         filtered.push(misc);
       }
     }
@@ -127,8 +146,12 @@ export class MiscDetailComponent {
 
   // step 3 
   Clear() {
+    this.IsUpdate = false;
     this.PMSMiscDetailForm.reset();
-    this.GetAll();
+    this.filteredMiscDetailList = [];
+    this.GetAllMiscs();
+    this.GetAllMiscDetails();
+    
 
   }
 
@@ -142,12 +165,17 @@ export class MiscDetailComponent {
     console.log(this.PMSMiscDetailForm.controls['selectedMiscName']);
 
     if (this.PMSMiscDetailForm.controls['selectedMiscName'] != null) {
-      this.filteredItems = _.filter(this.items, (val) => {
+      this.filteredMiscDetailList = _.filter(this.miscDtlItems, (val) => {
         return (val.miscId == this.PMSMiscDetailForm.controls['selectedMiscName']?.value.miscId)
       })
     }
 
   }
+
+
+
+
+
 
 
   // step 6
@@ -159,36 +187,28 @@ export class MiscDetailComponent {
 
       try {
         let _miscDtlName: any[] = [];
-        _miscDtlName = _.filter(this.filteredItems, va => {
+        _miscDtlName = _.filter(this.filteredMiscDetailList, va => {
           return va.miscDtlDesc == "";
         })
 
         this.isValidation = true;
         this.ValidationMsg = "";
 
-        // if(this.PMSMiscDetailForm.value['selectedMiscName'] == undefined ||
-        //  _.isEmpty(this.PMSMiscDetailForm.value['selectedMiscName'].miscName) ||
-        //  this.PMSMiscDetailForm.value['selectedMiscName']==null
-        //  ){
-        //   this.isValidation =false;
-        //   this.ValidationMsg = "Please Select Type"
-        // }
-        // else
         if (_miscDtlName.length != 0) {
           this.isValidation = false;
-          this.ValidationMsg = "Please Enter Description";
+          this.ValidationMsg = "Please Enter Misc Detail Name.";
         }
 
         if (this.isValidation) {
           let dataBind: any = {};
           dataBind.miscDtlId = 0;
           dataBind.miscId = this.PMSMiscDetailForm.value['selectedMiscName'] != null ? this.PMSMiscDetailForm.value['selectedMiscName'].miscId : 0;
+          dataBind.miscName = "";
           dataBind.miscDtlName = "";
           dataBind.miscDtlDesc = "";
-
           dataBind.edit = true;
           dataBind.IsActive = true;
-          this.filteredItems.push(dataBind);
+          this.filteredMiscDetailList.push(dataBind);
         }
         else {
           this.notificationsService(FiscalValidation.NOTIFICATION_VALIDATION, 'Validation Message', this.ValidationMsg)
@@ -200,19 +220,93 @@ export class MiscDetailComponent {
       }
     }
     else {
-      this.notificationsService(PMSValidation.NOTIFICATION_VALIDATION, 'Validation Message', "Please select Misc Name")
+      this.notificationsService(FiscalValidation.NOTIFICATION_VALIDATION, 'Validation Message', "Please select Misc Name")
     }
   }
 
+
+
   Save() {
-    console.log('drop down values', this.filteredItems);
+      try {
+        let _apiUrl: string = '';
+        let passSaveParams: any = {};
+        passSaveParams.miscDtlList ={};
+        passSaveParams.miscDtlList.miscDtl=[];
+        this.isValidation =true;
+        this.ValidationMsg="";
+
+        let _miscDtlName :any[]=[];
+
+        _miscDtlName = _.filter(this.filteredMiscDetailList , (va)=>{
+          return va.miscDtlName == '';
+        })
+
+        if(this.PMSMiscDetailForm.value['selectedMiscName'] == undefined || 
+        _.isEmpty(this.PMSMiscDetailForm.value['selectedMiscName'].name || 
+        this.PMSMiscDetailForm.value['selectedMiscName']== null))
+        {
+            this.isValidation=false;
+            this.ValidationMsg='Please Select Type.';
+        }
+
+        else if(_miscDtlName.length !=0){
+              this.isValidation = false;
+              this.ValidationMsg = 'Please Enter Misc Detail Name.';
+        }
+
+        if(this.isValidation){
+          _.each(this.filteredMiscDetailList, va => {
+            va.isActive = true;
+            passSaveParams.miscDtlList.miscDtl.push(va);
+          });
+
+          _.each(this.DeletedMiscDtls,va =>{
+            va.isActive = false;
+            passSaveParams.miscDtlList.miscDtl.push(va);
+          });
+
+          passSaveParams.miscDtlList.keyWord = "Fiscal";
+          passSaveParams.miscDtlList.userId = this.userDetails ? this.userDetails.userId : 0;
+          passSaveParams.miscDtlList.ipAddress = '192.168.1.1';
+
+          _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.CREATE_UPDATE_DELETE;
+          
+          this.httpService.globalPost(_apiUrl,JSON.stringify(passSaveParams))
+          .subscribe({next: (result:any)=>{
+            this.notificationsService(AdminValidation.NOTIFICATION_SUCCESS,'Success Message',result.message);
+            this.Clear();
+          },
+          
+          error:(err:HttpErrorResponse)=>console.log(err),
+          
+        })
+
+        }
+        else {
+          this.notificationsService(FiscalValidation.NOTIFICATION_VALIDATION,'Validation Message',this.ValidationMsg );
+
+        }
+
+        
+      } catch (error) {
+        
+      }
   }
-
-
 
 
   RemoveRows(data: any, index: number) {
+    try {
+      if(+data.miscDtlId !=0){
+        this.DeletedMiscDtls.push(data);
+      }
+      this.filteredMiscDetailList.splice(index,1);
+      this.filteredMiscDetailList = [...this.filteredMiscDetailList]
+    } catch (error) {
+      alert(error);
+    }
   }
+
+
 
   private notificationsService(_severity: any, _summary: any, _message: any) {
     this.messageService.add({ severity: _severity, summary: _summary, detail: _message, life: 3000 });
