@@ -51,9 +51,6 @@ export class MiscDetailComponent {
   // Grid 
   items: IMiscDetails[] = [];
   item: IMiscDetails = {};
-  // For Grid Agaisnt Load data
-  // filteredItems: IMiscDetails[] = [];
-  // selectedItems: IMiscDetails[] = [];
 
 
 
