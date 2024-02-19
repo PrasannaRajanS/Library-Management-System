@@ -25,7 +25,7 @@ import { SelectItem } from 'primeng/api';
 })
 export class AdmissionAddComponent {
 
-  activeTab = 'register';
+  activeTab = 'student-information';
 
   activeCard = '';
 

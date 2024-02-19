@@ -1,47 +1,83 @@
-<div class="h-screen bg-no-repeat bg-cover"
-    style="background: url('/assets/layout/images/extensions/background@2x.jpg')">
+<div class="h-screen bg-no-repeat bg-cover" style="background: url('/assets/layout/images/extensions/background@2x.jpg')">
+    <div class="flex flex-column">
+        <div class="flex align-items-center justify-content-center">
+            <h1 style="color: white;"> SCHOOL NAME</h1>
+        </div>
+        <div class="flex align-items-center justify-content-center">
+            <h3 style="color: white;">APPLICATION FOR ADMISSION</h3>
+        </div>
+    </div>
     <div class="flex flex-column h-full">
-        <div class="flex align-items-center justify-content-center"
-            style="height: calc(100% - 75px); min-height: 600px;">
+        <div class="flex align-items-center justify-content-center" style="height: calc(100% - 75px); min-height: 600px;">
             <div style="height: 540px;"
-                class="surface-50 shadow-3 w-11 lg:w-9 flex flex-column flex-shrink-0 flex-grow-0">
+                class="surface-50 shadow-3 w-11 lg:w-11 flex flex-column flex-shrink-0 flex-grow-0">
                 <div class="w-full shadow-3 relative bg-indigo-500">
                     <div class="grid col">
-                        <div class="col-4 cursor-pointer bg-indigo-500 text-center"
-                            [ngClass]="{'transition-duration-500': activeTab === 'register'}"
-                            (click)="clickNext('register')">
+
+                        <div class="col cursor-pointer bg-indigo-500 text-center"
+                            [ngClass]="{'transition-duration-500': activeTab === 'student-information'}"
+                            (click)="clickNext('student-information')">
                             <div class="line-height-3">
                                 <i style="width:20px" class="pi pi-sign-in opacity-40 text-white"
-                                    [ngClass]="{'opacity-100': activeTab === 'register'}"></i>
+                                    [ngClass]="{'opacity-100': activeTab === 'student-information'}"></i>
                             </div>
                             <div class="text-white opacity-40 text-lg line-height-3"
-                                [ngClass]="{'opacity-100': activeTab === 'register'}">REGISTER</div>
+                                [ngClass]="{'opacity-100': activeTab === 'student-information'}">STUDENT INFO.</div>
                         </div>
-                        <div class="col-4 cursor-pointer bg-indigo-500 text-center"
-                            [ngClass]="{'transition-duration-500': activeTab === 'tier'}" (click)="clickNext('tier')">
+
+                        <div class="col cursor-pointer bg-indigo-500 text-center"
+                            [ngClass]="{'transition-duration-500': activeTab === 'parent-information'}" (click)="clickNext('parent-information')">
                             <div class="line-height-3">
-                                <i style="width:20px" [ngClass]="{'opacity-100': activeTab === 'tier'}"
+                                <i style="width:20px" [ngClass]="{'opacity-100': activeTab === 'parent-information'}"
                                     class="pi pi-clone opacity-40 text-white"></i>
                             </div>
                             <div class="text-white opacity-40 text-lg line-height-3"
-                                [ngClass]="{'opacity-100': activeTab === 'tier'}">CHOOSE TIER</div>
+                                [ngClass]="{'opacity-100': activeTab === 'parent-information'}">PARENT INFO.</div>
                         </div>
-                        <div class="col-4 cursor-pointer bg-indigo-500 text-center"
-                            [ngClass]="{'transition-duration-500': activeTab === 'payment'}"
-                            (click)="clickNext('payment')">
+
+                        <div class="col cursor-pointer bg-indigo-500 text-center"
+                            [ngClass]="{'transition-duration-500': activeTab === 'pre-class-info'}" (click)="clickNext('pre-class-info')">
                             <div class="line-height-3">
-                                <i style="width:20px" [ngClass]="{'opacity-100':activeTab === 'payment'}"
-                                    class="pi pi-shopping-cart opacity-40 text-white"></i>
+                                <i style="width:20px" [ngClass]="{'opacity-100': activeTab === 'pre-class-info'}"
+                                    class="pi pi-clone opacity-40 text-white"></i>
                             </div>
-                            <div class="text-white opacity-40 text-lg line-height-3 transition-duration-500 transition-ease-in-out"
-                                [ngClass]="{'opacity-100':activeTab === 'payment'}">PAYMENT</div>
+                            <div class="text-white opacity-40 text-lg line-height-3"
+                                [ngClass]="{'opacity-100': activeTab === 'pre-class-info'}">PRE.CLASS INFO.</div>
                         </div>
-                        <div class="absolute bottom-0 bg-white" style="height:2px; visibility: hidden;"
-                            [@tabBar]="activeTab === 'register' ? 'register' : activeTab === 'tier' ? 'tier' : 'payment' ">
+
+                        <div class="col cursor-pointer bg-indigo-500 text-center"
+                        [ngClass]="{'transition-duration-500': activeTab === 'attach-docs'}" (click)="clickNext('attach-docs')">
+                        <div class="line-height-3">
+                            <i style="width:20px" [ngClass]="{'opacity-100': activeTab === 'attach-docs'}"
+                                class="pi pi-clone opacity-40 text-white"></i>
                         </div>
+                        <div class="text-white opacity-40 text-lg line-height-3"
+                            [ngClass]="{'opacity-100': activeTab === 'attach-docs'}">ATTACH DOCS.</div>
+                    </div>
+
+                    <div class="col cursor-pointer bg-indigo-500 text-center"
+                        [ngClass]="{'transition-duration-500': activeTab === 'payment'}"
+                        (click)="clickNext('payment')">
+                        <div class="line-height-3">
+                            <i style="width:20px" [ngClass]="{'opacity-100':activeTab === 'payment'}"
+                                class="pi pi-shopping-cart opacity-40 text-white"></i>
+                        </div>
+                        <div class="text-white opacity-40 text-lg line-height-3 transition-duration-500 transition-ease-in-out"
+                            [ngClass]="{'opacity-100':activeTab === 'payment'}">PAYMENT</div>
+                    </div>
+
+                    <div class="absolute bottom-0 bg-white" style="height:2px; visibility: hidden;" [@tabBar]="activeTab === 'student-information' ? 'student-information' :  
+                                                                    activeTab === 'parent-information' ? 'parent-information' : 
+                                                                    activeTab === 'pre-class-info' ? 'pre-class-info' : 
+                                                                    activeTab === 'attach-docs' ? 'attach-docs' : 
+                                                                    activeTab === 'tier' ? 'tier' :
+                                                                    'payment' ">
+                    </div>
+
                     </div>
                 </div>
-                <div class="p-5 hidden overflow-auto h-full" [ngClass]="{'flex flex-grow-1': activeTab === 'register'}">
+
+                <div class="p-5 hidden overflow-auto h-full" [ngClass]="{'flex flex-grow-1': activeTab === 'student-information'}">
                     <div class="grid h-full w-full ">
                         <div class="col-12  lg:col-6">
                             <h1 class="text-sm m-0 text-color-secondary">ESSENTIAL INFORMATION</h1>
@@ -94,6 +130,349 @@
                         <div class="col-12">
                             <button pButton pRipple class="w-full mt-5" type="button" label="CONTINUE"
                                 (click)="clickNext('tier')"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-5 hidden overflow-auto h-full" [ngClass]="{'flex flex-grow-1': activeTab === 'parent-information'}">
+                    <div class="grid h-full w-full ">
+                        <div class="col-12  lg:col-6">
+                            <h1 class="text-sm m-0 text-color-secondary">ESSENTIAL INFORMATION</h1>
+                            <div>
+                                <div class="mt-5 p-inputgroup">
+                                    <span class="p-inputgroup-addon">
+                                        <i class="pi pi-user"></i>
+                                    </span>
+                                    <span class="p-float-label">
+                                        <input class="w-full" id="name" type="text" pInputText />
+                                        <label for="name">Username</label>
+                                    </span>
+                                </div>
+                                <div class="p-inputgroup mt-5">
+                                    <span class="p-inputgroup-addon">
+                                        <i class="pi pi-envelope"></i>
+                                    </span>
+                                    <span class="p-float-label">
+                                        <input class="w-full" id="email" type="text" pInputText />
+                                        <label for="email">Email</label>
+                                    </span>
+                                </div>
+                                <div class="p-inputgroup mt-5">
+                                    <span class="p-inputgroup-addon">
+                                        <i class="pi pi-lock"></i>
+                                    </span>
+                                    <span class="p-float-label">
+                                        <input class="w-full" id="password" type="password" pInputText />
+                                        <label for="password">Password</label>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 lg:col-6">
+                            <h1 class="text-sm m-0 text-color-secondary">OPTIONAL</h1>
+                            <div>
+                                <p-dropdown styleClass="mt-5 w-full" id="timezone" [style]="{'margin-bottom':'10px'}"
+                                    [options]="dropdownOptions1" [(ngModel)]="selectDropdownOptions1"></p-dropdown>
+
+                                <div class="mt-3">
+                                    <p-calendar styleClass="w-full relative " id="button" [(ngModel)]="birthdate"
+                                        placeholder="Birthdate" [showIcon]="true" appendTo="body"></p-calendar>
+                                </div>
+
+                                <p-dropdown styleClass="mt-5 w-full" id="ultima" [options]="dropdownOptions2"
+                                    [(ngModel)]="selectDropdownOptions2" appendTo="body"
+                                    [style]="{'margin-bottom':'10px'}"></p-dropdown>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button pButton pRipple class="w-full mt-5" type="button" label="CONTINUE"
+                                (click)="clickNext('tier')"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="h-full hidden overflow-auto p-5" [ngClass]="{'flex flex-grow-1': activeTab === 'pre-class-info'}">
+                    <div class="flex flex-column lg:flex-row gap-3 w-full h-full">
+                        <div class="w-full">
+                            <div style="min-height: 400px;" class="surface-ground shadow-3 p-0 border-round-md relative">
+                                <div class="text-white text-xl py-3 px-2 bg-indigo-500 mb-3">
+                                    <div class="flex px-3 align-items-center justify-content-between">
+                                        <div>
+                                            <h1 class="inline text-white pt-5 text-3xl">BASIC</h1>
+                                        </div>
+                                        <div>
+                                            <h1 class="inline text-white pt-5 text-3xl">$5</h1>
+                                            <span>/m</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-base p-2">
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">Responsive</div>
+                                    </div>
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">Push Messages</div>
+                                    </div>
+                                    <div class="col-12 absolute w-auto" style="bottom:15px;right:10px;left:0px">
+                                        <button pButton pRipple class="w-full" type="button" label="BASIC"
+                                            (click)="selectTier('basic')"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full">
+                            <div style="min-height: 400px;" class="p-0 relative">
+                                <div style="min-height: 400px;" class="surface-ground shadow-3 border-round-md p-0 relative">
+                                    <div class="text-white text-xl py-3 px-2 bg-pink-500 mb-3">
+                                        <div class="flex px-3 align-items-center justify-content-between">
+                                            <div>
+                                                <h1 class="inline text-white pt-5 text-3xl">PRO</h1>
+                                            </div>
+                                            <div>
+                                                <h1 class="inline text-white pt-5 text-3xl">$25</h1>
+                                                <span>/m</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-base p-2">
+                                        <div class="w-full h-3rem grid">
+                                            <div class="col-3">
+                                                <i class="pi pi-fw pi-check"></i>
+                                            </div>
+                                            <div class="col-9">Responsive</div>
+                                        </div>
+                                        <div class="w-full h-3rem grid">
+                                            <div class="col-3">
+                                                <i class="pi pi-fw pi-check"></i>
+                                            </div>
+                                            <div class="col-9">Push Messages</div>
+                                        </div>
+                                        <div class="w-full h-3rem grid">
+                                            <div class="col-3">
+                                                <i class="pi pi-fw pi-check"></i>
+                                            </div>
+                                            <div class="col-9">7/24 Support</div>
+                                        </div>
+                                        <div class="w-full h-3rem grid">
+                                            <div class="col-3">
+                                                <i class="pi pi-fw pi-check"></i>
+                                            </div>
+                                            <div class="col-9">Free Shipping</div>
+                                        </div>
+                                        <div class="col-12 absolute w-auto" style="bottom:15px;right:10px;left:0px">
+                                            <button pButton pRipple class="w-full bg-pink-500" type="button"
+                                                label="SELECT PRO" (click)="selectTier('pro')"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full">
+                            <div class="surface-ground shadow-3 border-round-md p-0 relative" style="min-height: 400px;">
+                                <div class="text-white text-xl py-3 px-2 bg-bluegray-500 mb-3">
+                                    <div class="flex px-3 align-items-center justify-content-between">
+                                        <div>
+                                            <h1 class="inline text-white pt-5 text-3xl">PRO+</h1>
+                                        </div>
+                                        <div>
+                                            <h1 class="inline text-white pt-5 text-3xl">$50</h1>
+                                            <span>/m</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-base p-2">
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">Responsive</div>
+                                    </div>
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">Push Messages</div>
+                                    </div>
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">7/24 Support</div>
+                                    </div>
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">Free Shipping</div>
+                                    </div>
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">Unlimited BW</div>
+                                    </div>
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">Special Gift Cards</div>
+                                    </div>
+                                    <div class="col-12 absolute w-auto" style="bottom:15px;right:10px;left:0px">
+                                        <button pButton pRipple class="w-full bg-bluegray-500" type="button"
+                                            label="SELECT PRO+" (click)="selectTier('pro-plus')"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="h-full hidden overflow-auto p-5" [ngClass]="{'flex flex-grow-1': activeTab === 'attach-docs'}">
+                    <div class="flex flex-column lg:flex-row gap-3 w-full h-full">
+                        <div class="w-full">
+                            <div style="min-height: 400px;" class="surface-ground shadow-3 p-0 border-round-md relative">
+                                <div class="text-white text-xl py-3 px-2 bg-indigo-500 mb-3">
+                                    <div class="flex px-3 align-items-center justify-content-between">
+                                        <div>
+                                            <h1 class="inline text-white pt-5 text-3xl">BASIC</h1>
+                                        </div>
+                                        <div>
+                                            <h1 class="inline text-white pt-5 text-3xl">$5</h1>
+                                            <span>/m</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-base p-2">
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">Responsive</div>
+                                    </div>
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">Push Messages</div>
+                                    </div>
+                                    <div class="col-12 absolute w-auto" style="bottom:15px;right:10px;left:0px">
+                                        <button pButton pRipple class="w-full" type="button" label="BASIC"
+                                            (click)="selectTier('basic')"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full">
+                            <div style="min-height: 400px;" class="p-0 relative">
+                                <div style="min-height: 400px;" class="surface-ground shadow-3 border-round-md p-0 relative">
+                                    <div class="text-white text-xl py-3 px-2 bg-pink-500 mb-3">
+                                        <div class="flex px-3 align-items-center justify-content-between">
+                                            <div>
+                                                <h1 class="inline text-white pt-5 text-3xl">PRO</h1>
+                                            </div>
+                                            <div>
+                                                <h1 class="inline text-white pt-5 text-3xl">$25</h1>
+                                                <span>/m</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-base p-2">
+                                        <div class="w-full h-3rem grid">
+                                            <div class="col-3">
+                                                <i class="pi pi-fw pi-check"></i>
+                                            </div>
+                                            <div class="col-9">Responsive</div>
+                                        </div>
+                                        <div class="w-full h-3rem grid">
+                                            <div class="col-3">
+                                                <i class="pi pi-fw pi-check"></i>
+                                            </div>
+                                            <div class="col-9">Push Messages</div>
+                                        </div>
+                                        <div class="w-full h-3rem grid">
+                                            <div class="col-3">
+                                                <i class="pi pi-fw pi-check"></i>
+                                            </div>
+                                            <div class="col-9">7/24 Support</div>
+                                        </div>
+                                        <div class="w-full h-3rem grid">
+                                            <div class="col-3">
+                                                <i class="pi pi-fw pi-check"></i>
+                                            </div>
+                                            <div class="col-9">Free Shipping</div>
+                                        </div>
+                                        <div class="col-12 absolute w-auto" style="bottom:15px;right:10px;left:0px">
+                                            <button pButton pRipple class="w-full bg-pink-500" type="button"
+                                                label="SELECT PRO" (click)="selectTier('pro')"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full">
+                            <div class="surface-ground shadow-3 border-round-md p-0 relative" style="min-height: 400px;">
+                                <div class="text-white text-xl py-3 px-2 bg-bluegray-500 mb-3">
+                                    <div class="flex px-3 align-items-center justify-content-between">
+                                        <div>
+                                            <h1 class="inline text-white pt-5 text-3xl">PRO+</h1>
+                                        </div>
+                                        <div>
+                                            <h1 class="inline text-white pt-5 text-3xl">$50</h1>
+                                            <span>/m</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-base p-2">
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">Responsive</div>
+                                    </div>
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">Push Messages</div>
+                                    </div>
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">7/24 Support</div>
+                                    </div>
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">Free Shipping</div>
+                                    </div>
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">Unlimited BW</div>
+                                    </div>
+                                    <div class="w-full h-3rem grid">
+                                        <div class="col-3">
+                                            <i class="pi pi-fw pi-check"></i>
+                                        </div>
+                                        <div class="col-9">Special Gift Cards</div>
+                                    </div>
+                                    <div class="col-12 absolute w-auto" style="bottom:15px;right:10px;left:0px">
+                                        <button pButton pRipple class="w-full bg-bluegray-500" type="button"
+                                            label="SELECT PRO+" (click)="selectTier('pro-plus')"></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
