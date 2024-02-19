@@ -40,9 +40,9 @@ export class MiscDetailComponent {
   //  List of items array
   selectedMiscName: IMisc = {};
   filteredMiscList: IMiscDetails[] = [];
-  miscItems:IMiscDetails[]=[];
-  filteredMiscDetailList:IMiscDetails[]=[];
-  miscDtlItems:IMiscDetails[]=[]
+  miscItems: IMiscDetails[] = [];
+  filteredMiscDetailList: IMiscDetails[] = [];
+  miscDtlItems: IMiscDetails[] = []
   MiscList: IMisc[] = []
 
 
@@ -108,17 +108,17 @@ export class MiscDetailComponent {
 
   public GetAllMiscDetails() {
     try {
-        this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.PMS.DETAILS + '?keyWord=PMS')
-            .subscribe({
-                next: (result: any) => {
-                    this.miscDtlItems = result.miscDtls;
-                    this.filteredMiscDetailList = this.miscDtlItems;
-                    console.log('GetAllMiscDetails', this.filteredMiscDetailList);
-                },
-                error: (err: HttpErrorResponse) => console.log(err),
-            });
+      this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.PMS.DETAILS + '?keyWord=PMS')
+        .subscribe({
+          next: (result: any) => {
+            this.miscDtlItems = result.miscDtls;
+            this.filteredMiscDetailList = this.miscDtlItems;
+            console.log('GetAllMiscDetails', this.filteredMiscDetailList);
+          },
+          error: (err: HttpErrorResponse) => console.log(err),
+        });
     } catch (error) { }
-}
+  }
 
   ngOnInit() {
     this.GetAllMiscs();
@@ -151,7 +151,7 @@ export class MiscDetailComponent {
     this.filteredMiscDetailList = [];
     this.GetAllMiscs();
     this.GetAllMiscDetails();
-    
+
 
   }
 
@@ -228,81 +228,81 @@ export class MiscDetailComponent {
 
 
   Save() {
-      try {
-        let _apiUrl: string = '';
-        let passSaveParams: any = {};
-        passSaveParams.miscDtlList ={};
-        passSaveParams.miscDtlList.miscDtl=[];
-        this.isValidation =true;
-        this.ValidationMsg="";
+    try {
+      let _apiUrl: string = '';
+      let passSaveParams: any = {};
+      passSaveParams.miscDtlList = {};
+      passSaveParams.miscDtlList.miscDtl = [];
+      this.isValidation = true;
+      this.ValidationMsg = "";
 
-        let _miscDtlName :any[]=[];
+      let _miscDtlName: any[] = [];
 
-        _miscDtlName = _.filter(this.filteredMiscDetailList , (va)=>{
-          return va.miscDtlName == '';
-        })
+      _miscDtlName = _.filter(this.filteredMiscDetailList, (va) => {
+        return va.miscDtlName == '';
+      })
 
-        if(this.PMSMiscDetailForm.value['selectedMiscName'] == undefined || 
-        _.isEmpty(this.PMSMiscDetailForm.value['selectedMiscName'].name || 
-        this.PMSMiscDetailForm.value['selectedMiscName']== null))
-        {
-            this.isValidation=false;
-            this.ValidationMsg='Please Select Type.';
-        }
-
-        else if(_miscDtlName.length !=0){
-              this.isValidation = false;
-              this.ValidationMsg = 'Please Enter Misc Detail Name.';
-        }
-
-        if(this.isValidation){
-          _.each(this.filteredMiscDetailList, va => {
-            va.isActive = true;
-            passSaveParams.miscDtlList.miscDtl.push(va);
-          });
-
-          _.each(this.DeletedMiscDtls,va =>{
-            va.isActive = false;
-            passSaveParams.miscDtlList.miscDtl.push(va);
-          });
-
-          passSaveParams.miscDtlList.keyWord = "PMS";
-          passSaveParams.miscDtlList.userId = this.userDetails ? this.userDetails.userId : 0;
-          passSaveParams.miscDtlList.ipAddress = '192.168.1.1';
-
-          _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.PMS.CREATE_UPDATE_DELETE;
-          console.log(JSON.stringify(passSaveParams));
-          this.httpService.globalPost(_apiUrl,JSON.stringify(passSaveParams))
-          .subscribe({next: (result:any)=>{
-            this.notificationsService(AdminValidation.NOTIFICATION_SUCCESS,'Success Message',result.message);
-            this.Clear();
-
-            
-          },
-          
-          error:(err:HttpErrorResponse)=>console.log(err),
-          
-        })
-
-        }
-        else {
-          this.notificationsService(FiscalValidation.NOTIFICATION_VALIDATION,'Validation Message',this.ValidationMsg );
-
-        }
-
-        
-      } catch (error) {
-        
+      if (this.PMSMiscDetailForm.value['selectedMiscName'] == undefined ||
+        _.isEmpty(this.PMSMiscDetailForm.value['selectedMiscName'].name ||
+          this.PMSMiscDetailForm.value['selectedMiscName'] == null)) {
+        this.isValidation = false;
+        this.ValidationMsg = 'Please Select Type.';
       }
+
+      else if (_miscDtlName.length != 0) {
+        this.isValidation = false;
+        this.ValidationMsg = 'Please Enter Misc Detail Name.';
+      }
+
+      if (this.isValidation) {
+        _.each(this.filteredMiscDetailList, va => {
+          va.isActive = true;
+          passSaveParams.miscDtlList.miscDtl.push(va);
+        });
+
+        _.each(this.DeletedMiscDtls, va => {
+          va.isActive = false;
+          passSaveParams.miscDtlList.miscDtl.push(va);
+        });
+
+        passSaveParams.miscDtlList.keyWord = "PMS";
+        passSaveParams.miscDtlList.userId = this.userDetails ? this.userDetails.userId : 0;
+        passSaveParams.miscDtlList.ipAddress = '192.168.1.1';
+
+        _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.PMS.CREATE_UPDATE_DELETE;
+        console.log(JSON.stringify(passSaveParams));
+        this.httpService.globalPost(_apiUrl, JSON.stringify(passSaveParams))
+          .subscribe({
+            next: (result: any) => {
+              this.notificationsService(AdminValidation.NOTIFICATION_SUCCESS, 'Success Message', result.message);
+              this.Clear();
+
+
+            },
+
+            error: (err: HttpErrorResponse) => console.log(err),
+
+          })
+
+      }
+      else {
+        this.notificationsService(FiscalValidation.NOTIFICATION_VALIDATION, 'Validation Message', this.ValidationMsg);
+
+      }
+
+
+    } catch (error) {
+
+    }
   }
 
 
   RemoveRows(data: any, index: number) {
     try {
-      if(+data.miscDtlId !=0){
+      if (+data.miscDtlId != 0) {
         this.DeletedMiscDtls.push(data);
       }
-      this.filteredMiscDetailList.splice(index,1);
+      this.filteredMiscDetailList.splice(index, 1);
       this.filteredMiscDetailList = [...this.filteredMiscDetailList]
     } catch (error) {
       alert(error);

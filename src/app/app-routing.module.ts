@@ -30,7 +30,7 @@ const routes: Routes = [
     },
 
     { path: 'auth', data: { breadcrumb: 'Auth' }, loadChildren: () => import('./+auth/auth.module').then(m => m.AuthModule) },
-
+    { path: 'admission', data: { breadcrumb: 'Add Admission' }, loadChildren: () => import('./+school/+students/components/admission-add/admission-add.module').then(m => m.AdmissionAddModule) },
     { path: 'wizard', data: { breadcrumb: 'Wizard' }, loadChildren: () => import('./demo/components/pages/wizard/wizard.module').then(m => m.WizardModule) },
     { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
     { path: 'notfound', loadChildren: () => import('./demo/components/notfound/notfound.module').then(m => m.NotfoundModule) },

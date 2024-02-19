@@ -174,6 +174,22 @@ export class AppMenuComponent implements OnInit {
                         ]
                     },
                     {
+                        label: 'Admission Module',
+                        icon: 'pi pi-fw pi-align-left',
+                        items: [
+                            {
+                                label: 'Add Admission',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/admission/admission-entry']
+                            },
+                            {
+                                label: 'Admission List',
+                                icon: 'pi pi-fw pi-align-left',
+                                routerLink: ['/apps/students/admission-list']
+                            },
+                        ]
+                    },
+                    {
                         label: 'Student Module',
                         icon: 'pi pi-fw pi-align-left',
                         items: [

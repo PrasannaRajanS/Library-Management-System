@@ -12,9 +12,9 @@ import { ProductService } from 'src/app/demo/service/product.service';
 import { UtilService } from 'src/app/shared/util.service';
 import { SchoolAPIConfig } from '../../services/school-api-config';
 import { MessageService } from 'primeng/api';
-import { HttpService } from '../../services/school-http.service';
 import { SchoolValidation } from '../../services/school-validation';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 @Component({
   selector: 'app-period',
@@ -66,7 +66,7 @@ export class PeriodComponent {
     private productService: ProductService,
     private utilService: UtilService,
     private messageService: MessageService,
-    private httpService: HttpService,
+    private httpService: CommonHttpService,
   ){
     this.PeriodForm = FormHandler.controls<IPeriod>(this.initialValues)
     this.PeriodForm.setValidators(FormHandler.validate<IPeriod>(this.validationSchema))
