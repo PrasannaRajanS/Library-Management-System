@@ -1,4 +1,9 @@
-<div class="h-screen bg-no-repeat bg-cover" style="background: url('/assets/layout/images/extensions/background@2x.jpg')">
+<div class="h-screen bg-no-repeat bg-cover" style="background: url('/assets/layout/images/extensions/background@2x.jpg');height: auto !important;" >
+    
+
+    <p-toast></p-toast>
+
+
     <div class="flex flex-column">
         <div class="flex align-items-center justify-content-center">
             <h1 style="color: white;"> SCHOOL NAME</h1>
@@ -79,10 +84,122 @@
 
                 <div class="p-5 hidden overflow-auto h-full" [ngClass]="{'flex flex-grow-1': activeTab === 'student-information'}">
                     <div class="grid h-full w-full ">
+
+                        <div class="col-12">
+                            <h1 class="text-sm m-0 text-color-secondary">FOR OFFICE USE</h1>
+                            <div class="grid formgrid py-3">
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="employeeNumber" style="width: 100%;" pInputText>
+                                        <label for="employeeNumber">Application  No.</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="employeeNumber" style="width: 100%;" pInputText>
+                                        <label for="employeeNumber">Admission To Standard</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="employeeNumber" style="width: 100%;" pInputText>
+                                        <label for="employeeNumber">Academic Year</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="employeeNumber" style="width: 100%;" pInputText>
+                                        <label for="employeeNumber">Admission No.</label>
+                                    </span>
+                                </div>
+
+                                </div>
+                        </div> 
+
+
                         <div class="col-12  lg:col-6">
                             <h1 class="text-sm m-0 text-color-secondary">ESSENTIAL INFORMATION</h1>
-                            <div>
-                                <div class="mt-5 p-inputgroup">
+                            <div class="grid formgrid py-3">
+                                <div class="col-12 md:col-6 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="employeeNumber" style="width: 100%;" pInputText>
+                                        <label for="employeeNumber">Name of the Student</label>
+                                    </span>
+                                </div>
+
+
+                                <div class="field col-12 md:col-6 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="firstName" style="width: 100%;" pInputText >
+                                        <label for="firstName">DOB</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-6 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="gender" style="width: 100%;" pInputText >
+                                        <label for="gender">Gender</label>
+                                    </span>
+                                </div>
+
+
+
+                                <div class="col-12 md:col-6 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="lastName" style="width: 100%;" pInputText>
+                                        <label for="lastName">Nationality</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-6 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="nickName" style="width: 100%;" pInputText >
+                                        <label for="nickName">Religion</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-6 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="nickName" style="width: 100%;" pInputText >
+                                        <label for="nickName">Mother Tongue</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-6 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="nickName" style="width: 100%;" pInputText >
+                                        <label for="nickName">Blood Group</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-6 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="nickName" style="width: 100%;" pInputText >
+                                        <label for="nickName">Community</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-6 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="nickName" style="width: 100%;" pInputText >
+                                        <label for="nickName">Adhaar No.</label>
+                                    </span>
+                                </div>
+
+                                
+                                <div class="col-12 md:col-6 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="nickName" style="width: 100%;" pInputText >
+                                        <label for="nickName">EWIS</label>
+                                    </span>
+                                </div>
+
+
+
+                                <div class="m-3 mt-5 p-inputgroup">
                                     <span class="p-inputgroup-addon">
                                         <i class="pi pi-user"></i>
                                     </span>
@@ -91,24 +208,8 @@
                                         <label for="name">Username</label>
                                     </span>
                                 </div>
-                                <div class="p-inputgroup mt-5">
-                                    <span class="p-inputgroup-addon">
-                                        <i class="pi pi-envelope"></i>
-                                    </span>
-                                    <span class="p-float-label">
-                                        <input class="w-full" id="email" type="text" pInputText />
-                                        <label for="email">Email</label>
-                                    </span>
-                                </div>
-                                <div class="p-inputgroup mt-5">
-                                    <span class="p-inputgroup-addon">
-                                        <i class="pi pi-lock"></i>
-                                    </span>
-                                    <span class="p-float-label">
-                                        <input class="w-full" id="password" type="password" pInputText />
-                                        <label for="password">Password</label>
-                                    </span>
-                                </div>
+
+                               
                             </div>
                         </div>
                         <div class="col-12 lg:col-6">
@@ -127,10 +228,27 @@
                                     [style]="{'margin-bottom':'10px'}"></p-dropdown>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <!-- <div class="col-12">
                             <button pButton pRipple class="w-full mt-5" type="button" label="CONTINUE"
                                 (click)="clickNext('tier')"></button>
+                        </div> -->
+
+                        
+                <p-toolbar styleClass="mb-4">
+                    <ng-template pTemplate="left">
+                        <div class="my-2">
                         </div>
+                    </ng-template>
+                    <ng-template pTemplate="right">
+
+                        <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2">Save & Continue</button>
+
+                        <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning" ></button>
+
+                    </ng-template>
+
+
+                </p-toolbar>
                     </div>
                 </div>
 

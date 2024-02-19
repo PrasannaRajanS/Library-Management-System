@@ -11,6 +11,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RippleModule } from 'primeng/ripple';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { RippleModule } from 'primeng/ripple';
     RadioButtonModule,
     InputTextModule,
     RippleModule,
-    CheckboxModule
+    CheckboxModule,
+    ToolbarModule,ToastModule
   ]
 })
 export class AdmissionAddModule { }
