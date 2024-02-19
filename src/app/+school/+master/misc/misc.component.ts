@@ -8,7 +8,6 @@ import { IMisc } from 'src/app/shared/interface/IMisc';
 import { UtilService } from 'src/app/shared/util.service';
 
 import * as yup from "yup";
-import { HttpService } from '../../services/school-http.service';
 import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AdminValidation } from 'src/app/+admin/services/admin-validation';
@@ -76,7 +75,7 @@ export class MiscComponent {
   public GetAll() {
     try {
         this.httpService
-            .globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST+'?keyWord=Fiscal')
+            .globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.SCHOOL.LIST+'?keyWord=School')
             .subscribe({
                 next: (result: any) => {
                     this.items = result.miscs;
@@ -123,13 +122,13 @@ Clear() {
             passSaveParams.name = this.MiscForm.value['name'] != null ? this.MiscForm.value['name'] : "";
             passSaveParams.description = this.MiscForm.value['description'] != null ? this.MiscForm.value['description'] : "";
 
-            passSaveParams.keyWord = "Fiscal";
+            passSaveParams.keyWord = "School";
             passSaveParams.isActive = true;
             passSaveParams.unitId = this.unitDetails ? this.unitDetails.unitId : 0;
             passSaveParams.userId = this.userDetails ? this.userDetails.userId : 0;
             passSaveParams.ipAddress = this.IPAddress;
 
-            _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.UPDATE;
+            _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.SCHOOL.UPDATE;
         } else {
             //  SAVE
 
@@ -137,13 +136,13 @@ Clear() {
             passSaveParams.name = this.MiscForm.value['name'] != null ? this.MiscForm.value['name'] : "";
             passSaveParams.description = this.MiscForm.value['description'] != null ? this.MiscForm.value['description'] : "";
 
-            passSaveParams.keyWord = "Fiscal";
+            passSaveParams.keyWord = "School";
             passSaveParams.isActive = true;
             passSaveParams.unitId = this.unitDetails ? this.unitDetails.unitId : 0;
             passSaveParams.userId = this.userDetails ? this.userDetails.userId : 0;
             passSaveParams.ipAddress = this.IPAddress;
 
-            _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.SAVE;
+            _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.SCHOOL.SAVE;
         }
         console.log('Before save', passSaveParams);
 
@@ -195,11 +194,11 @@ Clear() {
           passSaveParams.description = deletedItem[0].description;
           passSaveParams.isActive = false;
           passSaveParams.ipAddress = this.IPAddress;
-          passSaveParams.keyWord = "Fiscal"
+          passSaveParams.keyWord = "School"
 
           console.log(passSaveParams);
 
-          this.httpService.globalPost(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.DELETE,
+          this.httpService.globalPost(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.SCHOOL.DELETE,
               JSON.stringify(passSaveParams)).subscribe({
                   next: (result: any) => {
                       this.Clear();

@@ -94,7 +94,7 @@ export class MiscDetailComponent {
   public GetAllMiscs() {
     try {
       this.httpService
-        .globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST + '?keyWord=Fiscal')
+        .globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.PMS.LIST + '?keyWord=PMS')
         .subscribe({
           next: (result: any) => {
             this.miscItems = result.miscs;
@@ -108,7 +108,7 @@ export class MiscDetailComponent {
 
   public GetAllMiscDetails() {
     try {
-        this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.DETAILS + '?keyWord=Fiscal')
+        this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.PMS.DETAILS + '?keyWord=PMS')
             .subscribe({
                 next: (result: any) => {
                     this.miscDtlItems = result.miscDtls;
@@ -206,8 +206,9 @@ export class MiscDetailComponent {
           dataBind.miscName = "";
           dataBind.miscDtlName = "";
           dataBind.miscDtlDesc = "";
+          // dataBind.keyWord="PMS";
           dataBind.edit = true;
-          dataBind.IsActive = true;
+          dataBind.isActive = true;
           this.filteredMiscDetailList.push(dataBind);
         }
         else {
@@ -265,16 +266,18 @@ export class MiscDetailComponent {
             passSaveParams.miscDtlList.miscDtl.push(va);
           });
 
-          passSaveParams.miscDtlList.keyWord = "Fiscal";
+          passSaveParams.miscDtlList.keyWord = "PMS";
           passSaveParams.miscDtlList.userId = this.userDetails ? this.userDetails.userId : 0;
           passSaveParams.miscDtlList.ipAddress = '192.168.1.1';
 
-          _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.CREATE_UPDATE_DELETE;
-          
+          _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.PMS.CREATE_UPDATE_DELETE;
+          console.log(JSON.stringify(passSaveParams));
           this.httpService.globalPost(_apiUrl,JSON.stringify(passSaveParams))
           .subscribe({next: (result:any)=>{
             this.notificationsService(AdminValidation.NOTIFICATION_SUCCESS,'Success Message',result.message);
             this.Clear();
+
+            
           },
           
           error:(err:HttpErrorResponse)=>console.log(err),

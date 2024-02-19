@@ -25,7 +25,7 @@ export const FiscalAPIConfig = {
                     LIST: "/academicyear/GetAcademicYears"
                 },
                 
-                MISC: {
+                FISCAL: {
                     SAVE: "/Fiscal/Miscellaneous/Create",
                     UPDATE: "/Fiscal/Miscellaneous/Update",
                     DELETE: "/Fiscal/Miscellaneous/Delete",
@@ -35,7 +35,39 @@ export const FiscalAPIConfig = {
                     DETAILS:"/Fiscal/Miscellaneous/GetAllMiscDetails",
                     
                 },
+                PMS:{
+
+                    SAVE: "/PMS/Miscellaneous/Create",
+                    UPDATE: "/PMS/Miscellaneous/Update",
+                    DELETE: "/PMS/Miscellaneous/Delete",
+                    LIST: "/PMS/Miscellaneous/GetAllMiscs",
+                    EDIT:"/PMS/Miscellaneous/GetMiscById",
+                    CREATE_UPDATE_DELETE:"/PMS/Miscellaneous/MiscDetailCreate",
+                    DETAILS:"/PMS/Miscellaneous/GetAllMiscDetails",
+                    
+                },
+                SCHOOL:{
+                    SAVE: "/School/Miscellaneous/Create",
+                    UPDATE: "/School/Miscellaneous/Update",
+                    DELETE: "/School/Miscellaneous/Delete",
+                    LIST: "/School/Miscellaneous/GetAllMiscs",
+                    EDIT:"/School/Miscellaneous/GetMiscById",
+                    CREATE_UPDATE_DELETE:"/School/Miscellaneous/MiscDetailCreate",
+                    DETAILS:"/School/Miscellaneous/GetAllMiscDetails",
+                    
+                },
+
+
             }
         }
     }
 }
+
+
+
+
+
+
+
+
+

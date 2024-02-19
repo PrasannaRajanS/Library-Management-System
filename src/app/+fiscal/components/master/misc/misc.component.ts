@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Table } from 'primeng/table';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -99,28 +99,26 @@ export class MiscComponent {
                 passSaveParams.miscId = this.miscId;
                 passSaveParams.name = this.MiscForm.value['name'] != null ? this.MiscForm.value['name'] : "";
                 passSaveParams.description = this.MiscForm.value['description'] != null ? this.MiscForm.value['description'] : "";
-
                 passSaveParams.keyWord = "Fiscal";
                 passSaveParams.isActive = true;
                 passSaveParams.unitId = this.unitDetails ? this.unitDetails.unitId : 0;
                 passSaveParams.userId = this.userDetails ? this.userDetails.userId : 0;
                 passSaveParams.ipAddress = this.IPAddress;
 
-                _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.UPDATE;
+                _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.FISCAL.UPDATE;
             } else {
                 //  SAVE
 
                 passSaveParams.miscId = 0;
                 passSaveParams.name = this.MiscForm.value['name'] != null ? this.MiscForm.value['name'] : "";
                 passSaveParams.description = this.MiscForm.value['description'] != null ? this.MiscForm.value['description'] : "";
-
                 passSaveParams.keyWord = "Fiscal";
                 passSaveParams.isActive = true;
                 passSaveParams.unitId = this.unitDetails ? this.unitDetails.unitId : 0;
                 passSaveParams.userId = this.userDetails ? this.userDetails.userId : 0;
                 passSaveParams.ipAddress = this.IPAddress;
 
-                _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.SAVE;
+                _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.FISCAL.SAVE;
             }
             console.log('Before save', passSaveParams);
 
@@ -146,7 +144,7 @@ export class MiscComponent {
     // Step 9
     public GetAll() {
         try {
-            this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST + '?keyWord=Fiscal')
+            this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.FISCAL.LIST + '?keyWord=Fiscal')
                 .subscribe({
                     next: (result: any) => {
                         this.items = result.miscs;
@@ -202,7 +200,7 @@ export class MiscComponent {
 
             console.log(passSaveParams);
 
-            this.httpService.globalPost(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.DELETE,
+            this.httpService.globalPost(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.FISCAL.DELETE,
                 JSON.stringify(passSaveParams)).subscribe({
                     next: (result: any) => {
                         this.Clear();

@@ -77,7 +77,7 @@ constructor(
 
     public GetAllMiscs() {
       try {
-          this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST + '?keyWord=Fiscal')
+          this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.SCHOOL.LIST + '?keyWord=School')
               .subscribe({
                   next: (result: any) => {
                       this.miscItems = result.miscs;
@@ -95,7 +95,7 @@ constructor(
     
     public GetAllMiscDetails() {
       try {
-          this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.DETAILS + '?keyWord=Fiscal')
+          this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.SCHOOL.DETAILS + '?keyWord=School')
               .subscribe({
                   next: (result: any) => {
                       this.miscDtlItems = result.miscDtls;
@@ -260,11 +260,11 @@ constructor(
                   passSaveParams.miscDtlList.miscDtl.push(va);
               });
 
-              passSaveParams.miscDtlList.keyWord = 'Fiscal';
+              passSaveParams.miscDtlList.keyWord = 'School';
               passSaveParams.miscDtlList.userId = this.userDetails ? this.userDetails.userId : 0;
               passSaveParams.miscDtlList.ipAddress = '192.168.1.1';
 
-              _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.CREATE_UPDATE_DELETE;
+              _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.SCHOOL.CREATE_UPDATE_DELETE;
 
               console.log('Before save misc-details', JSON.stringify(passSaveParams));
 

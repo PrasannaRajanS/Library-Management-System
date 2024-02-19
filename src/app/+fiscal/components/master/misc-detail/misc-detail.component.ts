@@ -23,8 +23,8 @@ import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 export class MiscDetailComponent {
 
     //#region Misc Name Autocomplete
-    filteredMiscList: IMiscDetails[] = [];
-    miscItems: IMiscDetails[] = []; //  Load : Misc items array
+    miscItems: IMiscDetails[] = []; //  Load : Misc items array 
+    filteredMiscList: IMiscDetails[] = []; //  dropdown list
     //#endregion
 
 
@@ -84,7 +84,7 @@ export class MiscDetailComponent {
     // step 1
     public GetAllMiscs() {
         try {
-            this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST + '?keyWord=Fiscal')
+            this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.FISCAL.LIST + '?keyWord=Fiscal')
                 .subscribe({
                     next: (result: any) => {
                         this.miscItems = result.miscs;
@@ -99,7 +99,7 @@ export class MiscDetailComponent {
 
     public GetAllMiscDetails() {
         try {
-            this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.DETAILS + '?keyWord=Fiscal')
+            this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.FISCAL.DETAILS + '?keyWord=Fiscal')
                 .subscribe({
                     next: (result: any) => {
                         this.miscDtlItems = result.miscDtls;
@@ -219,7 +219,7 @@ export class MiscDetailComponent {
                 passSaveParams.miscDtlList.userId = this.userDetails ? this.userDetails.userId : 0;
                 passSaveParams.miscDtlList.ipAddress = '192.168.1.1';
 
-                _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.CREATE_UPDATE_DELETE;
+                _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.FISCAL.CREATE_UPDATE_DELETE;
 
                 console.log('Before save misc-details', JSON.stringify(passSaveParams));
 
@@ -241,7 +241,9 @@ export class MiscDetailComponent {
                 this.notificationsService(FiscalValidation.NOTIFICATION_VALIDATION, 'Validation Message', this.ValidationMsg);
             }
 
-        } catch (error) { }
+        } catch (error) { 
+            alert(error)
+        }
     }
 
     public AddRows() {
