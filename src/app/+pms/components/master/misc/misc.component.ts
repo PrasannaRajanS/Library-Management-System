@@ -25,36 +25,25 @@ import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 })
 export class MiscComponent {
 
-  
-
-
-    // save
-   public buttonText: string = 'Save';
-
-    // Update
+    public miscId: number | null | undefined = 0
+    public buttonText: string = 'Save';
     private IsUpdate:boolean=false;
-    // Once you get   keyword check is this need or not ?
-    public PMSMiscId:string|null|undefined;
     public unitDetails:any;
     public userDetails:any;
-    public IPAddress:string ="192.168.1.1"
-
-
-
-    // Grid
-    public miscId: number | null | undefined = 0;
-    item: IMisc = {};
-    items: IMisc[] = [];
-    cols: any[] = [];
-    selectedItems: IMisc[] = [];
+    public IPAddress:string ="192.168.1.1";
     deleteDialog: boolean = false;
 
 
 
+    // Grid
+    item: IMisc = {};
+    items: IMisc[] = [];
+    cols: any[] = [];
+    selectedItems: IMisc[] = [];
 
 
     // step 1  field values
-    PMSMiscForm: FormGroup<YupFormControls<IMisc>>;
+    MiscForm: FormGroup<YupFormControls<IMisc>>;
 
     // step 2 field  initialValues 
 
@@ -86,16 +75,16 @@ export class MiscComponent {
     ) {
       // step 3
       // For Field:
-        this.PMSMiscForm = FormHandler.controls<IMisc>(this.initialValues);
+        this.MiscForm = FormHandler.controls<IMisc>(this.initialValues);
       // For Validation:
-        this.PMSMiscForm.setValidators(FormHandler.validate<IMisc>(this.validationSchema))
+        this.MiscForm.setValidators(FormHandler.validate<IMisc>(this.validationSchema))
     }
 
     // step 6
 
     Clear() {
       this.buttonText="Save";
-      this.PMSMiscForm.reset();
+      this.MiscForm.reset();
       this.IsUpdate=false;
       this.GetAll();
       
@@ -113,9 +102,9 @@ export class MiscComponent {
         if (this.IsUpdate) { 
           // Update
           
-          passSaveParams.PMSMiscId=this.PMSMiscId;
-          passSaveParams.PMSMiscName=this.PMSMiscForm.value['name'] !=null ? this.PMSMiscForm.value['name'] : ''  ;
-          passSaveParams.PMSMiscDescription = this.PMSMiscForm.value['description'] !=null?this.PMSMiscForm.value['description']:'' ;
+          passSaveParams.miscId=this.miscId;
+          passSaveParams.name=this.MiscForm.value['name'] !=null ? this.MiscForm.value['name'] : ''  ;
+          passSaveParams.description = this.MiscForm.value['description'] !=null?this.MiscForm.value['description']:'' ;
 
           passSaveParams.keyWord="PMS";
           passSaveParams.isActive=true;
@@ -129,10 +118,9 @@ export class MiscComponent {
 
 
         } else {
-          passSaveParams.PMSMiscId=this.PMSMiscId;
-          passSaveParams.PMSMiscName=this.PMSMiscForm.value['name'] !=null?this.PMSMiscForm.value['name']:"";
-          passSaveParams.PMSMiscDescription=this.PMSMiscForm.value['description'] !=null? this.PMSMiscForm.value['description']:"";
-
+          passSaveParams.miscId=this.miscId;
+          passSaveParams.name=this.MiscForm.value['name'] !=null?this.MiscForm.value['name']:"";
+          passSaveParams.description=this.MiscForm.value['description'] !=null? this.MiscForm.value['description']:"";
           passSaveParams.keyWord="PMS";
           passSaveParams.isActive=true;
           passSaveParams.unitId=this.unitDetails ? this.unitDetails.unitId:0;
@@ -209,8 +197,8 @@ export class MiscComponent {
     Edit(item: any){
       console.log('Edit',item);
       this.miscId=item.miscId;
-      this.PMSMiscForm.controls['name']?.setValue(item.name);
-      this.PMSMiscForm.controls['description']?.setValue(item.description);
+      this.MiscForm.controls['name']?.setValue(item.name);
+      this.MiscForm.controls['description']?.setValue(item.description);
       this.IsUpdate = true;
       this.buttonText="Update";
   }

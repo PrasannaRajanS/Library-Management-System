@@ -10,7 +10,7 @@
         
         <ng-template pTemplate="right">
             <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" id="PMSMiscSaveUpdate" (click)="Save()"
-                [disabled]="!PMSMiscForm.valid">{{buttonText}}</button>
+                [disabled]="!MiscForm.valid">{{buttonText}}</button>
 
             <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning" id="PMSMiscClear"
                 (click)="Clear()"></button>
@@ -20,7 +20,7 @@
 
    <p-toast></p-toast>
 
-   <form [formGroup]="PMSMiscForm" style="margin-top: 10px;">
+   <form [formGroup]="MiscForm" style="margin-top: 10px;">
     <div class="grid p-fluid mt-3">
 
         <div class="field col-12 md:col-6">
@@ -28,7 +28,7 @@
                 <input id="name" pInputText formControlName="name" autocomplete="off">
                 <label for="name">Name<span class="mandatory">*</span></label>
             </span>
-            <small id="name-help">{{ formError("name" ,PMSMiscForm)}}</small>
+            <small id="name-help">{{ formError("name" ,MiscForm)}}</small>
         </div>
 
         <div class="field col-12 md:col-6">
@@ -36,7 +36,7 @@
                 <input id="description" pInputText formControlName="description" autocomplete="off">
                 <label for="description">Description<span class="mandatory">*</span></label>
             </span>
-            <small id="description-help">{{ formError("description" ,PMSMiscForm)}}</small>
+            <small id="description-help">{{ formError("description" ,MiscForm)}}</small>
         </div>
 
     </div>
