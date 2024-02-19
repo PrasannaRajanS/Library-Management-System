@@ -27,8 +27,7 @@
                   
                     <p-autoComplete id="selectedMiscName" formControlName="selectedMiscName"
                         [suggestions]="filteredMiscList" (completeMethod)="filterMisc($event)" field="name"
-                        (onSelect)="onSelectMiscName()"
-                        [forceSelection]="true" [dropdown]="true"
+                        (onSelect)="onSelectMiscName()" [forceSelection]="true" [dropdown]="true"
                         [inputStyle]="{'background':'#E8F0FE'}"></p-autoComplete>
                     <label for="selectedMiscName">Name<span class="mandatory">*</span></label>
                 </span>

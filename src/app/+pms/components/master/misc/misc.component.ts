@@ -117,7 +117,7 @@ export class MiscComponent {
           passSaveParams.PMSMiscName=this.PMSMiscForm.value['name'] !=null ? this.PMSMiscForm.value['name'] : ''  ;
           passSaveParams.PMSMiscDescription = this.PMSMiscForm.value['description'] !=null?this.PMSMiscForm.value['description']:'' ;
 
-          passSaveParams.keyWord="";
+          passSaveParams.keyWord="PMS";
           passSaveParams.isActive=true;
           passSaveParams.unitId = this.unitDetails ? this.unitDetails.unitId:0;
           passSaveParams.userId = this.userDetails ? this.userDetails.userId:0;
@@ -125,7 +125,7 @@ export class MiscComponent {
 
           // Check MISC API
 
-          _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.UPDATE;
+          _apiUrl = FiscalAPIConfig.API_CONFIG.API_URL.MASTER.PMS.UPDATE;
 
 
         } else {
@@ -133,14 +133,14 @@ export class MiscComponent {
           passSaveParams.PMSMiscName=this.PMSMiscForm.value['name'] !=null?this.PMSMiscForm.value['name']:"";
           passSaveParams.PMSMiscDescription=this.PMSMiscForm.value['description'] !=null? this.PMSMiscForm.value['description']:"";
 
-          passSaveParams.keyWord=""
+          passSaveParams.keyWord="PMS";
           passSaveParams.isActive=true;
           passSaveParams.unitId=this.unitDetails ? this.unitDetails.unitId:0;
           passSaveParams.userId = this.userDetails ? this.userDetails.userId:0;
           passSaveParams.ipAddress = this.IPAddress;
 
           // Check MISC API
-          _apiUrl=FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.SAVE;
+          _apiUrl=FiscalAPIConfig.API_CONFIG.API_URL.MASTER.PMS.SAVE;
 
           
           
@@ -180,7 +180,7 @@ export class MiscComponent {
        public GetAll() {
         try {
             this.httpService
-                .globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.LIST+'?keyWord=Fiscal')
+                .globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.PMS.LIST+'?keyWord=PMS')
                 .subscribe({
                     next: (result: any) => {
                         this.items = result.miscs;
@@ -238,10 +238,10 @@ export class MiscComponent {
         passSaveParams.description = deletedItem[0].description;
         passSaveParams.isActive = false;
         passSaveParams.ipAddress=this.IPAddress;
-        passSaveParams.keyWord="";
+        passSaveParams.keyWord="PMS";
         console.log(passSaveParams);
 
-        this.httpService.globalPost(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.MISC.DELETE 
+        this.httpService.globalPost(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.PMS.DELETE 
           , JSON.stringify(passSaveParams))
         .subscribe(
           {
