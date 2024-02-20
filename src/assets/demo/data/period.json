@@ -3,7 +3,7 @@
 		{
 			"periodId": 1,
 			"type":"School",
-			"period": "I",
+			"name": "I",
 			"startTime":"09:00",
 			"endTime":"09:45",
 			"isActive": 1,
@@ -13,7 +13,7 @@
         {
 			"periodId": 2,
 			"type":"School",
-			"period": "II",
+			"name": "II",
 			"startTime":"09:45",
 			"endTime":"10:30",
 			"isActive": 1,
@@ -23,7 +23,7 @@
         {
 			"periodId": 3,
 			"type":"School",
-			"period": "III",
+			"name": "III",
 			"startTime":"10:45",
 			"endTime":"11:30",
 			"isActive": 1,
@@ -33,7 +33,7 @@
         {
 			"periodId": 4,
 			"type":"School",
-			"period": "IV",
+			"name": "IV",
 			"startTime":"11:30",
 			"endTime":"12:15",
 			"isActive": 1,
@@ -43,7 +43,7 @@
         {
 			"periodId": 5,
 			"type":"School",
-			"period": "V",
+			"name": "V",
 			"startTime":"12:15",
 			"endTime":"12:55",
 			"isActive": 1,

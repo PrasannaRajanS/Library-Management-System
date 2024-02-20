@@ -45,7 +45,7 @@ export class PeriodComponent {
 
     periodId:0,
     type:null,
-    period:null,
+    name:null,
     startTime:null,
     endTime:null,
     description:null,
@@ -76,14 +76,14 @@ export class PeriodComponent {
     this.GetAll();
   }
 
-  validateRomanNumeral(event: KeyboardEvent) {
-    let input = event.key.toUpperCase();
-    let romanNumeralPattern = /^[IVXLCDM]*$/; // Regular expression to match Roman numerals
+  // validateRomanNumeral(event: KeyboardEvent) {
+  //   let input = event.key.toUpperCase();
+  //   let romanNumeralPattern = /^[IVXLCDM]*$/; // Regular expression to match Roman numerals
 
-    if (!romanNumeralPattern.test(input) && input !== 'BACKSPACE') {
-      event.preventDefault();
-    }
-  }
+  //   if (!romanNumeralPattern.test(input) && input !== 'BACKSPACE') {
+  //     event.preventDefault();
+  //   }
+  // }
 
   public GetAll() {
     this.productService.getPeriod().then((data) => {
@@ -100,7 +100,7 @@ export class PeriodComponent {
         
         passSaveParams.periodId = this.PeriodId;
         passSaveParams.type = this.PeriodForm.value['type'] != null ? this.PeriodForm.value['type']:'';
-        passSaveParams.period = this.PeriodForm.value['period'] != null ? this.PeriodForm.value['period']:'';
+        passSaveParams.name = this.PeriodForm.value['name'] != null ? this.PeriodForm.value['name']:'';
         passSaveParams.startTime = this.PeriodForm.value['startTime'] != null ? this.PeriodForm.value['startTime']:'';
         passSaveParams.endTime = this.PeriodForm.value['endTime'] != null ? this.PeriodForm.value['endTime']:'';
         passSaveParams.description = this.PeriodForm.value['description'] != null ? this.PeriodForm.value['description']:'';
@@ -115,7 +115,7 @@ export class PeriodComponent {
         
         passSaveParams.periodId = this.PeriodId;
         passSaveParams.type = this.PeriodForm.value['type'] != null ? this.PeriodForm.value['type']:'';
-        passSaveParams.period = this.PeriodForm.value['period'] != null ? this.PeriodForm.value['period']:'';
+        passSaveParams.period = this.PeriodForm.value['name'] != null ? this.PeriodForm.value['name']:'';
         passSaveParams.startTime = this.PeriodForm.value['startTime'] != null ? this.PeriodForm.value['startTime']:'';
         passSaveParams.endTime = this.PeriodForm.value['endTime'] != null ? this.PeriodForm.value['endTime']:'';
         passSaveParams.description = this.PeriodForm.value['description'] != null ? this.PeriodForm.value['description']:'';
@@ -172,7 +172,7 @@ export class PeriodComponent {
     this.PeriodId = item.periodId
 
     this.PeriodForm.controls['type']?.setValue(item.type)
-    this.PeriodForm.controls['period']?.setValue(item.period)
+    this.PeriodForm.controls['name']?.setValue(item.name)
     this.PeriodForm.controls['startTime']?.setValue(item.startTime)
     this.PeriodForm.controls['endTime']?.setValue(item.endTime)
     this.PeriodForm.controls['description']?.setValue(item.description)
@@ -198,7 +198,7 @@ export class PeriodComponent {
 
     passSaveParams.periodId = deletedItem[0].periodId
     passSaveParams.type = deletedItem[0].type
-    passSaveParams.period = deletedItem[0].period
+    passSaveParams.name = deletedItem[0].name
     passSaveParams.startTime = deletedItem[0].startTime
     passSaveParams.endTime = deletedItem[0].endTime
     passSaveParams.description = deletedItem[0].description

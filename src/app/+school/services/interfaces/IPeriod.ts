@@ -2,7 +2,7 @@ export interface IPeriod{
 
     periodId?: number | null | undefined;
     type?: any | null | undefined
-    period?: string | null | undefined;
+    name?: string | null | undefined;
     startTime?: number | null | undefined;
     endTime?: number | null | undefined;
     description?: string | null | undefined;
