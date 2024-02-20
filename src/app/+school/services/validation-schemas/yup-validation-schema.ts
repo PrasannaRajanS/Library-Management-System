@@ -6,7 +6,7 @@ export const YupSchoolValidation = Object.freeze({
 
         periodId: yup.number().nullable(),
         type: yup.object().required('Type is required'),
-        period: yup.string().required('Period is required'),
+        name: yup.string().required('Name is required'),
         startTime: yup.number().nullable().required('Start Time is required'),
         endTime:  yup.number().nullable().required('End Time is required'),
         description: yup.string().nullable().notRequired(),
