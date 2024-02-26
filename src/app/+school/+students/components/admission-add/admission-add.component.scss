@@ -1,0 +1,15 @@
+/* Add this to your component's CSS file or global styles */
+::ng-deep .p-autocomplete {
+  width: 100%; /* Set the desired width */
+}
+
+/* Adjust the width of the input field within the autocomplete */
+::ng-deep .p-autocomplete .p-autocomplete-input {
+  width: 100%; /* Set the desired width */
+}
+
+/* Reduce the margin-bottom of the first div */
+.btm {
+  margin-bottom: -15px; /* Adjust the value as needed */
+}
+

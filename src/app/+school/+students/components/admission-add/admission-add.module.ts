@@ -13,6 +13,10 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { RippleModule } from 'primeng/ripple';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToastModule } from 'primeng/toast';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { TableModule } from 'primeng/table';
+import { FileUploadModule } from 'primeng/fileupload';
+import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
@@ -31,7 +35,12 @@ import { ToastModule } from 'primeng/toast';
     InputTextModule,
     RippleModule,
     CheckboxModule,
-    ToolbarModule,ToastModule
+    ToolbarModule,
+    ToastModule,
+    AutoCompleteModule,
+    TableModule,
+    FileUploadModule,
+    DialogModule
   ]
 })
 export class AdmissionAddModule { }
