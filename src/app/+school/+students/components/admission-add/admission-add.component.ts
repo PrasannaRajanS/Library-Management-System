@@ -25,6 +25,8 @@ import { SelectItem } from 'primeng/api';
 })
 export class AdmissionAddComponent {
 
+    item:any[]=[];
+
   activeTab = 'student-information';
 
   activeCard = '';
@@ -42,6 +44,8 @@ export class AdmissionAddComponent {
   checked = false;
 
   radioButton1!: string;
+  
+  deleteDialog:boolean=false;
 
   constructor() {
       this.dropdownOptions1 = [
@@ -105,5 +109,17 @@ export class AdmissionAddComponent {
   selectTier(card: string) {
       this.activeCard = card;
       this.activeTab = 'payment';
+  }
+
+  confirmDelete(){
+
+  }
+
+  Delete(){
+
+  }
+
+  Edit(){
+    
   }
 }
