@@ -1,14 +1,13 @@
 export const PMSAPIConfig = {
-    PMS_API_BASE_URL: "",
-
     API_CONFIG:{
         API_URL:{
-            PMS:{
+            MASTER:{
                 EMPLOYEE:{
                     SAVE: "/Misc/Create",
                     UPDATE: "/Misc/Update",
                     DELETE: "/Misc/Delete",
-                    LIST: "/Misc/GetMisc"
+                    LIST: "/Misc/GetMisc",
+                    DATA:"/PMS/Employee/GetLoadEmployeesData"
                 },
                 MISC:{
                     SAVE: "/Misc/Create",

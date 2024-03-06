@@ -44,37 +44,33 @@
                                     <h5>Personal Info</h5>
                                     <div class="grid formgrid">
 
-
-                                        
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="employeeNumber" pInputText formControlName="employeeNumber">
-                                                <label for="employeeNumber">Employee No</label>
+                                                <input id="txtEmployeeNo" pInputText formControlName="employeeNo">
+                                                <label for="txtEmployeeNo">Employee No</label>
                                             </span>
                                         </div>
 
-
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false" [showClear]="true"
-                                                    formControlName="reportingTo">
-                                                </p-dropdown>
-                                                <label for="employeeNumber">Salutation</label>
+                                                    <p-dropdown id="ddlSalutation" 
+                                                            formControlName="selectedSalutation"
+                                                            [options]="salutationList" 
+                                                            optionLabel="salutationName" 
+                                                            [autoDisplayFirst]="false"
+                                                            [showClear]="true">
+                                                    </p-dropdown>
+                                                <label for="ddlSalutation">Salutation</label>
                                             </span>
                                         </div>
-
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
                                                 <input id="firstName" pInputText formControlName="firstName">
                                                 <label for="firstName">First Name</label>
                                             </span>
-                                            <small id="firstName-help">{{ formError("firstName" ,EmployeeForm)}}</small>
+                                            <small id="firstName">{{ formError("firstName" ,EmployeeForm)}}</small>
                                         </div>
-
-
-
-
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
@@ -90,17 +86,22 @@
                                             </span>
                                         </div>
 
-
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="gender" pInputText formControlName="gender">
-                                                <label for="gender">Gender</label>
+                                            <p-dropdown id="ddlGender" 
+                                                    formControlName="selectedGender"
+                                                    [options]="genderList" 
+                                                    optionLabel="genderName" 
+                                                    [autoDisplayFirst]="false"
+                                                    [showClear]="true">
+                                            </p-dropdown>
+                                                <label for="ddlGender">Gender</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-calendar formControlName="DOB" id="dob"></p-calendar>
+                                                <p-calendar formControlName="dob" id="dob"></p-calendar>
                                                 <label for="dob">DOB</label>
                                             </span>
                                         </div>
@@ -110,7 +111,6 @@
                                                 <input id="age" pInputText formControlName="age">
                                                 <label for="age">Age</label>
                                             </span>
-
                                         </div>
                                     </div>
 
@@ -119,72 +119,61 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="presentAddress1" pInputText
-                                                    formControlName="presentAddress1">
-                                                <label for="presentAddress1">Address 1</label>
+                                                <input id="txtaddress1" pInputText formControlName="address1">
+                                                <label for="txtaddress1">Address 1</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input pInputText id="presentAddress2"
-                                                    formControlName="presentAddress2">
-                                                <label for="presentAddress2">Address 2</label>
-                                            </span>
-
-                                        </div>
-
-                                        <div class="col-12 md:col-6 mb-3">
-                                            <span class="p-float-label">
-                                                <input pInputText id="presentAddress3"
-                                                    formControlName="presentAddress3">
-                                                <label for="presentAddress3">Address 3</label>
+                                                <input pInputText id="txtaddress2" formControlName="address2">
+                                                <label for="txtaddress2">Address 2</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input pInputText id="presentCity" formControlName="presentCity">
-                                                <label for="presentCity">City / Town</label>
+                                                <input pInputText id="txtAddress3" formControlName="address3">
+                                                <label for="txtAddress3">Address 3</label>
                                             </span>
                                         </div>
 
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input pInputText id="txtcity" formControlName="city">
+                                                <label for="txtcity">City / Town</label>
+                                            </span>
+                                        </div>
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-autoComplete id="selectedPresentState"
-                                                    formControlName="selectedPresentState"
-                                                    [suggestions]="filteredStateList"
-                                                    (completeMethod)="filterState($event)" [minLength]="0"
-                                                    [dropdown]="true" [forceSelection]="true"
-                                                    (onSelect)="onSelectState()" field="stateName" [showClear]="true"
-                                                    (onClear)="onClearState()"></p-autoComplete>
-                                                <label for="selectedPresentState">State</label>
+                                                <p-dropdown id="ddlPresentState" 
+                                                        formControlName="selectedState"
+                                                        [options]="StateList" 
+                                                        optionLabel="stateName" 
+                                                        [autoDisplayFirst]="false"
+                                                        [showClear]="true" [filter]="true">
+                                                </p-dropdown>
+                                                <label for="ddlPresentState">State</label>
                                             </span>
                                         </div>
 
-
-
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-autoComplete id="selectedPresentCountry"
-                                                    formControlName="selectedPresentCountry"
-                                                    [suggestions]="filteredCoutryList"
-                                                    (completeMethod)="filterCountry($event)" [minLength]="0"
-                                                    [dropdown]="true" [forceSelection]="true" field="countryName"
-                                                    [showClear]="true"></p-autoComplete>
-
+                                                    <p-dropdown id="ddlPresentCountry" 
+                                                        formControlName="selectedCountry"
+                                                        [options]="CoutryList" 
+                                                        optionLabel="countryName" 
+                                                        [autoDisplayFirst]="false"
+                                                        [showClear]="true" [filter]="true">
+                                                    </p-dropdown>
                                                 <label for="selectedPresentCountry">Country</label>
                                             </span>
                                         </div>
 
-
-
-
-
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="presentPIN" pInputText formControlName="presentPIN">
+                                                <input id="presentPIN" pInputText formControlName="pinCode">
                                                 <label for="presentPIN">PIN</label>
                                             </span>
                                         </div>
@@ -205,15 +194,14 @@
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
                                                 <input id="permanentAddress1" pInputText
-                                                    formControlName="permanentAddress1">
+                                                    formControlName="permanantAddress1">
                                                 <label for="permanentAddress1">Address 1</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="permanentAddress2" pInputText
-                                                    formControlName="permanentAddress2">
+                                                <input id="permanentAddress2" pInputText formControlName="permanantAddress2">
                                                 <label for="permanentAddress2">Address 2</label>
                                             </span>
 
@@ -221,37 +209,50 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="permanentAddress3" pInputText
-                                                    formControlName="permanentAddress3">
+                                                <input id="permanentAddress3" pInputText formControlName="permanantAddress3">
                                                 <label for="permanentAddress3">Address 3</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="permanentCity" pInputText formControlName="permanentCity">
+                                                <input id="permanentCity" pInputText formControlName="permanantCity">
                                                 <label for="permanentCity">City / Town</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="permanentState" pInputText formControlName="permanentState">
-                                                <label for="permanentState">State</label>
+                                                <p-dropdown id="ddlPermanentState" 
+                                                        formControlName="permanantSelectedState"
+                                                        [options]="permanantStateList" 
+                                                        optionLabel="stateName" 
+                                                        [autoDisplayFirst]="false"
+                                                        [showClear]="true" 
+                                                        [filter]="true">
+                                                </p-dropdown>
+                                                <label for="ddlPermanentState">State</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="permanentCountry" pInputText
-                                                    formControlName="permanentCountry">
-                                                <label for="permanentCountry">Country</label>
+
+                                                <p-dropdown id="ddlPermanentCountry" 
+                                                    formControlName="permanantSelectedCountry"
+                                                    [options]="permanantCoutryList" 
+                                                    optionLabel="countryName" 
+                                                    [autoDisplayFirst]="false"
+                                                    [showClear]="true" [filter]="true">
+                                                </p-dropdown>
+
+                                                <label for="ddlPermanentCountry">Country</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="permanentPIN" pInputText formControlName="permanentPIN">
+                                                <input id="permanentPIN" pInputText formControlName="permanantPINCode">
                                                 <label for="permanentPIN">PIN</label>
                                             </span>
                                         </div>
@@ -265,6 +266,7 @@
                                 <div class="card">
                                     <h5>Organizational Info</h5>
                                     <div class="grid formgrid">
+
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
                                                 <input id="officialEmail" pInputText formControlName="officialEmail">
@@ -277,46 +279,33 @@
                                                 <input id="officialMobile" pInputText formControlName="officialMobile">
                                                 <label for="officialMobile">Official Mobile</label>
                                             </span>
-
                                         </div>
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-calendar id="dateOfJoin" formControlName="dateOfJoin"></p-calendar>
+                                                <p-calendar id="dateOfJoin" formControlName="dateofJoin"></p-calendar>
                                                 <label for="dateOfJoin">Date of Join *</label>
                                             </span>
-                                            <small id="dateOfJoin-help">{{
-                                                formError("dateOfJoin",EmployeeForm)}}</small>
-
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-
                                                 <p-autoComplete id="employeeCategory"
                                                     (completeMethod)="filterMagePage($event)" [minLength]="0"
                                                     [dropdown]="true" [forceSelection]="true" field="employeeCategory"
-                                                    formControlName="employeeCategory"></p-autoComplete>
-
+                                                    formControlName="selectedEmployeeCategory"></p-autoComplete>
                                                 <label for="employeeCategory">Employee Category *</label>
                                             </span>
-                                            <small id="employeeCategory-help">{{
-                                                formError("employeeCategory",EmployeeForm)}}</small>
                                         </div>
-
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-
                                                 <p-autoComplete id="deptSection"
                                                     (completeMethod)="filterMagePage($event)" [minLength]="0"
                                                     [dropdown]="true" [forceSelection]="true" field="deptSection"
-                                                    formControlName="deptSection"></p-autoComplete>
-
-                                                <label for="deptSection">Dept Section *</label>
+                                                    formControlName="selectedDepartment"></p-autoComplete>
+                                                <label for="deptSection">Department</label>
                                             </span>
-                                            <small id="deptSection-help">{{
-                                                formError("deptSection",EmployeeForm)}}</small>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 ">
@@ -324,11 +313,9 @@
                                                 <p-autoComplete id="production"
                                                     (completeMethod)="filterMagePage($event)" [minLength]="0"
                                                     [dropdown]="true" [forceSelection]="true" field="production"
-                                                    formControlName="production"></p-autoComplete>
-
-                                                <label for="production">Production</label>
+                                                    formControlName="selectedSection"></p-autoComplete>
+                                                <label for="production">Sub Department</label>
                                             </span>
-
                                         </div>
 
 
@@ -337,18 +324,15 @@
                                                 <p-autoComplete id="typeOfEmployment"
                                                     (completeMethod)="filterMagePage($event)" [minLength]="0"
                                                     [dropdown]="true" [forceSelection]="true" field="typeOfEmployment"
-                                                    formControlName="typeOfEmployment"></p-autoComplete>
-
-                                                <label for="typeOfEmployment">Type of Employment *</label>
+                                                    formControlName="selectedEmployeementType"></p-autoComplete>
+                                                <label for="typeOfEmployment">Type of Employment</label>
                                             </span>
-                                            <small id="typeOfEmployment-help">{{
-                                                formError("typeOfEmployment",EmployeeForm)}}</small>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
                                                 <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false"
-                                                    [showClear]="true" formControlName="reportingTo">
+                                                    [showClear]="true" formControlName="selectedReportingTo">
                                                 </p-dropdown>
                                                 <label for="role">Reporting To</label>
                                             </span>
@@ -360,57 +344,41 @@
                                                 <p-autoComplete id="salaryType"
                                                     (completeMethod)="filterMagePage($event)" [minLength]="0"
                                                     [dropdown]="true" [forceSelection]="true" field="salaryType"
-                                                    formControlName="salaryType"></p-autoComplete>
-
+                                                    formControlName="selectedSalaryType"></p-autoComplete>
                                                 <label for="salaryType">Salary Type *</label>
                                             </span>
-                                            <small id="salaryType-help">{{
-                                                formError("salaryType",EmployeeForm)}}</small>
                                         </div>
-
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-
                                                 <p-dropdown id="workingLocation" optionLabel="workingLocation"
                                                     [autoDisplayFirst]="false" [showClear]="true"
-                                                    formControlName="workingLocation">
+                                                    formControlName="selectedLocation">
                                                 </p-dropdown>
                                                 <label for="workingLocation">Working Location *</label>
                                             </span>
-                                            <small
-                                                id="workingLocation-help">{{formError("workingLocation",EmployeeForm)}}</small>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-
                                                 <p-autoComplete id="mainPageName"
                                                     (completeMethod)="filterMagePage($event)" [minLength]="0"
                                                     [dropdown]="true" [forceSelection]="true" field="mainPageName"
-                                                    formControlName="shift"></p-autoComplete>
-
+                                                    formControlName="selectedShift"></p-autoComplete>
                                                 <label for="mainPageName">Shift</label>
                                             </span>
-
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
                                                 <p-dropdown id="designationJobTitle" optionLabel="roleName"
                                                     [autoDisplayFirst]="false" [showClear]="true"
-                                                    formControlName="designationJobTitle">
+                                                    formControlName="selectedDesignation">
                                                 </p-dropdown>
                                                 <label for="designationJobTitle">Designation (Job Title) *</label>
                                             </span>
-                                            <small
-                                                id="designationJobTitle-help">{{formError("designationJobTitle",EmployeeForm)}}</small>
                                         </div>
-
                                     </div>
-
-
-
 
                                 </div>
 
@@ -419,21 +387,19 @@
                                 <div class="card">
                                     <h5>Emergency Contact Info</h5>
                                     <div class="grid formgrid">
+
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
                                                 <input id="contactPerson1" pInputText formControlName="contactPerson1">
                                                 <label for="contactPerson1">Contact Person 1 *</label>
                                             </span>
-                                            <small id="contactPerson1-help">{{
-                                                formError("contactPerson1",EmployeeForm)}}</small>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input id="mobileNo1" pInputText formControlName="mobileNo1">
+                                                <input id="mobileNo1" pInputText formControlName="contactPersonMobileNo1">
                                                 <label for="mobileNo1">Mobile No 1 *</label>
                                             </span>
-                                            <small id="mobileNo1-help">{{ formError("mobileNo1",EmployeeForm)}}</small>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
@@ -441,39 +407,28 @@
                                                 <input id="contactPerson2" pInputText formControlName="contactPerson2">
                                                 <label for="contactPerson2">Contact Person 2</label>
                                             </span>
-
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="mobileNo2" pInputText formControlName="mobileNo2">
+                                                <input id="mobileNo2" pInputText formControlName="contactPersonMobileNo2">
                                                 <label for="mobileNo2">Mobile No 2</label>
                                             </span>
-
                                         </div>
-
-
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-
-                                                <p-autoComplete id="mainPageName"
-                                                    (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                    [dropdown]="true" [forceSelection]="true" field="mainPageName"
-                                                    formControlName="bloodGroup"></p-autoComplete>
-
-                                                <label for="mainPageName">Blood Group</label>
+                                                <p-dropdown id="ddlBloodGroup" 
+                                                        formControlName="selectedBloodGroup"
+                                                        [options]="bloodGroupList" 
+                                                        optionLabel="bloodGroupName" 
+                                                        [autoDisplayFirst]="false"
+                                                        [showClear]="true">
+                                                </p-dropdown>
+                                                <label for="ddlBloodGroup">Blood Group</label>
                                             </span>
-
                                         </div>
-
-
-
-
                                     </div>
-
-
-
 
                                 </div>
 
@@ -483,30 +438,24 @@
                                     <div class="grid formgrid">
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input id="nationality" pInputText formControlName="nationality">
+                                                <input id="nationality" pInputText formControlName="selectedNationality">
                                                 <label for="nationality">Nationality *</label>
                                             </span>
-                                            <small id="nationality-help">{{
-                                                formError("nationality",EmployeeForm)}}</small>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input id="community" pInputText formControlName="community">
+                                                <input id="community" pInputText formControlName="selectedCommunity">
                                                 <label for="community">Community *</label>
                                             </span>
-                                            <small id="community-help">{{ formError("community",EmployeeForm)}}</small>
-
                                         </div>
 
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input id="PANNo" pInputText formControlName="PANNo">
+                                                <input id="PANNo" pInputText formControlName="panNo">
                                                 <label for="PANNo">PAN No *</label>
                                             </span>
-                                            <small id="PANNo-help">{{ formError("PANNo",EmployeeForm)}}</small>
-
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
@@ -514,41 +463,30 @@
                                                 <input id="aadhaarNo" pInputText formControlName="aadhaarNo">
                                                 <label for="aadhaarNo">Aadhaar No *</label>
                                             </span>
-                                            <small id="aadhaarNo-help">{{ formError("aadhaarNo",EmployeeForm)}}</small>
-
                                         </div>
+
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="UANNo" pInputText formControlName="UANNo">
+                                                <input id="UANNo" pInputText formControlName="uanNo">
                                                 <label for="UANNo">UAN No</label>
                                             </span>
-
                                         </div>
+
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="ESINo" pInputText formControlName="ESINo">
+                                                <input id="ESINo" pInputText formControlName="esiNo">
                                                 <label for="ESINo">ESI No</label>
                                             </span>
-
                                         </div>
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="EPFNo" pInputText formControlName="EPFNo">
+                                                <input id="EPFNo" pInputText formControlName="epfNo">
                                                 <label for="EPFNo">EPF No</label>
                                             </span>
-
                                         </div>
-
                                     </div>
-
-
-
-
                                 </div>
-
-
                             </div>
-
                         </div>
 
 
@@ -1162,239 +1100,6 @@
 
 
                 </p-toolbar>
-
-
-
-                <p-dialog [(visible)]="educationDialog" [style]="{width: '500px'}" header="Add Education" [modal]="true" class="p-fluid">
-                    
-                    <ng-template pTemplate="content">
-
-                        <div class="field pt-3">
-                            <span class="p-float-label">
-                                <p-dropdown id="ddlEducation" 
-                                    formControlName="educationDetail.selectedQualification" 
-                                    [options]="QualificationList"
-                                    optionLabel="qualificationName" 
-                                    [autoDisplayFirst]="false" 
-                                    [showClear]="true" 
-                                    autoWidth="false"
-                                    [style]="{ minWidth: '60%', width: '100%' }">
-                                </p-dropdown>
-                                <label for="ddlSchoolCategory">Qualification</label>
-                            </span>
-                        </div>
-
-                        <div class="field pt-3">
-                            <span class="p-float-label">
-                                <input type="text" pInputText 
-                                        id="name" [(ngModel)]="educationDetail.schoolCollege" 
-                                        required autofocus 
-                                        [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.schoolCollege}"/>
-
-                                <label for="ddlSchoolCategory">University/Institute</label>
-                            </span>
-                        </div>
-
-                        <div class="field pt-3">
-                            <span class="p-float-label">
-                                <p-dropdown id="ddlCourse" 
-                                    formControlName="educationDetail.selectedCourse" 
-                                    [options]="CourseList"
-                                    optionLabel="courseName" 
-                                    [autoDisplayFirst]="false" 
-                                    [showClear]="true" 
-                                    autoWidth="false"
-                                    [style]="{ minWidth: '60%', width: '100%' }">
-                                </p-dropdown>
-                                <label for="ddlCourse">Course</label>
-                            </span>
-                        </div>
-
-                        <div class="field pt-3">
-                            <span class="p-float-label">
-                                <p-dropdown id="ddlCourse" 
-                                    formControlName="educationDetail.selectedSpecialisation" 
-                                    [options]="SpecializationList"
-                                    optionLabel="specializationName" 
-                                    [autoDisplayFirst]="false" 
-                                    [showClear]="true" 
-                                    autoWidth="false"
-                                    [style]="{ minWidth: '60%', width: '100%' }">
-                                </p-dropdown>
-                                <label for="ddlCourse">Specialization</label>
-                            </span>
-                        </div>
-
-                        <div class="field pt-3">
-                            <span class="p-float-label">
-                                <p-dropdown id="ddlCourseType" 
-                                    formControlName="educationDetail.selectedModeOfStudy" 
-                                    [options]="CourseTypeList"
-                                    optionLabel="courseTypeName" 
-                                    [autoDisplayFirst]="false" 
-                                    [showClear]="true" 
-                                    autoWidth="false"
-                                    [style]="{ minWidth: '60%', width: '100%' }">
-                                </p-dropdown>
-                                <label for="ddlCourseType">Course type</label>
-                            </span>
-                        </div>
-
-                        <div class="field pt-3">
-                            <span class="p-float-label">
-                                <input type="text" pInputText 
-                                        id="percentageCGPA" [(ngModel)]="educationDetail.percentage" 
-                                        required autofocus 
-                                        [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.percentage}"/>
-
-                                <label for="percentageCGPA">Percentage / CGPA</label>
-                            </span>
-                        </div>
-
-                        <div class="formgrid grid">
-                            <div class="field col">
-                                <span class="p-float-label">
-                                    <input type="text" pInputText 
-                                            id="percentageCGPA" [(ngModel)]="educationDetail.CourseDurationStart" 
-                                            required autofocus 
-                                            [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.percentage}"/>
-                                    <label for="percentageCGPA">Course Start</label>
-                                </span>
-                            </div>
-
-                            <div class="field col">
-                                <span class="p-float-label">
-                                    <input type="text" pInputText 
-                                            id="CourseDurationEnd" [(ngModel)]="educationDetail.CourseDurationEnd" 
-                                            required autofocus 
-                                            [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.percentage}"/>
-                                    <label for="CourseDurationEnd">Course End</label>
-                                </span>
-                            </div>
-                        </div>
-
-                    </ng-template>
-        
-                    <ng-template pTemplate="footer">
-                        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideEducationDialog()"></button>
-                        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="AddEducation()"></button>
-                    </ng-template>
-                </p-dialog>
-                <p-dialog [(visible)]="workExperienceDialog" [style]="{width: '500px'}" header="Add Education" [modal]="true" class="p-fluid">
-                    
-                    <ng-template pTemplate="content">
-
-                        <div class="field pt-3">
-                            <span class="p-float-label">
-                                <p-dropdown id="ddlEducation" 
-                                    formControlName="educationDetail.selectedQualification" 
-                                    [options]="QualificationList"
-                                    optionLabel="qualificationName" 
-                                    [autoDisplayFirst]="false" 
-                                    [showClear]="true" 
-                                    autoWidth="false"
-                                    [style]="{ minWidth: '60%', width: '100%' }">
-                                </p-dropdown>
-                                <label for="ddlSchoolCategory">Qualification</label>
-                            </span>
-                        </div>
-
-                        <div class="field pt-3">
-                            <span class="p-float-label">
-                                <input type="text" pInputText 
-                                        id="name" [(ngModel)]="educationDetail.schoolCollege" 
-                                        required autofocus 
-                                        [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.schoolCollege}"/>
-
-                                <label for="ddlSchoolCategory">University/Institute</label>
-                            </span>
-                        </div>
-
-                        <div class="field pt-3">
-                            <span class="p-float-label">
-                                <p-dropdown id="ddlCourse" 
-                                    formControlName="educationDetail.selectedCourse" 
-                                    [options]="CourseList"
-                                    optionLabel="courseName" 
-                                    [autoDisplayFirst]="false" 
-                                    [showClear]="true" 
-                                    autoWidth="false"
-                                    [style]="{ minWidth: '60%', width: '100%' }">
-                                </p-dropdown>
-                                <label for="ddlCourse">Course</label>
-                            </span>
-                        </div>
-
-                        <div class="field pt-3">
-                            <span class="p-float-label">
-                                <p-dropdown id="ddlCourse" 
-                                    formControlName="educationDetail.selectedSpecialisation" 
-                                    [options]="SpecializationList"
-                                    optionLabel="specializationName" 
-                                    [autoDisplayFirst]="false" 
-                                    [showClear]="true" 
-                                    autoWidth="false"
-                                    [style]="{ minWidth: '60%', width: '100%' }">
-                                </p-dropdown>
-                                <label for="ddlCourse">Specialization</label>
-                            </span>
-                        </div>
-
-                        <div class="field pt-3">
-                            <span class="p-float-label">
-                                <p-dropdown id="ddlCourseType" 
-                                    formControlName="educationDetail.selectedModeOfStudy" 
-                                    [options]="CourseTypeList"
-                                    optionLabel="courseTypeName" 
-                                    [autoDisplayFirst]="false" 
-                                    [showClear]="true" 
-                                    autoWidth="false"
-                                    [style]="{ minWidth: '60%', width: '100%' }">
-                                </p-dropdown>
-                                <label for="ddlCourseType">Course type</label>
-                            </span>
-                        </div>
-
-                        <div class="field pt-3">
-                            <span class="p-float-label">
-                                <input type="text" pInputText 
-                                        id="percentageCGPA" [(ngModel)]="educationDetail.percentage" 
-                                        required autofocus 
-                                        [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.percentage}"/>
-
-                                <label for="percentageCGPA">Percentage / CGPA</label>
-                            </span>
-                        </div>
-
-                        <div class="formgrid grid">
-                            <div class="field col">
-                                <span class="p-float-label">
-                                    <input type="text" pInputText 
-                                            id="percentageCGPA" [(ngModel)]="educationDetail.CourseDurationStart" 
-                                            required autofocus 
-                                            [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.percentage}"/>
-                                    <label for="percentageCGPA">Course Start</label>
-                                </span>
-                            </div>
-
-                            <div class="field col">
-                                <span class="p-float-label">
-                                    <input type="text" pInputText 
-                                            id="CourseDurationEnd" [(ngModel)]="educationDetail.CourseDurationEnd" 
-                                            required autofocus 
-                                            [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.percentage}"/>
-                                    <label for="CourseDurationEnd">Course End</label>
-                                </span>
-                            </div>
-                        </div>
-
-                    </ng-template>
-        
-                    <ng-template pTemplate="footer">
-                        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideEducationDialog()"></button>
-                        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="AddEducation()"></button>
-                    </ng-template>
-                </p-dialog>
 
             </div>
 

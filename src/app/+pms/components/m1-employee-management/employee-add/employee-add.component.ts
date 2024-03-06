@@ -6,8 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { Table } from 'primeng/table';
 
-import { APIConfig } from 'src/app/config/api.config';
-import { ICourse, IQualification, IEducationDetail, IEmployee, ISpecialization, ICourseType } from 'src/app/+pms/services/interfaces/IEmployee';
+import { ICourse, IQualification, IEducationDetail, IEmployee, ISpecialization, ICourseType, ISalutation, IGender, IBloodGroup } from 'src/app/+pms/services/interfaces/IEmployee';
 
 
 import * as yup from 'yup';
@@ -20,11 +19,11 @@ import { ICountry } from 'src/app/shared/interface/ICountry';
 import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
 import * as _ from 'lodash';
-import { IMiscDetails } from 'src/app/shared/interface/IMisc';
 
 import { MessageService } from 'primeng/api';
 import { PMSValidation } from 'src/app/+pms/services/pms-validation';
-import { ProductService } from 'src/app/demo/service/product.service';
+import { CommonService } from 'src/app/shared-services/common.service';
+import { PMSAPIConfig } from 'src/app/+pms/services/pms-api-config';
 
 
 
@@ -109,107 +108,126 @@ export class EmployeeAddComponent {
     cols: any[] = [];
     selectedItems: any[] = [];
     items: any[] = [];
-    filteredMiscDetailList:IEmployee[]=[];
+    filteredMiscDetailList: IEmployee[] = [];
 
-    allCountries:ICountry[]=[];
-    countriesData: ICountry = {};
-    // AutoComplete By mj tamil
-    filteredStateList: IState[] = [];
+    // AutoComplete
     StateList: IState[] = [];
-
+    permanantStateList: IState[] = [];
     CoutryList: ICountry[] = [];
-    filteredCoutryList: ICountry[] = [];
+    permanantCoutryList: ICountry[] = [];
 
-    //#region UI Validation Variables
+    //#region UI VALIDATION VARIABLES
     //  Step 1
     EmployeeForm: FormGroup<YupFormControls<IEmployee>>;
 
-    // Step 2 Initializer
+    // Step 2 INITIALIZER
     initialValues: IEmployee = {
-        employeeId: null,
+        
+    employeeId:  null ,
+    // Personal Info
+    employeeNo:  null ,
+    salutationId:  null ,
+    selectedSalutation:null,
+    firstName:  null ,
+    lastName:  null ,
+    nickName:  null ,
+    genderId:  null ,
+    selectedGender: null ,
+    dob:  null ,
+    age:  null ,
 
-        // Personal Info
+     // Present Address
+    address1:  null ,
+    address2:  null ,
+    address3:  null ,
+    city:  null ,
+    stateId:  null ,
+    selectedState: null ,
+    countryId:  null ,
+    selectedCountry: null ,
+    pinCode:  null ,
 
-        employeeNo: null,
-        firstName: null,
-        lastName: null,
-        nickName: null,
-        genderId: null,
-        dob: null,
-        age: null,
+    // Permanent Address
+    sameasPresent:  null ,
+    permanantAddress1:  null ,
+    permanantAddress2:  null ,
+    permanantAddress3:  null ,
+    permanantCity:  null ,
+    permanantStateId:  null ,
+    permanantSelectedState:  null ,
+    permanantCountryId:  null ,
+    permanantSelectedCountry:  null ,
+    permanantPINCode:  null ,
 
-        // Present Address
+    contactPerson1:  null ,
+    contactPersonMobileNo1:  null ,
+    contactPerson2:  null ,
+    contactPersonMobileNo2:  null ,
+    bloodGroupId:  null ,
+    selectedBloodGroup: null ,
 
-        address1: null,
-        address2: null,
-        address3: null,
-        city: null,
-        stateId: null,
+    // Unique Number Info
+    panNo:  null ,
+    uanNo:  null ,
+    // passportNo:  null , //  
+    // passportExpDt:  null ,  //
+    // drivingLicenseNo:  null , //  
+    // drivingLicenseExpDt:  null ,  //
+    aadhaarNo:  null ,
+    esiNo:  null ,
+    epfNo:  null ,
+    nationalityId:  null ,
+    selectedNationality:  null ,
+    communityId:  null ,
+    selectedCommunity:  null ,
+    // jobDescription:  null ,
+    // aboutMe:  null ,
+    // identyMarks1:  null ,
+    // identyMarks2:  null ,
 
-        countryId: null,
-        // selectedPresentCountry: null,
-        pinCode: null,
-
-        // Permanent Address
-        sameasPresent:null,
-        permanantAddress1: null,
-        permanantAddress2: null,
-        permanantAddress3: null,
-        permanantCity: null,
-        permanantStateId: null,
-        permanantCountryId: null,
-        permanantPINCode: null,
-
-        //  Organizational Info
-        officialEmail: null,
-        officialMobile: null,
-        dateOfJoin: null,
-        employeeCategory: null,
-        deptSection: null,
-        production: null,
-        typeOfEmployment: null,
-        reportingTo: null,
-        salaryType: null,
-        workingLocation: null,
-        shift: null,
-        designationJobTitle: null,
-
-        //  Emergency Contact Info
-
-        contactPerson1: null,
-        contactPersonMobileNo1: null,
-        contactPerson2: null,
-        contactPersonMobileNo2: null,
-        bloodGroupId: null,
-
-        // Unique Number Info
-        nationalityId: null,
-        panNo: null,
-        uanNo: null,
-        aadhaarNo: null,
-        esiNo: null,
-        epfNo: null,
-        communityId: null,
-
-        // Family Information
-
-        selectedGender: null,
-        isActive: null,
-        unitId: null,
-        userId: null,
-        ipAddress: null,
+    //  Organizational Info
+    officialEmail:  null ,
+    officialMobile:  null ,
+    dateofJoin:  null ,
+    empCategoryId:  null ,
+    selectedEmployeeCategory:  null ,
+    departmentId:  null ,
+    selectedDepartment:  null ,
+    sectionId:  null ,
+    selectedSection:  null ,
+    
+    employeementTypeId:  null ,
+    selectedEmployeementType:  null ,
+    reportingToId:  null ,
+    selectedReportingTo:  null ,
+    salaryTypeId:  null ,
+    selectedSalaryType:  null ,
+    locationId:  null ,
+    selectedLocation:  null ,
+    shiftId:  null ,
+    selectedShift:  null ,
+    designationId:  null ,
+    selectedDesignation:  null ,
+    
+    isActive:  null ,
+    companyId:  null ,
+    unitId:  null ,
+    userId:  null ,
+    ipAddress:  null ,
     };
 
-    // Step 3 Validation
-
+    // Step 3 VALIDATION
     validationSchema: yup.ObjectSchema<IEmployee> = YupPMSValidation.EMPLOYEE;
 
-    // Step 4 Form Error
-
+    // Step 4 FORM ERROR
     formError = (controlName: string, formName: any) => {
         return this.utilService.formError(controlName, formName);
     };
+    //#endregion
 
+    salutationList : ISalutation[] = [];
+    genderList : IGender[] = [];
+    bloodGroupList : IBloodGroup[] = [];
 
     //#region EDUCATION DETAIL
     eduAddSubmitted: boolean = false;
@@ -241,8 +259,8 @@ export class EmployeeAddComponent {
         private router: Router,
         private httpService: CommonHttpService,
         private messageService: MessageService,
-        // private activatedRoute: ActivatedRoute,
-        private productService:ProductService
+        private activatedRoute: ActivatedRoute,
+        private commonService: CommonService
     ) {
         this.EmployeeForm = FormHandler.controls<IEmployee>(this.initialValues);
         this.EmployeeForm.setValidators(
@@ -253,6 +271,30 @@ export class EmployeeAddComponent {
     ngOnInit() {
         this.GetCountries();
         this.GetStates();
+        this.fetchEmployeesData();
+    }
+
+
+    fetchEmployeesData() {
+        try {
+            this.httpService.globalGet(PMSAPIConfig.API_CONFIG.API_URL.MASTER.EMPLOYEE.DATA)
+                .subscribe({
+                    next: (result: any) => {
+                        console.log('fetchEmployeesData()', result.loadEmployeesData);
+                        this.EmployeeForm.controls['employeeNo']?.setValue(result.loadEmployeesData.autoGenerateNo[0].autoGenerateNo);
+                        this.EmployeeForm.controls['employeeNo']?.disable();
+
+                        const bloodGroups = _.filter(result.loadEmployeesData.miscDtl, val => {
+                            return val.miscId == 1;
+                        });
+                        this.bloodGroupList = bloodGroups.map(x => { return <IBloodGroup>{ bloodGroupId: x.miscDtlId, bloodGroupName: x.miscDtlName } });
+
+
+                    },
+                    error: (err: HttpErrorResponse) => console.log(err)
+                });
+        } catch (error) {
+        }
     }
 
     onChipRemove(item: string) {
@@ -309,100 +351,29 @@ export class EmployeeAddComponent {
 
     // #region Countries
     public GetCountries() {
-       try {
-        this.productService.getCountries().then((data)=>{
-            console.log(data);
-            
-            this.allCountries=data;
-            console.log("All countries",this.allCountries);
-            
-        })
-       } catch (error) {
-        
-       }
-    }
+        try {
+            this.commonService.getCountries().then(res => {
+                 this.CoutryList = res;
+                 this.permanantCoutryList = res;
+            });
+        } catch (error) {
 
-
-    filterCountry(event: AutoCompleteCompleteEvent) {
-        let filtered: any[] = [];
-        let query = event.query;
-
-
-        for (let i = 0; i < (this.CoutryList as any[]).length; i++) {
-            let _countriesList = (this.CoutryList as any[])[i];
-            if (
-                _countriesList.countryName
-                    .toLowerCase()
-                    .indexOf(query.toLowerCase()) == 0
-            ) {
-                filtered.push(_countriesList);
-            }
         }
-        this.filteredCoutryList = filtered;
     }
     //  #endregion
 
     // #region States
     public GetStates() {
         try {
-            this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_STATES)
-                .subscribe({
-                    next: (result: any) => {
-                        this.StateList = result.states;
-                        // console.log('GetStates', this.GetStates);
-
-                    },
-                    error: (err: HttpErrorResponse) => console.log(err)
-
-                })
+            this.commonService.getStates().then(res => { 
+                this.StateList = res;
+                this.permanantStateList = res;
+            });
         } catch (error) {
-
         }
     }
 
-    filterState(event: AutoCompleteCompleteEvent) {
-        let filtered: any[] = [];
-        let query = event.query;
-
-
-
-        for (let i = 0; i < (this.StateList as any[]).length; i++) {
-            let _stateList = (this.StateList as any[])[i];
-            if (
-                _stateList.stateName
-                    .toLowerCase()
-                    .indexOf(query.toLowerCase()) == 0
-            ) {
-                filtered.push(_stateList);
-            }
-        }
-        this.filteredStateList = filtered;
-    }
-
-    onSelectState() {
-        if (
-            this.EmployeeForm.value['stateId'] != undefined &&
-            this.EmployeeForm.value['stateId'] != null
-        ) {
-            let _countryId: number =
-                this.EmployeeForm.value['stateId'].countryId;
-            this.EmployeeForm.get('countryId')?.setValue(
-                this.CoutryList.find((c) => c.countryId === _countryId)
-            );
-        } else {
-            this.EmployeeForm.get('countryId')?.setValue(null);
-        }
-    }
-
-    onClearState() {
-        console.log('OnClearState', this.EmployeeForm);
-        this.EmployeeForm.get('countryId')?.reset();
-    }
     //  #endregion
-
-
-
-
 
 
     Save() { }
@@ -418,25 +389,25 @@ export class EmployeeAddComponent {
 
     // Education 
 
-    AddEducationRows(){
-        
+    AddEducationRows() {
+
     }
 
-    
-    RemoveEducationRows(data:any,index:number){
+
+    RemoveEducationRows(data: any, index: number) {
 
     }
 
 
     // Experience
-    AddWorkExperience(){
+    AddWorkExperience() {
 
     }
 
-    RemoveWorkExperienceRows(data:any,index:number){
+    RemoveWorkExperienceRows(data: any, index: number) {
 
     }
-    
+
 
 
     //#region  EDUCATION DETAIL
