@@ -58,6 +58,7 @@ export class FiscalYearComponent {
         academicYear: null,
         startDate: null,
         endDate: null,
+        month:null,
         accountYear: null,
         isDefault: null,
 
@@ -157,6 +158,7 @@ export class FiscalYearComponent {
                 passSaveParams.startDate =
                     this.AcademicYearForm.value['startDate'];
                 passSaveParams.endDate = this.AcademicYearForm.value['endDate'];
+                passSaveParams.month = this.AcademicYearForm.value['month'];
                 passSaveParams.academicYear =
                     this.AcademicYearForm.value['academicYear'];
                 passSaveParams.accountYear =
@@ -178,6 +180,7 @@ export class FiscalYearComponent {
                 passSaveParams.startDate =
                     this.AcademicYearForm.value['startDate'];
                 passSaveParams.endDate = this.AcademicYearForm.value['endDate'];
+                passSaveParams.month = this.AcademicYearForm.value['month'];
                 passSaveParams.academicYear =
                     this.AcademicYearForm.value['academicYear'];
                 passSaveParams.accountYear =
@@ -236,6 +239,7 @@ export class FiscalYearComponent {
 
         this.AcademicYearForm.controls['startDate']?.setValue(item.startDate);
         this.AcademicYearForm.controls['endDate']?.setValue(item.endDate);
+        this.AcademicYearForm.controls['month']?.setValue(item.month)
         this.AcademicYearForm.controls['academicYear']?.setValue([new Date(item.academicYear[0]),new Date(item.academicYear[1])]);
         this.AcademicYearForm.controls['accountYear']?.setValue(new Date(item.accountYear));
         this.AcademicYearForm.controls['isDefault']?.setValue(this.categories.find(x=>x.key == item.isDefault));
@@ -262,6 +266,7 @@ export class FiscalYearComponent {
             passSaveParams.academicYear = deletedItem[0].academicYear;
             passSaveParams.startDate = deletedItem[0].startDate;
             passSaveParams.endDate = deletedItem[0].endDate;
+            passSaveParams.month = deletedItem[0].month;
             passSaveParams.accountYear = deletedItem[0].academicYear;
             // doubt
             passSaveParams.isDefault = true;
