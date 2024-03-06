@@ -13,781 +13,824 @@
             <h3 style="color: white;">APPLICATION FOR ADMISSION</h3>
         </div>
     </div>
-    <div class="flex flex-column h-full">
-        <div class="flex align-items-center justify-content-center"
-            style="height: calc(100% - 75px); min-height: 600px;">
-            <div style="height: 540px;"
-                class="surface-50 shadow-3 w-11 lg:w-11 flex flex-column flex-shrink-0 flex-grow-0">
-                <div class="w-full shadow-3 relative bg-indigo-500">
-                    <div class="grid col">
+    <form [formGroup]="AdmissionForm">
+        <div class="flex flex-column h-full">
+            <div class="flex align-items-center justify-content-center"
+                style="height: calc(100% - 75px); min-height: 600px;">
+                <div style="height: 540px;"
+                    class="surface-50 shadow-3 w-11 lg:w-11 flex flex-column flex-shrink-0 flex-grow-0">
+                    <div class="w-full shadow-3 relative bg-indigo-500">
+                        <div class="grid col">
 
-                        <div class="col cursor-pointer bg-indigo-500 text-center"
-                            [ngClass]="{'transition-duration-500': activeTab === 'student-information'}"
-                            (click)="clickNext('student-information')">
-                            <div class="line-height-3">
-                                <i style="width:20px" class="pi pi-sign-in opacity-40 text-white"
-                                    [ngClass]="{'opacity-100': activeTab === 'student-information'}"></i>
+                            <div class="col cursor-pointer bg-indigo-500 text-center"
+                                [ngClass]="{'transition-duration-500': activeTab === 'student-information'}"
+                                (click)="clickNext('student-information')">
+                                <div class="line-height-3">
+                                    <i style="width:20px" class="pi pi-sign-in opacity-40 text-white"
+                                        [ngClass]="{'opacity-100': activeTab === 'student-information'}"></i>
+                                </div>
+                                <div class="text-white opacity-40 text-lg line-height-3"
+                                    [ngClass]="{'opacity-100': activeTab === 'student-information'}">STUDENT INFO.</div>
                             </div>
-                            <div class="text-white opacity-40 text-lg line-height-3"
-                                [ngClass]="{'opacity-100': activeTab === 'student-information'}">STUDENT INFO.</div>
-                        </div>
 
-                        <div class="col cursor-pointer bg-indigo-500 text-center"
-                            [ngClass]="{'transition-duration-500': activeTab === 'parent-information'}"
-                            (click)="clickNext('parent-information')">
-                            <div class="line-height-3">
-                                <i style="width:20px" [ngClass]="{'opacity-100': activeTab === 'parent-information'}"
-                                    class="pi pi-clone opacity-40 text-white"></i>
+                            <div class="col cursor-pointer bg-indigo-500 text-center"
+                                [ngClass]="{'transition-duration-500': activeTab === 'parent-information'}"
+                                (click)="clickNext('parent-information')">
+                                <div class="line-height-3">
+                                    <i style="width:20px"
+                                        [ngClass]="{'opacity-100': activeTab === 'parent-information'}"
+                                        class="pi pi-clone opacity-40 text-white"></i>
+                                </div>
+                                <div class="text-white opacity-40 text-lg line-height-3"
+                                    [ngClass]="{'opacity-100': activeTab === 'parent-information'}">PARENT INFO.</div>
                             </div>
-                            <div class="text-white opacity-40 text-lg line-height-3"
-                                [ngClass]="{'opacity-100': activeTab === 'parent-information'}">PARENT INFO.</div>
-                        </div>
 
-                        <div class="col cursor-pointer bg-indigo-500 text-center"
-                            [ngClass]="{'transition-duration-500': activeTab === 'pre-class-info'}"
-                            (click)="clickNext('pre-class-info')">
-                            <div class="line-height-3">
-                                <i style="width:20px" [ngClass]="{'opacity-100': activeTab === 'pre-class-info'}"
-                                    class="pi pi-clone opacity-40 text-white"></i>
+                            <div class="col cursor-pointer bg-indigo-500 text-center"
+                                [ngClass]="{'transition-duration-500': activeTab === 'pre-class-info'}"
+                                (click)="clickNext('pre-class-info')">
+                                <div class="line-height-3">
+                                    <i style="width:20px" [ngClass]="{'opacity-100': activeTab === 'pre-class-info'}"
+                                        class="pi pi-clone opacity-40 text-white"></i>
+                                </div>
+                                <div class="text-white opacity-40 text-lg line-height-3"
+                                    [ngClass]="{'opacity-100': activeTab === 'pre-class-info'}">PRE.CLASS INFO.</div>
                             </div>
-                            <div class="text-white opacity-40 text-lg line-height-3"
-                                [ngClass]="{'opacity-100': activeTab === 'pre-class-info'}">PRE.CLASS INFO.</div>
-                        </div>
 
-                        <div class="col cursor-pointer bg-indigo-500 text-center"
-                            [ngClass]="{'transition-duration-500': activeTab === 'attach-docs'}"
-                            (click)="clickNext('attach-docs')">
-                            <div class="line-height-3">
-                                <i style="width:20px" [ngClass]="{'opacity-100': activeTab === 'attach-docs'}"
-                                    class="pi pi-clone opacity-40 text-white"></i>
+                            <div class="col cursor-pointer bg-indigo-500 text-center"
+                                [ngClass]="{'transition-duration-500': activeTab === 'attach-docs'}"
+                                (click)="clickNext('attach-docs')">
+                                <div class="line-height-3">
+                                    <i style="width:20px" [ngClass]="{'opacity-100': activeTab === 'attach-docs'}"
+                                        class="pi pi-clone opacity-40 text-white"></i>
+                                </div>
+                                <div class="text-white opacity-40 text-lg line-height-3"
+                                    [ngClass]="{'opacity-100': activeTab === 'attach-docs'}">ATTACH DOCS.</div>
                             </div>
-                            <div class="text-white opacity-40 text-lg line-height-3"
-                                [ngClass]="{'opacity-100': activeTab === 'attach-docs'}">ATTACH DOCS.</div>
-                        </div>
 
-                        <div class="col cursor-pointer bg-indigo-500 text-center"
-                            [ngClass]="{'transition-duration-500': activeTab === 'payment'}"
-                            (click)="clickNext('payment')">
-                            <div class="line-height-3">
-                                <i style="width:20px" [ngClass]="{'opacity-100':activeTab === 'payment'}"
-                                    class="pi pi-shopping-cart opacity-40 text-white"></i>
+                            <div class="col cursor-pointer bg-indigo-500 text-center"
+                                [ngClass]="{'transition-duration-500': activeTab === 'payment'}"
+                                (click)="clickNext('payment')">
+                                <div class="line-height-3">
+                                    <i style="width:20px" [ngClass]="{'opacity-100':activeTab === 'payment'}"
+                                        class="pi pi-shopping-cart opacity-40 text-white"></i>
+                                </div>
+                                <div class="text-white opacity-40 text-lg line-height-3 transition-duration-500 transition-ease-in-out"
+                                    [ngClass]="{'opacity-100':activeTab === 'payment'}">PAYMENT</div>
                             </div>
-                            <div class="text-white opacity-40 text-lg line-height-3 transition-duration-500 transition-ease-in-out"
-                                [ngClass]="{'opacity-100':activeTab === 'payment'}">PAYMENT</div>
-                        </div>
 
-                        <div class="absolute bottom-0 bg-white" style="height:2px; visibility: hidden;" [@tabBar]="activeTab === 'student-information' ? 'student-information' :  
+                            <div class="absolute bottom-0 bg-white" style="height:2px; visibility: hidden;" [@tabBar]="activeTab === 'student-information' ? 'student-information' :  
                                                                     activeTab === 'parent-information' ? 'parent-information' : 
                                                                     activeTab === 'pre-class-info' ? 'pre-class-info' : 
                                                                     activeTab === 'attach-docs' ? 'attach-docs' : 
                                                                     activeTab === 'tier' ? 'tier' :
                                                                     'payment' ">
-                        </div>
+                            </div>
 
+                        </div>
                     </div>
-                </div>
 
-                <div class="p-5 hidden overflow-auto h-full"
-                    [ngClass]="{'flex flex-grow-1': activeTab === 'student-information'}">
-                    <div class="grid h-full w-full ">
+                    <div class="p-5 hidden overflow-auto h-full"
+                        [ngClass]="{'flex flex-grow-1': activeTab === 'student-information'}">
+                        <div class="grid h-full w-full ">
 
-                        <div class="col-12 btm">
-                            <h1 class="text-sm m-0 text-color-secondary">FOR OFFICE USE</h1>
-                            <div class="grid formgrid py-3">
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="employeeNumber" style="width: 100%;" pInputText>
-                                        <label for="employeeNumber">Application No.</label>
-                                    </span>
+
+
+                            <div class="col-12 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">FOR OFFICE USE</h1>
+                                <div class="grid formgrid py-3">
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="StudentApplicationNo" formControlName="studentApplicationNo"
+                                                style="width: 100%;" pInputText>
+                                            <label for="StudentApplicationNo">Application No.</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+
+                                            <p-autoComplete [suggestions]="miscDtlItems"
+                                                (completeMethod)="filterStandard($event)" [minLength]="0"
+                                                [dropdown]="true" [forceSelection]="true" field="miscDtlName"
+                                                id="StudentStandard" formControlName="studentStandard"></p-autoComplete>
+
+                                            <label for="StudentStandard">Admission To Standard</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="StudentAcademicYear" style="width: 100%;" pInputText   formControlName="studentAcademicYear">                                        
+                                            <label for="StudentAcademicYear">Academic Year</label>
+
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="StudentAdmissionNo" style="width: 100%;" pInputText
+                                                formControlName="studentAdmissionNo">
+                                            <label for="StudentAdmissionNo">Admission No.</label>
+                                        </span>
+                                    </div>
+
                                 </div>
-
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="employeeNumber" style="width: 100%;" pInputText>
-                                        <label for="employeeNumber">Admission To Standard</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="employeeNumber" style="width: 100%;" pInputText>
-                                        <label for="employeeNumber">Academic Year</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="employeeNumber" style="width: 100%;" pInputText>
-                                        <label for="employeeNumber">Admission No.</label>
-                                    </span>
-                                </div>
-
                             </div>
+
+
+
+
+                            <div class="col-12  lg:col-6 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">ESSENTIAL INFORMATION</h1>
+                                <div class="grid formgrid py-3">
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="employeeNumber" style="width: 100%;" pInputText>
+                                            <label for="employeeNumber">Name of the Student</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                                <p-calendar  ></p-calendar>
+                                                <label for="firstName">DOB</label>    
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="gender" style="width: 100%;" pInputText>
+                                            <label for="gender">Gender</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+
+                                            <p-autoComplete id="studentNationality" [suggestions]="filteredCoutryList"
+                                                (completeMethod)="filterCountry($event)" [minLength]="0"
+                                                [dropdown]="true" [forceSelection]="true"
+                                                field="countryName"></p-autoComplete>
+                                            <label for="studentNationality">Nationality</label>
+                                        </span>
+                                    </div>
+
+
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="nickName" style="width: 100%;" pInputText>
+                                            <label for="nickName">Religion</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="nickName" style="width: 100%;" pInputText>
+                                            <label for="nickName">Mother Tongue</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="nickName" style="width: 100%;" pInputText>
+                                            <label for="nickName">Blood Group</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="nickName" style="width: 100%;" pInputText>
+                                            <label for="nickName">Community</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="nickName" style="width: 100%;" pInputText>
+                                            <label for="nickName">Adhaar No.</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="nickName" style="width: 100%;" pInputText>
+                                            <label for="nickName">EWIS</label>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12  lg:col-6 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">PASSPORT DETAILS (for foreign nationals
+                                    only)
+                                </h1>
+                                <div class="grid formgrid py-3">
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="passportno" style="width: 100%;" pInputText>
+                                            <label for="passportno">Passport No.</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="field col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <p-calendar  [showIcon]="true"></p-calendar>
+                                            <label for="passportExpiryDate">Expiry Date</label>
+                                        </span>
+                                    </div>
+
+
+                                </div>
+
+                                <h1 class="text-sm m-0 text-color-secondary">VISA DETAILS (for foreign nationals only)
+                                </h1>
+                                <div class="grid formgrid py-3">
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="visaType" style="width: 100%;" pInputText>
+                                            <label for="visaType">Visa Type</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="field col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <p-calendar [showIcon]="true"></p-calendar>
+                                            <label for="visaIssueDate">Issue Date</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <p-calendar [showIcon]="true"></p-calendar>
+                                            <label for="visaExpiryDate">Expiry Date</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="field col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="visaIssuedCountry" style="width: 100%;" pInputText>
+                                            <label for="visaIssuedCountry">Issued Country</label>
+                                        </span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="col-12 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">LANGUAGES</h1>
+                                <div class="grid formgrid py-3">
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="gradeOneToFiveLanguages" style="width: 100%;" pInputText>
+                                            <label for="gradeOneToFiveLanguages">Grade 1 to 5 (Compulsory)</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="gradeSixToTenLanguages" style="width: 100%;" pInputText>
+                                            <label for="gradeSixToTenLanguages">Grade 6 to 10 (Optional)</label>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12  lg:col-6 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">PERMANENT ADDRESS</h1>
+
+                                <div class="grid formgrid py-3">
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="permanentAddress" pInputText style="width: 100%;">
+                                            <label for="permanentAddress">Address</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="permanentCity" style="width: 100%;">
+                                            <label for="permanentCity">City / Town</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete formControlName="selectedPermanentState" [suggestions]="filteredStateList" id="selectedPermanentState" [minLength]="0"
+                                            (completeMethod)="filterState($event)" (onSelect)="onSelectState()" [dropdown]="true" [forceSelection]="true"
+                                                [showClear]="true" field="stateName" (onClear)="onClearState()"></p-autoComplete>
+                                            <label for="selectedPermanentState">State</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="field col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete id="selectedPermanentCountry" [minLength]="0" formControlName="selectedPermanentCountry"
+                                            [suggestions]="filteredCoutryList" (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" [forceSelection]="true" [showClear]="true" field="countryName">
+                                            </p-autoComplete>
+                                            <label for="selectedPermanentCountry">Country</label>
+                                        </span>
+                                    </div>
+
+                          
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="presentPIN" pInputText="permanentPIN" style="width: 100%;">
+                                            <label for="permanentPIN">PIN</label>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12  lg:col-6 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">ADDRESS FOR COMMUNICATION</h1>
+                                <div class="grid formgrid py-3">
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="presentAddress" pInputText style="width: 100%;">
+                                            <label for="presentAddress">Address</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="presentCity" style="width: 100%;">
+                                            <label for="presentCity">City / Town</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete id="selectedPresentState" formControlName="selectedState"
+                                            (completeMethod)="filterState($event)" (onSelect)="onSelectState()"
+                                            [suggestions]="filteredStateList" [minLength]="0" [dropdown]="true"
+                                            [forceSelection]="true" [showClear]="true"
+                                            field="stateName" (onClear)="onClearState()"
+                                                ></p-autoComplete>
+                                            <label for="selectedPresentState">State</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete id="selectedPresentCountry" [minLength]="0" formControlName="selectedPresentCountry"
+                                            [suggestions]="filteredCoutryList" (completeMethod)="filterCountry($event)"
+                                                [dropdown]="true" [forceSelection]="true" [showClear]="true" field="countryName">
+                                            </p-autoComplete>
+                                            <label for="selectedPresentCountry">Country</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="presentPIN" pInputText="presentPIN" style="width: 100%;">
+                                            <label for="presentPIN">PIN</label>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-12 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">INTERESTS AND HOBBIES</h1>
+                                <div class="grid formgrid py-3">
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="studentHobbies" style="width: 100%;" pInputText>
+                                            <label for="studentHobbies">Students Hobbies / Talents</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="specialInterests" style="width: 100%;" pInputText>
+                                            <label for="specialInterests">Special Interests (where applicable)</label>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                            <p-toolbar styleClass="mb-4">
+                                <ng-template pTemplate="left">
+                                    <div class="my-2">
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="right">
+
+                                    <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2"
+                                        (click)="Save()">Save & Continue</button>
+
+                                    <button pButton pRipple label="Clear" icon="pi pi-refresh"
+                                        class="p-button-warning"></button>
+
+                                </ng-template>
+
+
+                            </p-toolbar>
+
+
                         </div>
-
-
-                        <div class="col-12  lg:col-6 btm">
-                            <h1 class="text-sm m-0 text-color-secondary">ESSENTIAL INFORMATION</h1>
-                            <div class="grid formgrid py-3">
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="employeeNumber" style="width: 100%;" pInputText>
-                                        <label for="employeeNumber">Name of the Student</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="field col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="firstName" style="width: 100%;" pInputText>
-                                        <label for="firstName">DOB</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="gender" style="width: 100%;" pInputText>
-                                        <label for="gender">Gender</label>
-                                    </span>
-                                </div>
-
-
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="lastName" style="width: 100%;" pInputText>
-                                        <label for="lastName">Nationality</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="nickName" style="width: 100%;" pInputText>
-                                        <label for="nickName">Religion</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="nickName" style="width: 100%;" pInputText>
-                                        <label for="nickName">Mother Tongue</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="nickName" style="width: 100%;" pInputText>
-                                        <label for="nickName">Blood Group</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="nickName" style="width: 100%;" pInputText>
-                                        <label for="nickName">Community</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="nickName" style="width: 100%;" pInputText>
-                                        <label for="nickName">Adhaar No.</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="nickName" style="width: 100%;" pInputText>
-                                        <label for="nickName">EWIS</label>
-                                    </span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-12  lg:col-6 btm">
-                            <h1 class="text-sm m-0 text-color-secondary">PASSPORT DETAILS (for foreign nationals only)
-                            </h1>
-                            <div class="grid formgrid py-3">
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="passportno" style="width: 100%;" pInputText>
-                                        <label for="passportno">Passport No.</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="field col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="passportExpiryDate" style="width: 100%;" pInputText>
-                                        <label for="passportExpiryDate">Expiry Date</label>
-                                    </span>
-                                </div>
-
-
-                            </div>
-
-                            <h1 class="text-sm m-0 text-color-secondary">VISA DETAILS (for foreign nationals only) </h1>
-                            <div class="grid formgrid py-3">
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="visaType" style="width: 100%;" pInputText>
-                                        <label for="visaType">Visa Type</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="field col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="visaIssueDate" style="width: 100%;" pInputText>
-                                        <label for="visaIssueDate">Issue Date</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="visaExpiryDate" style="width: 100%;" pInputText>
-                                        <label for="visaExpiryDate">Expiry Date</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="field col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="visaIssuedCountry" style="width: 100%;" pInputText>
-                                        <label for="visaIssuedCountry">Issued Country</label>
-                                    </span>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                        <div class="col-12 btm">
-                            <h1 class="text-sm m-0 text-color-secondary">LANGUAGES</h1>
-                            <div class="grid formgrid py-3">
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="gradeOneToFiveLanguages" style="width: 100%;" pInputText>
-                                        <label for="gradeOneToFiveLanguages">Grade 1 to 5 (Compulsory)</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="gradeSixToTenLanguages" style="width: 100%;" pInputText>
-                                        <label for="gradeSixToTenLanguages">Grade 6 to 10 (Optional)</label>
-                                    </span>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-12  lg:col-6 btm">
-                            <h1 class="text-sm m-0 text-color-secondary">PERMANENT ADDRESS</h1>
-
-                            <div class="grid formgrid py-3">
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="permanentAddress" pInputText style="width: 100%;">
-                                        <label for="permanentAddress">Address</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="permanentCity" style="width: 100%;">
-                                        <label for="permanentCity">City / Town</label>
-                                    </span>
-                                </div>
-
-                                <div class="field col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <p-autoComplete id="selectedPermanentState" [minLength]="0" [dropdown]="true"
-                                            [forceSelection]="true" [showClear]="true"></p-autoComplete>
-                                        <label for="selectedPresentState">State</label>
-                                    </span>
-                                </div>
-
-                                <div class="field col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <p-autoComplete id="selectedPermanentCountry" [minLength]="0" [dropdown]="true"
-                                            [forceSelection]="true" [showClear]="true">
-                                        </p-autoComplete>
-                                        <label for="selectedPresentCountry">Country</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="presentPIN" pInputText="permanentPIN" style="width: 100%;">
-                                        <label for="permanentPIN">PIN</label>
-                                    </span>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-12  lg:col-6 btm">
-                            <h1 class="text-sm m-0 text-color-secondary">ADDRESS FOR COMMUNICATION</h1>
-                            <div class="grid formgrid py-3">
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="presentAddress" pInputText style="width: 100%;">
-                                        <label for="presentAddress">Address</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="presentCity" style="width: 100%;">
-                                        <label for="presentCity">City / Town</label>
-                                    </span>
-                                </div>
-
-                                <div class="field col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <p-autoComplete id="selectedPresentState" [minLength]="0" [dropdown]="true"
-                                            [forceSelection]="true" [showClear]="true"></p-autoComplete>
-                                        <label for="selectedPresentState">State</label>
-                                    </span>
-                                </div>
-
-                                <div class="field col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <p-autoComplete id="selectedPresentCountry" [minLength]="0" [dropdown]="true"
-                                            [forceSelection]="true" [showClear]="true">
-                                        </p-autoComplete>
-                                        <label for="selectedPresentCountry">Country</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="presentPIN" pInputText="presentPIN" style="width: 100%;">
-                                        <label for="presentPIN">PIN</label>
-                                    </span>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                        <div class="col-12 btm">
-                            <h1 class="text-sm m-0 text-color-secondary">INTERESTS AND HOBBIES</h1>
-                            <div class="grid formgrid py-3">
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="studentHobbies" style="width: 100%;" pInputText>
-                                        <label for="studentHobbies">Students Hobbies / Talents</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="specialInterests" style="width: 100%;" pInputText>
-                                        <label for="specialInterests">Special Interests (where applicable)</label>
-                                    </span>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-
-
-
-
-                        <p-toolbar styleClass="mb-4">
-                            <ng-template pTemplate="left">
-                                <div class="my-2">
-                                </div>
-                            </ng-template>
-                            <ng-template pTemplate="right">
-
-                                <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2">Save &
-                                    Continue</button>
-
-                                <button pButton pRipple label="Clear" icon="pi pi-refresh"
-                                    class="p-button-warning"></button>
-
-                            </ng-template>
-
-
-                        </p-toolbar>
                     </div>
-                </div>
 
 
 
 
 
 
-                <div class="p-5 hidden overflow-auto h-full"
-                    [ngClass]="{'flex flex-grow-1': activeTab === 'parent-information'}">
-                    <div class="grid h-full w-full ">
+                    <div class="p-5 hidden overflow-auto h-full"
+                        [ngClass]="{'flex flex-grow-1': activeTab === 'parent-information'}">
+                        <div class="grid h-full w-full ">
 
 
-                        <div class="col-12  lg:col-6 btm">
-                            <h1 class="text-sm m-0 text-color-secondary">FATHER</h1>
-                            <!-- father -->
+                            <div class="col-12  lg:col-6 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">FATHER</h1>
+                                <!-- father -->
 
 
 
-                            <div class="grid formgrid py-3">
+                                <div class="grid formgrid py-3">
 
 
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="fatherName" pInputText style="width: 100%;">
-                                        <label for="fatherName">Name</label>
-                                    </span>
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="fatherName" pInputText style="width: 100%;">
+                                            <label for="fatherName">Name</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="fatherEducationQualification" style="width: 100%;">
+                                            <label for="fatherEducationQualification">Education Qualification</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="fatherOccupation" pInputText style="width: 100%;">
+                                            <label for="fatherOccupation">Occupation</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="fatherDesignation" style="width: 100%;">
+                                            <label for="fatherDesignation">Designation</label>
+                                        </span>
+                                    </div>
+
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="fatherOrganizationInstitution" style="width: 100%;">
+                                            <label for="fatherOrganizationInstitution">Organization /
+                                                Institution</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="fatherOfficeAddress" style="width: 100%;">
+                                            <label for="fatherOfficeAddress">Office Address</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="fatherResidentialAddress" style="width: 100%;">
+                                            <label for="fatherResidentialAddress">Residential Address</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="fatherAnnualIncome" style="width: 100%;">
+                                            <label for="fatherAnnualIncome">Annual Income</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="fatherMobileNo" style="width: 100%;">
+                                            <label for="fatherMobileNo">Mobile No.</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="fatherEmail" style="width: 100%;">
+                                            <label for="fatherEmail">E-Mail</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="fatherAadhaarNumber" style="width: 100%;">
+                                            <label for="fatherAadhaarNumber">Aadhaar Number</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-2 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]"
+                                            accept="image/*" pTooltip="Upload Father's Picture"></p-fileUpload>
+                                    </div>
+
+
                                 </div>
-
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="fatherEducationQualification" style="width: 100%;">
-                                        <label for="fatherEducationQualification">Education Qualification</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="fatherOccupation" pInputText style="width: 100%;">
-                                        <label for="fatherOccupation">Occupation</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="fatherDesignation" style="width: 100%;">
-                                        <label for="fatherDesignation">Designation</label>
-                                    </span>
-                                </div>
-
-
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="fatherOrganizationInstitution" style="width: 100%;">
-                                        <label for="fatherOrganizationInstitution">Organization / Institution</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="fatherOfficeAddress" style="width: 100%;">
-                                        <label for="fatherOfficeAddress">Office Address</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="fatherResidentialAddress" style="width: 100%;">
-                                        <label for="fatherResidentialAddress">Residential Address</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="fatherAnnualIncome" style="width: 100%;">
-                                        <label for="fatherAnnualIncome">Annual Income</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="fatherMobileNo" style="width: 100%;">
-                                        <label for="fatherMobileNo">Mobile No.</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="fatherEmail" style="width: 100%;">
-                                        <label for="fatherEmail">E-Mail</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="fatherAadhaarNumber" style="width: 100%;">
-                                        <label for="fatherAadhaarNumber">Aadhaar Number</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">                   
-                                        <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" accept="image/*"></p-fileUpload>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                        <div class="col-12  lg:col-6 btm">
-                            <h1 class="text-sm m-0 text-color-secondary">MOTHER</h1>
-                            <!-- mother -->
-
-                            <div class="grid formgrid py-3">
-
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="motherName" pInputText style="width: 100%;">
-                                        <label for="motherName">Name</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="motherEducationQualification" style="width: 100%;">
-                                        <label for="motherEducationQualification">Education Qualification</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="motherOccupation" pInputText style="width: 100%;">
-                                        <label for="motherOccupation">Occupation</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="motherDesignation" style="width: 100%;">
-                                        <label for="motherDesignation">Designation</label>
-                                    </span>
-                                </div>
-
-
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="motherOrganizationInstitution" style="width: 100%;">
-                                        <label for="motherOrganizationInstitution">Organization / Institution</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="motherOfficeAddress" style="width: 100%;">
-                                        <label for="motherOfficeAddress">Office Address</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="motherResidentialAddress" style="width: 100%;">
-                                        <label for="motherResidentialAddress">Residential Address</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="motherAnnualIncome" style="width: 100%;">
-                                        <label for="motherAnnualIncome">Annual Income</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="motherMobileNo" style="width: 100%;">
-                                        <label for="motherMobileNo">Mobile No.</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="motherEmail" style="width: 100%;">
-                                        <label for="motherEmail">E-Mail</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="motherAadhaarNumber" style="width: 100%;">
-                                        <label for="motherAadhaarNumber">Aadhaar Number</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-6 mb-3">                   
-                                    <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" accept="image/*"></p-fileUpload>
                             </div>
 
+                            <div class="col-12  lg:col-6 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">MOTHER</h1>
+                                <!-- mother -->
 
+                                <div class="grid formgrid py-3">
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="motherName" pInputText style="width: 100%;">
+                                            <label for="motherName">Name</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="motherEducationQualification" style="width: 100%;">
+                                            <label for="motherEducationQualification">Education Qualification</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="motherOccupation" pInputText style="width: 100%;">
+                                            <label for="motherOccupation">Occupation</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="motherDesignation" style="width: 100%;">
+                                            <label for="motherDesignation">Designation</label>
+                                        </span>
+                                    </div>
+
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="motherOrganizationInstitution" style="width: 100%;">
+                                            <label for="motherOrganizationInstitution">Organization /
+                                                Institution</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="motherOfficeAddress" style="width: 100%;">
+                                            <label for="motherOfficeAddress">Office Address</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="motherResidentialAddress" style="width: 100%;">
+                                            <label for="motherResidentialAddress">Residential Address</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="motherAnnualIncome" style="width: 100%;">
+                                            <label for="motherAnnualIncome">Annual Income</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="motherMobileNo" style="width: 100%;">
+                                            <label for="motherMobileNo">Mobile No.</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="motherEmail" style="width: 100%;">
+                                            <label for="motherEmail">E-Mail</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="motherAadhaarNumber" style="width: 100%;">
+                                            <label for="motherAadhaarNumber">Aadhaar Number</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-2 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]"
+                                            accept="image/*" pTooltip="Upload Mother's Picture"></p-fileUpload>
+                                    </div>
+
+
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-12   btm">
-                            <h1 class="text-sm m-0 text-color-secondary">GUARDIAN</h1>
-                            <div class="grid formgrid py-3">
+                            <div class="col-12   btm">
+                                <h1 class="text-sm m-0 text-color-secondary">GUARDIAN</h1>
+                                <div class="grid formgrid py-3">
 
 
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="guardianName" pInputText style="width: 100%;">
-                                        <label for="guardianName">Name</label>
-                                    </span>
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="guardianName" pInputText style="width: 100%;">
+                                            <label for="guardianName">Name</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="guardianEducationQualification" style="width: 100%;">
+                                            <label for="guardianEducationQualification">Education Qualification</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="guardianOccupation" pInputText style="width: 100%;">
+                                            <label for="guardianOccupation">Occupation</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="guardianDesignation" style="width: 100%;">
+                                            <label for="guardianDesignation">Designation</label>
+                                        </span>
+                                    </div>
+
+
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="guardianOrganizationInstitution" style="width: 100%;">
+                                            <label for="guardianOrganizationInstitution">Organization /
+                                                Institution</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="guardianOfficeAddress" style="width: 100%;">
+                                            <label for="guardianOfficeAddress">Office Address</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="guardianResidentialAddress" style="width: 100%;">
+                                            <label for="guardianResidentialAddress">Residential Address</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="guardianAnnualIncome" style="width: 100%;">
+                                            <label for="guardianAnnualIncome">Annual Income</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="guardianMobileNo" style="width: 100%;">
+                                            <label for="guardianMobileNo">Mobile No.</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="guardianEmail" style="width: 100%;">
+                                            <label for="guardianEmail">E-Mail</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="guardianAadhaarNumber" style="width: 100%;">
+                                            <label for="guardianAadhaarNumber">Aadhaar Number</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-1 mb-3">
+                                        <p-fileUpload mode="basic"  name="demo[]"
+                                            accept="image/*"  chooseLabel="Upload " pTooltip="Upload Guardian's Picture"></p-fileUpload>
+                                    </div>
                                 </div>
-
-
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="guardianEducationQualification" style="width: 100%;">
-                                        <label for="guardianEducationQualification">Education Qualification</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="guardianOccupation" pInputText style="width: 100%;">
-                                        <label for="guardianOccupation">Occupation</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="guardianDesignation" style="width: 100%;">
-                                        <label for="guardianDesignation">Designation</label>
-                                    </span>
-                                </div>
-
-
-
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="guardianOrganizationInstitution" style="width: 100%;">
-                                        <label for="guardianOrganizationInstitution">Organization / Institution</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="guardianOfficeAddress" style="width: 100%;">
-                                        <label for="guardianOfficeAddress">Office Address</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="guardianResidentialAddress" style="width: 100%;">
-                                        <label for="guardianResidentialAddress">Residential Address</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="guardianAnnualIncome" style="width: 100%;">
-                                        <label for="guardianAnnualIncome">Annual Income</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="guardianMobileNo" style="width: 100%;">
-                                        <label for="guardianMobileNo">Mobile No.</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="guardianEmail" style="width: 100%;">
-                                        <label for="guardianEmail">E-Mail</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-                                        <input pInputText id="guardianAadhaarNumber" style="width: 100%;">
-                                        <label for="guardianAadhaarNumber">Aadhaar Number</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-3 mb-3">                   
-                                    <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" accept="image/*"></p-fileUpload>
                             </div>
 
 
-                            </div>
-                        </div>
 
 
-              
 
-                        
                             <div class="col-12">
                                 <div class="card px-6 py-6">
-                                    <p-table >
+                                    <p-table>
                                         <ng-template pTemplate="header">
                                             <tr>
                                                 <th style="width:10% !important" class="text-center">
-                                                    <button pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-success mr-2"></button>
+                                                    <button pButton pRipple icon="pi pi-plus"
+                                                        class="p-button-rounded p-button-success mr-2"></button>
                                                 </th>
                                                 <th style="width: 3rem">
                                                     S.No
                                                 </th>
-                                                <th pSortableColumn="name">Name<p-sortIcon field="applicationName"></p-sortIcon></th>
+                                                <th pSortableColumn="name">Name<p-sortIcon
+                                                        field="applicationName"></p-sortIcon></th>
                                                 <th>Brother / Sister</th>
                                                 <th>Age Grade</th>
                                                 <th>School Studying In</th>
                                             </tr>
                                         </ng-template>
-                        
+
                                         <ng-template pTemplate="body" let-item>
                                             <tr>
                                                 <td style="width:5%; min-width:10rem;">
                                                     {{item.Name}}
                                                 </td>
-                        
+
                                                 <td style="width:30%; min-width:10rem;">
                                                     <span class="p-column-title">Name</span>
                                                     {{item.brotherSister}}
                                                 </td>
-                        
+
                                                 <td style="width:30%; min-width:10rem;">
                                                     <span class="p-column-title">Name</span>
                                                     {{item.ageGrade}}
                                                 </td>
-                        
+
                                                 <td style="width:30%; min-width:10rem;">
                                                     <span class="p-column-title">Name</span>
                                                     {{item.schoolStudyingIn}}
                                                 </td>
-                        
+
                                                 <td style="width:15%; min-width:10rem;">
                                                     <div class="flex">
                                                         <button pButton pRipple icon="pi pi-pencil"
-                                                            class="p-button-rounded p-button-success mr-2" (click)="Edit()"></button>
-                        
-                                                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                                            class="p-button-rounded p-button-success mr-2"
+                                                            (click)="Edit()"></button>
+
+                                                        <button pButton pRipple icon="pi pi-trash"
+                                                            class="p-button-rounded p-button-warning"
                                                             (click)="Delete()"></button>
                                                     </div>
                                                 </td>
-                        
+
                                             </tr>
                                         </ng-template>
-                        
+
                                     </p-table>
                                 </div>
-                        
-                                <p-dialog [(visible)]="deleteDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+
+                                <p-dialog [(visible)]="deleteDialog" header="Confirm" [modal]="true"
+                                    [style]="{width:'450px'}">
                                     <div class="flex align-items-center justify-content-center">
                                         <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
                                         <span *ngIf="item">Are you sure you want to delete <b></b></span>
                                     </div>
-                        
+
                                     <ng-template pTemplate="footer">
                                         <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"
                                             (click)="deleteDialog = false"></button>
@@ -795,238 +838,338 @@
                                             (click)="confirmDelete()"></button>
                                     </ng-template>
                                 </p-dialog>
-                                
+
                             </div>
+
+
+
+                            <div class="col-12  btm">
+                                <div class="grid formgrid py-3">
+                                    <div class="field col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete id="selectedPresentCountry" [minLength]="0"
+                                                [dropdown]="true" [forceSelection]="true" [showClear]="true">
+                                            </p-autoComplete>
+                                            <label for="siblingChildIsLivingWith">child is living with</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete id="selectedPresentCountry" [minLength]="0"
+                                                [dropdown]="true" [forceSelection]="true" [showClear]="true">
+                                            </p-autoComplete>
+                                            <label for="siblingTransportation">Transportation</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-12 mb-3">
+
+                                        <label for="sibling">will you be able to volunteer your time & talent for school
+                                            activities? if yes please mention the areas of interest</label>
+
+                                        <span class="p-float-label">
+                                            <input pInputText id="sibling" style="width: 100%;">
+                                        </span>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <button pButton pRipple class="w-full mt-5" type="button" label="CONTINUE"
+                                    (click)="clickNext('tier')"></button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="h-full hidden overflow-auto p-5"
+                        [ngClass]="{'flex flex-grow-1': activeTab === 'pre-class-info'}">
+
+                        <div class="grid h-full w-full ">
+
+                            <div class="col-12 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">DETAILS OF PREVIOUS SCHOOL</h1>
+                                <div class="grid formgrid py-3">
+                                    <div class="col-12 md:col-4 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="classStudying" style="width: 100%;" pInputText>
+                                            <label for="classStudying">Class Studying/Studied</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-4 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="mediumOfInstruction" style="width: 100%;" pInputText>
+                                            <label for="mediumOfInstruction">Medium of Instruction</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-4 mb-3">
+                                        <span class="p-float-label">
+                                            <p-autoComplete id="boardAffiliatedTo" [minLength]="0" [dropdown]="true"
+                                                [forceSelection]="true" [showClear]="true"></p-autoComplete>
+                                            <label for="boardAffiliatedTo">Board Affiliated to</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-4 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="nameOfTheschool" style="width: 100%;" pInputText>
+                                            <label for="nameOfTheschool">Name of the school</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-4 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="addressOfTheSchool" style="width: 100%;" pInputText>
+                                            <label for="addressOfTheSchool">Address of the School</label>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12  lg:col-6 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">TRANSFER CERTIFICATE DETAILS</h1>
+                                <div class="grid formgrid py-3">
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="transferCertificateNo" style="width: 100%;" pInputText>
+                                            <label for="transferCertificateNo">Transfer Certificate No</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="field col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="dateOfIssue" style="width: 100%;" pInputText>
+                                            <label for="dateOfIssue">Date Of Issue</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12  lg:col-6 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">PERSONAL IDENTIFICATION MARK</h1>
+                                <div class="grid formgrid py-3">
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="identificationOne" style="width: 100%;" pInputText>
+                                            <label for="identificationOne">Identification One</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="field col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="identificationTwo" style="width: 100%;" pInputText>
+                                            <label for="identificationTwo">Identification Two</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12 btm">
+                                <div class="card px-6 py-6">
+
+                                    <h1 class="text-sm m-0 text-color-secondary">ACADEMIC PERFORMANCE IN THE PREVIOUS
+                                        CLASS
+                                    </h1>
+                                    <div class="p-grid p-dir-col">
+                                        <div class="p-col">
+                                            <p-table>
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                        <th>Subject</th>
+                                                        <th>Maximum Marks</th>
+                                                        <th>Marks Obtained</th>
+                                                        <th>% of Marks</th>
+                                                        <th>Remarks</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-rowData>
+                                                    <tr>
+                                                        <td>{{rowData.subject}}</td>
+                                                        <td>{{rowData.maximumMarks}}</td>
+                                                        <td>{{rowData.marksObtained}}</td>
+                                                        <td>{{rowData.percentageOfMarks}}</td>
+                                                        <td>{{rowData.remarks}}</td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="h-full hidden overflow-auto p-5"
+                        [ngClass]="{'flex flex-grow-1': activeTab === 'attach-docs'}">
+                        <div class="grid h-full w-full ">
+                            <div class="col-12  lg:col-6 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">AT THE TIME OF ADMISSION</h1>
+
+
+                                <div class="p-grid formgrid py-3">
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Copy of Birth Certificate</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Transfer Certificate</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Copy of Community Certificate</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Copy of Aadhar Card</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Proof of Current Address</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Medical Record</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Copy of Immunization Record</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Copy of the previous School's Academic Performance</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+                                </div>
+
                         
 
-
-                        <div class="col-12  btm">
-                            <div class="grid formgrid py-3">
-                                <div class="field col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <p-autoComplete id="selectedPresentCountry" [minLength]="0" [dropdown]="true"
-                                            [forceSelection]="true" [showClear]="true">
-                                        </p-autoComplete>
-                                        <label for="siblingChildIsLivingWith">child is living with</label>
-                                    </span>
-                                </div>
-
-                                <div class="field col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <p-autoComplete id="selectedPresentCountry" [minLength]="0" [dropdown]="true"
-                                            [forceSelection]="true" [showClear]="true">
-                                        </p-autoComplete>
-                                        <label for="siblingTransportation">Transportation</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="col-12 md:col-12 mb-3">
-
-                                    <label for="sibling">will you be able to volunteer your time & talent for school
-                                        activities? if yes please mention the areas of interest</label>
-
-                                    <span class="p-float-label">
-                                        <input pInputText id="sibling" style="width: 100%;">
-                                    </span>
-                                </div>
-
-
-
+        
                             </div>
-                        </div>
 
-                        <div class="col-12">
-                            <button pButton pRipple class="w-full mt-5" type="button" label="CONTINUE"
-                                (click)="clickNext('tier')"></button>
+                            <div class="col-12  lg:col-6 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">DOCUMENTS RECEIVED (To be Checked by Office)</h1>
+
+                                
+
+                                <div class="p-grid formgrid py-3">
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Copy of Birth Certificate</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Transfer Certificate</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Copy of Community Certificate</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Copy of Aadhar Card</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Proof of Current Address</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Medical Record</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Copy of Immunization Record</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <label for="fatherName">Copy of the previous School's Academic Performance</label>
+                                    </div>
+                                    <div class="p-col-12 p-md-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
+                                    </div>
+                                </div>
+
+                        
+
+        
+                            </div>
+
                         </div>
                     </div>
-                </div>
+
+                    <div class="h-full hidden overflow-auto p-5" [ngClass]="{'flex flex-grow-1': activeTab === 'tier'}">
+                        
+                        <div class="flex flex-column lg:flex-row gap-3 w-full h-full">
+              
+                    
 
 
-         
+        
 
-
-
-
-                <div class="h-full hidden overflow-auto p-5"
-                    [ngClass]="{'flex flex-grow-1': activeTab === 'pre-class-info'}">
-
-                    <div class="grid h-full w-full ">
-
-                        <div class="col-12 btm">
-                            <h1 class="text-sm m-0 text-color-secondary">DETAILS OF PREVIOUS SCHOOL</h1>
-                            <div class="grid formgrid py-3">
-                                <div class="col-12 md:col-4 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="classStudying" style="width: 100%;" pInputText>
-                                        <label for="classStudying">Class Studying/Studied</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-4 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="mediumOfInstruction" style="width: 100%;" pInputText>
-                                        <label for="mediumOfInstruction">Medium of Instruction</label>
-                                    </span>
-                                </div>
-
-                                <div class="field col-12 md:col-4 mb-3">
-                                    <span class="p-float-label">
-                                        <p-autoComplete id="boardAffiliatedTo" [minLength]="0" [dropdown]="true"
-                                            [forceSelection]="true" [showClear]="true"></p-autoComplete>
-                                        <label for="boardAffiliatedTo">Board Affiliated to</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="col-12 md:col-4 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="nameOfTheschool" style="width: 100%;" pInputText>
-                                        <label for="nameOfTheschool">Name of the school</label>
-                                    </span>
-                                </div>
-
-                                <div class="col-12 md:col-4 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="addressOfTheSchool" style="width: 100%;" pInputText>
-                                        <label for="addressOfTheSchool">Address of the School</label>
-                                    </span>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-12  lg:col-6 btm">
-                            <h1 class="text-sm m-0 text-color-secondary">TRANSFER CERTIFICATE DETAILS</h1>
-                            <div class="grid formgrid py-3">
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="transferCertificateNo" style="width: 100%;" pInputText>
-                                        <label for="transferCertificateNo">Transfer Certificate No</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="field col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="dateOfIssue" style="width: 100%;" pInputText>
-                                        <label for="dateOfIssue">Date Of Issue</label>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12  lg:col-6 btm">
-                            <h1 class="text-sm m-0 text-color-secondary">PERSONAL IDENTIFICATION MARK</h1>
-                            <div class="grid formgrid py-3">
-                                <div class="col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="identificationOne" style="width: 100%;" pInputText>
-                                        <label for="identificationOne">Identification One</label>
-                                    </span>
-                                </div>
-
-
-                                <div class="field col-12 md:col-6 mb-3">
-                                    <span class="p-float-label">
-                                        <input id="identificationTwo" style="width: 100%;" pInputText>
-                                        <label for="identificationTwo">Identification Two</label>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-12 btm">
-                            <div class="card px-6 py-6">
-
-                                <h1 class="text-sm m-0 text-color-secondary">ACADEMIC PERFORMANCE IN THE PREVIOUS CLASS
-                                </h1>
-                                <div class="p-grid p-dir-col">
-                                    <div class="p-col">
-                                        <p-table>
-                                            <ng-template pTemplate="header">
-                                                <tr>
-                                                    <th>Subject</th>
-                                                    <th>Maximum Marks</th>
-                                                    <th>Marks Obtained</th>
-                                                    <th>% of Marks</th>
-                                                    <th>Remarks</th>
-                                                </tr>
-                                            </ng-template>
-                                            <ng-template pTemplate="body" let-rowData>
-                                                <tr>
-                                                    <td>{{rowData.subject}}</td>
-                                                    <td>{{rowData.maximumMarks}}</td>
-                                                    <td>{{rowData.marksObtained}}</td>
-                                                    <td>{{rowData.percentageOfMarks}}</td>
-                                                    <td>{{rowData.remarks}}</td>
-                                                </tr>
-                                            </ng-template>
-                                        </p-table>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-
-
-
-                </div>
-
-                <div class="h-full hidden overflow-auto p-5"
-                    [ngClass]="{'flex flex-grow-1': activeTab === 'attach-docs'}">
-                    <div class="flex flex-column lg:flex-row gap-3 w-full h-full">
-                        <div class="w-full">
-                            <div style="min-height: 400px;"
-                                class="surface-ground shadow-3 p-0 border-round-md relative">
-                                <div class="text-white text-xl py-3 px-2 bg-indigo-500 mb-3">
-                                    <div class="flex px-3 align-items-center justify-content-between">
-                                        <div>
-                                            <h1 class="inline text-white pt-5 text-3xl">BASIC</h1>
-                                        </div>
-                                        <div>
-                                            <h1 class="inline text-white pt-5 text-3xl">$5</h1>
-                                            <span>/m</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-base p-2">
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">Responsive</div>
-                                    </div>
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">Push Messages</div>
-                                    </div>
-                                    <div class="col-12 absolute w-auto" style="bottom:15px;right:10px;left:0px">
-                                        <button pButton pRipple class="w-full" type="button" label="BASIC"
-                                            (click)="selectTier('basic')"></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-full">
-                            <div style="min-height: 400px;" class="p-0 relative">
-                                <div style="min-height: 400px;"
-                                    class="surface-ground shadow-3 border-round-md p-0 relative">
-                                    <div class="text-white text-xl py-3 px-2 bg-pink-500 mb-3">
+                            <div class="w-full">
+                                <div class="surface-ground shadow-3 border-round-md p-0 relative"
+                                    style="min-height: 400px;">
+                                    <div class="text-white text-xl py-3 px-2 bg-bluegray-500 mb-3">
                                         <div class="flex px-3 align-items-center justify-content-between">
                                             <div>
-                                                <h1 class="inline text-white pt-5 text-3xl">PRO</h1>
+                                                <h1 class="inline text-white pt-5 text-3xl">PRO+</h1>
                                             </div>
                                             <div>
-                                                <h1 class="inline text-white pt-5 text-3xl">$25</h1>
+                                                <h1 class="inline text-white pt-5 text-3xl">$50</h1>
                                                 <span>/m</span>
                                             </div>
                                         </div>
@@ -1056,351 +1199,162 @@
                                             </div>
                                             <div class="col-9">Free Shipping</div>
                                         </div>
-                                        <div class="col-12 absolute w-auto" style="bottom:15px;right:10px;left:0px">
-                                            <button pButton pRipple class="w-full bg-pink-500" type="button"
-                                                label="SELECT PRO" (click)="selectTier('pro')"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="w-full">
-                            <div class="surface-ground shadow-3 border-round-md p-0 relative"
-                                style="min-height: 400px;">
-                                <div class="text-white text-xl py-3 px-2 bg-bluegray-500 mb-3">
-                                    <div class="flex px-3 align-items-center justify-content-between">
-                                        <div>
-                                            <h1 class="inline text-white pt-5 text-3xl">PRO+</h1>
-                                        </div>
-                                        <div>
-                                            <h1 class="inline text-white pt-5 text-3xl">$50</h1>
-                                            <span>/m</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-base p-2">
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">Responsive</div>
-                                    </div>
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">Push Messages</div>
-                                    </div>
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">7/24 Support</div>
-                                    </div>
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">Free Shipping</div>
-                                    </div>
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">Unlimited BW</div>
-                                    </div>
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">Special Gift Cards</div>
-                                    </div>
-                                    <div class="col-12 absolute w-auto" style="bottom:15px;right:10px;left:0px">
-                                        <button pButton pRipple class="w-full bg-bluegray-500" type="button"
-                                            label="SELECT PRO+" (click)="selectTier('pro-plus')"></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="h-full hidden overflow-auto p-5" [ngClass]="{'flex flex-grow-1': activeTab === 'tier'}">
-                    <div class="flex flex-column lg:flex-row gap-3 w-full h-full">
-                        <div class="w-full">
-                            <div style="min-height: 400px;"
-                                class="surface-ground shadow-3 p-0 border-round-md relative">
-                                <div class="text-white text-xl py-3 px-2 bg-indigo-500 mb-3">
-                                    <div class="flex px-3 align-items-center justify-content-between">
-                                        <div>
-                                            <h1 class="inline text-white pt-5 text-3xl">BASIC</h1>
-                                        </div>
-                                        <div>
-                                            <h1 class="inline text-white pt-5 text-3xl">$5</h1>
-                                            <span>/m</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-base p-2">
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">Responsive</div>
-                                    </div>
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">Push Messages</div>
-                                    </div>
-                                    <div class="col-12 absolute w-auto" style="bottom:15px;right:10px;left:0px">
-                                        <button pButton pRipple class="w-full" type="button" label="BASIC"
-                                            (click)="selectTier('basic')"></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-full">
-                            <div style="min-height: 400px;" class="p-0 relative">
-                                <div style="min-height: 400px;"
-                                    class="surface-ground shadow-3 border-round-md p-0 relative">
-                                    <div class="text-white text-xl py-3 px-2 bg-pink-500 mb-3">
-                                        <div class="flex px-3 align-items-center justify-content-between">
-                                            <div>
-                                                <h1 class="inline text-white pt-5 text-3xl">PRO</h1>
-                                            </div>
-                                            <div>
-                                                <h1 class="inline text-white pt-5 text-3xl">$25</h1>
-                                                <span>/m</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="text-base p-2">
                                         <div class="w-full h-3rem grid">
                                             <div class="col-3">
                                                 <i class="pi pi-fw pi-check"></i>
                                             </div>
-                                            <div class="col-9">Responsive</div>
+                                            <div class="col-9">Unlimited BW</div>
                                         </div>
                                         <div class="w-full h-3rem grid">
                                             <div class="col-3">
                                                 <i class="pi pi-fw pi-check"></i>
                                             </div>
-                                            <div class="col-9">Push Messages</div>
-                                        </div>
-                                        <div class="w-full h-3rem grid">
-                                            <div class="col-3">
-                                                <i class="pi pi-fw pi-check"></i>
-                                            </div>
-                                            <div class="col-9">7/24 Support</div>
-                                        </div>
-                                        <div class="w-full h-3rem grid">
-                                            <div class="col-3">
-                                                <i class="pi pi-fw pi-check"></i>
-                                            </div>
-                                            <div class="col-9">Free Shipping</div>
+                                            <div class="col-9">Special Gift Cards</div>
                                         </div>
                                         <div class="col-12 absolute w-auto" style="bottom:15px;right:10px;left:0px">
-                                            <button pButton pRipple class="w-full bg-pink-500" type="button"
-                                                label="SELECT PRO" (click)="selectTier('pro')"></button>
+                                            <button pButton pRipple class="w-full bg-bluegray-500" type="button"
+                                                label="SELECT PRO+" (click)="selectTier('pro-plus')"></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="w-full">
-                            <div class="surface-ground shadow-3 border-round-md p-0 relative"
-                                style="min-height: 400px;">
-                                <div class="text-white text-xl py-3 px-2 bg-bluegray-500 mb-3">
-                                    <div class="flex px-3 align-items-center justify-content-between">
-                                        <div>
-                                            <h1 class="inline text-white pt-5 text-3xl">PRO+</h1>
-                                        </div>
-                                        <div>
-                                            <h1 class="inline text-white pt-5 text-3xl">$50</h1>
-                                            <span>/m</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-base p-2">
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">Responsive</div>
-                                    </div>
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">Push Messages</div>
-                                    </div>
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">7/24 Support</div>
-                                    </div>
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">Free Shipping</div>
-                                    </div>
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">Unlimited BW</div>
-                                    </div>
-                                    <div class="w-full h-3rem grid">
-                                        <div class="col-3">
-                                            <i class="pi pi-fw pi-check"></i>
-                                        </div>
-                                        <div class="col-9">Special Gift Cards</div>
-                                    </div>
-                                    <div class="col-12 absolute w-auto" style="bottom:15px;right:10px;left:0px">
-                                        <button pButton pRipple class="w-full bg-bluegray-500" type="button"
-                                            label="SELECT PRO+" (click)="selectTier('pro-plus')"></button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="hidden overflow-auto h-full p-0" [ngClass]="{'flex flex-grow-1': activeTab === 'payment'}">
-                    <div class="grid grid-nogutter w-full h-full">
-                        <div class="lg:col-8 col-12 py-8 px-4">
-                            <div class="grid col w-full">
-                                <div class=" col-1 lg:col-1 md:col-1" style="line-height: 2em">
-                                    <p-radioButton name="group1" value="Credit" [(ngModel)]="radioButton1"
-                                        inputId="credit">
-                                    </p-radioButton>
-                                </div>
-                                <div class="col-11 lg:col-5 md:col-5">
-                                    <div class="credits">
-                                        <img src="assets/layout/images/extensions/asset-mastercard.svg"
-                                            alt="ultima-layout" />
-                                        <img src="assets/layout/images/extensions/asset-visa.svg" alt="ultima-layout" />
-                                        <img src="assets/layout/images/extensions/asset-amex.svg" alt="ultima-layout" />
+                    <div class="hidden overflow-auto h-full p-0"
+                        [ngClass]="{'flex flex-grow-1': activeTab === 'payment'}">
+                        <div class="grid grid-nogutter w-full h-full">
+                            <div class="lg:col-8 col-12 py-8 px-4">
+                                <div class="grid col w-full">
+                                    <div class=" col-1 lg:col-1 md:col-1" style="line-height: 2em">
+                                        <p-radioButton name="group1" value="Credit" [(ngModel)]="radioButton1"
+                                            inputId="credit">
+                                        </p-radioButton>
+                                    </div>
+                                    <div class="col-11 lg:col-5 md:col-5">
+                                        <div class="credits">
+                                            <img src="assets/layout/images/extensions/asset-mastercard.svg"
+                                                alt="ultima-layout" />
+                                            <img src="assets/layout/images/extensions/asset-visa.svg"
+                                                alt="ultima-layout" />
+                                            <img src="assets/layout/images/extensions/asset-amex.svg"
+                                                alt="ultima-layout" />
+                                        </div>
+                                    </div>
+                                    <div class="col-1 lg:col-1 md:col-1" style="line-height: 2em">
+                                        <p-radioButton name="group1" value="Paypal" [(ngModel)]="radioButton1"
+                                            inputId="paypal">
+                                        </p-radioButton>
+                                    </div>
+                                    <div class="col-11 lg:col-5 md:col-5">
+                                        <div class="paypal">
+                                            <img src="assets/layout/images/extensions/asset-paypal.svg"
+                                                alt="ultima-layout" />
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-1 lg:col-1 md:col-1" style="line-height: 2em">
-                                    <p-radioButton name="group1" value="Paypal" [(ngModel)]="radioButton1"
-                                        inputId="paypal">
-                                    </p-radioButton>
-                                </div>
-                                <div class="col-11 lg:col-5 md:col-5">
-                                    <div class="paypal">
-                                        <img src="assets/layout/images/extensions/asset-paypal.svg"
-                                            alt="ultima-layout" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="grid col">
-                                <div class="col-12">
-                                    <span class="p-float-label">
-                                        <input class="w-full pb-3" pInputText type="text" />
-                                        <label>Card Holder Name </label>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="grid col">
-                                <div class="col-6">
-                                    <span class="p-float-label">
-                                        <input class="w-full pb-3" pInputText type="text" />
-                                        <label>Card No</label>
-                                    </span>
-                                </div>
-                                <div class="col-3">
-                                    <span class="p-float-label">
-                                        <input class="w-full pb-3" pInputText type="text" />
-                                        <label>Date</label>
-                                    </span>
-                                </div>
-                                <div class="col-3">
-                                    <span class="p-float-label">
-                                        <input class="w-full pb-3" pInputText type="text" />
-                                        <label>CCV</label>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="m-3">
-                                <p-checkbox [(ngModel)]="checked" [binary]="true" labelStyleClass="ml-2 text-base"
-                                    label="Save credit card information for future usage"></p-checkbox>
-                            </div>
-                        </div>
-                        <div
-                            class="lg:col-4 col-12 p-3 surface-300 border-left-1 surface-border text-base text-gray-600">
-                            <div class="grid col">
-                                <div class="col-12">
-                                    <h1 class="mt-3">ORDER SUMMARY</h1>
-                                </div>
-                            </div>
-                            <div class="hidden" [ngClass]="{'block': activeCard === ''}">
                                 <div class="grid col">
-                                    <div class="col-8">Tier - </div>
-                                    <div class="col-4 font-bold text-right">$0.00</div>
-                                    <div class="col-8">VAT (%18)</div>
-                                    <div class="col-4 font-bold text-right">$0.00</div>
-                                </div>
-                                <div class="grid col border-top-1 surface-border py-3 px-0 mt-5">
-                                    <div class="col-8">Total</div>
-                                    <div class="col-4 font-bold text-right">$0.00</div>
                                     <div class="col-12">
-                                        Please select one tier.
+                                        <span class="p-float-label">
+                                            <input class="w-full pb-3" pInputText type="text" />
+                                            <label>Card Holder Name </label>
+                                        </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="hidden" [ngClass]="{'block': activeCard === 'basic'}">
                                 <div class="grid col">
-                                    <div class="col-8">Tier - Basic</div>
-                                    <div class="col-4 font-bold text-right">$5.00</div>
-                                    <div class="col-8">VAT (%18)</div>
-                                    <div class="col-4 font-bold text-right">$0.90</div>
-                                </div>
-                                <div class="grid col border-top-1 surface-border py-3 px-0 mt-5">
-                                    <div class="col-8">Total</div>
-                                    <div class="col-4 font-bold text-right">$5.90</div>
-                                    <div class="col-12">
-                                        <p-button type="button" label="CONFIRM ORDER" styleClass="w-full my-7">
-                                        </p-button>
+                                    <div class="col-6">
+                                        <span class="p-float-label">
+                                            <input class="w-full pb-3" pInputText type="text" />
+                                            <label>Card No</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-3">
+                                        <span class="p-float-label">
+                                            <input class="w-full pb-3" pInputText type="text" />
+                                            <label>Date</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-3">
+                                        <span class="p-float-label">
+                                            <input class="w-full pb-3" pInputText type="text" />
+                                            <label>CCV</label>
+                                        </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="hidden" [ngClass]="{'block': activeCard === 'pro'}">
-                                <div class="grid col">
-                                    <div class="col-8">Tier - Pro</div>
-                                    <div class="col-4 font-bold text-right">$25.00</div>
-                                    <div class="col-8">VAT (%18)</div>
-                                    <div class="col-4 font-bold text-right">$4.50</div>
+                                <div class="m-3">
+                                    <p-checkbox [(ngModel)]="checked" [binary]="true" labelStyleClass="ml-2 text-base"
+                                        label="Save credit card information for future usage"></p-checkbox>
                                 </div>
-                                <div class="grid col border-top-1 surface-border py-3 px-0 mt-5">
-                                    <div class="col-8">Total</div>
-                                    <div class="col-4 font-bold text-right">$29.50</div>
+                            </div>
+                            <div
+                                class="lg:col-4 col-12 p-3 surface-300 border-left-1 surface-border text-base text-gray-600">
+                                <div class="grid col">
                                     <div class="col-12">
-                                        <p-button type="button" label="CONFIRM ORDER" styleClass="w-full my-7">
-                                        </p-button>
+                                        <h1 class="mt-3">ORDER SUMMARY</h1>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="hidden" [ngClass]="{'block': activeCard === 'pro-plus'}">
-                                <div class="grid col">
-                                    <div class="col-8">Tier - Pro+</div>
-                                    <div class="col-4 font-bold text-right">$50.00</div>
-                                    <div class="col-8">VAT (%18)</div>
-                                    <div class="col-4 font-bold text-right">$9.00</div>
+                                <div class="hidden" [ngClass]="{'block': activeCard === ''}">
+                                    <div class="grid col">
+                                        <div class="col-8">Tier - </div>
+                                        <div class="col-4 font-bold text-right">$0.00</div>
+                                        <div class="col-8">VAT (%18)</div>
+                                        <div class="col-4 font-bold text-right">$0.00</div>
+                                    </div>
+                                    <div class="grid col border-top-1 surface-border py-3 px-0 mt-5">
+                                        <div class="col-8">Total</div>
+                                        <div class="col-4 font-bold text-right">$0.00</div>
+                                        <div class="col-12">
+                                            Please select one tier.
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="grid col border-top-1 surface-border py-3 px-0 mt-5">
-                                    <div class="col-8">Total</div>
-                                    <div class="col-4 font-bold text-right">$59.00</div>
-                                    <div class="col-12">
-                                        <p-button type="button" label="CONFIRM ORDER" styleClass="w-full my-7">
-                                        </p-button>
+                                <div class="hidden" [ngClass]="{'block': activeCard === 'basic'}">
+                                    <div class="grid col">
+                                        <div class="col-8">Tier - Basic</div>
+                                        <div class="col-4 font-bold text-right">$5.00</div>
+                                        <div class="col-8">VAT (%18)</div>
+                                        <div class="col-4 font-bold text-right">$0.90</div>
+                                    </div>
+                                    <div class="grid col border-top-1 surface-border py-3 px-0 mt-5">
+                                        <div class="col-8">Total</div>
+                                        <div class="col-4 font-bold text-right">$5.90</div>
+                                        <div class="col-12">
+                                            <p-button type="button" label="CONFIRM ORDER" styleClass="w-full my-7">
+                                            </p-button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hidden" [ngClass]="{'block': activeCard === 'pro'}">
+                                    <div class="grid col">
+                                        <div class="col-8">Tier - Pro</div>
+                                        <div class="col-4 font-bold text-right">$25.00</div>
+                                        <div class="col-8">VAT (%18)</div>
+                                        <div class="col-4 font-bold text-right">$4.50</div>
+                                    </div>
+                                    <div class="grid col border-top-1 surface-border py-3 px-0 mt-5">
+                                        <div class="col-8">Total</div>
+                                        <div class="col-4 font-bold text-right">$29.50</div>
+                                        <div class="col-12">
+                                            <p-button type="button" label="CONFIRM ORDER" styleClass="w-full my-7">
+                                            </p-button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hidden" [ngClass]="{'block': activeCard === 'pro-plus'}">
+                                    <div class="grid col">
+                                        <div class="col-8">Tier - Pro+</div>
+                                        <div class="col-4 font-bold text-right">$50.00</div>
+                                        <div class="col-8">VAT (%18)</div>
+                                        <div class="col-4 font-bold text-right">$9.00</div>
+                                    </div>
+                                    <div class="grid col border-top-1 surface-border py-3 px-0 mt-5">
+                                        <div class="col-8">Total</div>
+                                        <div class="col-4 font-bold text-right">$59.00</div>
+                                        <div class="col-12">
+                                            <p-button type="button" label="CONFIRM ORDER" styleClass="w-full my-7">
+                                            </p-button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1409,5 +1363,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>

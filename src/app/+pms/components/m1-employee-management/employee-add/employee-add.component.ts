@@ -18,8 +18,13 @@ import { UtilService } from 'src/app/shared/util.service';
 import { IState } from 'src/app/shared/interface/IState';
 import { ICountry } from 'src/app/shared/interface/ICountry';
 import { CommonHttpService } from 'src/app/shared-services/common-http.service';
+
+import * as _ from 'lodash';
+import { IMiscDetails } from 'src/app/shared/interface/IMisc';
+
 import { MessageService } from 'primeng/api';
 import { PMSValidation } from 'src/app/+pms/services/pms-validation';
+
 
 
 
@@ -103,6 +108,7 @@ export class EmployeeAddComponent {
     cols: any[] = [];
     selectedItems: any[] = [];
     items: any[] = [];
+    filteredMiscDetailList:IEmployee[]=[];
 
     // AutoComplete By mj tamil
     filteredStateList: IState[] = [];
@@ -185,7 +191,6 @@ export class EmployeeAddComponent {
         // Family Information
 
         selectedGender: null,
-
         isActive: null,
         unitId: null,
         userId: null,
@@ -410,6 +415,29 @@ export class EmployeeAddComponent {
     }
 
 
+    // Education 
+
+    AddEducationRows(){
+        
+    }
+
+    
+    RemoveEducationRows(data:any,index:number){
+
+    }
+
+
+    // Experience
+    AddWorkExperience(){
+
+    }
+
+    RemoveWorkExperienceRows(data:any,index:number){
+
+    }
+    
+
+
     //#region  EDUCATION DETAIL
     AddEducation() {
 
@@ -474,4 +502,5 @@ export class EmployeeAddComponent {
         this.messageService.add({ severity: _severity, summary: _summary, detail: _message, life: 3000 });
         return;
     }
+
 }

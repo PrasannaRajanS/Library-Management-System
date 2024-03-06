@@ -3,13 +3,12 @@ import { FormGroup } from '@angular/forms';
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { Table } from 'primeng/table';
 
-import { CustomerService } from 'src/app/demo/service/customer.service';
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
 import { UtilService } from 'src/app/shared/util.service';
 import * as _ from 'lodash';
 import { MessageService } from 'primeng/api';
 import { FiscalValidation } from 'src/app/+fiscal/services/fiscal-validation';
-import { IMisc, IMiscDetails } from 'src/app/shared/interface/IMisc';
+import { IMiscDetails } from 'src/app/shared/interface/IMisc';
 import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AdminValidation } from 'src/app/+admin/services/admin-validation';
@@ -26,7 +25,6 @@ export class MiscDetailComponent {
     miscItems: IMiscDetails[] = []; //  Load : Misc items array 
     filteredMiscList: IMiscDetails[] = []; //  dropdown list
     //#endregion
-
 
     filteredMiscDetailList: IMiscDetails[] = [];
     miscDtlItems: IMiscDetails[] = []; //  Load : Misc Detail items array
@@ -310,12 +308,5 @@ export class MiscDetailComponent {
         this.IsUpdate = true;
         this.buttonText = "Update";
     }
-
-
-
-
-
-
-
 
 }

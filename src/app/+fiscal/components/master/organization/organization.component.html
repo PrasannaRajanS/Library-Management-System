@@ -95,17 +95,9 @@
                                         </span>
                                     </div>
 
-                                    <!-- <div class="field col-12 md:col-3 mt-3">
-                            <span class="p-float-label">
-                                <input type="text" id="state" pInputText formControlName="state"  autocomplete="off">
-                                <label for="state">State</label>
-                                <small id="state-help">{{ formError("state" ,OrganizationForm)}}</small>
-                            </span>
-                        </div> -->
-
+                           
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <!-- <input type="text" id="state" pInputText formControlName="state"  autocomplete="off"> -->
                                             <p-autoComplete formControlName="selectedState"
                                                 [suggestions]="filteredStateList" (completeMethod)="filterState($event)"
                                                 [minLength]="0" [dropdown]="true" [forceSelection]="true"
@@ -119,8 +111,6 @@
 
                                     <div class="field col-12 md:col-3">
                                         <span class="p-float-label">
-                                            <!-- <input type="text" id="country" pInputText formControlName="country"
-                                                autocomplete="off"> -->
                                                 <p-autoComplete formControlName="selectedCountry"
                                                 [suggestions]="filteredCoutryList" (completeMethod)="filterCountry($event)"
                                                 [minLength]="0" [dropdown]="true" [forceSelection]="true"

@@ -671,6 +671,9 @@
 
                                         <ng-template pTemplate="header">
                                             <tr>
+                                                <th style="width:10% !important" class="text-center">
+                                                    <button pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-success mr-2"  (click)="AddEducationRows()"></button>
+                                                </th>
                                                 <th style="width: 3rem">
                                                     S.No
                                                 </th>
@@ -685,6 +688,38 @@
                                                 <th>Mode of Study</th>
                                                 <th>Action</th>
 
+                                            </tr>
+                                        </ng-template>
+
+                                        <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                            <tr>
+                                
+                                                <td style="width:10% !important" class="text-center">
+                                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                                        (click)="RemoveEducationRows(item,i)"></button>
+                                                </td>
+                                
+                                                <td style="width:10% !important" class="text-center">
+                                                    <section>
+                                                        <label class="checkbox">
+                                                            <p-checkbox name="chkEdit" id="chkEdit" [(ngModel)]="item.edit"  inputId="binary"></p-checkbox>
+                                                            <i></i>
+                                                        </label>
+                                                    </section>
+                                                </td>
+                                
+                                                <td style="width:5% !important" class="text-center">{{i+1}}</td>
+                                
+                                                <td style="width:30% !important">
+                                                    <input pInputText type="text"  [disabled]="!item.edit" id="txtmiscDtlName"
+                                                     name="txtmiscDtlName" [(ngModel)]="item.miscDtlName" style="width: 100% !important;">
+                                                </td>
+                                
+                                                <td style="width:25% !important" class="text-center">
+                                                    <input pInputText type="text"  [disabled]="!item.edit" id="txtmiscDtlDesc"
+                                                     name="txtmiscDtlDesc" [(ngModel)]="item.miscDtlDesc" style="width: 100% !important;">
+                                                </td>
+                                
                                             </tr>
                                         </ng-template>
 
@@ -792,10 +827,12 @@
 
                                         <ng-template pTemplate="header">
                                             <tr>
+                                                <th style="width:10% !important" class="text-center">
+                                                    <button pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-success mr-2"  (click)="AddWorkExperience()"></button>
+                                                </th>
                                                 <th style="width: 3rem">
                                                     S.No
                                                 </th>
-                                                <!-- Should change the field name -->
                                                 <th pSortableColumn="name">Company Name<p-sortIcon
                                                         field="applicationName"></p-sortIcon></th>
                                                 <th>From Date</th>
@@ -805,6 +842,38 @@
                                                 <th>Reason For Change</th>
                                                 <th>Action</th>
 
+                                            </tr>
+                                        </ng-template>
+
+                                        <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                            <tr>
+                                
+                                                <td style="width:10% !important" class="text-center">
+                                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                                        (click)="RemoveWorkExperienceRows(item,i)"></button>
+                                                </td>
+                                
+                                                <td style="width:10% !important" class="text-center">
+                                                    <section>
+                                                        <label class="checkbox">
+                                                            <p-checkbox name="chkEdit" id="chkEdit" [(ngModel)]="item.edit"  inputId="binary"></p-checkbox>
+                                                            <i></i>
+                                                        </label>
+                                                    </section>
+                                                </td>
+                                
+                                                <td style="width:5% !important" class="text-center">{{i+1}}</td>
+                                
+                                                <td style="width:30% !important">
+                                                    <input pInputText type="text"  [disabled]="!item.edit" id="txtmiscDtlName"
+                                                     name="txtmiscDtlName" [(ngModel)]="item.miscDtlName" style="width: 100% !important;">
+                                                </td>
+                                
+                                                <td style="width:25% !important" class="text-center">
+                                                    <input pInputText type="text"  [disabled]="!item.edit" id="txtmiscDtlDesc"
+                                                     name="txtmiscDtlDesc" [(ngModel)]="item.miscDtlDesc" style="width: 100% !important;">
+                                                </td>
+                                
                                             </tr>
                                         </ng-template>
 
