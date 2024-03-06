@@ -1,39 +1,37 @@
 export interface IEmployee {
-    employeeId?: number | null | undefined;
+    employeeId?: string | null | undefined;
 
     // Personal Info
-    employeeNumber?: number | null | undefined;
+    employeeNo?: number | null | undefined;
+    salutationId?:number | null | undefined;
     firstName?: string | null | undefined;
     lastName?: string | null | undefined;
     nickName?: string | null | undefined;
-    gender?: string | null | undefined;
-    DOB?: number | null | undefined;
+    genderId?: number | null | undefined;
+    dob?: number | null | undefined;
     age?: number | null | undefined;
 
-    // Present Address
+     // Present Address
+    address1?:string | null | undefined;
+    address2?:string|null|undefined;
+    address3?:string|null|undefined;
+    city?:string|null|undefined;
+    stateId?:number|null|undefined;
+    countryId?:number|null|undefined;
+    pinCode?:number|null|undefined;
 
-
-    presentAddress1?: string | null | undefined;
-    presentAddress2?: string | null | undefined;
-    presentAddress3?: string | null | undefined;
-    presentCity?: string | null | undefined;
-
-    selectedPresentState?: any | null | undefined;
-
-    presentCountryId?: number | null | undefined;
-    selectedPresentCountry?: object | null | undefined;
-
-    presentPIN?: number | null | undefined;
+    // selectedPresentCountry?: object | null | undefined;
 
     // Permanent Address
-
-    permanentAddress1?: string | null | undefined;
-    permanentAddress2?: string | null | undefined;
-    permanentAddress3?: string | null | undefined;
-    permanentCity?: string | null | undefined;
-    permanentState?: string | null | undefined;
-    permanentCountry?: string | null | undefined;
-    permanentPIN?: number | null | undefined;
+    
+    sameasPresent:boolean|null|undefined;
+    permanantAddress1?: string | null | undefined;
+    permanantAddress2?: string | null | undefined;
+    permanantAddress3?: string | null | undefined;
+    permanantCity?: string | null | undefined;
+    permanantStateId?: string | null | undefined;
+    permanantCountryId?: string | null | undefined;
+    permanantPINCode?: number | null | undefined;
 
     //  Organizational Info
 
@@ -53,22 +51,44 @@ export interface IEmployee {
     //  Emergency Contact Info
 
     contactPerson1?: string | null | undefined;
-    mobileNo1?: string | null | undefined;
+    contactPersonMobileNo1?: string | null | undefined;
     contactPerson2?: string | null | undefined;
-    mobileNo2?: string | null | undefined;
-    bloodGroup?: string | null | undefined;
+    contactPersonMobileNo2?: string | null | undefined;
+    bloodGroupId?: number | null | undefined;
 
     // Unique Number Info
-    nationality?: string | null | undefined;
-    PANNo?: string | null | undefined;
-    community?: string | null | undefined;
+    nationalityId?: number | null | undefined;
+    panNo?: string | null | undefined;
+    uanNo?: string | null | undefined;
     aadhaarNo?: number | null | undefined;
-    UANNo?: number | null | undefined;
-    ESINo?: number | null | undefined;
-    EPFNo?: number | null | undefined;
+    esiNo?: string | null | undefined;
+    epfNo?: string | null | undefined;
+    communityId?: number | null | undefined;
 
-    
 
+    passportNo?: string | null | undefined;
+    passportExpDt?: string | null | undefined;
+    drivingLicenseNo?: string | null | undefined;
+    drivingLicenseExpDt?: string | null | undefined;
+    jobDescription?: string | null | undefined;
+    aboutMe?: string | null | undefined;
+
+    identyMarks1?: string | null | undefined;
+    identyMarks2?: string | null | undefined;
+
+    // officialEmail?: string | null | undefined;
+    // officialMobile?: string | null | undefined;
+
+    dateofJoin?: string | null | undefined;
+    empCategoryId?: string | null | undefined;
+    departmentId?: string | null | undefined;
+    sectionId?: string | null | undefined;
+    employeementTypeId?: string | null | undefined;
+    reportingToId?: string | null | undefined;
+    salaryTypeId?: string | null | undefined;
+    locationId?: string | null | undefined;
+    shiftId?: string | null | undefined;
+    designationId?: string | null | undefined;
 
     // Education Detail
 
@@ -77,6 +97,8 @@ export interface IEmployee {
 
 
     isActive?: boolean | null | undefined;
+    // what is this?
+    companyId?: number | null | undefined;
     unitId?: number | null | undefined;
     userId?: number | null | undefined;
     ipAddress?: string | null | undefined;
@@ -85,26 +107,23 @@ export interface IEmployee {
 // #region EDUCATION DETAIL
 export interface IEducationDetail {
     educationDtlId?: string | null | undefined;  //	uniqueidentifier
-
+    employeeId: string | null | undefined;
     qualificationId?: number | null | undefined;
-    selectedQualification?: any | null | undefined;
-
     courseId?: number | null | undefined;
-    selectedCourse?: any | null | undefined;
-    
     specialisationId?: number | null | undefined;
-    selectedSpecialisation?: any | null | undefined;
-
     schoolCollege?: string | null | undefined;
-
-    modeOfStudyId?: number | null | undefined;
-    selectedModeOfStudy?: any | null | undefined;
-
     percentage?: number | null | undefined;
-    CourseDurationStart?: Date | null | undefined;
-    CourseDurationEnd?: Date | null | undefined;
-    
+    yearOfPassing: string | null | undefined;
+    modeOfStudyId?: number | null | undefined;
     isActive?: boolean | null | undefined;
+    
+    // selectedQualification?: any | null | undefined;
+    // selectedCourse?: any | null | undefined;
+    // selectedSpecialisation?: any | null | undefined;
+    // selectedModeOfStudy?: any | null | undefined;
+    // CourseDurationStart?: Date | null | undefined;
+    // CourseDurationEnd?: Date | null | undefined;
+   
 }
 
 export interface IQualification {
@@ -130,26 +149,28 @@ export interface ICourseType {
 
 export interface IWorkExperienceDetail {
     workExperienceDtlId?: string | null | undefined;  //	uniqueidentifier
-
-    employmentType?: string | null | undefined;
+    employeeId: string | null | undefined;
     companyName?: string | null | undefined;
-
-    selectedQualification?: any | null | undefined;
-
-    courseId?: number | null | undefined;
-    selectedCourse?: any | null | undefined;
-    
-    specialisationId?: number | null | undefined;
-    selectedSpecialisation?: any | null | undefined;
-
-    schoolCollege?: string | null | undefined;
-
-    modeOfStudyId?: number | null | undefined;
-    selectedModeOfStudy?: any | null | undefined;
-
-    percentage?: number | null | undefined;
-    CourseDurationStart?: Date | null | undefined;
-    CourseDurationEnd?: Date | null | undefined;
-    
+    fromDate?: string | null | undefined;
+    toDate?:string | null | undefined;
+    experience?: string | null | undefined;
+    jobTitleId?: string | null | undefined;
+    jobDesc?: string | null | undefined;
+    reasonForChange?: string | null | undefined;
     isActive?: boolean | null | undefined;
+
+//     employmentType?: string | null | undefined;
+//     selectedQualification?: any | null | undefined;
+//     courseId?: number | null | undefined;
+//    selectedCourse?: any | null | undefined;  
+//     specialisationId?: number | null | undefined;
+//     selectedSpecialisation?: any | null | undefined;
+//     schoolCollege?: string | null | undefined;
+//     modeOfStudyId?: number | null | undefined;
+//     selectedModeOfStudy?: any | null | undefined;
+//     percentage?: number | null | undefined;
+//     CourseDurationStart?: Date | null | undefined;
+//     CourseDurationEnd?: Date | null | undefined;
+    
+  
 }
