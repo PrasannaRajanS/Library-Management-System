@@ -17,5 +17,6 @@ export const AppConstant = Object.freeze({
         { typeId: 1, type: 'School Hours' },
         { typeId: 2, type: 'Office Hours' },
         { typeId: 3, type: 'Period' }
-    ]
+    ],
+    MISC_DETAIL:[]
 });

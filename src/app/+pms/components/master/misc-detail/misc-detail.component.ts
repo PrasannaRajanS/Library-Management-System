@@ -185,8 +185,8 @@ export class MiscDetailComponent {
       try {
         let _miscDtlName: any[] = [];
         _miscDtlName = _.filter(this.filteredMiscDetailList, va => {
-          return va.miscDtlDesc == "";
-        })
+          return va.miscDtlName == "";
+        });
 
         this.isValidation = true;
         this.ValidationMsg = "";

@@ -1,0 +1,250 @@
+{
+  "states": [
+    {
+      "stateId": 1,
+      "stateName": "Andaman and Nicobar Islands",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 2,
+      "stateName": "Andhra Pradesh",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 3,
+      "stateName": "Arunachal Pradesh",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 4,
+      "stateName": "Assam",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 5,
+      "stateName": "Bihar",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 6,
+      "stateName": "Chandigarh",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 7,
+      "stateName": "Chhattisgarh",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 8,
+      "stateName": "Dadra and Nagar Haveli",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 9,
+      "stateName": "Daman and Diu",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 10,
+      "stateName": "Delhi",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 11,
+      "stateName": "Goa",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 12,
+      "stateName": "Gujarat",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 13,
+      "stateName": "Haryana",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 14,
+      "stateName": "Himachal Pradesh",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 15,
+      "stateName": "Jammu and Kashmir",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 16,
+      "stateName": "Jharkhand",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 17,
+      "stateName": "Karnataka",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 18,
+      "stateName": "Kenmore",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 19,
+      "stateName": "Kerala",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 20,
+      "stateName": "Lakshadweep",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 21,
+      "stateName": "Madhya Pradesh",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 22,
+      "stateName": "Maharashtra",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 23,
+      "stateName": "Manipur",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 24,
+      "stateName": "Meghalaya",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 25,
+      "stateName": "Mizoram",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 26,
+      "stateName": "Nagaland",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 27,
+      "stateName": "Narora",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 28,
+      "stateName": "Natwar",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 29,
+      "stateName": "Odisha",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 30,
+      "stateName": "Paschim Medinipur",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 31,
+      "stateName": "Pondicherry",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 32,
+      "stateName": "Punjab",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 33,
+      "stateName": "Rajasthan",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 34,
+      "stateName": "Sikkim",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 35,
+      "stateName": "Tamil Nadu",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 36,
+      "stateName": "Telangana",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 37,
+      "stateName": "Tripura",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 38,
+      "stateName": "Uttar Pradesh",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 39,
+      "stateName": "Uttarakhand",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 40,
+      "stateName": "Vaishali",
+      "countryId": 101,
+      "countryName": "India"
+    },
+    {
+      "stateId": 41,
+      "stateName": "West Bengal",
+      "countryId": 101,
+      "countryName": "India"
+    }
+  ]
+}

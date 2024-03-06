@@ -26,6 +26,7 @@ import { UtilService } from 'src/app/shared/util.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { DialogModule } from 'primeng/dialog';
 
 
 
@@ -59,7 +60,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 		// Grid
 		TableModule,
 		RadioButtonModule,
-		ToastModule
+		ToastModule,
+		DialogModule
 
   ],
   providers:[
