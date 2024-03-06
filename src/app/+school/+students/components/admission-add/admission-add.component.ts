@@ -1,6 +1,21 @@
 import { state, style, trigger } from '@angular/animations';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
+import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
+import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
+import { IAcademicYear } from 'src/app/+fiscal/services/interfaces/IAcademicYear';
+import { IAdmission } from 'src/app/+school/services/interfaces/IAdmission';
+import { APIConfig } from 'src/app/config/api.config';
+import { ProductService } from 'src/app/demo/service/product.service';
+import { CommonHttpService } from 'src/app/shared-services/common-http.service';
+import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
+import { ICountry } from 'src/app/shared/interface/ICountry';
+import { IMiscDetails } from 'src/app/shared/interface/IMisc';
+import { IState } from 'src/app/shared/interface/IState';
+import * as yup from "yup";
+
 
 @Component({
   selector: 'app-admission-add',
@@ -25,11 +40,21 @@ import { SelectItem } from 'primeng/api';
 })
 export class AdmissionAddComponent {
 
-    item:any[]=[];
+ 
+  item:IAcademicYear={}
+
+    items:IAcademicYear[]=[];
+    StateList:IState[]=[];
+    filteredStateList:IState[]=[];
+    
+    CoutryList: ICountry[] = [];
+    
 
   activeTab = 'student-information';
 
   activeCard = '';
+
+  filteredCoutryList: ICountry[] = [];
 
   dropdownOptions1: SelectItem[];
 
@@ -47,7 +72,33 @@ export class AdmissionAddComponent {
   
   deleteDialog:boolean=false;
 
-  constructor() {
+
+  IpAddress="192.168.1.1";
+
+  miscDtlItems: IMiscDetails[] = [];
+  filteredMiscDetailList: IMiscDetails[] = [];
+
+
+  AdmissionForm:FormGroup<YupFormControls<IAdmission>>;
+
+  initialValues:IAdmission ={
+    studentApplicationNo:null,
+    studentStandard:null,
+    studentAcademicYear:null,
+    studentAdmissionNo:null,
+
+    selectedState:null,
+    selectedCountry:null,
+    // keyWord:null,
+    ipAddress:null,
+    isActive:null
+
+  }
+
+  constructor(
+    private httpService:CommonHttpService,
+    private productService:ProductService
+  ) {
       this.dropdownOptions1 = [
           {label: 'Select Time Zone', value: null},
           {label: 'UTC-12.00', value: {id: 1, name: 'UTC-12.00', code: '-12'}},
@@ -90,6 +141,8 @@ export class AdmissionAddComponent {
           {label: 'UTC+14.00', value: {id: 38, name: 'UTC+01.00', code: '+14'}},
       ];
 
+      this.AdmissionForm=FormHandler.controls<IAdmission>(this.initialValues);
+
       this.dropdownOptions2 = [
           {label: 'Where did you hear Ultima', value: null},
           {label: 'Blogs', value: 'Blogs'},
@@ -101,6 +154,137 @@ export class AdmissionAddComponent {
           {label: 'Other', value: 'Other'}
       ];
   }
+
+  public GetAllMiscDetails() {
+    try {
+        this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.SCHOOL.DETAILS + '?keyWord=School')
+            .subscribe({
+                next: (result: any) => {
+                    this.miscDtlItems = result.miscDtls;
+                    this.filteredMiscDetailList = this.miscDtlItems;
+                    console.log('GetAllMiscDetails', this.filteredMiscDetailList);
+                },
+                error: (err: HttpErrorResponse) => console.log(err),
+            });
+    } catch (error) { }
+}
+
+filterStandard(event: AutoCompleteCompleteEvent){
+    let filtered:any[]=[];
+    let query = event.query;
+
+    for(let i=0; i<(this.miscDtlItems as any[]).length; i++){
+            let studentStandards = (this.miscDtlItems as any[])[i];
+            if(studentStandards.miscDtlName.toLowerCase().indexOf(query.toLowerCase())==0){
+                filtered.push(studentStandards);
+            }
+    }
+    this.miscDtlItems=filtered
+}
+
+
+
+public GetCountries() {
+
+    try {
+
+      this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_COUNTRIES)
+        .subscribe({
+          next: (result: any) => {
+            this.CoutryList = result.countries;
+            console.log('GetCountries', this.CoutryList);
+          },
+          error: (err: HttpErrorResponse) => console.log(err)
+        });
+
+    } catch (error) {
+
+    }
+  }
+
+
+
+filterCountry(event: AutoCompleteCompleteEvent) {
+
+    let filtered: any[] = [];
+    let query = event.query;
+
+    for (let i = 0; i < (this.CoutryList as any[]).length; i++) {
+      let _countriesList = (this.CoutryList as any[])[i];
+      if (_countriesList.countryName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(_countriesList);
+      }
+    }
+    this.filteredCoutryList = filtered;
+  }
+
+ public  filterState(event:AutoCompleteCompleteEvent){
+    let filtered:any[]=[];
+    let query =event.query;
+
+    for(let i=0; i<(this.StateList as any[]).length;i++){
+        let _stateList = (this.StateList as any[])[i];
+        if(_stateList.stateName.toLowerCase().indexOf(query.toLowerCase())==0){
+            filtered.push(_stateList);
+        }
+    }
+      this.filteredStateList=filtered;
+  }
+
+
+
+
+
+public GetStates(){
+
+  try {
+          this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_STATES)
+          .subscribe({
+            next:(result:any)=>{
+              this.StateList=result.states;
+            },
+            error:(err:HttpErrorResponse) => console.log(err)
+          });
+  }
+   catch (error) {
+
+      
+  }
+}
+
+
+
+public onSelectState(){
+  if(this.AdmissionForm.value['selectedState']!=undefined && this.AdmissionForm.value['selectedState'] !=null ){
+    let _countryId:number=this.AdmissionForm.value['selectedState'].countryId;
+    this.AdmissionForm.get("selectedCountry")?.setValue(this.CoutryList.find(c=>c.countryId === _countryId))
+      }
+
+  else{
+    this.AdmissionForm.get("selectedCountry")?.setValue(null)
+  }
+
+}
+
+onClearState() {
+  console.log('onClearState',this.AdmissionForm)
+  this.AdmissionForm.get("selectedCountry")?.reset();
+}
+
+  public GetAcademicYear(){
+    this.productService.getAcademicYears().then((data)=>{
+      this.items=data; 
+    })
+  }
+
+ngOnInit() {
+    this.GetAllMiscDetails();
+    this.GetCountries();
+    this.GetStates();
+    
+
+}
+
 
   clickNext(step: string) {
       this.activeTab = step;
@@ -120,6 +304,31 @@ export class AdmissionAddComponent {
   }
 
   Edit(){
+    
+  }
+
+  public Save(){
+
+    try {
+    let _apiUrl:string='';
+    let passSaveParams:any={};
+
+    passSaveParams.studentAdmissionNo=this.AdmissionForm.value['studentAdmissionNo'] !=null ? this.AdmissionForm.value['studentAdmissionNo']:"";
+    passSaveParams.studentStandard=this.AdmissionForm.value['studentStandard'] !=null ? this.AdmissionForm.value['studentStandard']:"";
+    passSaveParams.studentAcademicYear=this.AdmissionForm.value['studentAcademicYear'] !=null ? this.AdmissionForm.value['studentAcademicYear']:"";
+    passSaveParams.studentAdmissionNo=this.AdmissionForm.value['studentAdmissionNo'] !=null ? this.AdmissionForm.value['studentAdmissionNo']:"";
+
+
+    passSaveParams.isActive=true;
+    passSaveParams.ipAddress=this.IpAddress;
+
+
+console.log(JSON.stringify(passSaveParams));
+ 
+    } catch (error) {
+      
+    }
+
     
   }
 }

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AdmissionAddRoutingModule } from './admission-add-routing.module';
 import { AdmissionAddComponent } from './admission-add.component';
 import { ButtonModule } from 'primeng/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -17,6 +17,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { TableModule } from 'primeng/table';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DialogModule } from 'primeng/dialog';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { DialogModule } from 'primeng/dialog';
   imports: [
     CommonModule,
     AdmissionAddRoutingModule,
+    ReactiveFormsModule,
 
     ButtonModule,
     FormsModule,
@@ -40,7 +42,8 @@ import { DialogModule } from 'primeng/dialog';
     AutoCompleteModule,
     TableModule,
     FileUploadModule,
-    DialogModule
+    DialogModule,
+    TooltipModule
   ]
 })
 export class AdmissionAddModule { }

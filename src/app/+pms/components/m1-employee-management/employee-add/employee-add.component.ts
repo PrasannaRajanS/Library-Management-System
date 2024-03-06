@@ -18,6 +18,8 @@ import { UtilService } from 'src/app/shared/util.service';
 import { IState } from 'src/app/shared/interface/IState';
 import { ICountry } from 'src/app/shared/interface/ICountry';
 import { CommonHttpService } from 'src/app/shared-services/common-http.service';
+import * as _ from 'lodash';
+import { IMiscDetails } from 'src/app/shared/interface/IMisc';
 
 
 
@@ -101,6 +103,7 @@ export class EmployeeAddComponent {
     cols: any[] = [];
     selectedItems: any[] = [];
     items: any[] = [];
+    filteredMiscDetailList:IEmployee[]=[];
 
     // AutoComplete By mj tamil
     filteredStateList: IState[] = [];
@@ -183,7 +186,6 @@ export class EmployeeAddComponent {
         // Family Information
 
         selectedGender: null,
-
         isActive: null,
         unitId: null,
         userId: null,
@@ -389,4 +391,26 @@ export class EmployeeAddComponent {
     RedirecttoList() {
         this.router.navigate(['/apps/pms/employee/employee-list']);
     }
+
+    // Education 
+
+    AddEducationRows(){
+        
+    }
+
+    
+    RemoveEducationRows(data:any,index:number){
+
+    }
+
+
+    // Experience
+    AddWorkExperience(){
+
+    }
+
+    RemoveWorkExperienceRows(data:any,index:number){
+
+    }
+    
 }

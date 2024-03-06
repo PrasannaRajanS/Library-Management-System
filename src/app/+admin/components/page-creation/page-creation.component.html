@@ -39,14 +39,6 @@
                 <small id="ModuleName-help">{{ formError("moduleName" ,PageCreationInfoForm)}}</small>
             </div>
 
-            <!-- <div class="field col-12 md:col-3">
-                <span class="p-float-label">
-                    <p-dropdown id="ddlSubModuleName" formControlName="subModuleName" [options]="SubModuleList"
-                        optionLabel="name" [autoDisplayFirst]="false" [showClear]="true"></p-dropdown>
-                    <label for="ddlSubModuleName">Sub Module Name</label>
-                </span>
-                <small id="SubModuleName-help">{{ formError("subModuleName",PageCreationInfoForm)}}</small>
-            </div> -->
 
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
@@ -56,13 +48,6 @@
                 <small id="pageName-help">{{ formError("pageName" ,PageCreationInfoForm)}}</small>
             </div>
 
-            <!-- <div class="field col-12 md:col-3">
-                <span class="p-float-label">
-                    <input type="text" id="txtUniqueName" pInputText formControlName="uniqueName">
-                    <label for="txtUniqueName">Unique Name<span class="mandatory">*</span></label>
-                </span>
-                <small id="PageName-help">{{ formError("uniqueName" ,PageCreationInfoForm)}}</small>
-            </div> -->
 
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
@@ -75,7 +60,7 @@
 
             <div class="field col-12 md:col-3">
                 <span class="p-float-label">
-                    <!-- <input type="text" id="txtMainPageName" pInputText formControlName="mainPageName"> -->
+        
 
                     <p-autoComplete formControlName="mainPageName" [suggestions]="filteredMainPageList"
                         (completeMethod)="filterMagePage($event)" [minLength]="0" [dropdown]="true" [forceSelection]="true"
@@ -83,8 +68,7 @@
 
                     <label for="mainPageName">Main Page Name</label>
                 </span>
-                <!-- <small id="MainPageName-help">{{ formError("mainPageName",PageCreationInfoForm)}}</small> -->
-            </div>
+          </div>
 
 
             <div class="field col-12 md:col-3">
