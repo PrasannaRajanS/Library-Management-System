@@ -1,13 +1,13 @@
 import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
 
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Table } from 'primeng/table';
 
 import { APIConfig } from 'src/app/config/api.config';
-import { IEmployee } from 'src/app/+pms/services/interfaces/IEmployee';
+import { ICourse, IQualification, IEducationDetail, IEmployee, ISpecialization, ICourseType } from 'src/app/+pms/services/interfaces/IEmployee';
 
 
 import * as yup from 'yup';
@@ -18,8 +18,13 @@ import { UtilService } from 'src/app/shared/util.service';
 import { IState } from 'src/app/shared/interface/IState';
 import { ICountry } from 'src/app/shared/interface/ICountry';
 import { CommonHttpService } from 'src/app/shared-services/common-http.service';
+
 import * as _ from 'lodash';
 import { IMiscDetails } from 'src/app/shared/interface/IMisc';
+
+import { MessageService } from 'primeng/api';
+import { PMSValidation } from 'src/app/+pms/services/pms-validation';
+
 
 
 
@@ -63,9 +68,9 @@ export class EmployeeAddComponent {
     categoryOptions = ['Sneakers', 'Apparel', 'Socks'];
 
     colorOptions: any[] = [
-        { name: 'Black', background: 'bg-gray-900' },
-        { name: 'Orange', background: 'bg-orange-500' },
-        { name: 'Navy', background: 'bg-blue-500' },
+        { name: 'Blange', background: 'bg-orange-500' },
+        { name: 'Naack', background: 'bg-gray-900' },
+        { name: 'Orvy', background: 'bg-blue-500' },
     ];
 
     product: Product = {
@@ -201,18 +206,47 @@ export class EmployeeAddComponent {
     formError = (controlName: string, formName: any) => {
         return this.utilService.formError(controlName, formName);
     };
-   
 
-    constructor(private utilService: UtilService,       
-         private router: Router,
-         private httpService : CommonHttpService) {
+
+    //#region EDUCATION DETAIL
+    eduAddSubmitted: boolean = false;
+    educationDialog: boolean = false;
+
+    educationDetail: IEducationDetail = {};
+    educationDetails: IEducationDetail[] = [];
+    selectedEducationDetail: IEducationDetail[] = [];
+
+    QualificationList: IQualification[] = []; // DDL
+    CourseList: ICourse[] = []; // DDL
+    SpecializationList: ISpecialization[] = []; // DDL
+    CourseTypeList: ICourseType[] = []; // DDL
+    //#endregion
+
+    //#region WORK EXPERIENCE DETAIL
+    wrkAddSubmitted: boolean = false;
+    workExperienceDialog: boolean = false;
+
+
+    //#endregion
+
+    ImageFiles: string[] = [];
+    public ImagePath: string | undefined = "";
+    selectedEmployeeImageURL: any = "assets/demo/images/avatar/emp.jpg";
+
+    constructor(
+        private utilService: UtilService,
+        private router: Router,
+        private httpService: CommonHttpService,
+        private messageService: MessageService,
+        private activatedRoute: ActivatedRoute,
+    ) {
         this.EmployeeForm = FormHandler.controls<IEmployee>(this.initialValues);
         this.EmployeeForm.setValidators(
             FormHandler.validate<IEmployee>(this.validationSchema)
         );
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.GetCountries();
         this.GetStates();
     }
@@ -255,7 +289,7 @@ export class EmployeeAddComponent {
 
     //   Drop down by mj tamil
 
-    filterMagePage(event: AutoCompleteCompleteEvent) {}
+    filterMagePage(event: AutoCompleteCompleteEvent) { }
 
     //   Grid List by mj tamil
 
@@ -269,33 +303,29 @@ export class EmployeeAddComponent {
 
     // Filter
 
-    // GetCountries
-
-    public GetCountries(){
+    // #region Countries
+    public GetCountries() {
         try {
             this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_COUNTRIES)
-            .subscribe(
-                {
-                    next:(result :any)=>{
-                        this.CoutryList = result.countries;
-                        // console.log('GetCountries',this.CoutryList);
-                        
-                    },
-                    error: (err: HttpErrorResponse) =>console.log(err)
-                    
-                }
-            )
+                .subscribe(
+                    {
+                        next: (result: any) => {
+                            this.CoutryList = result.countries;
+                            // console.log('GetCountries',this.CoutryList);
+
+                        },
+                        error: (err: HttpErrorResponse) => console.log(err)
+                    }
+                )
         } catch (error) {
-            
+
         }
     }
 
-     // auto complete Country
-
-     filterCountry(event: AutoCompleteCompleteEvent) {
+    filterCountry(event: AutoCompleteCompleteEvent) {
         let filtered: any[] = [];
         let query = event.query;
-        
+
 
         for (let i = 0; i < (this.CoutryList as any[]).length; i++) {
             let _countriesList = (this.CoutryList as any[])[i];
@@ -309,38 +339,31 @@ export class EmployeeAddComponent {
         }
         this.filteredCoutryList = filtered;
     }
+    //  #endregion
 
-
-    // GetStates
-
-    public GetStates(){
+    // #region States
+    public GetStates() {
         try {
             this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_STATES)
-            .subscribe({
-                next: (result : any) =>{
-                    this.StateList = result.states;
-                    // console.log('GetStates', this.GetStates);
+                .subscribe({
+                    next: (result: any) => {
+                        this.StateList = result.states;
+                        // console.log('GetStates', this.GetStates);
 
-                },
-                error: (err:HttpErrorResponse) =>console.log(err)
-                
-            })
+                    },
+                    error: (err: HttpErrorResponse) => console.log(err)
+
+                })
         } catch (error) {
-            
+
         }
     }
-
-
-
-
-
-    // auto complete state
 
     filterState(event: AutoCompleteCompleteEvent) {
         let filtered: any[] = [];
         let query = event.query;
 
-     
+
 
         for (let i = 0; i < (this.StateList as any[]).length; i++) {
             let _stateList = (this.StateList as any[])[i];
@@ -354,8 +377,6 @@ export class EmployeeAddComponent {
         }
         this.filteredStateList = filtered;
     }
-
-    //
 
     onSelectState() {
         if (
@@ -376,21 +397,23 @@ export class EmployeeAddComponent {
         console.log('OnClearState', this.EmployeeForm);
         this.EmployeeForm.get('selectedPresentCountry')?.reset();
     }
+    //  #endregion
 
-   
-    // Save
 
-    Save() {}
 
-    // Clear
 
-    Clear() {}
 
-    // List Link
+
+    Save() { }
+
+
+    Clear() { }
+
 
     RedirecttoList() {
         this.router.navigate(['/apps/pms/employee/employee-list']);
     }
+
 
     // Education 
 
@@ -413,4 +436,71 @@ export class EmployeeAddComponent {
 
     }
     
+
+
+    //#region  EDUCATION DETAIL
+    AddEducation() {
+
+    }
+
+    openEducationDialog() {
+        this.educationDialog = true;
+    }
+
+    hideEducationDialog() {
+        this.educationDialog = false;
+    }
+
+    //#endregion
+
+
+    //#region Employee Image
+    getSelectedFile($event: any) {
+
+        if ($event.length === 0) {
+            return;
+        }
+
+        for (var i = 0; i < $event.target.files.length; i++) {
+
+            // #region Validation
+            var mimeType = $event.target.files[i].type;
+            if (mimeType.match(/image\/*/) == null) {
+                this.notificationsService(PMSValidation.NOTIFICATION_VALIDATION, 'Validation', "Only images are supported.")
+                return;
+            }
+            // #endregion
+
+            this.ImageFiles.push($event.target.files[i]);
+        }
+        this.ImagePath = $event.target.files;
+
+        //#region PREVIEW IMAGE
+        var reader = new FileReader();
+        this.ImagePath = $event.target.files;
+        reader.readAsDataURL($event.target.files[0]);
+        reader.onload = (_event) => {
+            this.selectedEmployeeImageURL = reader.result;
+        }
+        //#endregion
+
+    }
+
+
+    ValidateSelectedFile(name: String) {
+        var ext = name.substring(name.lastIndexOf('.') + 1);
+        if (ext.toLowerCase() == 'png' || ext.toLowerCase() == 'jpg' || ext.toLowerCase() == 'jpeg') {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    //#endregion
+
+    private notificationsService(_severity: any, _summary: any, _message: any) {
+        this.messageService.add({ severity: _severity, summary: _summary, detail: _message, life: 3000 });
+        return;
+    }
+
 }

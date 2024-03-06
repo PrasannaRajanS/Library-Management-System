@@ -81,3 +81,75 @@ export interface IEmployee {
     userId?: number | null | undefined;
     ipAddress?: string | null | undefined;
 }
+
+// #region EDUCATION DETAIL
+export interface IEducationDetail {
+    educationDtlId?: string | null | undefined;  //	uniqueidentifier
+
+    qualificationId?: number | null | undefined;
+    selectedQualification?: any | null | undefined;
+
+    courseId?: number | null | undefined;
+    selectedCourse?: any | null | undefined;
+    
+    specialisationId?: number | null | undefined;
+    selectedSpecialisation?: any | null | undefined;
+
+    schoolCollege?: string | null | undefined;
+
+    modeOfStudyId?: number | null | undefined;
+    selectedModeOfStudy?: any | null | undefined;
+
+    percentage?: number | null | undefined;
+    CourseDurationStart?: Date | null | undefined;
+    CourseDurationEnd?: Date | null | undefined;
+    
+    isActive?: boolean | null | undefined;
+}
+
+export interface IQualification {
+    qualificationId?: number | null | undefined;
+    qualificationName?: string | null | undefined;
+}
+
+export interface ICourse {
+    courseId?: number | null | undefined;
+    courseName?: string | null | undefined;
+}
+
+export interface ISpecialization {
+    specializationId?: number | null | undefined;
+    specializationName?: string | null | undefined;
+}
+
+export interface ICourseType {
+    courseTypeId?: number | null | undefined;
+    courseTypeName?: string | null | undefined;
+}
+//#endregion
+
+export interface IWorkExperienceDetail {
+    workExperienceDtlId?: string | null | undefined;  //	uniqueidentifier
+
+    employmentType?: string | null | undefined;
+    companyName?: string | null | undefined;
+
+    selectedQualification?: any | null | undefined;
+
+    courseId?: number | null | undefined;
+    selectedCourse?: any | null | undefined;
+    
+    specialisationId?: number | null | undefined;
+    selectedSpecialisation?: any | null | undefined;
+
+    schoolCollege?: string | null | undefined;
+
+    modeOfStudyId?: number | null | undefined;
+    selectedModeOfStudy?: any | null | undefined;
+
+    percentage?: number | null | undefined;
+    CourseDurationStart?: Date | null | undefined;
+    CourseDurationEnd?: Date | null | undefined;
+    
+    isActive?: boolean | null | undefined;
+}

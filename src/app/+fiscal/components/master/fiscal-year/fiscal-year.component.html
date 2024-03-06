@@ -21,7 +21,7 @@
     <form [formGroup]="AcademicYearForm" style="margin-top: 10px;">
         <div class="grid p-fluid mt-3">
 
-            <div class="field col-12 md:col-3">
+            <div class="field col-12 md:col-2">
                 <span class="p-float-label">
                     <p-calendar id="calStartDate" formControlName="startDate" [showIcon]="true"
                         [showButtonBar]="true"></p-calendar>
@@ -30,7 +30,7 @@
                 <small>{{ formError("startDate" ,AcademicYearForm)}}</small>
             </div>
 
-            <div class="field col-12 md:col-3">
+            <div class="field col-12 md:col-2">
                 <span class="p-float-label">
                     <p-calendar id="calEndDate" formControlName="endDate" [showIcon]="true"
                         [showButtonBar]="true"></p-calendar>
@@ -38,6 +38,16 @@
                     <label for="calEndDate">End Date<span class="mandatory">*</span></label>
                 </span>
                 <small>{{ formError("endDate" ,AcademicYearForm)}}</small>
+            </div>
+
+            <div class="field col-12 md:col-2">
+                <span class="p-float-label">
+                    <p-calendar id="calmonth" formControlName="month" view="month" [showIcon]="true"
+                    dateFormat="mm/yy" [showButtonBar]="true"></p-calendar>
+
+                    <label for="calmonth">Month<span class="mandatory">*</span></label>
+                </span>
+                <small>{{ formError("month" ,AcademicYearForm)}}</small>
             </div>
 
             <div class="field col-12 md:col-2">
@@ -104,6 +114,7 @@
                         </th>
                         <th pSortableColumn="startDate">Start Date<p-sortIcon field="startDate"></p-sortIcon></th>
                         <th pSortableColumn="endDate">End Date<p-sortIcon field="endDate"></p-sortIcon></th>
+                        <th pSortableColumn="month">Month<p-sortIcon field="month"></p-sortIcon></th>
                         <th pSortableColumn="academicYear">Academic Year<p-sortIcon field="academicYear"></p-sortIcon>
                         </th>
                         <th pSortableColumn="accountYear">Account Year<p-sortIcon field="accountYear"></p-sortIcon></th>
@@ -128,6 +139,11 @@
                         <td style="width:20%; min-width:10rem;">
                             <span class="p-column-title">Name</span>
                             {{item.endDate}}
+                        </td>
+
+                        <td style="width:20%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{item.month}}
                         </td>
 
                         <td style="width:15%; min-width:10rem;">

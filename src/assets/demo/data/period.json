@@ -2,55 +2,68 @@
 	"data": [
 		{
 			"periodId": 1,
-			"type":"School",
-			"period": "I",
-			"startTime":"09:00",
-			"endTime":"09:45",
+			"selectedtype": {
+				"typeId": 3,
+				"type": "Period"
+			},
+			"name": "I",
+			"startTime": "09:00 PM",
+			"endTime": "09:45 PM",
 			"isActive": 1,
 			"userId": "1",
 			"ipAddress": "192.168.1.1"
 		},
-        {
+		{
 			"periodId": 2,
-			"type":"School",
-			"period": "II",
-			"startTime":"09:45",
-			"endTime":"10:30",
+			"selectedtype": {
+				"typeId": 3,
+				"type": "Period"
+			},
+			"name": "II",
+			"startTime": "09:45 PM",
+			"endTime": "10:30 PM",
 			"isActive": 1,
 			"userId": "1",
 			"ipAddress": "192.168.1.1"
 		},
-        {
+		{
 			"periodId": 3,
-			"type":"School",
-			"period": "III",
-			"startTime":"10:45",
-			"endTime":"11:30",
+			"selectedtype": {
+				"typeId": 3,
+				"type": "Period"
+			},
+			"name": "III",
+			"startTime": "10:45 PM",
+			"endTime": "11:30 PM",
 			"isActive": 1,
 			"userId": "1",
 			"ipAddress": "192.168.1.1"
 		},
-        {
+		{
 			"periodId": 4,
-			"type":"School",
-			"period": "IV",
-			"startTime":"11:30",
-			"endTime":"12:15",
+			"selectedtype": {
+				"typeId": 3,
+				"type": "Period"
+			},
+			"name": "IV",
+			"startTime": "11:30 PM",
+			"endTime": "12:15 AM",
 			"isActive": 1,
 			"userId": "1",
 			"ipAddress": "192.168.1.1"
 		},
-        {
+		{
 			"periodId": 5,
-			"type":"School",
-			"period": "V",
-			"startTime":"12:15",
-			"endTime":"12:55",
+			"selectedtype": {
+				"typeId": 3,
+				"type": "Period"
+			},
+			"name": "V",
+			"startTime": "12:15 AM",
+			"endTime": "12:55 AM",
 			"isActive": 1,
 			"userId": "1",
 			"ipAddress": "192.168.1.1"
 		}
-        
-    ]
+	]
 }
-

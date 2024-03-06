@@ -2,9 +2,7 @@
     <div class="grid">
         <div class="col-12 md:col-12">
             <div class="card">
-
                 <h5>ADD EMPLOYEE</h5>
-
                 <p-toolbar styleClass="mb-4">
                     <ng-template pTemplate="left">
                         <div class="my-2">
@@ -26,8 +24,6 @@
 
 
                 </p-toolbar>
-
-
                 <p-toast></p-toast>
 
                 <p-tabView orientation="left">
@@ -35,21 +31,35 @@
                     <p-tabPanel header="Profile" class="line-height-3 m-0">
                         <div class="grid p-fluid">
                             <div class="col-12 md:col-6">
-                                <div class="flex flex-column align-items-center  surface-border p-6">
-                                    <img src="assets/demo/images/avatar/circle/avatar-f-1@2x.png"
-                                        class="w-10rem h-10rem border-circle shadow-4" alt="Asiya Javayant">
-                                    <span class="text-900 text-xl font-semibold mt-4">Asiya Javayant</span>
+                                <div class="flex flex-column align-items-center  surface-border p-6"  >
+                                    <img [src]="selectedEmployeeImageURL" 
+                                    pTooltip="Click Here Replace Photo" 
+                                    tooltipPosition="right" 
+                                    class="w-10rem h-10rem border-circle shadow-4" 
+                                    alt="Employee Photo" (click)="FileInput.click()">
                                 </div>
+                                <input type="file" id="avatar" (change)="getSelectedFile($event)" accept='image/*' style="display:none" #FileInput />
+
                                 <div class="card">
                                     <h5>Personal Info</h5>
                                     <div class="grid formgrid">
 
 
-
+                                        
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
                                                 <input id="employeeNumber" pInputText formControlName="employeeNumber">
                                                 <label for="employeeNumber">Employee No</label>
+                                            </span>
+                                        </div>
+
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false" [showClear]="true"
+                                                    formControlName="reportingTo">
+                                                </p-dropdown>
+                                                <label for="employeeNumber">Salutation</label>
                                             </span>
                                         </div>
 
@@ -546,7 +556,6 @@
 
                     <p-tabPanel header="Education" class="line-height-3 m-0">
                         <div class="grid p-fluid m-3">
-                            <h5>Education Detail</h5>
                             <div class="grid formgrid">
 
                                 <div class="field col-12 md:col-3 mb-3">
@@ -617,14 +626,22 @@
                                             dateFormat="yy" inputId="yearpicker"></p-calendar>
                                         <label for="YearOfPassing">Year Of Passing</label>
                                     </span>
-
-
                                 </div>
 
 
+                                <div class="formgrid grid pl-6" >
+                                    <div class="field col">
+                                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openEducationDialog()"></button>
+                                    </div>
+        
+                                    <div class="field col">
+                                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openEducationDialog()"></button>
+                                    </div>
+                                </div>
+
+
+
                             </div>
-
-
                         </div>
 
                         <div class="grid">
@@ -640,7 +657,8 @@
                                         <ng-template pTemplate="caption">
                                             <div
                                                 class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                                                <h4 class="m-0"> </h4>
+                                                <!-- <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openEducationDialog()"></button> -->
+
                                                 <span class="block mt-2 md:mt-0 p-input-icon-left">
                                                     <i class="pi pi-search"></i>
                                                     <input id="" pInputText (input)="onGlobalFilter(dt, $event)"
@@ -714,9 +732,8 @@
                         </div>
                     </p-tabPanel>
 
-                    <p-tabPanel header="Work" class="line-height-3 m-0">
+                    <p-tabPanel header="Experience" class="line-height-3 m-0">
                         <div class="grid p-fluid m-3">
-                            <h5>Work Experience Detail</h5>
                             <div class="grid formgrid">
 
 
@@ -1145,6 +1162,239 @@
 
 
                 </p-toolbar>
+
+
+
+                <p-dialog [(visible)]="educationDialog" [style]="{width: '500px'}" header="Add Education" [modal]="true" class="p-fluid">
+                    
+                    <ng-template pTemplate="content">
+
+                        <div class="field pt-3">
+                            <span class="p-float-label">
+                                <p-dropdown id="ddlEducation" 
+                                    formControlName="educationDetail.selectedQualification" 
+                                    [options]="QualificationList"
+                                    optionLabel="qualificationName" 
+                                    [autoDisplayFirst]="false" 
+                                    [showClear]="true" 
+                                    autoWidth="false"
+                                    [style]="{ minWidth: '60%', width: '100%' }">
+                                </p-dropdown>
+                                <label for="ddlSchoolCategory">Qualification</label>
+                            </span>
+                        </div>
+
+                        <div class="field pt-3">
+                            <span class="p-float-label">
+                                <input type="text" pInputText 
+                                        id="name" [(ngModel)]="educationDetail.schoolCollege" 
+                                        required autofocus 
+                                        [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.schoolCollege}"/>
+
+                                <label for="ddlSchoolCategory">University/Institute</label>
+                            </span>
+                        </div>
+
+                        <div class="field pt-3">
+                            <span class="p-float-label">
+                                <p-dropdown id="ddlCourse" 
+                                    formControlName="educationDetail.selectedCourse" 
+                                    [options]="CourseList"
+                                    optionLabel="courseName" 
+                                    [autoDisplayFirst]="false" 
+                                    [showClear]="true" 
+                                    autoWidth="false"
+                                    [style]="{ minWidth: '60%', width: '100%' }">
+                                </p-dropdown>
+                                <label for="ddlCourse">Course</label>
+                            </span>
+                        </div>
+
+                        <div class="field pt-3">
+                            <span class="p-float-label">
+                                <p-dropdown id="ddlCourse" 
+                                    formControlName="educationDetail.selectedSpecialisation" 
+                                    [options]="SpecializationList"
+                                    optionLabel="specializationName" 
+                                    [autoDisplayFirst]="false" 
+                                    [showClear]="true" 
+                                    autoWidth="false"
+                                    [style]="{ minWidth: '60%', width: '100%' }">
+                                </p-dropdown>
+                                <label for="ddlCourse">Specialization</label>
+                            </span>
+                        </div>
+
+                        <div class="field pt-3">
+                            <span class="p-float-label">
+                                <p-dropdown id="ddlCourseType" 
+                                    formControlName="educationDetail.selectedModeOfStudy" 
+                                    [options]="CourseTypeList"
+                                    optionLabel="courseTypeName" 
+                                    [autoDisplayFirst]="false" 
+                                    [showClear]="true" 
+                                    autoWidth="false"
+                                    [style]="{ minWidth: '60%', width: '100%' }">
+                                </p-dropdown>
+                                <label for="ddlCourseType">Course type</label>
+                            </span>
+                        </div>
+
+                        <div class="field pt-3">
+                            <span class="p-float-label">
+                                <input type="text" pInputText 
+                                        id="percentageCGPA" [(ngModel)]="educationDetail.percentage" 
+                                        required autofocus 
+                                        [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.percentage}"/>
+
+                                <label for="percentageCGPA">Percentage / CGPA</label>
+                            </span>
+                        </div>
+
+                        <div class="formgrid grid">
+                            <div class="field col">
+                                <span class="p-float-label">
+                                    <input type="text" pInputText 
+                                            id="percentageCGPA" [(ngModel)]="educationDetail.CourseDurationStart" 
+                                            required autofocus 
+                                            [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.percentage}"/>
+                                    <label for="percentageCGPA">Course Start</label>
+                                </span>
+                            </div>
+
+                            <div class="field col">
+                                <span class="p-float-label">
+                                    <input type="text" pInputText 
+                                            id="CourseDurationEnd" [(ngModel)]="educationDetail.CourseDurationEnd" 
+                                            required autofocus 
+                                            [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.percentage}"/>
+                                    <label for="CourseDurationEnd">Course End</label>
+                                </span>
+                            </div>
+                        </div>
+
+                    </ng-template>
+        
+                    <ng-template pTemplate="footer">
+                        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideEducationDialog()"></button>
+                        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="AddEducation()"></button>
+                    </ng-template>
+                </p-dialog>
+                <p-dialog [(visible)]="workExperienceDialog" [style]="{width: '500px'}" header="Add Education" [modal]="true" class="p-fluid">
+                    
+                    <ng-template pTemplate="content">
+
+                        <div class="field pt-3">
+                            <span class="p-float-label">
+                                <p-dropdown id="ddlEducation" 
+                                    formControlName="educationDetail.selectedQualification" 
+                                    [options]="QualificationList"
+                                    optionLabel="qualificationName" 
+                                    [autoDisplayFirst]="false" 
+                                    [showClear]="true" 
+                                    autoWidth="false"
+                                    [style]="{ minWidth: '60%', width: '100%' }">
+                                </p-dropdown>
+                                <label for="ddlSchoolCategory">Qualification</label>
+                            </span>
+                        </div>
+
+                        <div class="field pt-3">
+                            <span class="p-float-label">
+                                <input type="text" pInputText 
+                                        id="name" [(ngModel)]="educationDetail.schoolCollege" 
+                                        required autofocus 
+                                        [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.schoolCollege}"/>
+
+                                <label for="ddlSchoolCategory">University/Institute</label>
+                            </span>
+                        </div>
+
+                        <div class="field pt-3">
+                            <span class="p-float-label">
+                                <p-dropdown id="ddlCourse" 
+                                    formControlName="educationDetail.selectedCourse" 
+                                    [options]="CourseList"
+                                    optionLabel="courseName" 
+                                    [autoDisplayFirst]="false" 
+                                    [showClear]="true" 
+                                    autoWidth="false"
+                                    [style]="{ minWidth: '60%', width: '100%' }">
+                                </p-dropdown>
+                                <label for="ddlCourse">Course</label>
+                            </span>
+                        </div>
+
+                        <div class="field pt-3">
+                            <span class="p-float-label">
+                                <p-dropdown id="ddlCourse" 
+                                    formControlName="educationDetail.selectedSpecialisation" 
+                                    [options]="SpecializationList"
+                                    optionLabel="specializationName" 
+                                    [autoDisplayFirst]="false" 
+                                    [showClear]="true" 
+                                    autoWidth="false"
+                                    [style]="{ minWidth: '60%', width: '100%' }">
+                                </p-dropdown>
+                                <label for="ddlCourse">Specialization</label>
+                            </span>
+                        </div>
+
+                        <div class="field pt-3">
+                            <span class="p-float-label">
+                                <p-dropdown id="ddlCourseType" 
+                                    formControlName="educationDetail.selectedModeOfStudy" 
+                                    [options]="CourseTypeList"
+                                    optionLabel="courseTypeName" 
+                                    [autoDisplayFirst]="false" 
+                                    [showClear]="true" 
+                                    autoWidth="false"
+                                    [style]="{ minWidth: '60%', width: '100%' }">
+                                </p-dropdown>
+                                <label for="ddlCourseType">Course type</label>
+                            </span>
+                        </div>
+
+                        <div class="field pt-3">
+                            <span class="p-float-label">
+                                <input type="text" pInputText 
+                                        id="percentageCGPA" [(ngModel)]="educationDetail.percentage" 
+                                        required autofocus 
+                                        [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.percentage}"/>
+
+                                <label for="percentageCGPA">Percentage / CGPA</label>
+                            </span>
+                        </div>
+
+                        <div class="formgrid grid">
+                            <div class="field col">
+                                <span class="p-float-label">
+                                    <input type="text" pInputText 
+                                            id="percentageCGPA" [(ngModel)]="educationDetail.CourseDurationStart" 
+                                            required autofocus 
+                                            [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.percentage}"/>
+                                    <label for="percentageCGPA">Course Start</label>
+                                </span>
+                            </div>
+
+                            <div class="field col">
+                                <span class="p-float-label">
+                                    <input type="text" pInputText 
+                                            id="CourseDurationEnd" [(ngModel)]="educationDetail.CourseDurationEnd" 
+                                            required autofocus 
+                                            [ngClass]="{'ng-invalid ng-dirty' : eduAddSubmitted && !educationDetail.percentage}"/>
+                                    <label for="CourseDurationEnd">Course End</label>
+                                </span>
+                            </div>
+                        </div>
+
+                    </ng-template>
+        
+                    <ng-template pTemplate="footer">
+                        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideEducationDialog()"></button>
+                        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="AddEducation()"></button>
+                    </ng-template>
+                </p-dialog>
 
             </div>
 

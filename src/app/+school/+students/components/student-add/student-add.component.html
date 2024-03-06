@@ -1,1 +1,389 @@
-<p>student-add works!</p>
+<form [formGroup]="StudentForm">
+
+    <div class="grid">
+        <div class="col-12 md:col-12">
+            <div class="card">
+                <h5>ADD STUDENT</h5>
+
+                <p-toolbar styleClass="mb-4">
+                    <ng-template pTemplate="left">
+                        <div class="my-2">
+                        </div>
+                    </ng-template>
+
+                    <ng-template pTemplate="right">
+
+                        <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" (click)="Save()"
+                            [disabled]="!StudentForm.valid">{{buttonText}}</button>
+
+                        <button pButton pRipple label="List" icon="pi pi-align-justify" class="p-button-primary mr-2"
+                            (click)="RedirecttoList()"></button>
+
+                        <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
+                            (click)="Clear()"></button>
+
+                    </ng-template>
+
+                </p-toolbar>
+
+                <p-toast></p-toast>
+
+                <p-tabView orientation="left">
+
+                    <p-tabPanel header="Profile" class="line-height-3 m-0">
+                        <div class="grid p-fluid">
+                            <div class="col-12 md:col-6">
+                                <div class="flex flex-column align-items-center  surface-border p-6">
+                                    <img src="assets/demo/images/avatar/circle/avatar-f-1@2x.png"
+                                        class="w-10rem h-10rem border-circle shadow-4" alt="Asiya Javayant">
+                                </div>
+                                <div class="card">
+
+                                    <h5>Official Info</h5>
+
+                                    <div class="grid formgrid">
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="RollNo" pInputText formControlName="rollNo">
+                                                <label for="RollNo">Roll No</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="AdmissionNo" pInputText formControlName="admissionNo">
+                                                <label for="AdmissionNo">Admission No</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="EwsNo" pInputText formControlName="ewsNo">
+                                                <label for="EwsNo">Ews No</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="firstName" pInputText formControlName="firstName">
+                                                <label for="firstName">First Name</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="lastName" pInputText formControlName="lastName">
+                                                <label for="lastName">Last Name</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="gender" pInputText formControlName="gender">
+                                                <label for="gender">Gender</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-calendar formControlName="DOB" id="dob"></p-calendar>
+                                                <label for="dob">DOB</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="age" pInputText formControlName="age">
+                                                <label for="age">Age</label>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <h5>Present Address</h5>
+
+                                    <div class="grid formgrid">
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="presentAddress1" pInputText
+                                                    formControlName="presentAddress1">
+                                                <label for="presentAddress1">Address 1</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input pInputText id="presentAddress2"
+                                                    formControlName="presentAddress2">
+                                                <label for="presentAddress2">Address 2</label>
+                                            </span>
+
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input pInputText id="presentAddress3"
+                                                    formControlName="presentAddress3">
+                                                <label for="presentAddress3">Address 3</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input pInputText id="presentCity" formControlName="presentCity">
+                                                <label for="presentCity">City / Town</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-autoComplete id="selectedPresentState"
+                                                    formControlName="selectedPresentState"
+                                                    [suggestions]="filteredStateList"
+                                                    (completeMethod)="filterState($event)" [minLength]="0"
+                                                    [dropdown]="true" [forceSelection]="true"
+                                                    (onSelect)="onSelectState()" field="stateName" [showClear]="true"
+                                                    (onClear)="onClearState()"></p-autoComplete>
+                                                <label for="selectedPresentState">State</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-autoComplete id="selectedPresentCountry"
+                                                    formControlName="selectedPresentCountry"
+                                                    [suggestions]="filteredCoutryList"
+                                                    (completeMethod)="filterCountry($event)" [minLength]="0"
+                                                    [dropdown]="true" [forceSelection]="true" field="countryName"
+                                                    [showClear]="true"></p-autoComplete>
+
+                                                <label for="selectedPresentCountry">Country</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="presentPIN" pInputText formControlName="presentPIN">
+                                                <label for="presentPIN">PIN</label>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                    <h5>Permanent Address</h5>
+
+                                    <div class="grid formgrid">
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <input id="" type="checkbox" value="Same as Present">
+                                            <label for="firstname2">Same as Present Address</label>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="permanentAddress1" pInputText
+                                                    formControlName="permanentAddress1">
+                                                <label for="permanentAddress1">Address 1</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="permanentAddress2" pInputText
+                                                    formControlName="permanentAddress2">
+                                                <label for="permanentAddress2">Address 2</label>
+                                            </span>
+
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="permanentAddress3" pInputText
+                                                    formControlName="permanentAddress3">
+                                                <label for="permanentAddress3">Address 3</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="permanentCity" pInputText formControlName="permanentCity">
+                                                <label for="permanentCity">City / Town</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="permanentState" pInputText formControlName="permanentState">
+                                                <label for="permanentState">State</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="permanentCountry" pInputText
+                                                    formControlName="permanentCountry">
+                                                <label for="permanentCountry">Country</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="permanentPIN" pInputText formControlName="permanentPIN">
+                                                <label for="permanentPIN">PIN</label>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12 md:col-6 mb-3">
+                                <div class="card">
+
+                                    <h5>Emergency Contact Info</h5>
+
+                                    <div class="grid formgrid">
+                                        <div class="col-12 md:col-6 mb-3 field">
+                                            <span class="p-float-label">
+                                                <input id="contactPerson1" pInputText formControlName="contactPerson1">
+                                                <label for="contactPerson1">Contact Person 1<span class="mandatory">*</span></label>
+                                            </span>
+                                            <small id="contactPerson1-help">{{ formError("contactPerson1",StudentForm)}}</small>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3 field">
+                                            <span class="p-float-label">
+                                                <input id="mobileNo1" pInputText formControlName="mobileNo1">
+                                                <label for="mobileNo1">Mobile No 1<span class="mandatory">*</span></label>
+                                            </span>
+                                            <small id="mobileNo1-help">{{ formError("mobileNo1",StudentForm)}}</small>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="contactPerson2" pInputText formControlName="contactPerson2">
+                                                <label for="contactPerson2">Contact Person 2</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="mobileNo2" pInputText formControlName="mobileNo2">
+                                                <label for="mobileNo2">Mobile No 2</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-autoComplete id="mainPageName"
+                                                    (completeMethod)="filterMagePage($event)" [minLength]="0"
+                                                    [dropdown]="true" [forceSelection]="true" field="mainPageName"
+                                                    formControlName="bloodGroup"></p-autoComplete>
+                                                <label for="mainPageName">Blood Group</label>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="card">
+                                        <h5>Unique Number Info</h5>
+                                        <div class="grid formgrid">
+                                            <div class="col-12 md:col-6 mb-3 field">
+                                                <span class="p-float-label">
+                                                    <input id="nationality" pInputText formControlName="nationality">
+                                                    <label for="nationality">Nationality<span class="mandatory">*</span></label>
+                                                </span>
+                                                <small id="nationality-help">{{
+                                                    formError("nationality",StudentForm)}}</small>
+                                            </div>
+
+                                            <div class="col-12 md:col-6 mb-3 field">
+                                                <span class="p-float-label">
+                                                    <input id="community" pInputText formControlName="community">
+                                                    <label for="community">Community<span class="mandatory">*</span></label>
+                                                </span>
+                                                <small id="community-help">{{
+                                                    formError("community",StudentForm)}}</small>
+
+                                            </div>
+
+
+                                            <div class="col-12 md:col-6 mb-3 field">
+                                                <span class="p-float-label">
+                                                    <input id="PANNo" pInputText formControlName="panNo">
+                                                    <label for="PANNo">PAN No<span class="mandatory">*</span></label>
+                                                </span>
+                                                <small id="PANNo-help">{{ formError("panNo",StudentForm)}}</small>
+
+                                            </div>
+
+                                            <div class="col-12 md:col-6 mb-3 field">
+                                                <span class="p-float-label">
+                                                    <input id="aadhaarNo" pInputText formControlName="aadhaarNo">
+                                                    <label for="aadhaarNo">Aadhaar No<span class="mandatory">*</span></label>
+                                                </span>
+                                                <small id="aadhaarNo-help">{{
+                                                    formError("aadhaarNo",StudentForm)}}</small>
+
+                                            </div>
+                                            <div class="col-12 md:col-6 mb-3">
+                                                <span class="p-float-label">
+                                                    <input id="UANNo" pInputText formControlName="uanNo">
+                                                    <label for="UANNo">UAN No</label>
+                                                </span>
+
+                                            </div>
+                                            <div class="col-12 md:col-6 mb-3">
+                                                <span class="p-float-label">
+                                                    <input id="ESINo" pInputText formControlName="esiNo">
+                                                    <label for="ESINo">ESI No</label>
+                                                </span>
+
+                                            </div>
+                                            <div class="col-12 md:col-6 mb-3">
+                                                <span class="p-float-label">
+                                                    <input id="EPFNo" pInputText formControlName="epfNo">
+                                                    <label for="EPFNo">EPF No</label>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Education" class="line-height-3 m-0">
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Work" class="line-height-3 m-0">
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Family" class="line-height-3 m-0">
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Asset" class="line-height-3 m-0">
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Benefit" class="line-height-3 m-0">
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Exit Details" class="line-height-3 m-3">
+
+                    </p-tabPanel>
+
+                </p-tabView>
+
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { IPeriod } from '../../services/interfaces/IPeriod';
@@ -16,6 +16,11 @@ import { SchoolValidation } from '../../services/school-validation';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 
+import { AppConstant } from 'src/app/config/app.constant';
+import { IType } from '../../services/interfaces/IType';
+
+
+
 @Component({
   selector: 'app-period',
   templateUrl: './period.component.html',
@@ -23,7 +28,7 @@ import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 })
 export class PeriodComponent {
 
-  TypeList: any[] = [{ typeId: '1', type: 'School Hours' },{ typeId: '2', type: 'Office Hours' },{ typeId: '3', type: 'Period' }];
+ TypeList: IType[] = [];
 
   buttonText:string = "Save"
   PeriodId: number | null | undefined =0;
@@ -44,8 +49,8 @@ export class PeriodComponent {
   initialValues: IPeriod = {
 
     periodId:0,
-    type:null,
-    period:null,
+    selectedtype:null,
+    name:null,
     startTime:null,
     endTime:null,
     description:null,
@@ -67,7 +72,10 @@ export class PeriodComponent {
     private utilService: UtilService,
     private messageService: MessageService,
     private httpService: CommonHttpService,
+
   ){
+
+    this.TypeList = AppConstant.TypeList;
     this.PeriodForm = FormHandler.controls<IPeriod>(this.initialValues)
     this.PeriodForm.setValidators(FormHandler.validate<IPeriod>(this.validationSchema))
   }
@@ -76,14 +84,14 @@ export class PeriodComponent {
     this.GetAll();
   }
 
-  validateRomanNumeral(event: KeyboardEvent) {
-    let input = event.key.toUpperCase();
-    let romanNumeralPattern = /^[IVXLCDM]*$/; // Regular expression to match Roman numerals
+  // validateRomanNumeral(event: KeyboardEvent) {
+  //   let input = event.key.toUpperCase();
+  //   let romanNumeralPattern = /^[IVXLCDM]*$/; // Regular expression to match Roman numerals
 
-    if (!romanNumeralPattern.test(input) && input !== 'BACKSPACE') {
-      event.preventDefault();
-    }
-  }
+  //   if (!romanNumeralPattern.test(input) && input !== 'BACKSPACE') {
+  //     event.preventDefault();
+  //   }
+  // }
 
   public GetAll() {
     this.productService.getPeriod().then((data) => {
@@ -99,8 +107,8 @@ export class PeriodComponent {
       if (this.IsUpdate) { // UPDATE
         
         passSaveParams.periodId = this.PeriodId;
-        passSaveParams.type = this.PeriodForm.value['type'] != null ? this.PeriodForm.value['type']:'';
-        passSaveParams.period = this.PeriodForm.value['period'] != null ? this.PeriodForm.value['period']:'';
+        passSaveParams.selectedtype = this.PeriodForm.value['selectedtype'] != null ? this.PeriodForm.value['selectedtype']:'';
+        passSaveParams.name = this.PeriodForm.value['name'] != null ? this.PeriodForm.value['name']:'';
         passSaveParams.startTime = this.PeriodForm.value['startTime'] != null ? this.PeriodForm.value['startTime']:'';
         passSaveParams.endTime = this.PeriodForm.value['endTime'] != null ? this.PeriodForm.value['endTime']:'';
         passSaveParams.description = this.PeriodForm.value['description'] != null ? this.PeriodForm.value['description']:'';
@@ -114,8 +122,8 @@ export class PeriodComponent {
        else { //  SAVE
         
         passSaveParams.periodId = this.PeriodId;
-        passSaveParams.type = this.PeriodForm.value['type'] != null ? this.PeriodForm.value['type']:'';
-        passSaveParams.period = this.PeriodForm.value['period'] != null ? this.PeriodForm.value['period']:'';
+        passSaveParams.selectedtype = this.PeriodForm.value['selectedtype'] != null ? this.PeriodForm.value['selectedtype']:'';
+        passSaveParams.period = this.PeriodForm.value['name'] != null ? this.PeriodForm.value['name']:'';
         passSaveParams.startTime = this.PeriodForm.value['startTime'] != null ? this.PeriodForm.value['startTime']:'';
         passSaveParams.endTime = this.PeriodForm.value['endTime'] != null ? this.PeriodForm.value['endTime']:'';
         passSaveParams.description = this.PeriodForm.value['description'] != null ? this.PeriodForm.value['description']:'';
@@ -153,10 +161,6 @@ export class PeriodComponent {
     this.GetAll(); 
   }
 
-  onChangeType(event:any){
-
-  }
-
   onGlobalFilter(table: Table, event: Event){
 
       table.filterGlobal(
@@ -170,9 +174,8 @@ export class PeriodComponent {
 
     console.log('Edit', item);
     this.PeriodId = item.periodId
-
-    this.PeriodForm.controls['type']?.setValue(item.type)
-    this.PeriodForm.controls['period']?.setValue(item.period)
+    this.PeriodForm.controls['selectedtype']?.setValue(item.selectedtype)
+    this.PeriodForm.controls['name']?.setValue(item.name)
     this.PeriodForm.controls['startTime']?.setValue(item.startTime)
     this.PeriodForm.controls['endTime']?.setValue(item.endTime)
     this.PeriodForm.controls['description']?.setValue(item.description)
@@ -197,8 +200,8 @@ export class PeriodComponent {
     var passSaveParams: any = {};
 
     passSaveParams.periodId = deletedItem[0].periodId
-    passSaveParams.type = deletedItem[0].type
-    passSaveParams.period = deletedItem[0].period
+    passSaveParams.selectedtype = deletedItem[0].selectedtype
+    passSaveParams.name = deletedItem[0].name
     passSaveParams.startTime = deletedItem[0].startTime
     passSaveParams.endTime = deletedItem[0].endTime
     passSaveParams.description = deletedItem[0].description

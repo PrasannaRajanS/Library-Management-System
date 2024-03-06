@@ -23,21 +23,21 @@
 
             <div class="field col-12 md:col-2">
                 <span class="p-float-label">
-                    <p-dropdown id="type" [options]="TypeList"  formControlName="type" optionLabel="type" [autoDisplayFirst]="false"
-                        [showClear]="true" (onChange)="onChangeType($event)">
+                    <p-dropdown id="type" [options]="TypeList"  formControlName="selectedtype" optionLabel="type" [autoDisplayFirst]="false"
+                        [showClear]="true">
                     </p-dropdown>
                     <label for="type">Type<span class="mandatory">*</span></label>
                 </span>
-                <small id="application-help">{{formError("type",PeriodForm)}}</small>
+                <small id="selectedtype-help">{{formError("selectedtype",PeriodForm)}}</small>
             </div>
 
             <div class="field col-12 md:col-2  m-0 pb-0">
                 <span class="p-float-label">
-                    <input type="text" id="Period" pInputText
-                        formControlName="period" autocomplete="off">
-                    <label for="Period">Period<span class="mandatory">*</span></label>
+                    <input type="text" id="Name" pInputText
+                        formControlName="name" autocomplete="off" pTooltip="Enter Roman numerals for Period" tooltipPosition="top">
+                    <label for="Name">Name<span class="mandatory">*</span></label>
                 </span>
-                <small id="Period-help">{{ formError("period" ,PeriodForm)}}</small>
+                <small id="Name-help">{{ formError("name" ,PeriodForm)}}</small>
             </div>
 
             <div class="field col-12 md:col-2  m-0 pb-0">
@@ -51,7 +51,9 @@
 
             <div class="field col-12 md:col-2  m-0 pb-0">
                 <span class="p-float-label">
-                    <input type="text" id="endTime" pInputText formControlName="endTime" autocomplete="off">
+                    <p-calendar id="endTime" formControlName="endTime" autocomplete="off" [showTime]="true" [showSeconds]="false"
+                    [timeOnly]="true" hourFormat="12" [showButtonBar]="true"></p-calendar>
+                    
                     <label for="endTime">End Time<span class="mandatory">*</span></label>
                 </span>
                 <small id="endTime-help">{{ formError("endTime" ,PeriodForm)}}</small>
@@ -72,7 +74,7 @@
         <div class="col-12">
             <div class="card px-6 py-6">
                 <p-table #dt [value]="items" [columns]="cols" resposiveLayout="scroll" [rows]="10"
-                    [globalFilterFields]="['type','period','startTime','endTime','description']" [rows]="10"
+                    [globalFilterFields]="['type','name','startTime','endTime','description']" [rows]="10"
                     [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                     [(selection)]="selectedItems" selectionMode="multiple" [rowHover]="true" dataKey="id">
@@ -94,8 +96,8 @@
                             <th style="width: 3rem">
                                 S.No
                             </th>
-                            <th pSortableColumn="type">Type<p-sortIcon field="type"></p-sortIcon></th>
-                            <th pSortableColumn="period">Period<p-sortIcon field="period"></p-sortIcon></th>
+                            <th pSortableColumn="selectedtype">Type<p-sortIcon field="selectedtype"></p-sortIcon></th>
+                            <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
                             <th pSortableColumn="startTime">Start Time<p-sortIcon field="startTime"></p-sortIcon>
                             </th>
                             <th pSortableColumn="endTime">End Time<p-sortIcon field="endTime"></p-sortIcon></th>
@@ -110,16 +112,15 @@
                                 <span class="p-column-title">Name</span>
                                 {{item.periodId}}
                             </td>
-
-
+                            
                             <td style="width:20%; min-width:10rem;">
                                 <span class="p-column-title">Name</span>
-                                {{item.type}}
+                                {{item.selectedtype.type}} <!-- type extra added here -->
                             </td>
 
                             <td style="width:20%; min-width:10rem;">
                                 <span class="p-column-title">Name</span>
-                                {{item.period}}
+                                {{item.name}}
                             </td>
 
                             <td style="width:15%; min-width:10rem;">
@@ -153,7 +154,7 @@
             <p-dialog [(visible)]="deleteDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
                 <div class="flex align-items-center justify-content-center">
                     <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                    <span *ngIf="item">Are you sure you want to delete <b>{{item.period}}</b>?</span>
+                    <span *ngIf="item">Are you sure you want to delete <b>{{item.name}}</b>?</span>
                 </div>
 
                 <ng-template pTemplate="footer">
