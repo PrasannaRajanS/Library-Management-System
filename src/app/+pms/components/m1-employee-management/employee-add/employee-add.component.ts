@@ -20,6 +20,7 @@ import { ICountry } from 'src/app/shared/interface/ICountry';
 import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 import { MessageService } from 'primeng/api';
 import { PMSValidation } from 'src/app/+pms/services/pms-validation';
+import { ProductService } from 'src/app/demo/service/product.service';
 
 
 
@@ -104,6 +105,8 @@ export class EmployeeAddComponent {
     selectedItems: any[] = [];
     items: any[] = [];
 
+    allCountries:ICountry[]=[];
+    countriesData: ICountry = {};
     // AutoComplete By mj tamil
     filteredStateList: IState[] = [];
     StateList: IState[] = [];
@@ -121,35 +124,35 @@ export class EmployeeAddComponent {
 
         // Personal Info
 
-        employeeNumber: null,
+        employeeNo: null,
         firstName: null,
         lastName: null,
         nickName: null,
-        gender: null,
-        DOB: null,
+        genderId: null,
+        dob: null,
         age: null,
 
         // Present Address
 
-        presentAddress1: null,
-        presentAddress2: null,
-        presentAddress3: null,
-        presentCity: null,
-        selectedPresentState: null,
+        address1: null,
+        address2: null,
+        address3: null,
+        city: null,
+        stateId: null,
 
-        presentCountryId: null,
-        selectedPresentCountry: null,
-        presentPIN: null,
+        countryId: null,
+        // selectedPresentCountry: null,
+        pinCode: null,
 
         // Permanent Address
-
-        permanentAddress1: null,
-        permanentAddress2: null,
-        permanentAddress3: null,
-        permanentCity: null,
-        permanentState: null,
-        permanentCountry: null,
-        permanentPIN: null,
+        sameasPresent:null,
+        permanantAddress1: null,
+        permanantAddress2: null,
+        permanantAddress3: null,
+        permanantCity: null,
+        permanantStateId: null,
+        permanantCountryId: null,
+        permanantPINCode: null,
 
         //  Organizational Info
         officialEmail: null,
@@ -168,19 +171,19 @@ export class EmployeeAddComponent {
         //  Emergency Contact Info
 
         contactPerson1: null,
-        mobileNo1: null,
+        contactPersonMobileNo1: null,
         contactPerson2: null,
-        mobileNo2: null,
-        bloodGroup: null,
+        contactPersonMobileNo2: null,
+        bloodGroupId: null,
 
         // Unique Number Info
-        nationality: null,
-        PANNo: null,
-        community: null,
+        nationalityId: null,
+        panNo: null,
+        uanNo: null,
         aadhaarNo: null,
-        UANNo: null,
-        ESINo: null,
-        EPFNo: null,
+        esiNo: null,
+        epfNo: null,
+        communityId: null,
 
         // Family Information
 
@@ -233,7 +236,8 @@ export class EmployeeAddComponent {
         private router: Router,
         private httpService: CommonHttpService,
         private messageService: MessageService,
-        private activatedRoute: ActivatedRoute,
+        // private activatedRoute: ActivatedRoute,
+        private productService:ProductService
     ) {
         this.EmployeeForm = FormHandler.controls<IEmployee>(this.initialValues);
         this.EmployeeForm.setValidators(
@@ -300,22 +304,19 @@ export class EmployeeAddComponent {
 
     // #region Countries
     public GetCountries() {
-        try {
-            this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_COUNTRIES)
-                .subscribe(
-                    {
-                        next: (result: any) => {
-                            this.CoutryList = result.countries;
-                            // console.log('GetCountries',this.CoutryList);
-
-                        },
-                        error: (err: HttpErrorResponse) => console.log(err)
-                    }
-                )
-        } catch (error) {
-
-        }
+       try {
+        this.productService.getCountries().then((data)=>{
+            console.log(data);
+            
+            this.allCountries=data;
+            console.log("All countries",this.allCountries);
+            
+        })
+       } catch (error) {
+        
+       }
     }
+
 
     filterCountry(event: AutoCompleteCompleteEvent) {
         let filtered: any[] = [];
@@ -375,22 +376,22 @@ export class EmployeeAddComponent {
 
     onSelectState() {
         if (
-            this.EmployeeForm.value['selectedPresentState'] != undefined &&
-            this.EmployeeForm.value['selectedPresentState'] != null
+            this.EmployeeForm.value['stateId'] != undefined &&
+            this.EmployeeForm.value['stateId'] != null
         ) {
             let _countryId: number =
-                this.EmployeeForm.value['selectedPresentState'].countryId;
-            this.EmployeeForm.get('selectedPresentCountry')?.setValue(
+                this.EmployeeForm.value['stateId'].countryId;
+            this.EmployeeForm.get('countryId')?.setValue(
                 this.CoutryList.find((c) => c.countryId === _countryId)
             );
         } else {
-            this.EmployeeForm.get('selectedPresentCountry')?.setValue(null);
+            this.EmployeeForm.get('countryId')?.setValue(null);
         }
     }
 
     onClearState() {
         console.log('OnClearState', this.EmployeeForm);
-        this.EmployeeForm.get('selectedPresentCountry')?.reset();
+        this.EmployeeForm.get('countryId')?.reset();
     }
     //  #endregion
 

@@ -1,41 +1,40 @@
 import * as yup from 'yup';
 export const YupPMSValidation = Object.freeze({
     EMPLOYEE: yup.object().shape({
-        employeeId: yup.number().nullable().notRequired(),
+        employeeId: yup.string().nullable().notRequired(),
 
         // Personal Info
 
-        employeeNumber: yup.number().notRequired(),
+        employeeNo: yup.number().notRequired(),
+        salutationId: yup.number().notRequired(), 
         firstName: yup.string().required('Name is required'),
         lastName: yup.string().notRequired(),
         nickName: yup.string().notRequired(),
-        gender: yup.string().notRequired(),
-        DOB: yup.number().nullable().notRequired(),
+        genderId: yup.string().notRequired(),
+        dob: yup.number().nullable().notRequired(),
         age: yup.number().nullable().notRequired(),
+
 
         // Present Address
 
-        
-        
-
-        presentAddress1: yup.string().notRequired(),
-        presentAddress2: yup.string().notRequired(),
-        presentAddress3: yup.string().notRequired(),
-        presentCity: yup.string().notRequired(),
-        selectedPresentState: yup.object().nullable().notRequired(),
+        address1: yup.string().notRequired(),
+        address2: yup.string().notRequired(),
+        address3: yup.string().notRequired(),
+        city: yup.string().notRequired(),
+        stateId: yup.object().nullable().notRequired(),
         presentCountryId: yup.number().nullable().notRequired(),
-        selectedPresentCountry: yup.object().nullable().notRequired(),
-        presentPIN: yup.number().notRequired(),
+        countryId: yup.object().nullable().notRequired(),
+        pinCode: yup.number().notRequired(),
 
         // Permanent Address
-
-        permanentAddress1: yup.string().notRequired(),
-        permanentAddress2: yup.string().notRequired(),
-        permanentAddress3: yup.string().notRequired(),
-        permanentCity: yup.string().notRequired(),
-        permanentState: yup.string().notRequired(),
-        permanentCountry: yup.string().notRequired(),
-        permanentPIN: yup.number().notRequired(),
+        sameasPresent:yup.boolean().notRequired(),
+        permanantAddress1: yup.string().notRequired(),
+        permanantAddress2: yup.string().notRequired(),
+        permanantAddress3: yup.string().notRequired(),
+        permanantCity: yup.string().notRequired(),
+        permanantStateId: yup.string().notRequired(),
+        permanantCountryId: yup.string().notRequired(),
+        permanantPINCode: yup.number().notRequired(),
 
         //  Organizational Info
         officialEmail: yup.string().notRequired(),
@@ -54,20 +53,20 @@ export const YupPMSValidation = Object.freeze({
         //  Emergency Contact Info
 
         contactPerson1: yup.string().required('Name is required'),
-        mobileNo1: yup.string().required('Number is required'),
+        contactPersonMobileNo1: yup.string().required('Number is required'),
         contactPerson2: yup.string().notRequired(),
-        mobileNo2: yup.string().notRequired(),
-        bloodGroup: yup.string().notRequired(),
+        contactPersonMobileNo2: yup.string().notRequired(),
+        bloodGroupId: yup.string().notRequired(),
 
         // Unique Number Info
 
-        nationality: yup.string().required('Nationality is required'),
-        community: yup.string().required('Community is required'),
-        PANNo: yup.string().required('PAN No is required'),
+        nationalityId: yup.string().required('Nationality is required'),
+        panNo: yup.string().required('PAN No is required'),
+        uanNo: yup.number().notRequired(),
         aadhaarNo: yup.number().required('Aadhaar No is required '),
-        UANNo: yup.number().notRequired(),
-        ESINo: yup.number().notRequired(),
-        EPFNo: yup.number().notRequired(),
+        esiNo: yup.number().notRequired(),
+        epfNo: yup.number().notRequired(),
+        communityId: yup.string().required('Community is required'),
 
 
         // Family Information
@@ -75,6 +74,7 @@ export const YupPMSValidation = Object.freeze({
         selectedGender:yup.string().notRequired(),
 
         isActive: yup.boolean().notRequired(),
+        companyId:yup.number().nullable().notRequired(),
         unitId: yup.number().nullable().notRequired(),
         userId: yup.number().nullable().notRequired(),
         ipAddress: yup.string().notRequired(),
