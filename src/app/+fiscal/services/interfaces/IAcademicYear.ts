@@ -3,6 +3,7 @@ export interface IAcademicYear {
     academicYear?: any | null | undefined;
     startDate?: Date | null | undefined;
     endDate?: Date | null | undefined;
+    month?: Date | null | undefined;
     accountYear?: Date | null | undefined;
     isDefault?: any | null | undefined;
 

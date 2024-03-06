@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule} from '@angular/common';
 
 import { PeriodRoutingModule } from './period-routing.module';
 import { PeriodComponent } from './period.component';
@@ -15,6 +15,7 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { UtilService } from 'src/app/shared/util.service';
 import { MessageService } from 'primeng/api';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 
@@ -38,6 +39,7 @@ import { MessageService } from 'primeng/api';
     InputNumberModule,
     TableModule,
     DialogModule,
+    TooltipModule,
  
        
   ],

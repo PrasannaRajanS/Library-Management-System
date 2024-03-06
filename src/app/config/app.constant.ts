@@ -12,5 +12,10 @@ export const AppConstant = Object.freeze({
             label: "No",
             labelId: false,
         }
+    ],
+    TypeList: [
+        { typeId: 1, type: 'School Hours' },
+        { typeId: 2, type: 'Office Hours' },
+        { typeId: 3, type: 'Period' }
     ]
 });

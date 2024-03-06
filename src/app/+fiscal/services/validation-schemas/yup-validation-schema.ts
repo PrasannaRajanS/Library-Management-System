@@ -7,6 +7,7 @@ export const YupFiscalValidation = Object.freeze({
     academicYear: yup.array().required('Academic Year is required'),
     startDate: yup.date().required('Start Date is required'),
     endDate: yup.date().required('End Date is required'),
+    month: yup.date().required('Month is required'),
     accountYear: yup.date().required('Account Year is required'),
     isDefault: yup.object().nullable(),
 
