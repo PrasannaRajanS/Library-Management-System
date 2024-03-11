@@ -19,3 +19,8 @@ export interface IAdmission{
     ipAddress?: string | null | undefined;
 }
 
+export interface IStandard{
+    standardId?:number|null|undefined;
+    standardTypeName?:string|null|undefined;
+}
+

@@ -26,10 +26,10 @@ import { UtilService } from 'src/app/shared/util.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { RadioButtonModule } from 'primeng/radiobutton';
-
-import { Checkbox } from 'primeng/checkbox';
-
 import { DialogModule } from 'primeng/dialog';
+import {  KeyFilterModule } from 'primeng/keyfilter';
+import { InputMaskModule } from 'primeng/inputmask';
+
 
 
 
@@ -57,6 +57,7 @@ import { DialogModule } from 'primeng/dialog';
 		DividerModule,
 		SplitterModule,
 		PanelModule,
+		InputMaskModule,
 		// dropdown ng
 		AutoCompleteModule,
 		DropdownModule,
@@ -65,7 +66,8 @@ import { DialogModule } from 'primeng/dialog';
 		TableModule,
 		RadioButtonModule,
 		ToastModule,
-		DialogModule
+		DialogModule,
+		KeyFilterModule
 
   ],
   providers:[
