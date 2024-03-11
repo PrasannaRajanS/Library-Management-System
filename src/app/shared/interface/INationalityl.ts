@@ -1,4 +1,4 @@
-export interface ICountry {
+export interface INationality {
     countryId?: number | null | undefined;
     countryName?: string | null | undefined;
     shortCode?: string | null | undefined;
@@ -6,5 +6,7 @@ export interface ICountry {
     isActive?: boolean | null | undefined;
     code?: string | null | undefined;
     nationality?: string | null | undefined;
+    permanantCountryId?: number | null | undefined;
 
 }
+

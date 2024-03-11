@@ -6,7 +6,7 @@ import { SelectItem } from 'primeng/api';
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
 import { IAcademicYear } from 'src/app/+fiscal/services/interfaces/IAcademicYear';
-import { IAdmission } from 'src/app/+school/services/interfaces/IAdmission';
+import { IAdmission, IStandard } from 'src/app/+school/services/interfaces/IAdmission';
 import { APIConfig } from 'src/app/config/api.config';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { CommonHttpService } from 'src/app/shared-services/common-http.service';
@@ -15,6 +15,7 @@ import { ICountry } from 'src/app/shared/interface/ICountry';
 import { IMiscDetails } from 'src/app/shared/interface/IMisc';
 import { IState } from 'src/app/shared/interface/IState';
 import * as yup from "yup";
+import * as _ from 'lodash';
 
 
 @Component({
@@ -71,6 +72,9 @@ export class AdmissionAddComponent {
   radioButton1!: string;
   
   deleteDialog:boolean=false;
+
+  // DDL
+  standardtList:IStandard[]=[]
 
 
   IpAddress="192.168.1.1";
@@ -162,25 +166,25 @@ export class AdmissionAddComponent {
                 next: (result: any) => {
                     this.miscDtlItems = result.miscDtls;
                     this.filteredMiscDetailList = this.miscDtlItems;
-                    console.log('GetAllMiscDetails', this.filteredMiscDetailList);
+
+                    const Standard= _.filter(result.miscDtls, 
+                      (val)=>{return val.miscId == 1 })
+
+                      this.standardtList=Standard.map((x)=>{
+                        return <IStandard>{
+                          standardId:x.miscDtlId,
+                          standardTypeName:x.miscDtlName
+                        }
+                      })
+                         
+                    // console.log('GetAllMiscDetails', this.filteredMiscDetailList);
                 },
                 error: (err: HttpErrorResponse) => console.log(err),
             });
     } catch (error) { }
 }
 
-filterStandard(event: AutoCompleteCompleteEvent){
-    let filtered:any[]=[];
-    let query = event.query;
 
-    for(let i=0; i<(this.miscDtlItems as any[]).length; i++){
-            let studentStandards = (this.miscDtlItems as any[])[i];
-            if(studentStandards.miscDtlName.toLowerCase().indexOf(query.toLowerCase())==0){
-                filtered.push(studentStandards);
-            }
-    }
-    this.miscDtlItems=filtered
-}
 
 
 

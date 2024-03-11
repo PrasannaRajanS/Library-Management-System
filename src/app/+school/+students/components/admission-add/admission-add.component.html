@@ -108,13 +108,14 @@
 
                                     <div class="col-12 md:col-3 mb-3">
                                         <span class="p-float-label">
-
-                                            <p-autoComplete [suggestions]="miscDtlItems"
-                                                (completeMethod)="filterStandard($event)" [minLength]="0"
-                                                [dropdown]="true" [forceSelection]="true" field="miscDtlName"
-                                                id="StudentStandard" formControlName="studentStandard"></p-autoComplete>
-
-                                            <label for="StudentStandard">Admission To Standard</label>
+                                            <p-dropdown id="ddlStudentStandard" 
+                                                        formControlName="studentStandard"
+                                                        [options]="standardtList" 
+                                                        optionLabel="standardTypeName" 
+                                                        [autoDisplayFirst]="false"
+                                                        [showClear]="true">
+                                                </p-dropdown>
+                                            <label for="ddlStudentStandard">Admission To Standard</label>
                                         </span>
                                     </div>
 

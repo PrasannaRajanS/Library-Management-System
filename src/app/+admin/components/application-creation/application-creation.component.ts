@@ -180,7 +180,7 @@ export class ApplicationCreationComponent {
     Edit(item: any) {
 
         console.log('Edit',item);
-        this.ApplicationId = item.applicationId;
+        // this.ApplicationId = item.applicationId;
         // this.ApplicationCreationForm.setValue({ applicationName: item.applicationName, description: item.description });
         this.ApplicationCreationForm.controls['applicationName']?.setValue(item.applicationName);
         this.ApplicationCreationForm.controls['description']?.setValue(item.description);

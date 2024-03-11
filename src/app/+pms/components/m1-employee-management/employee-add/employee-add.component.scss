@@ -1,0 +1,50 @@
+.custom-rounded .pi {
+    font-size: 50px; /* Adjust the font size as needed */
+}
+
+.p-button-add {
+    background-color: #ffcc00;
+    color: #333; 
+    border: 1px solid #ffcc00; 
+    transition: background-color 0.3s ease; 
+}
+
+.p-button-add:hover {
+    background-color: #e0a800; 
+}
+
+.p-button-addrounded {
+    border-radius: 5px; 
+    padding: 8px 16px; 
+    font-size: 14px; 
+}
+
+
+.custom-adding-button {
+    margin-right: 10px;
+}
+
+
+/* Custom styles for the "clear" button */
+.custom-clear-button {
+    background-color: #e44d26; /* Custom color for the clear button */
+    color: #fff; /* Text color */
+    border: 1px solid #e44d26; /* Border color, if needed */
+    transition: background-color 0.3s ease; /* Smooth transition for background color change */
+}
+
+.custom-clear-button:hover {
+    background-color: #c4381d; /* Darker shade on hover */
+}
+
+.custom-rounded {
+    border-radius: 5px; /* Rounded corners */
+    padding: 8px 16px; /* Adjust padding as needed */
+    font-size: 14px; /* Adjust font size as needed */
+}
+
+/* Optional: Add a bit of margin or spacing */
+.custom-clear-button {
+    margin-right: 10px;
+}
+

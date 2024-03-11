@@ -11,8 +11,8 @@
 
                     <ng-template pTemplate="right">
 
-                        <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" (click)="Save()"
-                            [disabled]="!EmployeeForm.valid">{{buttonText}}</button>
+                        <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" (click)="Save()">{{buttonText}}</button>
+                        <!--  [disabled]="!EmployeeForm.valid" -->
 
                         <button pButton pRipple label="List" icon="pi pi-align-justify" class="p-button-primary mr-2"
                             (click)="RedirecttoList()"></button>
@@ -58,7 +58,8 @@
                                                             [options]="salutationList" 
                                                             optionLabel="salutationName" 
                                                             [autoDisplayFirst]="false"
-                                                            [showClear]="true">
+                                                            [showClear]="true"
+                                                            pKeyFilter="alpha">
                                                     </p-dropdown>
                                                 <label for="ddlSalutation">Salutation</label>
                                             </span>
@@ -66,23 +67,23 @@
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="firstName" pInputText formControlName="firstName">
-                                                <label for="firstName">First Name</label>
+                                                <input id="EmpFirstName" pInputText formControlName="firstName" pKeyFilter="alpha">
+                                                <label for="EmpFirstName">First Name</label>
                                             </span>
                                             <small id="firstName">{{ formError("firstName" ,EmployeeForm)}}</small>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="lastName" pInputText formControlName="lastName">
-                                                <label for="lastName">Last Name</label>
+                                                <input id="EmpLastName" pInputText formControlName="lastName" pKeyFilter="alpha">
+                                                <label for="EmpLastName">Last Name</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="nickName" pInputText formControlName="nickName">
-                                                <label for="nickName">Nick Name</label>
+                                                <input id="EmpNickName" pInputText formControlName="nickName" pKeyFilter="alpha">
+                                                <label for="EmpNickName">Nick Name</label>
                                             </span>
                                         </div>
 
@@ -94,6 +95,7 @@
                                                     optionLabel="genderName" 
                                                     [autoDisplayFirst]="false"
                                                     [showClear]="true">
+                                                    pKeyFilter="alpha"
                                             </p-dropdown>
                                                 <label for="ddlGender">Gender</label>
                                             </span>
@@ -101,15 +103,16 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-calendar formControlName="dob" id="dob"></p-calendar>
-                                                <label for="dob">DOB</label>
+                                                <p-calendar formControlName="dob" id="Empdob" (onSelect)="calculateAge()"></p-calendar>
+                                                <label for="Empdob">DOB</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="age" pInputText formControlName="age">
-                                                <label for="age">Age</label>
+                                                <input id="Empage" pInputText formControlName="age" pKeyFilter="int" readonly>
+                                               
+                                                <label for="Empage">Age</label>
                                             </span>
                                         </div>
                                     </div>
@@ -140,7 +143,7 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input pInputText id="txtcity" formControlName="city">
+                                                <input pInputText id="txtcity" formControlName="city" pKeyFilter="alpha">
                                                 <label for="txtcity">City / Town</label>
                                             </span>
                                         </div>
@@ -152,7 +155,8 @@
                                                         [options]="StateList" 
                                                         optionLabel="stateName" 
                                                         [autoDisplayFirst]="false"
-                                                        [showClear]="true" [filter]="true">
+                                                        (onChange)="onChangeforState($event)"
+                                                        [showClear]="true" [filter]="true" pKeyFilter="alpha">
                                                 </p-dropdown>
                                                 <label for="ddlPresentState">State</label>
                                             </span>
@@ -165,16 +169,16 @@
                                                         [options]="CoutryList" 
                                                         optionLabel="countryName" 
                                                         [autoDisplayFirst]="false"
-                                                        [showClear]="true" [filter]="true">
+                                                        [showClear]="true" [filter]="true" pKeyFilter="alpha">
                                                     </p-dropdown>
-                                                <label for="selectedPresentCountry">Country</label>
+                                                <label for="ddlPresentCountry">Country</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="presentPIN" pInputText formControlName="pinCode">
-                                                <label for="presentPIN">PIN</label>
+                                                <p-inputMask id="presentPINCode" mask="999999" formControlName="pinCode" ></p-inputMask>
+                                                <label for="presentPINCode">PIN</label>
                                             </span>
                                         </div>
 
@@ -182,42 +186,39 @@
 
                                     <h5>Permanent Address</h5>
                                     <div class="grid formgrid">
+
                                         <div class="col-12 md:col-6 mb-3">
-                                            <!-- Span no need here -->
-                                            <span class="p-float-label">
-                                                <input id="" type="checkbox" value="Same as Present">
-                                                <label for="firstname2">Same as Present</label>
-                                            </span>
-
-
+                                                <input id="empChkSameAsPresentAddress" type="checkbox" value="Same as Present">
+                                                <label for="empChkSameAsPresentAddress">Same as Present Address</label>
                                         </div>
+
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="permanentAddress1" pInputText
+                                                <input id="EmpPermanentAddress1" pInputText
                                                     formControlName="permanantAddress1">
-                                                <label for="permanentAddress1">Address 1</label>
+                                                <label for="EmpPermanentAddress1">Address 1</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="permanentAddress2" pInputText formControlName="permanantAddress2">
-                                                <label for="permanentAddress2">Address 2</label>
+                                                <input id="EmpPermanentAddress2" pInputText formControlName="permanantAddress2">
+                                                <label for="EmpPermanentAddress2">Address 2</label>
                                             </span>
 
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="permanentAddress3" pInputText formControlName="permanantAddress3">
-                                                <label for="permanentAddress3">Address 3</label>
+                                                <input id="EmpPermanentAddress3" pInputText formControlName="permanantAddress3">
+                                                <label for="EmpPermanentAddress3">Address 3</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="permanentCity" pInputText formControlName="permanantCity">
-                                                <label for="permanentCity">City / Town</label>
+                                                <input id="EmpPermanentCity" pInputText formControlName="permanantCity">
+                                                <label for="EmpPermanentCity">City / Town</label>
                                             </span>
                                         </div>
 
@@ -229,7 +230,8 @@
                                                         optionLabel="stateName" 
                                                         [autoDisplayFirst]="false"
                                                         [showClear]="true" 
-                                                        [filter]="true">
+                                                        (onChange)="onChangeforPermanantState($event)"
+                                                        [filter]="true" pKeyFilter="alpha">
                                                 </p-dropdown>
                                                 <label for="ddlPermanentState">State</label>
                                             </span>
@@ -243,7 +245,7 @@
                                                     [options]="permanantCoutryList" 
                                                     optionLabel="countryName" 
                                                     [autoDisplayFirst]="false"
-                                                    [showClear]="true" [filter]="true">
+                                                    [showClear]="true" [filter]="true" pKeyFilter="alpha">
                                                 </p-dropdown>
 
                                                 <label for="ddlPermanentCountry">Country</label>
@@ -252,8 +254,8 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="permanentPIN" pInputText formControlName="permanantPINCode">
-                                                <label for="permanentPIN">PIN</label>
+                                                <p-inputMask id="EmpPermanentPINCode" mask="999999" formControlName="permanantPINCode"></p-inputMask>
+                                                <label for="EmpPermanentPINCode">PIN</label>
                                             </span>
                                         </div>
 
@@ -269,113 +271,130 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="officialEmail" pInputText formControlName="officialEmail">
-                                                <label for="officialEmail">Official Email</label>
+                                                <input id="EmpOfficialEmail" pInputText  formControlName="officialEmail" type="email" required>
+                                                <label for="EmpOfficialEmail">Official Email</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="officialMobile" pInputText formControlName="officialMobile">
-                                                <label for="officialMobile">Official Mobile</label>
+                                                <input id="EmpOfficialMobile" pInputText formControlName="officialMobile">
+                                                <label for="EmpOfficialMobile">Official Mobile</label>
                                             </span>
                                         </div>
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-calendar id="dateOfJoin" formControlName="dateofJoin"></p-calendar>
-                                                <label for="dateOfJoin">Date of Join *</label>
+                                                <p-calendar id="EmpdateOfJoin" formControlName="dateofJoin"></p-calendar>
+                                                <label for="EmpdateOfJoin">Date of Join *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <p-autoComplete id="employeeCategory"
-                                                    (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                    [dropdown]="true" [forceSelection]="true" field="employeeCategory"
-                                                    formControlName="selectedEmployeeCategory"></p-autoComplete>
-                                                <label for="employeeCategory">Employee Category *</label>
+
+                                                <p-dropdown id="ddlEmployeeCategory" 
+                                                formControlName="selectedEmployeeCategory"
+                                                [options]="employeeCategoryList" 
+                                                optionLabel="employeeCategoryName" 
+                                                [autoDisplayFirst]="false"
+                                                [showClear]="true">
+                                                 </p-dropdown>
+                                              
+                                                <label for="ddlEmployeeCategory">Employee Category *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <p-autoComplete id="deptSection"
-                                                    (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                    [dropdown]="true" [forceSelection]="true" field="deptSection"
-                                                    formControlName="selectedDepartment"></p-autoComplete>
-                                                <label for="deptSection">Department</label>
+                                                <p-dropdown id="ddlDepartmentList" 
+                                                formControlName="selectedDepartment"
+                                                [options]="departmentList" 
+                                                optionLabel="departmentName" 
+                                                [autoDisplayFirst]="false"
+                                                [showClear]="true">
+                                                 </p-dropdown>
+                                                <label for="ddlDepartmentList">Department</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 ">
                                             <span class="p-float-label">
-                                                <p-autoComplete id="production"
-                                                    (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                    [dropdown]="true" [forceSelection]="true" field="production"
-                                                    formControlName="selectedSection"></p-autoComplete>
-                                                <label for="production">Sub Department</label>
+                                                <p-autoComplete id="" formControlName="selectedSection"></p-autoComplete>
+                                                <label for="">Sub Department</label>
                                             </span>
                                         </div>
 
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <p-autoComplete id="typeOfEmployment"
-                                                    (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                    [dropdown]="true" [forceSelection]="true" field="typeOfEmployment"
-                                                    formControlName="selectedEmployeementType"></p-autoComplete>
-                                                <label for="typeOfEmployment">Type of Employment</label>
+                                                <p-dropdown id="ddlTypeOfEmployment" 
+                                                formControlName="selectedEmployeementType"
+                                                [options]="employmentTypesList" 
+                                                optionLabel="employmentTypesName" 
+                                                [autoDisplayFirst]="false"
+                                                [showClear]="true">
+                                                 </p-dropdown>
+                                                <label for="ddlTypeOfEmployment">Type of Employment</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-dropdown id="role" optionLabel="roleName" [autoDisplayFirst]="false"
+                                                <p-dropdown id="empReportingTo" optionLabel="roleName" [autoDisplayFirst]="false"
                                                     [showClear]="true" formControlName="selectedReportingTo">
                                                 </p-dropdown>
-                                                <label for="role">Reporting To</label>
+                                                <label for="empReportingTo">Reporting To</label>
                                             </span>
                                         </div>
 
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <p-autoComplete id="salaryType"
-                                                    (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                    [dropdown]="true" [forceSelection]="true" field="salaryType"
-                                                    formControlName="selectedSalaryType"></p-autoComplete>
-                                                <label for="salaryType">Salary Type *</label>
+                                                <p-dropdown id="ddlSalaryType" 
+                                                formControlName="selectedSalaryType"
+                                                [options]="salaryTypeList" 
+                                                optionLabel="SalaryTypeName" 
+                                                [autoDisplayFirst]="false"
+                                                [showClear]="true">
+                                                 </p-dropdown>                              
+                                                <label for="ddlSalaryType">Salary Type *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <p-dropdown id="workingLocation" optionLabel="workingLocation"
+                                                <p-dropdown id="empWorkingLocation" optionLabel="workingLocation"
                                                     [autoDisplayFirst]="false" [showClear]="true"
                                                     formControlName="selectedLocation">
                                                 </p-dropdown>
-                                                <label for="workingLocation">Working Location *</label>
+                                                <label for="empWorkingLocation">Working Location *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-autoComplete id="mainPageName"
-                                                    (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                    [dropdown]="true" [forceSelection]="true" field="mainPageName"
-                                                    formControlName="selectedShift"></p-autoComplete>
-                                                <label for="mainPageName">Shift</label>
+                                                <p-dropdown id="ddlShifts" 
+                                                formControlName="selectedShift"
+                                                [options]="shiftsTypeList" 
+                                                optionLabel="shiftTypeName" 
+                                                [autoDisplayFirst]="false"
+                                                [showClear]="true">
+                                                 </p-dropdown>
+                                                <label for="ddlShifts">Shift</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <p-dropdown id="designationJobTitle" optionLabel="roleName"
-                                                    [autoDisplayFirst]="false" [showClear]="true"
-                                                    formControlName="selectedDesignation">
-                                                </p-dropdown>
-                                                <label for="designationJobTitle">Designation (Job Title) *</label>
+                                                <p-dropdown id="ddlDesignationJobTitle" 
+                                                formControlName="selectedDesignation"
+                                                [options]="designationTypeList" 
+                                                optionLabel="designationName" 
+                                                [autoDisplayFirst]="false"
+                                                [showClear]="true">
+                                                 </p-dropdown>
+                                                <label for="ddlDesignationJobTitle">Designation (Job Title) *</label>
                                             </span>
                                         </div>
                                     </div>
@@ -390,29 +409,29 @@
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input id="contactPerson1" pInputText formControlName="contactPerson1">
-                                                <label for="contactPerson1">Contact Person 1 *</label>
+                                                <input id="empContactPerson1" pInputText formControlName="contactPerson1" pKeyFilter="alpha">
+                                                <label for="empContactPerson1">Contact Person 1 *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input id="mobileNo1" pInputText formControlName="contactPersonMobileNo1">
-                                                <label for="mobileNo1">Mobile No 1 *</label>
+                                                <input id="empMobileNo1" pInputText pKeyFilter="int" formControlName="contactPersonMobileNo1">
+                                                <label for="empMobileNo1">Mobile No 1 *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="contactPerson2" pInputText formControlName="contactPerson2">
-                                                <label for="contactPerson2">Contact Person 2</label>
+                                                <input id="empContactPerson2" pInputText formControlName="contactPerson2" pKeyFilter="alpha">
+                                                <label for="empContactPerson2">Contact Person 2</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="mobileNo2" pInputText formControlName="contactPersonMobileNo2">
-                                                <label for="mobileNo2">Mobile No 2</label>
+                                                <input id="empMobileNo2" pKeyFilter="int" pInputText formControlName="contactPersonMobileNo2">
+                                                <label for="empMobileNo2">Mobile No 2</label>
                                             </span>
                                         </div>
 
@@ -438,50 +457,63 @@
                                     <div class="grid formgrid">
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input id="nationality" pInputText formControlName="selectedNationality">
-                                                <label for="nationality">Nationality *</label>
+                                                <p-dropdown id="ddlEmpNationality" 
+                                                formControlName="selectedNationality"
+                                                [options]="NationalityList" 
+                                                optionLabel="nationality" 
+                                                [autoDisplayFirst]="false"
+                                                [filter]="true"
+                                                [showClear]="true">
+                                        </p-dropdown>
+                                                <label for="ddlEmpNationality">Nationality *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input id="community" pInputText formControlName="selectedCommunity">
-                                                <label for="community">Community *</label>
+                                                <p-dropdown id="ddlCommunity" 
+                                                formControlName="selectedCommunity"
+                                                [options]="communityList" 
+                                                optionLabel="communityName" 
+                                                [autoDisplayFirst]="false"
+                                                [showClear]="true">
+                                        </p-dropdown>
+                                                <label for="ddlCommunity">Community *</label>
                                             </span>
                                         </div>
 
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input id="PANNo" pInputText formControlName="panNo">
-                                                <label for="PANNo">PAN No *</label>
+                                                <input id="empPANNo" pInputText pKeyFilter="alphanum" (input)="onInputChangeForPan()" maxlength="10" formControlName="panNo">
+                                                <label for="empPANNo">PAN No *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input id="aadhaarNo" pInputText formControlName="aadhaarNo">
-                                                <label for="aadhaarNo">Aadhaar No *</label>
+                                                <p-inputMask id="empAadhaarNo" pKeyFilter="int" mask="9999 9999 9999"  formControlName="aadhaarNo"> </p-inputMask>
+                                                <label for="empAadhaarNo">Aadhaar No *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="UANNo" pInputText formControlName="uanNo">
-                                                <label for="UANNo">UAN No</label>
+                                                <input id="empUANNo" pInputText pKeyFilter="alphanum" formControlName="uanNo">
+                                                <label for="empUANNo">UAN No</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="ESINo" pInputText formControlName="esiNo">
-                                                <label for="ESINo">ESI No</label>
+                                                <input id="empESINo" pKeyFilter="int" pInputText formControlName="esiNo">
+                                                <label for="empESINo">ESI No</label>
                                             </span>
                                         </div>
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="EPFNo" pInputText formControlName="epfNo">
-                                                <label for="EPFNo">EPF No</label>
+                                                <input id="empEPFNo" pKeyFilter="int" pInputText formControlName="epfNo">
+                                                <label for="empEPFNo">EPF No</label>
                                             </span>
                                         </div>
                                     </div>
@@ -499,81 +531,91 @@
                                 <div class="field col-12 md:col-3 mb-3">
 
                                     <span class="p-float-label">
-                                        <p-autoComplete id="mainPageName" (completeMethod)="filterMagePage($event)"
-                                            [minLength]="0" [dropdown]="true" [forceSelection]="true"
-                                            field="mainPageName"></p-autoComplete>
-
-                                        <label for="mainPageName">Qualification</label>
+                                        <p-dropdown id="ddlEducationQualification" 
+                                        formControlName="selectedQualification"
+                                        [options]="QualificationList" 
+                                        optionLabel="qualificationName" 
+                                        [autoDisplayFirst]="false"
+                                        [showClear]="true">
+                                      </p-dropdown>
+                                        <label for="ddlEducationQualification">Qualification</label>
                                     </span>
                                 </div>
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-
-                                        <p-dropdown id="course" optionLabel="roleName" [autoDisplayFirst]="false"
-                                            [showClear]="true">
+                                        <p-dropdown id="ddlEmpCourse" 
+                                        formControlName="selectedCourse"
+                                        [options]="CourseList" 
+                                        optionLabel="courseName" 
+                                        [autoDisplayFirst]="false"
+                                        [showClear]="true">
                                         </p-dropdown>
-                                        <label for="course">Course<span class="mandatory">*</span></label>
+                                        <label for="ddlEmpCourse">Course<span class="mandatory">*</span></label>
                                     </span>
 
                                 </div>
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-
-                                        <p-dropdown id="specialisation" optionLabel="roleName"
-                                            [autoDisplayFirst]="false" [showClear]="true">
+                                        <p-dropdown id="ddlEmpSpecialisation" 
+                                        formControlName="selectedSpecialisation"
+                                        [options]="SpecialisationList" 
+                                        optionLabel="specialisationName" 
+                                        [autoDisplayFirst]="false"
+                                        [showClear]="true">
                                         </p-dropdown>
-                                        <label for="specialisation">Specialisation<span
-                                                class="mandatory">*</span></label>
+                                        <label for="ddlEmpSpecialisation">Specialisation<span class="mandatory">*</span></label>
                                     </span>
 
                                 </div>
 
                                 <div class="field" class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input id="" pInputText id="majorQualification" />
-                                        <label for="majorQualification">School/Institute/University</label>
+                                        <input  pInputText id="empMajorQualification" formControlName="schoolCollege" pKeyFilter="alpha"/>
+                                        <label for="empMajorQualification">School/Institute/University</label>
                                     </span>
                                 </div>
 
 
                                 <div class="field col-12 md:col-3 mb-3">
-                                    <span class="p-float-label">
-
-                                        <p-autoComplete id="modeOfStudy" (completeMethod)="filterMagePage($event)"
-                                            [minLength]="0" [dropdown]="true" [forceSelection]="true"
-                                            field="mainPageName"></p-autoComplete>
-
-                                        <label for="modeOfStudy">Mode of Study</label>
+                                    <span class="p-float-label">                                       
+                                        <p-dropdown id="ddlEmpModeOfStudy" 
+                                        formControlName="selectedModeOfStudy"
+                                        [options]="CourseTypeList" 
+                                        optionLabel="courseTypeName" 
+                                        [autoDisplayFirst]="false"
+                                        [showClear]="true">
+                                        </p-dropdown>
+                                        <label for="ddlEmpModeOfStudy">Mode of Study</label>
                                     </span>
 
                                 </div>
 
                                 <div class="field" class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input id="PercentageCGPA" pInputText id="Percentage" />
-                                        <label for="PercentageCGPA">Percentage / CGPA</label>
+                                        <input id="empPercentageCGPA" pInputText pKeyFilter="num"  formControlName="percentage" />
+                                        <label for="empPercentageCGPA">Percentage / CGPA</label>
                                     </span>
 
                                 </div>
 
                                 <div class="field" class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <p-calendar id="YearOfPassing" [readonlyInput]="true" view="year"
-                                            dateFormat="yy" inputId="yearpicker"></p-calendar>
-                                        <label for="YearOfPassing">Year Of Passing</label>
+                                        <p-calendar id="empYearOfPassing" [readonlyInput]="true" view="year"
+                                            dateFormat="yy" inputId="yearpicker" formControlName="yearOfPassing" ></p-calendar>
+                                        <label for="empYearOfPassing">Year Of Passing</label>
                                     </span>
                                 </div>
 
 
                                 <div class="formgrid grid pl-6" >
                                     <div class="field col">
-                                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openEducationDialog()"></button>
+                                        <button pButton pRipple  icon="pi pi-plus" class="p-button-rounded p-button-addrounded p-button-add custom-adding-button" (click)="AddEducationRows()"></button>
                                     </div>
         
                                     <div class="field col">
-                                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openEducationDialog()"></button>
+                                        <button pButton pRipple  icon="pi pi-times" class="p-button-rounded custom-rounded custom-clear-button" ></button>
                                     </div>
                                 </div>
 
@@ -585,7 +627,7 @@
                         <div class="grid">
                             <div class="col-12">
                                 <div class="card px-6 py-6">
-                                    <p-table #dt [value]="items" [columns]="cols" responsiveLayout="scroll" [rows]="10"
+                                    <p-table #dt [value]="EducationDetailList" [columns]="cols" responsiveLayout="scroll" [rows]="10"
                                         [globalFilterFields]="['applicationName']" [rows]="10" [paginator]="true"
                                         [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
                                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -593,38 +635,29 @@
 
 
                                         <ng-template pTemplate="caption">
-                                            <div
+                                            <!-- <div
                                                 class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                                                <!-- <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openEducationDialog()"></button> -->
+                                                <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openEducationDialog()"></button>
 
                                                 <span class="block mt-2 md:mt-0 p-input-icon-left">
                                                     <i class="pi pi-search"></i>
-                                                    <input id="" pInputText (input)="onGlobalFilter(dt, $event)"
+                                                    <input id="findEducationList" pInputText (input)="onGlobalFilter(dt, $event)"
                                                         placeholder="Search..." class="w-full sm:w-auto" />
                                                 </span>
-                                            </div>
+                                            </div> -->
                                         </ng-template>
-
-
 
                                         <ng-template pTemplate="header">
                                             <tr>
-                                                <th style="width:10% !important" class="text-center">
-                                                    <button pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-success mr-2"  (click)="AddEducationRows()"></button>
-                                                </th>
-                                                <th style="width: 3rem">
-                                                    S.No
-                                                </th>
-                                                <!-- Should change the field name -->
-                                                <th pSortableColumn="name">Qualification<p-sortIcon
-                                                        field="applicationName"></p-sortIcon></th>
+                                                <th></th>
+                                                <th>S.No</th>
+                                                <th>Qualification</th>
                                                 <th>Course</th>
                                                 <th>Specialisation</th>
-                                                <th>School/Institute/University</th>
-                                                <th>Percentage / CGPA</th>
+                                                <th>School/Institute</th>
+                                                <th>Percentage/CGPA</th>
                                                 <th>Year Of Passing</th>
                                                 <th>Mode of Study</th>
-                                                <th>Action</th>
 
                                             </tr>
                                         </ng-template>
@@ -632,37 +665,57 @@
                                         <ng-template pTemplate="body" let-item let-i="rowIndex">
                                             <tr>
                                 
-                                                <td style="width:10% !important" class="text-center">
+                                                <td style="width:5% !important" class="text-center">
+                                                    <div class="flex">
+                                                        <button pButton pRipple icon="pi pi-pencil"
+                                                    class="p-button-rounded p-button-success mr-2" (click)="EditEducationRows(item)"></button>
                                                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                                                        (click)="RemoveEducationRows(item,i)"></button>
-                                                </td>
-                                
-                                                <td style="width:10% !important" class="text-center">
-                                                    <section>
-                                                        <label class="checkbox">
-                                                            <p-checkbox name="chkEdit" id="chkEdit" [(ngModel)]="item.edit"  inputId="binary"></p-checkbox>
-                                                            <i></i>
-                                                        </label>
-                                                    </section>
+                                                    (click)="RemoveEducationRows(item,i)"></button>
+                                                    </div>
                                                 </td>
                                 
                                                 <td style="width:5% !important" class="text-center">{{i+1}}</td>
                                 
-                                                <td style="width:30% !important">
-                                                    <input pInputText type="text"  [disabled]="!item.edit" id="txtmiscDtlName"
-                                                     name="txtmiscDtlName" [(ngModel)]="item.miscDtlName" style="width: 100% !important;">
+                                                <td style="width:10% !important">
+                                                   {{item.qualificationName}}
                                                 </td>
-                                
-                                                <td style="width:25% !important" class="text-center">
-                                                    <input pInputText type="text"  [disabled]="!item.edit" id="txtmiscDtlDesc"
-                                                     name="txtmiscDtlDesc" [(ngModel)]="item.miscDtlDesc" style="width: 100% !important;">
-                                                </td>
-                                
+                                                <td style="width:10% !important">
+                                                    {{item.courseName}}
+                                                 </td>
+                                                 <td style="width:10% !important">
+                                                    {{item.specialisationName}}
+                                                 </td>
+                                                 <td style="width:10% !important">
+                                                    {{item.schoolCollege}}
+                                                 </td>
+                                                 <td style="width:10% !important">
+                                                    {{item.percentage}}
+                                                 </td>
+                                                 <td style="width:10% !important">
+                                                    {{item.yearOfPassing |  date:'YYYY' }}
+                                                 </td>
+                                                 <td style="width:10% !important">
+                                                    {{item.modeOfStudy}}
+                                                 </td>       
                                             </tr>
                                         </ng-template>
 
 
                                     </p-table>
+
+                                    <p-dialog [(visible)]="deleteDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+                                        <div class="flex align-items-center justify-content-center">
+                                            <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                                            <span *ngIf="EducationDetailItem">Are you sure you want to delete <b>{{EducationDetailItem.schoolCollege}}</b>?</span>
+                                        </div>
+                            
+                                         <ng-template pTemplate="footer">
+                                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"
+                                                (click)="deleteDialog = false"></button>
+                                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes"
+                                                (click)="EducationListconfirmDelete()"></button>
+                                        </ng-template> 
+                                    </p-dialog>
 
 
                                 </div>
@@ -677,8 +730,8 @@
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText id="PreviousCompanyName" />
-                                        <label for="PreviousCompanyName">Previous Company Name</label>
+                                        <input pInputText id="empPreviousCompanyName"  formControlName="companyName" />
+                                        <label for="empPreviousCompanyName">Previous Company Name</label>
                                     </span>
 
                                 </div>
@@ -686,42 +739,44 @@
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <p-calendar id="StartingDate"></p-calendar>
-                                        <label for="StartingDate">Starting Date</label>
+                                        <p-calendar id="empStartingDate" formControlName="fromDate"></p-calendar>
+                                        <label for="empStartingDate">Starting Date</label>
                                     </span>
                                 </div>
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <p-calendar id="EndingDate"></p-calendar>
-                                        <label for="EndingDate">Ending Date</label>
+                                        <p-calendar id="empEndingDate" formControlName="toDate"></p-calendar>
+                                        <label for="empEndingDate">Ending Date</label>
                                     </span>
 
                                 </div>
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText id="Experience" />
-                                        <label for="Experience">Experience</label>
+                                        <input pInputText id="empExperience" pKeyFilter="int" formControlName="experience" />
+                                        <label for="empExperience">Experience</label>
                                     </span>
                                 </div>
 
                                 <div class="field col-12 md:col-3 mb-3">
 
                                     <span class="p-float-label">
-
-                                        <p-autoComplete id="jobTitle" (completeMethod)="filterMagePage($event)"
-                                            [minLength]="0" [dropdown]="true" [forceSelection]="true"
-                                            field="mainPageName"></p-autoComplete>
-
-                                        <label for="jobTitle">Job Title</label>
+                                        <p-dropdown id="ddlEmpJobTitle" 
+                                        formControlName="selectedJobTitle"
+                                        [options]="previousJObList" 
+                                        optionLabel="jobTitleName" 
+                                        [autoDisplayFirst]="false"
+                                        [showClear]="true">
+                                        </p-dropdown>
+                                        <label for="empJobTitle">Job Title</label>
                                     </span>
 
                                 </div>
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText id="jobDescription" />
-                                        <label for="jobDescription">Job Description</label>
+                                        <input pInputText id="empJobDescription" formControlName="jobDesc" />
+                                        <label for="empJobDescription">Job Description</label>
                                     </span>
 
 
@@ -729,20 +784,30 @@
 
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
-                                        <input pInputText id="reasonForChange" />
-                                        <label for="reasonForChange">Reason For Change</label>
+                                        <input pInputText id="empReasonForChange"  formControlName="reasonForChange" />
+                                        <label for="empReasonForChange">Reason For Change</label>
                                     </span>
+
+                                 
 
 
                                 </div>
-
+                                <div class="formgrid grid pl-6" >
+                                    <div class="field col">
+                                        <button pButton pRipple  icon="pi pi-plus" class="p-button-rounded p-button-addrounded p-button-add custom-adding-button" (click)="AddExperienceRows()"></button>
+                                    </div>
+        
+                                    <div class="field col">
+                                        <button pButton pRipple  icon="pi pi-times" class="p-button-rounded custom-rounded custom-clear-button"></button>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
                         <div class="grid">
                             <div class="col-12">
                                 <div class="card px-6 py-6">
-                                    <p-table #dt [value]="items" [columns]="cols" responsiveLayout="scroll" [rows]="10"
+                                    <p-table #dt [value]="ExperienceDetailList" [columns]="cols" responsiveLayout="scroll" [rows]="10"
                                         [globalFilterFields]="['applicationName']" [rows]="10" [paginator]="true"
                                         [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
                                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -750,7 +815,7 @@
 
 
                                         <ng-template pTemplate="caption">
-                                            <div
+                                            <!-- <div
                                                 class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                                                 <h4 class="m-0"> </h4>
                                                 <span class="block mt-2 md:mt-0 p-input-icon-left">
@@ -758,66 +823,84 @@
                                                     <input pInputText (input)="onGlobalFilter(dt, $event)"
                                                         placeholder="Search..." class="w-full sm:w-auto" />
                                                 </span>
-                                            </div>
+                                            </div> -->
                                         </ng-template>
 
 
 
                                         <ng-template pTemplate="header">
                                             <tr>
-                                                <th style="width:10% !important" class="text-center">
-                                                    <button pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-success mr-2"  (click)="AddWorkExperience()"></button>
-                                                </th>
-                                                <th style="width: 3rem">
-                                                    S.No
-                                                </th>
-                                                <th pSortableColumn="name">Company Name<p-sortIcon
-                                                        field="applicationName"></p-sortIcon></th>
-                                                <th>From Date</th>
-                                                <th>To Date</th>
-                                                <th>Experience</th>
-                                                <th>Job Title</th>
-                                                <th>Reason For Change</th>
-                                                <th>Action</th>
 
+                                                <th></th>
+                                                <th class="text-center">S.No</th>
+                                                <th class="text-center" >Company Name</th>
+                                                <th class="text-center">From Date</th>
+                                                <th class="text-center">To Date</th>
+                                                <th class="text-center">Experience</th>
+                                                <th class="text-center">Job Title</th>
+                                                <th class="text-center">Job Desc</th>
+                                                <th class="text-center">Reason For Change</th>
                                             </tr>
                                         </ng-template>
 
+
                                         <ng-template pTemplate="body" let-item let-i="rowIndex">
-                                            <tr>
-                                
-                                                <td style="width:10% !important" class="text-center">
+                                            <tr style="width:15%; min-width:10rem;">
+                                              
+                                                <td style="width:5% !important" class="text-center">
+                                                    <div class="flex">
+                                                        <button pButton pRipple icon="pi pi-pencil"
+                                                    class="p-button-rounded p-button-success mr-2" (click)="EditExperienceRows(item)"></button>
                                                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                                                        (click)="RemoveWorkExperienceRows(item,i)"></button>
+                                                    (click)="RemoveExperienceRows(item,i)"></button>
+                                                    </div>
                                                 </td>
-                                
-                                                <td style="width:10% !important" class="text-center">
-                                                    <section>
-                                                        <label class="checkbox">
-                                                            <p-checkbox name="chkEdit" id="chkEdit" [(ngModel)]="item.edit"  inputId="binary"></p-checkbox>
-                                                            <i></i>
-                                                        </label>
-                                                    </section>
-                                                </td>
-                                
+
                                                 <td style="width:5% !important" class="text-center">{{i+1}}</td>
                                 
-                                                <td style="width:30% !important">
-                                                    <input pInputText type="text"  [disabled]="!item.edit" id="txtmiscDtlName"
-                                                     name="txtmiscDtlName" [(ngModel)]="item.miscDtlName" style="width: 100% !important;">
+                                                <td style="width:10% !important" class="text-center">
+                                                   {{item.companyName}}
                                                 </td>
-                                
-                                                <td style="width:25% !important" class="text-center">
-                                                    <input pInputText type="text"  [disabled]="!item.edit" id="txtmiscDtlDesc"
-                                                     name="txtmiscDtlDesc" [(ngModel)]="item.miscDtlDesc" style="width: 100% !important;">
-                                                </td>
-                                
+                                                <td style="width:10% !important" class="text-center">
+                                                    {{item.fromDate |  date:'M/d/yyyy' }}
+                                                 </td>
+                                                 <td style="width:10% !important" class="text-center">
+                                                    {{item.toDate |  date:'M/d/yyyy' }}
+                                                 </td>
+                                                 <td style="width:10% !important" class="text-center">
+                                                    {{item.experience}}
+                                                 </td>
+                                                 <td style="width:10% !important" class="text-center">
+                                                    {{item.jobTitleName}}
+                                                 </td>
+                                                 <td style="width:10% !important" class="text-center">
+                                                    {{item.jobDesc}}
+                                                 </td>
+                                                 <td style="width:10% !important" class="text-center">
+                                                    {{item.reasonForChange}}
+                                                 </td>       
                                             </tr>
                                         </ng-template>
 
 
 
                                     </p-table>
+
+                                    <p-dialog [(visible)]="deleteDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+                                        <div class="flex align-items-center justify-content-center">
+                                            <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                                            <!-- <span *ngIf="item">Are you sure you want to delete <b>{{item.applicationName}}</b>?</span> -->
+                                            <span >Are you sure you want to delete <b></b>?</span>
+                                        </div>
+                            
+                                        <ng-template pTemplate="footer">
+                                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"
+                                                (click)="deleteDialog = false"></button>
+                                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes"
+                                                (click)="ExperienceListconfirmDelete()"></button>
+                                        </ng-template>
+                                    </p-dialog>
+                                    
 
 
                                 </div>
@@ -826,7 +909,7 @@
 
                     </p-tabPanel>
 
-                    <p-tabPanel header="Family" class="line-height-3 m-0">
+                    <!-- <p-tabPanel header="Family" class="line-height-3 m-0">
 
                         <div class="grid p-fluid m-3">
                             <h5>Family Information</h5>
@@ -856,7 +939,7 @@
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
                                         <p-dropdown id="relation1Gender" formControlName="selectedGender"
-                                            [options]="genderOptions" placeholder="Gender"></p-dropdown>
+                                            [options]="" placeholder="Gender"></p-dropdown>
                                         <label for="relation1Gender"> Gender*</label>
                                     </span>
 
@@ -885,7 +968,7 @@
                                 <div class="field col-12 md:col-3 mb-3">
                                     <span class="p-float-label">
                                         <p-dropdown id="relation2Gender" formControlName="selectedGender"
-                                            [options]="genderOptions" placeholder="Gender"></p-dropdown>
+                                            [options]="" placeholder="Gender"></p-dropdown>
                                         <label for="relation2Gender"> Gender</label>
                                     </span>
 
@@ -1075,7 +1158,7 @@
 
                         </div>
 
-                    </p-tabPanel>
+                    </p-tabPanel> -->
 
                 </p-tabView>
 
