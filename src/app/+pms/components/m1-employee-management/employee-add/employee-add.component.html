@@ -188,7 +188,7 @@
                                     <div class="grid formgrid">
 
                                         <div class="col-12 md:col-6 mb-3">
-                                                <input id="empChkSameAsPresentAddress" type="checkbox" value="Same as Present">
+                                                <input id="empChkSameAsPresentAddress" type="checkbox" value="Same as Present" (click)="handleSameAsPresentAddress()">
                                                 <label for="empChkSameAsPresentAddress">Same as Present Address</label>
                                         </div>
 
@@ -615,7 +615,7 @@
                                     </div>
         
                                     <div class="field col">
-                                        <button pButton pRipple  icon="pi pi-times" class="p-button-rounded custom-rounded custom-clear-button" ></button>
+                                        <button pButton pRipple  icon="pi pi-times" class="p-button-rounded custom-rounded custom-clear-button" (click)="ClearEducationRows()" ></button>
                                     </div>
                                 </div>
 
@@ -798,7 +798,7 @@
                                     </div>
         
                                     <div class="field col">
-                                        <button pButton pRipple  icon="pi pi-times" class="p-button-rounded custom-rounded custom-clear-button"></button>
+                                        <button pButton pRipple  icon="pi pi-times" class="p-button-rounded custom-rounded custom-clear-button" (click)="ClearExperienceRows()"></button>
                                     </div>
                                 </div>
 
