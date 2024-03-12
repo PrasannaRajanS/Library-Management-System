@@ -240,7 +240,6 @@ export class EmployeeAddComponent {
 
     // Work
     previousJObList: IJobTitle[] = [];
-
     DeletedEducationDtls: IEducationDetail[] = [];
 
     //#region EDUCATION DETAIL
@@ -274,6 +273,7 @@ export class EmployeeAddComponent {
         );
     }
 
+    
     ngOnInit() {
         this.GetCountries();
         this.GetStates();
@@ -287,10 +287,7 @@ export class EmployeeAddComponent {
                 .subscribe({
                     next: (result: any) => {
                         // console.log( 'fetchEmployeesData()',   result.loadEmployeesData );
-                        this.EmployeeForm.controls['employeeNo']?.setValue(
-                            result.loadEmployeesData.autoGenerateNo[0]
-                                .autoGenerateNo
-                        );
+                        this.EmployeeForm.controls['employeeNo']?.setValue(result.loadEmployeesData.autoGenerateNo[0] .autoGenerateNo );
                         this.EmployeeForm.controls['employeeNo']?.disable();
 
                         // console.log(JSON.stringify(result.loadEmployeesData.miscDtl));
@@ -520,6 +517,33 @@ export class EmployeeAddComponent {
         } catch (error) {}
     }
 
+    // calculateAge
+    calculateAge() {
+        // console.log('calculateAge', this.EmployeeForm);
+
+        if (
+            this.EmployeeForm.value['dob'] != undefined &&
+            this.EmployeeForm.value['dob'] != null
+        ) {
+            const today = new Date();
+            const birthDate = new Date(this.EmployeeForm.value['dob']);
+
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+
+            if (
+                monthDiff < 0 ||
+                (monthDiff === 0 && today.getDate() < birthDate.getDate())
+            ) {
+                age--;
+            }
+            console.log('age', age);
+            this.EmployeeForm.controls['age']?.setValue(age);
+        } else {
+            // Handle the case when no date is selected
+            this.EmployeeForm.controls['age']?.setValue(0);
+        }
+    }
 
 
 // For Pan to UpperCase by mj
@@ -571,6 +595,9 @@ export class EmployeeAddComponent {
             this.EmployeeForm.get("selectedCountry")?.setValue(this.CoutryList.find(c => c.countryId === _countryId))
          
         }
+        else if (this.EmployeeForm.value['selectedState'] === null || this.EmployeeForm.value['selectedState'] === undefined) {
+            this.EmployeeForm.get("selectedCountry")?.setValue(null);
+        } 
        
         
     }
@@ -579,44 +606,38 @@ export class EmployeeAddComponent {
         this.EmployeeForm.get('selectedCountry')?.reset();
     }
 
-    onChangeforPermanantState(data:any){
-        if(this.EmployeeForm.value['permanantSelectedState'] !=null && this.EmployeeForm.value['permanantSelectedState'] !=undefined){
-            let _countryId:number=this.EmployeeForm.value['permanantSelectedState'].countryId;
-            this.EmployeeForm.get("permanantSelectedCountry")?.setValue(this.permanantCoutryList.find(c => c.countryId === _countryId))
-         
-        }
+    onChangeforPermanantState(data: any) {
+        if (this.EmployeeForm.value['permanantSelectedState'] !== null && this.EmployeeForm.value['permanantSelectedState'] !== undefined) {
+            let _countryId: number = this.EmployeeForm.value['permanantSelectedState'].countryId;
+            this.EmployeeForm.get("permanantSelectedCountry")?.setValue(this.permanantCoutryList.find(c => c.countryId === _countryId));
+        } 
+        else if (this.EmployeeForm.value['permanantSelectedState'] === null || this.EmployeeForm.value['permanantSelectedState'] === undefined) {
+            this.EmployeeForm.get("permanantSelectedCountry")?.setValue(null);
+        } 
     }
 
-    //  #endregion
+
+    handleSameAsPresentAddress() {
+        const { address1, address2, address3, city, selectedState, selectedCountry, pinCode  } = this.EmployeeForm.value;
+          
+          if (address1 != null  && address2 != null) {
+            this.EmployeeForm.get('permanantAddress1')?.setValue(address1);
+            this.EmployeeForm.get('permanantAddress2')?.setValue(address2);
+            this.EmployeeForm.get('permanantAddress3')?.setValue(address3);
+            this.EmployeeForm.get('permanantCity')?.setValue(city);
+            this.EmployeeForm.get('permanantSelectedState')?.setValue(selectedState);
+            this.EmployeeForm.get('permanantSelectedCountry')?.setValue(selectedCountry);
+            this.EmployeeForm.get('permanantPINCode')?.setValue(pinCode);
+          } else {
+            this.EmployeeForm.get('permanantAddress1')?.setValue("");
+          }
+    }
 
     
 
-    calculateAge() {
-        // console.log('calculateAge', this.EmployeeForm);
+    //  #endregion
 
-        if (
-            this.EmployeeForm.value['dob'] != undefined &&
-            this.EmployeeForm.value['dob'] != null
-        ) {
-            const today = new Date();
-            const birthDate = new Date(this.EmployeeForm.value['dob']);
 
-            let age = today.getFullYear() - birthDate.getFullYear();
-            const monthDiff = today.getMonth() - birthDate.getMonth();
-
-            if (
-                monthDiff < 0 ||
-                (monthDiff === 0 && today.getDate() < birthDate.getDate())
-            ) {
-                age--;
-            }
-            console.log('age', age);
-            this.EmployeeForm.controls['age']?.setValue(age);
-        } else {
-            // Handle the case when no date is selected
-            this.EmployeeForm.controls['age']?.setValue(0);
-        }
-    }
 
     AddEductionDetail() {}
 
@@ -665,7 +686,7 @@ export class EmployeeAddComponent {
             passSaveParams.dob =
                 this.EmployeeForm.value['dob'] != null
                     ? this.EmployeeForm.value['dob']
-                    : '';
+                    : null;
             passSaveParams.age =
                 this.EmployeeForm.value['age'] != null
                     ? this.EmployeeForm.value['age']
@@ -773,7 +794,7 @@ export class EmployeeAddComponent {
             passSaveParams.passportExpDt =
                 this.EmployeeForm.value['passportExpDt'] != null
                     ? this.EmployeeForm.value['passportExpDt']
-                    : '';
+                    : null;
             passSaveParams.drivingLicenseNo =
                 this.EmployeeForm.value['drivingLicenseNo'] != null
                     ? this.EmployeeForm.value['drivingLicenseNo']
@@ -781,7 +802,7 @@ export class EmployeeAddComponent {
             passSaveParams.drivingLicenseExpDt =
                 this.EmployeeForm.value['drivingLicenseExpDt'] != null
                     ? this.EmployeeForm.value['drivingLicenseExpDt']
-                    : '';
+                    : null;
             passSaveParams.aadhaarNo =
                 this.EmployeeForm.value['aadhaarNo'] != null
                     ? this.EmployeeForm.value['aadhaarNo']
@@ -832,7 +853,7 @@ export class EmployeeAddComponent {
             passSaveParams.dateofJoin =
                 this.EmployeeForm.value['dateofJoin'] != null
                     ? this.EmployeeForm.value['dateofJoin']
-                    : '';
+                    : null;
             passSaveParams.empCategoryId =
                 this.EmployeeForm.value['selectedEmployeeCategory'] !=
                     undefined &&
@@ -992,7 +1013,7 @@ export class EmployeeAddComponent {
                     dataBind.yearOfPassing =
                         this.EmployeeForm.value['yearOfPassing'] != null
                             ? this.EmployeeForm.value['yearOfPassing']
-                            : 0;
+                            : null;
                     dataBind.modeOfStudyId =
                         this.EmployeeForm.value['selectedModeOfStudy'] !=
                             undefined &&
@@ -1057,7 +1078,22 @@ export class EmployeeAddComponent {
             );
         }
 
-        this.EmployeeForm.reset();
+    }
+
+    ClearEducationRows(){
+            const {selectedQualification,selectedCourse,selectedSpecialisation,schoolCollege,selectedModeOfStudy,percentage,yearOfPassing}=this.EmployeeForm.value;
+
+            if(selectedQualification!=null && selectedQualification!=undefined ){
+                this.EmployeeForm.get('selectedQualification')?.setValue("");
+                this.EmployeeForm.get('selectedCourse')?.setValue("");
+                this.EmployeeForm.get('selectedSpecialisation')?.setValue("");
+                this.EmployeeForm.get('schoolCollege')?.setValue("");
+                this.EmployeeForm.get('selectedModeOfStudy')?.setValue("");
+                this.EmployeeForm.get('percentage')?.setValue("");
+                this.EmployeeForm.get('yearOfPassing')?.setValue(null);
+
+            }
+
     }
 
     EditEducationRows(item: any) {
@@ -1132,11 +1168,11 @@ export class EmployeeAddComponent {
                     dataBind.fromDate =
                         this.EmployeeForm.value['fromDate'] != null
                             ? this.EmployeeForm.value['fromDate']
-                            : '';
+                            : null;
                     dataBind.toDate =
                         this.EmployeeForm.value['toDate'] != null
                             ? this.EmployeeForm.value['toDate']
-                            : '';
+                            : null;
                     dataBind.experience =
                         this.EmployeeForm.value['experience'] != null
                             ? this.EmployeeForm.value['experience']
@@ -1189,7 +1225,27 @@ export class EmployeeAddComponent {
             );
         }
 
-        this.EmployeeForm.reset();
+    }
+
+    ClearExperienceRows(){
+            const{companyName,fromDate,toDate,experience,selectedJobTitle,jobDesc,reasonForChange}=this.EmployeeForm.value;
+
+            if(companyName!=null &&  companyName!=undefined ){
+
+                this.EmployeeForm.get('companyName')?.setValue("");
+                this.EmployeeForm.get('fromDate')?.setValue(null);
+                this.EmployeeForm.get('toDate')?.setValue(null);
+                this.EmployeeForm.get('experience')?.setValue(0);
+                this.EmployeeForm.get('selectedJobTitle')?.setValue("");
+                this.EmployeeForm.get('jobDesc')?.setValue("");
+                this.EmployeeForm.get('reasonForChange')?.setValue("");
+                this.EmployeeForm.get('companyName')?.setValue("");
+                this.EmployeeForm.get('companyName')?.setValue("");
+                this.EmployeeForm.get('companyName')?.setValue("");
+                this.EmployeeForm.get('companyName')?.setValue("");
+
+            }
+            
     }
 
     EditExperienceRows(item: any) {
@@ -1209,6 +1265,8 @@ export class EmployeeAddComponent {
             item.reasonForChange
         );
     }
+
+
 
     RemoveExperienceRows(data: any, index: number) {
         // this.deleteDialog=true;
