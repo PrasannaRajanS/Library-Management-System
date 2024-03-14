@@ -53,4 +53,11 @@ export interface ILabel {
     labelId?: boolean | null | undefined;
     label?: string | null | undefined;
 }
-
+export interface ITransportation{
+    transportationId?: number | null | undefined;
+    transportationName?: string | null | undefined;
+}
+export interface IChildIsLiving{
+    childIsLivingWithId?: number | null | undefined;
+    childIsLivingWithName?: string | null | undefined;
+}

@@ -3,13 +3,28 @@
   width: 100%; /* Set the desired width */
 }
 
-/* Adjust the width of the input field within the autocomplete */
-::ng-deep .p-autocomplete .p-autocomplete-input .p-calendar {
-  width: 100%; /* Set the desired width */
-}
+
 
 /* Reduce the margin-bottom of the first div */
 .btm {
   margin-bottom: -15px; /* Adjust the value as needed */
 }
+
+::ng-deep  .p-dropdown {
+  width: 100%;
+}
+
+::ng-deep .p-calendar {
+  width: 100% ;
+}
+
+::ng-deep .p-inputmask {
+  width: 300px; /* Change to the desired width */
+  /* Other styles remain the same */
+}
+
+
+
+
+
 

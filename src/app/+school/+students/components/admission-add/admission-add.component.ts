@@ -2,20 +2,26 @@ import { state, style, trigger } from '@angular/animations';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { SelectItem } from 'primeng/api';
+
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 import { FiscalAPIConfig } from 'src/app/+fiscal/services/fiscal-api-config';
 import { IAcademicYear } from 'src/app/+fiscal/services/interfaces/IAcademicYear';
-import { IAdmission, IStandard } from 'src/app/+school/services/interfaces/IAdmission';
-import { APIConfig } from 'src/app/config/api.config';
+import { IAdmission, IGender,  IMotherTongue, IReligion, IStandard } from 'src/app/+school/services/interfaces/IAdmission';
+
 import { ProductService } from 'src/app/demo/service/product.service';
 import { CommonHttpService } from 'src/app/shared-services/common-http.service';
 import { FormHandler, YupFormControls } from 'src/app/shared/form-handler';
 import { ICountry } from 'src/app/shared/interface/ICountry';
 import { IMiscDetails } from 'src/app/shared/interface/IMisc';
 import { IState } from 'src/app/shared/interface/IState';
-import * as yup from "yup";
 import * as _ from 'lodash';
+import { PMSAPIConfig } from 'src/app/+pms/services/pms-api-config';
+import { CommonService } from 'src/app/shared-services/common.service';
+import { IBloodGroup, ICommunity, IQualification } from 'src/app/+pms/services/interfaces/IEmployee';
+import { IBoard, IChildIsLiving, IMediumofInstruction, ITransportation } from 'src/app/+fiscal/services/interfaces/ICommon';
+import { IClass } from 'src/app/shared/interface/ICommon';
+import { MessageService } from 'primeng/api';
+import { FiscalValidation } from 'src/app/+fiscal/services/fiscal-validation';
 
 
 @Component({
@@ -45,10 +51,9 @@ export class AdmissionAddComponent {
   item:IAcademicYear={}
 
     items:IAcademicYear[]=[];
-    StateList:IState[]=[];
     filteredStateList:IState[]=[];
     
-    CoutryList: ICountry[] = [];
+    NationalityList:ICountry[]=[]
     
 
   activeTab = 'student-information';
@@ -56,10 +61,6 @@ export class AdmissionAddComponent {
   activeCard = '';
 
   filteredCoutryList: ICountry[] = [];
-
-  dropdownOptions1: SelectItem[];
-
-  dropdownOptions2: SelectItem[];
 
   selectDropdownOptions1: any;
 
@@ -73,23 +74,72 @@ export class AdmissionAddComponent {
   
   deleteDialog:boolean=false;
 
-  // DDL
-  standardtList:IStandard[]=[]
+  private isValidation: boolean = true;
+  private ValidationMsg: string = "";
 
+  // DDL
+  standardtList:IClass[]=[];
+  genderList: IGender[] = [];
+  bloodGroupList: IBloodGroup[]=[];
+  communityList:ICommunity[]=[];
+  permanentStateList:IState[]=[];
+  CoutryList: ICountry[] = [];
+  StateList:IState[]=[]
+  QualificationList:IQualification[]=[];
+  ReligionList:IReligion[]=[];
+  MotherTongueList:IMotherTongue[]=[];
+  MediumOfInstructionList:IMediumofInstruction[]=[]
+  boardAffiliatedList:IBoard[]=[];
+  transportationList:ITransportation[]=[];
+  childIsLivingWithList:IChildIsLiving[]=[];
+  studiedList:IClass[]=[];
+  
 
   IpAddress="192.168.1.1";
 
   miscDtlItems: IMiscDetails[] = [];
   filteredMiscDetailList: IMiscDetails[] = [];
+ 
+
+// temp file we can delete it
+  sibsiblingslist:IMiscDetails[]=[];
+  cols:any[]=[];
+  
 
 
   AdmissionForm:FormGroup<YupFormControls<IAdmission>>;
 
   initialValues:IAdmission ={
+
+    // STUDENT INFO
+    studentName:null,
     studentApplicationNo:null,
     studentStandard:null,
     studentAcademicYear:null,
     studentAdmissionNo:null,
+
+    selectedGender:null,
+    selectedNationality:null,
+    selectedReligion:null,
+    selectedMotherTongue:null,
+    selectedBloodGroup:null,
+    selectedCommunity:null,
+    selectedVisaIssuedCountry:null,
+    selectedPermanentStateList:null,
+    selectedPermanentCountryList:null,
+    selectedcommunicationStateList:null,
+    selectedcommunicationCountryList:null,
+    selectedFatherQualification:null,
+    selectedMotherQualification:null,
+    selectedGuardianQualification:null,
+
+    // PRE CLASS INFO
+    selectedStudied:null,
+    selectedMediumOfInstruction:null,
+    selectedBoard:null,
+    selectedTransportation:null,
+    selectedChildIsLivingWith:null,
+    
 
     selectedState:null,
     selectedCountry:null,
@@ -101,65 +151,95 @@ export class AdmissionAddComponent {
 
   constructor(
     private httpService:CommonHttpService,
-    private productService:ProductService
+    private productService:ProductService,
+    private commonService:CommonService,
+    private messageService:MessageService
   ) {
-      this.dropdownOptions1 = [
-          {label: 'Select Time Zone', value: null},
-          {label: 'UTC-12.00', value: {id: 1, name: 'UTC-12.00', code: '-12'}},
-          {label: 'UTC-11.00', value: {id: 2, name: 'UTC-11.00', code: '-11'}},
-          {label: 'UTC-10.00', value: {id: 3, name: 'UTC-10.00', code: '-10'}},
-          {label: 'UTC-09.30', value: {id: 4, name: 'UTC-09.30', code: '-93'}},
-          {label: 'UTC-09.00', value: {id: 5, name: 'UTC-09.00', code: '-09'}},
-          {label: 'UTC-08.00', value: {id: 6, name: 'UTC-08.00', code: '-08'}},
-          {label: 'UTC-07.00', value: {id: 7, name: 'UTC-07.00', code: '-07'}},
-          {label: 'UTC-06.00', value: {id: 8, name: 'UTC-06.00', code: '-06'}},
-          {label: 'UTC-05.00', value: {id: 9, name: 'UTC-05.00', code: '-05'}},
-          {label: 'UTC-04.00', value: {id: 10, name: 'UTC-04.00', code: '-04'}},
-          {label: 'UTC-03.30', value: {id: 11, name: 'UTC-03.30', code: '-33'}},
-          {label: 'UTC-03.00', value: {id: 12, name: 'UTC-03.00', code: '-03'}},
-          {label: 'UTC-02.00', value: {id: 13, name: 'UTC-02.00', code: '-02'}},
-          {label: 'UTC-01.00', value: {id: 14, name: 'UTC-01.00', code: '-01'}},
-          {label: 'UTC-+00.00', value: {id: 15, name: 'UTC-+00.00', code: '-00'}},
-          {label: 'UTC+01.00', value: {id: 16, name: 'UTC+01.00', code: '+01'}},
-          {label: 'UTC+02.00', value: {id: 17, name: 'UTC+02.00', code: '+02'}},
-          {label: 'UTC+03.00', value: {id: 18, name: 'UTC+03.00', code: '+03'}},
-          {label: 'UTC+03.30', value: {id: 19, name: 'UTC+03.30', code: '+33'}},
-          {label: 'UTC+04.00', value: {id: 20, name: 'UTC+04.00', code: '+04'}},
-          {label: 'UTC+04.30', value: {id: 21, name: 'UTC+04.30', code: '+43'}},
-          {label: 'UTC+05.00', value: {id: 22, name: 'UTC+05.00', code: '+05'}},
-          {label: 'UTC+05.30', value: {id: 23, name: 'UTC+05.30', code: '+53'}},
-          {label: 'UTC+05.45', value: {id: 24, name: 'UTC+05.45', code: '+54'}},
-          {label: 'UTC+06.00', value: {id: 25, name: 'UTC+06.00', code: '+06'}},
-          {label: 'UTC+06.30', value: {id: 26, name: 'UTC+06.30', code: '+63'}},
-          {label: 'UTC+07.00', value: {id: 27, name: 'UTC+07.00', code: '+07'}},
-          {label: 'UTC+08.00', value: {id: 28, name: 'UTC+08.00', code: '+08'}},
-          {label: 'UTC+08.45', value: {id: 29, name: 'UTC+08.45', code: '+84'}},
-          {label: 'UTC+09.00', value: {id: 30, name: 'UTC+09.00', code: '+09'}},
-          {label: 'UTC+09.30', value: {id: 31, name: 'UTC+09.30', code: '+93'}},
-          {label: 'UTC+10.00', value: {id: 32, name: 'UTC+10.00', code: '+10'}},
-          {label: 'UTC+10.30', value: {id: 33, name: 'UTC+10.30', code: '+13'}},
-          {label: 'UTC+11.00', value: {id: 34, name: 'UTC+01.00', code: '+11'}},
-          {label: 'UTC+12.00', value: {id: 35, name: 'UTC+01.00', code: '+12'}},
-          {label: 'UTC+12.45', value: {id: 36, name: 'UTC+01.00', code: '+24'}},
-          {label: 'UTC+13.00', value: {id: 37, name: 'UTC+01.00', code: '+13'}},
-          {label: 'UTC+14.00', value: {id: 38, name: 'UTC+01.00', code: '+14'}},
-      ];
 
       this.AdmissionForm=FormHandler.controls<IAdmission>(this.initialValues);
-
-      this.dropdownOptions2 = [
-          {label: 'Where did you hear Ultima', value: null},
-          {label: 'Blogs', value: 'Blogs'},
-          {label: 'Google Ads', value: 'google'},
-          {label: 'Your Forum', value: 'prime-forum'},
-          {label: 'Youtube', value: 'Youtube'},
-          {label: 'Reddit', value: 'Reddit'},
-          {label: 'Events', value: 'Events'},
-          {label: 'Other', value: 'Other'}
-      ];
   }
 
-  public GetAllMiscDetails() {
+  // EmployeeMiscDetails
+  public GetAllEmployeeMiscDetails(){
+
+    try {
+        this.httpService.globalGet(PMSAPIConfig.API_CONFIG.API_URL.MASTER.EMPLOYEE.DATA)
+        .subscribe({
+          next: (result:any)=>{
+              // Genders
+              const genders = _.filter(
+                result.loadEmployeesData.miscDtl,
+                (val)=>{
+                  return val.miscId == 14
+                }
+              )
+              this.genderList=genders.map( (x)=>{ 
+                return <IGender> { 
+                   genderId:x.miscDtlId,
+                     genderName:x.miscDtlName,   } } )
+
+            // bloodGroups
+            const bloodGroups =_.filter(
+              result.loadEmployeesData.miscDtl,
+              (val)=>{
+                return val.miscId ==1
+              }
+            )
+              this.bloodGroupList=bloodGroups.map(
+                (x)=>{
+                  return <IBloodGroup>{
+                    bloodGroupId:x.miscDtlId,
+                    bloodGroupName:x.miscDtlName,
+                  }
+                }
+              )
+
+              // communityList
+
+              const community =_.filter(
+                result.loadEmployeesData.miscDtl,
+                (val)=>{
+                  return val.miscId == 8
+                }
+              )
+
+              this.communityList =community.map(
+                (x)=>{
+                  return <ICommunity>{
+                    communityId:x.miscDtlId,
+                    communityName:x.miscDtlName,
+                  }
+                }
+              )
+
+                  // eduQualification
+
+                  const eduQualification = _.filter(
+                    result.loadEmployeesData.miscDtl,
+                    (val) => {
+                        return val.miscId == 9;
+                    }
+                );
+
+                this.QualificationList = eduQualification.map((x) => {
+                    return <IQualification>{
+                        qualificationId: x.miscDtlId,
+                        qualificationName: x.miscDtlName,
+                    };
+                });
+
+
+
+
+
+          }
+        })
+    } catch (error) {
+      
+    }
+  }
+  // SchoolMiscDetails
+  public GetAllSchoolMiscDetails() {
     try {
         this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.SCHOOL.DETAILS + '?keyWord=School')
             .subscribe({
@@ -171,40 +251,142 @@ export class AdmissionAddComponent {
                       (val)=>{return val.miscId == 1 })
 
                       this.standardtList=Standard.map((x)=>{
-                        return <IStandard>{
-                          standardId:x.miscDtlId,
-                          standardTypeName:x.miscDtlName
+                        return <IClass>{
+                          classId:x.miscDtlId,
+                          className:x.miscDtlName
                         }
                       })
+
+                      this.studiedList=Standard.map((x)=>{
+                        return <IClass>{
+                          classId:x.miscDtlId,
+                          className:x.miscDtlName
+                        }
+                      })
+
+                      const Religions = _.filter(result.miscDtls,
+                        (val)=>{
+                          return val.miscId == 4 ;
+                        }
+                        )
+
+                        this.ReligionList=Religions.map((x)=>{
+                          return <IReligion>{
+                              religionId:x.miscDtlId,
+                              religionName:x.miscDtlName,
+
+                          }
+                        })
+
+                        
+                        const MotherTongue =_.filter(result.miscDtls,
+                          (val)=>{
+                            return val.miscId == 5;
+                          }
+                          )
+
+                          this.MotherTongueList = MotherTongue.map((x)=>{
+                            return <IMotherTongue>{
+                              mothertongueId:x.miscDtlId,
+                              mothertongueName:x.miscDtlName,
+                            }
+                          }) 
+
+
+                        const  Transportations =_.filter(result.miscDtls,
+                          (val)=>{
+                             return val.miscId == 3
+                          })
+
+                          this.transportationList=Transportations.map((x)=>{
+                              return <ITransportation>{
+                                transportationId:x.miscDtlId,
+                                transportationName:x.miscDtlName,
+                              }
+                          })
+
+                          const childIsLivings = _.filter(result.miscDtls,
+                            (val)=>{
+                              return val.miscId == 6
+                            })
+
+                          this.childIsLivingWithList=childIsLivings.map((x)=>{
+                            return <IChildIsLiving>{
+                              childIsLivingWithId:x.miscDtlId,
+                              childIsLivingWithName:x.miscDtlName,
+                            }
+                          })
+
                          
-                    // console.log('GetAllMiscDetails', this.filteredMiscDetailList);
                 },
                 error: (err: HttpErrorResponse) => console.log(err),
             });
     } catch (error) { }
-}
+  }
 
-
-
-
-
-public GetCountries() {
-
-    try {
-
-      this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_COUNTRIES)
+  
+  public GetAllFiscalMiscDetails(){
+      try {
+        this.httpService.globalGet(FiscalAPIConfig.API_CONFIG.API_URL.MASTER.FISCAL.DETAILS +'?keyWord=Fiscal')
         .subscribe({
-          next: (result: any) => {
-            this.CoutryList = result.countries;
-            console.log('GetCountries', this.CoutryList);
-          },
-          error: (err: HttpErrorResponse) => console.log(err)
-        });
+          next:(result:any)=>{
+            const MediumOfInstructions = _.filter(result.miscDtls,
+              (val)=>{
+                return val.miscId == 6
+              })
 
+              this.MediumOfInstructionList = MediumOfInstructions.map((x)=>{
+                return <IMediumofInstruction>{
+                  instructionId:x.miscDtlId,
+                  instruction:x.miscDtlName
+                }
+              })
+
+              const affiliatesboards =_.filter(result.miscDtls,
+                (val)=>{
+                  return val.miscId == 7
+                } )  
+                
+                this.boardAffiliatedList =affiliatesboards.map((x)=>{
+                  return <IBoard>{
+                    boardId:x.miscDtlId,
+                    boardName:x.miscDtlName
+                  }
+                })
+
+          }
+        }
+
+        )
+      } catch (error) {
+        
+      }
+  }
+
+
+  public GetCountries(){
+    try {
+      this.commonService.getCountries().then((res)=>{
+        this.CoutryList=res;
+        this.NationalityList=res;
+        
+      })
     } catch (error) {
-
+      
     }
   }
+
+  public GetStates(){
+      try {
+        this.commonService.getStates().then((res)=>{
+          this.StateList=res;
+        })
+      } catch (error) {
+        
+      }
+    
+  }
+
 
 
 
@@ -221,40 +403,6 @@ filterCountry(event: AutoCompleteCompleteEvent) {
     }
     this.filteredCoutryList = filtered;
   }
-
- public  filterState(event:AutoCompleteCompleteEvent){
-    let filtered:any[]=[];
-    let query =event.query;
-
-    for(let i=0; i<(this.StateList as any[]).length;i++){
-        let _stateList = (this.StateList as any[])[i];
-        if(_stateList.stateName.toLowerCase().indexOf(query.toLowerCase())==0){
-            filtered.push(_stateList);
-        }
-    }
-      this.filteredStateList=filtered;
-  }
-
-
-
-
-
-public GetStates(){
-
-  try {
-          this.httpService.globalGet(APIConfig.API_CONFIG.API_URL.COMMON.GET_STATES)
-          .subscribe({
-            next:(result:any)=>{
-              this.StateList=result.states;
-            },
-            error:(err:HttpErrorResponse) => console.log(err)
-          });
-  }
-   catch (error) {
-
-      
-  }
-}
 
 
 
@@ -282,10 +430,11 @@ onClearState() {
   }
 
 ngOnInit() {
-    this.GetAllMiscDetails();
     this.GetCountries();
     this.GetStates();
-    
+    this.GetAllSchoolMiscDetails();
+    this.GetAllEmployeeMiscDetails();
+    this.GetAllFiscalMiscDetails();
 
 }
 
@@ -303,7 +452,7 @@ ngOnInit() {
 
   }
 
-  Delete(){
+  RemoveRows(data:any,item:any){
 
   }
 
@@ -334,5 +483,51 @@ console.log(JSON.stringify(passSaveParams));
     }
 
     
+  }
+  OnInputChangeStudentName(){
+    try {
+      if(this.AdmissionForm.value['studentName']){
+          this.AdmissionForm.controls['studentName']?.setValue(this.AdmissionForm.value['studentName'].toUpperCase())
+      }
+    } catch (error) {
+      
+    }
+      
+  }
+
+   public AddSiblingRows(){
+
+    try {
+
+      let _siblingName: any[] = [];
+      _siblingName = _.filter(this.sibsiblingslist, va => {
+        return va.miscDtlName == "";
+      });
+
+      this.isValidation = true;
+      this.ValidationMsg = "";
+
+      if (_siblingName.length != 0) {
+        this.isValidation = false;
+        this.ValidationMsg = "Please Enter Name";
+      }
+      if (this.isValidation) {
+        let dataBind:any={};
+        dataBind.miscDtlDesc="";
+        dataBind.miscDtlName="";
+
+          this.sibsiblingslist.push(dataBind);
+      } else {
+        this.notificationsService(FiscalValidation.NOTIFICATION_VALIDATION, 'Validation Message', this.ValidationMsg)
+      }
+    } catch (error) {
+      
+    }
+  }
+
+
+  private notificationsService(_severity: any, _summary: any, _message: any) {
+    this.messageService.add({ severity: _severity, summary: _summary, detail: _message, life: 3000 });
+    return;
   }
 }
