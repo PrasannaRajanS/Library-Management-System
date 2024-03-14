@@ -46,37 +46,39 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="txtEmployeeNo" pInputText formControlName="employeeNo">
-                                                <label for="txtEmployeeNo">Employee No</label>
+                                                <input id="employeeNo" pInputText formControlName="employeeNo">
+                                                <label for="employeeNo">Employee No</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                    <p-dropdown id="ddlSalutation" 
+                                                <p-dropdown id="selectedSalutation" 
                                                             formControlName="selectedSalutation"
                                                             [options]="salutationList" 
                                                             optionLabel="salutationName" 
                                                             [autoDisplayFirst]="false"
                                                             [showClear]="true"
-                                                            pKeyFilter="alpha">
-                                                    </p-dropdown>
-                                                <label for="ddlSalutation">Salutation</label>
+                                                            pKeyFilter="alpha"
+                                                            name="selectedSalutation">
+                                                </p-dropdown>
+                                                <label for="selectedSalutation" name="selectedSalutation" >Salutation</label>
                                             </span>
                                         </div>
+                                        
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="EmpFirstName" pInputText formControlName="firstName" pKeyFilter="alpha">
-                                                <label for="EmpFirstName">First Name</label>
+                                                <input id="firstName" pInputText formControlName="firstName" pKeyFilter="alpha">
+                                                <label for="firstName">First Name</label>
                                             </span>
                                             <small id="firstName">{{ formError("firstName" ,EmployeeForm)}}</small>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="EmpLastName" pInputText formControlName="lastName" pKeyFilter="alpha">
-                                                <label for="EmpLastName">Last Name</label>
+                                                <input id="lastName" pInputText formControlName="lastName" pKeyFilter="alpha">
+                                                <label for="lastName">Last Name</label>
                                             </span>
                                         </div>
 
@@ -89,7 +91,7 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                            <p-dropdown id="ddlGender" 
+                                            <p-dropdown id="selectedGender" 
                                                     formControlName="selectedGender"
                                                     [options]="genderList" 
                                                     optionLabel="genderName" 
@@ -97,22 +99,22 @@
                                                     [showClear]="true">
                                                     pKeyFilter="alpha"
                                             </p-dropdown>
-                                                <label for="ddlGender">Gender</label>
+                                                <label for="selectedGender">Gender</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-calendar formControlName="dob" id="Empdob" (onSelect)="calculateAge()"></p-calendar>
-                                                <label for="Empdob">DOB</label>
+                                                <p-calendar formControlName="dob" id="dob" (onSelect)="calculateAge()"></p-calendar>
+                                                <label for="dob">DOB</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="Empage" pInputText formControlName="age" pKeyFilter="int" readonly>
+                                                <input id="age" pInputText formControlName="age" pKeyFilter="int" readonly>
                                                
-                                                <label for="Empage">Age</label>
+                                                <label for="age">Age</label>
                                             </span>
                                         </div>
                                     </div>
@@ -122,35 +124,35 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="txtaddress1" pInputText formControlName="address1">
-                                                <label for="txtaddress1">Address 1</label>
+                                                <input id="address1" pInputText formControlName="address1">
+                                                <label for="address1">Address 1</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input pInputText id="txtaddress2" formControlName="address2">
-                                                <label for="txtaddress2">Address 2</label>
+                                                <input pInputText id="address2" formControlName="address2">
+                                                <label for="address2">Address 2</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input pInputText id="txtAddress3" formControlName="address3">
-                                                <label for="txtAddress3">Address 3</label>
+                                                <input pInputText id="address3" formControlName="address3">
+                                                <label for="address3">Address 3</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input pInputText id="txtcity" formControlName="city" pKeyFilter="alpha">
-                                                <label for="txtcity">City / Town</label>
+                                                <input pInputText id="city" formControlName="city" pKeyFilter="alpha">
+                                                <label for="city">City / Town</label>
                                             </span>
                                         </div>
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-dropdown id="ddlPresentState" 
+                                                <p-dropdown id="selectedState" 
                                                         formControlName="selectedState"
                                                         [options]="StateList" 
                                                         optionLabel="stateName" 
@@ -158,27 +160,27 @@
                                                         (onChange)="onChangeforState($event)"
                                                         [showClear]="true" [filter]="true" pKeyFilter="alpha">
                                                 </p-dropdown>
-                                                <label for="ddlPresentState">State</label>
+                                                <label for="selectedState">State</label>
                                             </span>
                                         </div>
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                    <p-dropdown id="ddlPresentCountry" 
+                                                    <p-dropdown id="selectedCountry" 
                                                         formControlName="selectedCountry"
                                                         [options]="CoutryList" 
                                                         optionLabel="countryName" 
                                                         [autoDisplayFirst]="false"
                                                         [showClear]="true" [filter]="true" pKeyFilter="alpha">
                                                     </p-dropdown>
-                                                <label for="ddlPresentCountry">Country</label>
+                                                <label for="selectedCountry">Country</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-inputMask id="presentPINCode" mask="999999" formControlName="pinCode" ></p-inputMask>
-                                                <label for="presentPINCode">PIN</label>
+                                                <p-inputMask id="pinCode" mask="999999" formControlName="pinCode" ></p-inputMask>
+                                                <label for="pinCode">PIN</label>
                                             </span>
                                         </div>
 
@@ -187,44 +189,47 @@
                                     <h5>Permanent Address</h5>
                                     <div class="grid formgrid">
 
-                                        <div class="col-12 md:col-6 mb-3">
-                                                <input id="empChkSameAsPresentAddress" type="checkbox" value="Same as Present" (click)="handleSameAsPresentAddress()">
-                                                <label for="empChkSameAsPresentAddress">Same as Present Address</label>
+
+                                        <div class="m-3 col-12 md:col-6 mb-3">
+                                            <!-- col-12 md:col-6 mb-3 empChkSameAsPresentAddress -->
+                                            <p-checkbox  [binary]="true" labelStyleClass="ml-2 text-base" (click)="handleSameAsPresentAddress()"
+                                                label="Same as Present Address"></p-checkbox>
                                         </div>
+                                        
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="EmpPermanentAddress1" pInputText
+                                                <input id="permanantAddress1" pInputText
                                                     formControlName="permanantAddress1">
-                                                <label for="EmpPermanentAddress1">Address 1</label>
+                                                <label for="permanantAddress1">Address 1</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="EmpPermanentAddress2" pInputText formControlName="permanantAddress2">
-                                                <label for="EmpPermanentAddress2">Address 2</label>
+                                                <input id="permanantAddress2" pInputText formControlName="permanantAddress2">
+                                                <label for="permanantAddress2">Address 2</label>
                                             </span>
 
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="EmpPermanentAddress3" pInputText formControlName="permanantAddress3">
-                                                <label for="EmpPermanentAddress3">Address 3</label>
+                                                <input id="permanantAddress3" pInputText formControlName="permanantAddress3">
+                                                <label for="permanantAddress3">Address 3</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="EmpPermanentCity" pInputText formControlName="permanantCity">
-                                                <label for="EmpPermanentCity">City / Town</label>
+                                                <input id="permanantCity" pInputText formControlName="permanantCity">
+                                                <label for="permanantCity">City / Town</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-dropdown id="ddlPermanentState" 
+                                                <p-dropdown id="permanantSelectedState" 
                                                         formControlName="permanantSelectedState"
                                                         [options]="permanantStateList" 
                                                         optionLabel="stateName" 
@@ -233,14 +238,14 @@
                                                         (onChange)="onChangeforPermanantState($event)"
                                                         [filter]="true" pKeyFilter="alpha">
                                                 </p-dropdown>
-                                                <label for="ddlPermanentState">State</label>
+                                                <label for="permanantSelectedState">State</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
 
-                                                <p-dropdown id="ddlPermanentCountry" 
+                                                <p-dropdown id="permanantSelectedCountry" 
                                                     formControlName="permanantSelectedCountry"
                                                     [options]="permanantCoutryList" 
                                                     optionLabel="countryName" 
@@ -248,14 +253,14 @@
                                                     [showClear]="true" [filter]="true" pKeyFilter="alpha">
                                                 </p-dropdown>
 
-                                                <label for="ddlPermanentCountry">Country</label>
+                                                <label for="permanantSelectedCountry">Country</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-inputMask id="EmpPermanentPINCode" mask="999999" formControlName="permanantPINCode"></p-inputMask>
-                                                <label for="EmpPermanentPINCode">PIN</label>
+                                                <p-inputMask id="permanantPINCode" mask="999999" formControlName="permanantPINCode"></p-inputMask>
+                                                <label for="permanantPINCode">PIN</label>
                                             </span>
                                         </div>
 
@@ -271,29 +276,29 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="EmpOfficialEmail" pInputText  formControlName="officialEmail" type="email" required>
-                                                <label for="EmpOfficialEmail">Official Email</label>
+                                                <input id="officialEmail" pInputText  formControlName="officialEmail" type="email" required>
+                                                <label for="officialEmail">Official Email</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="EmpOfficialMobile" pInputText formControlName="officialMobile">
-                                                <label for="EmpOfficialMobile">Official Mobile</label>
+                                                <input id="officialMobile" pInputText formControlName="officialMobile">
+                                                <label for="officialMobile">Official Mobile</label>
                                             </span>
                                         </div>
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-calendar id="EmpdateOfJoin" formControlName="dateofJoin"></p-calendar>
-                                                <label for="EmpdateOfJoin">Date of Join *</label>
+                                                <p-calendar id="dateofJoin" formControlName="dateofJoin"></p-calendar>
+                                                <label for="dateofJoin">Date of Join *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
 
-                                                <p-dropdown id="ddlEmployeeCategory" 
+                                                <p-dropdown id="selectedEmployeeCategory" 
                                                 formControlName="selectedEmployeeCategory"
                                                 [options]="employeeCategoryList" 
                                                 optionLabel="employeeCategoryName" 
@@ -301,100 +306,100 @@
                                                 [showClear]="true">
                                                  </p-dropdown>
                                               
-                                                <label for="ddlEmployeeCategory">Employee Category *</label>
+                                                <label for="selectedEmployeeCategory">Employee Category *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <p-dropdown id="ddlDepartmentList" 
+                                                <p-dropdown id="selectedDepartment" 
                                                 formControlName="selectedDepartment"
                                                 [options]="departmentList" 
                                                 optionLabel="departmentName" 
                                                 [autoDisplayFirst]="false"
                                                 [showClear]="true">
                                                  </p-dropdown>
-                                                <label for="ddlDepartmentList">Department</label>
+                                                <label for="selectedDepartment">Department</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 ">
                                             <span class="p-float-label">
-                                                <p-autoComplete id="" formControlName="selectedSection"></p-autoComplete>
-                                                <label for="">Sub Department</label>
+                                                <p-autoComplete id="selectedSection" formControlName="selectedSection"></p-autoComplete>
+                                                <label for="selectedSection">Sub Department</label>
                                             </span>
                                         </div>
 
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <p-dropdown id="ddlTypeOfEmployment" 
+                                                <p-dropdown id="selectedEmployeementType" 
                                                 formControlName="selectedEmployeementType"
                                                 [options]="employmentTypesList" 
                                                 optionLabel="employmentTypesName" 
                                                 [autoDisplayFirst]="false"
                                                 [showClear]="true">
                                                  </p-dropdown>
-                                                <label for="ddlTypeOfEmployment">Type of Employment</label>
+                                                <label for="selectedEmployeementType">Type of Employment</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-dropdown id="empReportingTo" optionLabel="roleName" [autoDisplayFirst]="false"
+                                                <p-dropdown id="selectedReportingTo" optionLabel="roleName" [autoDisplayFirst]="false"
                                                     [showClear]="true" formControlName="selectedReportingTo">
                                                 </p-dropdown>
-                                                <label for="empReportingTo">Reporting To</label>
+                                                <label for="selectedReportingTo">Reporting To</label>
                                             </span>
                                         </div>
 
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <p-dropdown id="ddlSalaryType" 
+                                                <p-dropdown id="selectedSalaryType" 
                                                 formControlName="selectedSalaryType"
                                                 [options]="salaryTypeList" 
                                                 optionLabel="SalaryTypeName" 
                                                 [autoDisplayFirst]="false"
                                                 [showClear]="true">
                                                  </p-dropdown>                              
-                                                <label for="ddlSalaryType">Salary Type *</label>
+                                                <label for="selectedSalaryType">Salary Type *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <p-dropdown id="empWorkingLocation" optionLabel="workingLocation"
+                                                <p-dropdown id="selectedLocation" optionLabel="workingLocation"
                                                     [autoDisplayFirst]="false" [showClear]="true"
                                                     formControlName="selectedLocation">
                                                 </p-dropdown>
-                                                <label for="empWorkingLocation">Working Location *</label>
+                                                <label for="selectedLocation">Working Location *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-dropdown id="ddlShifts" 
+                                                <p-dropdown id="selectedShift" 
                                                 formControlName="selectedShift"
                                                 [options]="shiftsTypeList" 
                                                 optionLabel="shiftTypeName" 
                                                 [autoDisplayFirst]="false"
                                                 [showClear]="true">
                                                  </p-dropdown>
-                                                <label for="ddlShifts">Shift</label>
+                                                <label for="selectedShift">Shift</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <p-dropdown id="ddlDesignationJobTitle" 
+                                                <p-dropdown id="selectedDesignation" 
                                                 formControlName="selectedDesignation"
                                                 [options]="designationTypeList" 
                                                 optionLabel="designationName" 
                                                 [autoDisplayFirst]="false"
                                                 [showClear]="true">
                                                  </p-dropdown>
-                                                <label for="ddlDesignationJobTitle">Designation (Job Title) *</label>
+                                                <label for="selectedDesignation">Designation (Job Title) *</label>
                                             </span>
                                         </div>
                                     </div>
@@ -409,42 +414,42 @@
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input id="empContactPerson1" pInputText formControlName="contactPerson1" pKeyFilter="alpha">
-                                                <label for="empContactPerson1">Contact Person 1 *</label>
+                                                <input id="contactPerson1" pInputText formControlName="contactPerson1" pKeyFilter="alpha">
+                                                <label for="contactPerson1">Contact Person 1 *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
-                                                <input id="empMobileNo1" pInputText pKeyFilter="int" formControlName="contactPersonMobileNo1">
-                                                <label for="empMobileNo1">Mobile No 1 *</label>
+                                                <input id="contactPersonMobileNo1" pInputText pKeyFilter="int" formControlName="contactPersonMobileNo1">
+                                                <label for="contactPersonMobileNo1">Mobile No 1 *</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="empContactPerson2" pInputText formControlName="contactPerson2" pKeyFilter="alpha">
-                                                <label for="empContactPerson2">Contact Person 2</label>
+                                                <input id="contactPerson2" pInputText formControlName="contactPerson2" pKeyFilter="alpha">
+                                                <label for="contactPerson2">Contact Person 2</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="empMobileNo2" pKeyFilter="int" pInputText formControlName="contactPersonMobileNo2">
-                                                <label for="empMobileNo2">Mobile No 2</label>
+                                                <input id="contactPersonMobileNo2" pKeyFilter="int" pInputText formControlName="contactPersonMobileNo2">
+                                                <label for="contactPersonMobileNo2">Mobile No 2</label>
                                             </span>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-dropdown id="ddlBloodGroup" 
+                                                <p-dropdown id="selectedBloodGroup" 
                                                         formControlName="selectedBloodGroup"
                                                         [options]="bloodGroupList" 
                                                         optionLabel="bloodGroupName" 
                                                         [autoDisplayFirst]="false"
                                                         [showClear]="true">
                                                 </p-dropdown>
-                                                <label for="ddlBloodGroup">Blood Group</label>
+                                                <label for="selectedBloodGroup">Blood Group</label>
                                             </span>
                                         </div>
                                     </div>

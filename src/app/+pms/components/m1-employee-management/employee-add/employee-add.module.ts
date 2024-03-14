@@ -29,6 +29,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { DialogModule } from 'primeng/dialog';
 import {  KeyFilterModule } from 'primeng/keyfilter';
 import { InputMaskModule } from 'primeng/inputmask';
+import { CheckboxModule } from 'primeng/checkbox';
 
 
 
@@ -67,7 +68,8 @@ import { InputMaskModule } from 'primeng/inputmask';
 		RadioButtonModule,
 		ToastModule,
 		DialogModule,
-		KeyFilterModule
+		KeyFilterModule,
+		CheckboxModule
 
   ],
   providers:[

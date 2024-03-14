@@ -100,7 +100,7 @@
                                 <div class="grid formgrid py-3">
                                     <div class="col-12 md:col-3 mb-3">
                                         <span class="p-float-label">
-                                            <input id="StudentApplicationNo" formControlName="studentApplicationNo"
+                                            <input id="StudentApplicationNo" 
                                                 style="width: 100%;" pInputText>
                                             <label for="StudentApplicationNo">Application No.</label>
                                         </span>
@@ -111,9 +111,11 @@
                                             <p-dropdown id="ddlStudentStandard" 
                                                         formControlName="studentStandard"
                                                         [options]="standardtList" 
-                                                        optionLabel="standardTypeName" 
+                                                        optionLabel="className" 
                                                         [autoDisplayFirst]="false"
-                                                        [showClear]="true">
+                                                        [showClear]="true"
+                                                        [filter]="true"
+                                                        pKeyFilter="alpha">
                                                 </p-dropdown>
                                             <label for="ddlStudentStandard">Admission To Standard</label>
                                         </span>
@@ -121,16 +123,14 @@
 
                                     <div class="col-12 md:col-3 mb-3">
                                         <span class="p-float-label">
-                                            <input id="StudentAcademicYear" style="width: 100%;" pInputText   formControlName="studentAcademicYear">                                        
+                                            <p-calendar id="StudentAcademicYear"  selectionMode="range" [readonlyInput]="true"  view="year" dateFormat="yy" inputId="yearpicker"  [showIcon]="true"></p-calendar>                                        
                                             <label for="StudentAcademicYear">Academic Year</label>
-
                                         </span>
                                     </div>
 
                                     <div class="col-12 md:col-3 mb-3">
                                         <span class="p-float-label">
-                                            <input id="StudentAdmissionNo" style="width: 100%;" pInputText
-                                                formControlName="studentAdmissionNo">
+                                            <input id="StudentAdmissionNo" style="width: 100%;" pInputText>
                                             <label for="StudentAdmissionNo">Admission No.</label>
                                         </span>
                                     </div>
@@ -146,7 +146,7 @@
                                 <div class="grid formgrid py-3">
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input id="employeeNumber" style="width: 100%;" pInputText>
+                                            <input id="employeeNumber" style="width: 100%;" pInputText formControlName="studentName" (input)="OnInputChangeStudentName()" pKeyFilter="alpha">
                                             <label for="employeeNumber">Name of the Student</label>
                                         </span>
                                     </div>
@@ -154,65 +154,101 @@
 
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                                <p-calendar  ></p-calendar>
+                                                <p-calendar></p-calendar>
                                                 <label for="firstName">DOB</label>    
                                         </span>
                                     </div>
 
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input id="gender" style="width: 100%;" pInputText>
-                                            <label for="gender">Gender</label>
+                                        <p-dropdown id="selectedGender"
+                                                formControlName="selectedGender"
+                                                [options]="genderList" 
+                                                optionLabel="genderName" 
+                                                [autoDisplayFirst]="false"
+                                                [showClear]="true" 
+                                                pKeyFilter="alpha"
+                                                [filter]="true">
+                                        </p-dropdown>
+                                            <label for="selectedGender">Gender</label>
                                         </span>
                                     </div>
 
 
-                                    <div class="col-12 md:col-6 mb-3">
+                                    <div class="col-12 md:col-6 mb-3 field">
                                         <span class="p-float-label">
-
-                                            <p-autoComplete id="studentNationality" [suggestions]="filteredCoutryList"
-                                                (completeMethod)="filterCountry($event)" [minLength]="0"
-                                                [dropdown]="true" [forceSelection]="true"
-                                                field="countryName"></p-autoComplete>
-                                            <label for="studentNationality">Nationality</label>
+                                            <p-dropdown id="ddlEmpNationality"
+                                            formControlName="selectedNationality"
+                                            [options]="NationalityList" 
+                                            optionLabel="nationality" 
+                                            [autoDisplayFirst]="false"
+                                            [filter]="true"
+                                            [showClear]="true">
+                                    </p-dropdown>
+                                            <label for="ddlEmpNationality">Nationality *</label>
                                         </span>
                                     </div>
 
-
-
-
-                                    <div class="col-12 md:col-6 mb-3">
+                               
+                                    <div class="field col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input id="nickName" style="width: 100%;" pInputText>
-                                            <label for="nickName">Religion</label>
+                                            <p-dropdown id="selectedState" 
+                                                    formControlName="selectedReligion"
+                                                    [options]="ReligionList" 
+                                                    optionLabel="religionName" 
+                                                    [autoDisplayFirst]="false"
+                                                    [showClear]="true" [filter]="true" pKeyFilter="alpha">
+                                            </p-dropdown>
+                                            <label for="selectedState">Religion</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <p-dropdown id="selectedState" 
+                                                    formControlName="selectedMotherTongue"
+                                                    [options]="MotherTongueList" 
+                                                    optionLabel="mothertongueName" 
+                                                    [autoDisplayFirst]="false"
+                                                    [showClear]="true" [filter]="true" pKeyFilter="alpha">
+                                            </p-dropdown>
+                                            <label for="selectedState">Mother Tongue</label>
                                         </span>
                                     </div>
 
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input id="nickName" style="width: 100%;" pInputText>
-                                            <label for="nickName">Mother Tongue</label>
+                                            <p-dropdown id="selectedBloodGroup"
+                                                    formControlName="selectedBloodGroup"
+                                                    [options]="bloodGroupList"
+                                                    optionLabel="bloodGroupName" 
+                                                    [autoDisplayFirst]="false"
+                                                    [showClear]="true"
+                                                    [filter]="true">
+                                            </p-dropdown>
+                                            <label for="selectedBloodGroup">Blood Group</label>
                                         </span>
                                     </div>
 
-                                    <div class="col-12 md:col-6 mb-3">
+                                    <div class="col-12 md:col-6 mb-3 field">
                                         <span class="p-float-label">
-                                            <input id="nickName" style="width: 100%;" pInputText>
-                                            <label for="nickName">Blood Group</label>
+                                            <p-dropdown id="ddlCommunity" 
+                                            formControlName="selectedCommunity"
+                                            [options]="communityList" 
+                                            optionLabel="communityName"
+                                            [autoDisplayFirst]="false"
+                                            [showClear]="true"
+                                            [filter]="true">
+                                    </p-dropdown>
+                                            <label for="ddlCommunity">Community *</label>
                                         </span>
                                     </div>
 
+                            
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input id="nickName" style="width: 100%;" pInputText>
-                                            <label for="nickName">Community</label>
-                                        </span>
-                                    </div>
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input id="nickName" style="width: 100%;" pInputText>
-                                            <label for="nickName">Adhaar No.</label>
+                                            <p-inputMask id="studentAdharCardNo" mask="9999 9999 9999" ></p-inputMask>
+                                            <label for="studentAdharCardNo">Aadhaar Number</label>
                                         </span>
                                     </div>
 
@@ -234,10 +270,11 @@
                                 <div class="grid formgrid py-3">
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input id="passportno" style="width: 100%;" pInputText>
+                                            <input id="passportno" style="width: 100%;" pInputText pKeyFilter="alphanum">
                                             <label for="passportno">Passport No.</label>
                                         </span>
                                     </div>
+                                    
 
 
                                     <div class="field col-12 md:col-6 mb-3">
@@ -277,13 +314,19 @@
                                         </span>
                                     </div>
 
-
                                     <div class="field col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input id="visaIssuedCountry" style="width: 100%;" pInputText>
+                                                <p-dropdown id="visaIssuedCountry" 
+                                                    formControlName="selectedVisaIssuedCountry"
+                                                    [options]="CoutryList" 
+                                                    optionLabel="countryName" 
+                                                    [autoDisplayFirst]="false"
+                                                    [showClear]="true" [filter]="true" pKeyFilter="alpha">
+                                                </p-dropdown>
                                             <label for="visaIssuedCountry">Issued Country</label>
                                         </span>
                                     </div>
+
 
 
                                 </div>
@@ -331,29 +374,35 @@
 
                                     <div class="field col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete formControlName="selectedPermanentState" [suggestions]="filteredStateList" id="selectedPermanentState" [minLength]="0"
-                                            (completeMethod)="filterState($event)" (onSelect)="onSelectState()" [dropdown]="true" [forceSelection]="true"
-                                                [showClear]="true" field="stateName" (onClear)="onClearState()"></p-autoComplete>
-                                            <label for="selectedPermanentState">State</label>
+                                            <p-dropdown id="selectedState" 
+                                            formControlName="selectedPermanentStateList" 
+                                            [options]="StateList"
+                                            optionLabel="stateName"
+                                            [autoDisplayFirst]="false"
+                                            [showClear]="true" [filter]="true" pKeyFilter="alpha">
+                                            </p-dropdown>
+                                            <label for="selectedState">State</label>
                                         </span>
                                     </div>
 
 
                                     <div class="field col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete id="selectedPermanentCountry" [minLength]="0" formControlName="selectedPermanentCountry"
-                                            [suggestions]="filteredCoutryList" (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" [forceSelection]="true" [showClear]="true" field="countryName">
-                                            </p-autoComplete>
-                                            <label for="selectedPermanentCountry">Country</label>
+                                                <p-dropdown id="selectedCountry"
+                                                formControlName="selectedPermanentCountryList" 
+                                                 [options]="CoutryList"
+                                                 optionLabel="countryName"
+                                                    [autoDisplayFirst]="false"
+                                                    [showClear]="true" [filter]="true" pKeyFilter="alpha">
+                                                </p-dropdown>
+                                            <label for="selectedCountry">Country</label>
                                         </span>
                                     </div>
-
-                          
-
+                           
+                                    
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input id="presentPIN" pInputText="permanentPIN" style="width: 100%;">
+                                            <p-inputMask id="permanentPIN" mask="999999" ></p-inputMask>
                                             <label for="permanentPIN">PIN</label>
                                         </span>
                                     </div>
@@ -382,30 +431,34 @@
 
                                     <div class="field col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete id="selectedPresentState" formControlName="selectedState"
-                                            (completeMethod)="filterState($event)" (onSelect)="onSelectState()"
-                                            [suggestions]="filteredStateList" [minLength]="0" [dropdown]="true"
-                                            [forceSelection]="true" [showClear]="true"
-                                            field="stateName" (onClear)="onClearState()"
-                                                ></p-autoComplete>
-                                            <label for="selectedPresentState">State</label>
+                                            <p-dropdown id="selectedState" 
+                                                    formControlName="selectedcommunicationStateList"
+                                                    [options]="StateList"
+                                                    optionLabel="stateName"
+                                                    [autoDisplayFirst]="false"
+                                                    [showClear]="true" [filter]="true" pKeyFilter="alpha">
+                                            </p-dropdown>
+                                            <label for="selectedState">State</label>
                                         </span>
                                     </div>
+                                    
+                                    <div class="field col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                                <p-dropdown id="selectedCountry" 
+                                                    formControlName="selectedcommunicationCountryList"
+                                                    [options]="CoutryList"
+                                                    optionLabel="countryName"
+                                                    [autoDisplayFirst]="false"
+                                                    [showClear]="true" [filter]="true" pKeyFilter="alpha">
+                                                </p-dropdown>
+                                            <label for="selectedCountry">Country</label>
+                                        </span>
+                                    </div>
+
 
                                     <div class="field col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete id="selectedPresentCountry" [minLength]="0" formControlName="selectedPresentCountry"
-                                            [suggestions]="filteredCoutryList" (completeMethod)="filterCountry($event)"
-                                                [dropdown]="true" [forceSelection]="true" [showClear]="true" field="countryName">
-                                            </p-autoComplete>
-                                            <label for="selectedPresentCountry">Country</label>
-                                        </span>
-                                    </div>
-
-
-                                    <div class="col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <input id="presentPIN" pInputText="presentPIN" style="width: 100%;">
+                                            <p-inputMask id="presentPIN" mask="999999" class="my-input" ></p-inputMask>
                                             <label for="presentPIN">PIN</label>
                                         </span>
                                     </div>
@@ -476,7 +529,6 @@
 
                                 <div class="grid formgrid py-3">
 
-
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
                                             <input id="fatherName" pInputText style="width: 100%;">
@@ -487,10 +539,13 @@
 
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input pInputText id="fatherEducationQualification" style="width: 100%;">
+                                            <input id="fatherEducationQualification" pInputText style="width: 100%;">
                                             <label for="fatherEducationQualification">Education Qualification</label>
                                         </span>
                                     </div>
+
+
+                       
 
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
@@ -547,14 +602,14 @@
 
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input pInputText id="fatherEmail" style="width: 100%;">
+                                            <input pInputText id="fatherEmail" style="width: 100%;" required>
                                             <label for="fatherEmail">E-Mail</label>
                                         </span>
                                     </div>
 
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input pInputText id="fatherAadhaarNumber" style="width: 100%;">
+                                            <p-inputMask id="fatherAadhaarNumber" mask="9999 9999 9999" ></p-inputMask>
                                             <label for="fatherAadhaarNumber">Aadhaar Number</label>
                                         </span>
                                     </div>
@@ -583,12 +638,16 @@
                                     </div>
 
 
+
+
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input pInputText id="motherEducationQualification" style="width: 100%;">
+                                            <input id="motherEducationQualification" pInputText style="width: 100%;">
                                             <label for="motherEducationQualification">Education Qualification</label>
                                         </span>
                                     </div>
+
+
 
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
@@ -652,10 +711,11 @@
 
                                     <div class="col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input pInputText id="motherAadhaarNumber" style="width: 100%;">
+                                            <p-inputMask id="motherAadhaarNumber" mask="9999 9999 9999" ></p-inputMask>
                                             <label for="motherAadhaarNumber">Aadhaar Number</label>
                                         </span>
                                     </div>
+
 
 
                                     <div class="col-12 md:col-2 mb-3">
@@ -679,13 +739,16 @@
                                         </span>
                                     </div>
 
+         
 
                                     <div class="col-12 md:col-3 mb-3">
                                         <span class="p-float-label">
-                                            <input pInputText id="guardianEducationQualification" style="width: 100%;">
+                                            <input id="guardianEducationQualification" pInputText style="width: 100%;">
                                             <label for="guardianEducationQualification">Education Qualification</label>
                                         </span>
                                     </div>
+
+
 
 
                                     <div class="col-12 md:col-3 mb-3">
@@ -750,12 +813,12 @@
 
                                     <div class="col-12 md:col-3 mb-3">
                                         <span class="p-float-label">
-                                            <input pInputText id="guardianAadhaarNumber" style="width: 100%;">
+                                            <p-inputMask id="guardianAadhaarNumber" mask="9999 9999 9999" ></p-inputMask>
                                             <label for="guardianAadhaarNumber">Aadhaar Number</label>
                                         </span>
                                     </div>
 
-                                    <div class="col-12 md:col-1 mb-3">
+                                    <div class="col-12 md:col-3 mb-3">
                                         <p-fileUpload mode="basic"  name="demo[]"
                                             accept="image/*"  chooseLabel="Upload " pTooltip="Upload Guardian's Picture"></p-fileUpload>
                                     </div>
@@ -768,59 +831,70 @@
 
                             <div class="col-12">
                                 <div class="card px-6 py-6">
-                                    <p-table>
+                                     
+                                    <p-table #dt [value]="sibsiblingslist" [columns]="cols" resposiveLayout="scroll" [rows]="10" 
+                                    [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+                                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowHover]="true" dataKey="id">
                                         <ng-template pTemplate="header">
                                             <tr>
                                                 <th style="width:10% !important" class="text-center">
                                                     <button pButton pRipple icon="pi pi-plus"
-                                                        class="p-button-rounded p-button-success mr-2"></button>
+                                                        class="p-button-rounded p-button-success mr-2" (click)="AddSiblingRows()"></button>
                                                 </th>
-                                                <th style="width: 3rem">
-                                                    S.No
-                                                </th>
-                                                <th pSortableColumn="name">Name<p-sortIcon
-                                                        field="applicationName"></p-sortIcon></th>
-                                                <th>Brother / Sister</th>
-                                                <th>Age Grade</th>
-                                                <th>School Studying In</th>
+                                                <!-- <th style="width:10% !important" class="text-center"> Edit </th> -->
+                                                <th style="width:10% !important" class="text-center"> S.No </th>
+                                                <th style="width:10% !important" class="text-center">Name</th>
+                                                <th style="width:10% !important" class="text-center">Brother / Sister</th>
+                                                <th style="width:10% !important" class="text-center">Age Grade</th>
+                                                <th style="width:10% !important" class="text-center">School Studying In</th>
                                             </tr>
                                         </ng-template>
 
-                                        <ng-template pTemplate="body" let-item>
+                                        <ng-template pTemplate="body" let-item let-i="rowIndex">
                                             <tr>
-                                                <td style="width:5%; min-width:10rem;">
-                                                    {{item.Name}}
+                                
+                                                <td style="width:10% !important" class="text-center">
+                                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                                        (click)="RemoveRows(item,i)"></button>
                                                 </td>
-
-                                                <td style="width:30%; min-width:10rem;">
-                                                    <span class="p-column-title">Name</span>
-                                                    {{item.brotherSister}}
+<!--                                 
+                                                <td style="width:10% !important" class="text-center">
+                                                    <section>
+                                                        <label class="checkbox">
+                                                            <p-checkbox name="chkEdit" id="chkEdit" [(ngModel)]="item.edit" [binary]="true" inputId="binary"></p-checkbox>
+                                                            <i></i>
+                                                        </label>
+                                                    </section>
+                                                </td> -->
+                                
+                                                <td style="width:5% !important" class="text-center">{{i+1}}</td>
+                                
+                                                <td style="width:15% !important">
+                                                    <input pInputText type="text"   id="txtmiscDtlName"
+                                                     name="txtmiscDtlName" [(ngModel)]="item.miscDtlName" style="width: 100% !important;" [ngModelOptions]="{standalone: true}">
                                                 </td>
-
-                                                <td style="width:30%; min-width:10rem;">
-                                                    <span class="p-column-title">Name</span>
-                                                    {{item.ageGrade}}
+                                
+                                                <td style="width:15% !important" class="text-center">
+                                                    <input pInputText type="text"   id="txtmiscDtlDesc"
+                                                     name="txtmiscDtlDesc" [(ngModel)]="item.miscDtlDesc" style="width: 100% !important;" [ngModelOptions]="{standalone: true}">
                                                 </td>
-
-                                                <td style="width:30%; min-width:10rem;">
-                                                    <span class="p-column-title">Name</span>
-                                                    {{item.schoolStudyingIn}}
+                                                <td style="width:15% !important">
+                                                    <input pInputText type="text"    id="txtmiscDtlName"
+                                                     name="txtmiscDtlName" [(ngModel)]="item.miscDtlName" style="width: 100% !important;" [ngModelOptions]="{standalone: true}">
                                                 </td>
-
-                                                <td style="width:15%; min-width:10rem;">
-                                                    <div class="flex">
-                                                        <button pButton pRipple icon="pi pi-pencil"
-                                                            class="p-button-rounded p-button-success mr-2"
-                                                            (click)="Edit()"></button>
-
-                                                        <button pButton pRipple icon="pi pi-trash"
-                                                            class="p-button-rounded p-button-warning"
-                                                            (click)="Delete()"></button>
-                                                    </div>
+                                
+                                                <td style="width:15% !important" class="text-center">
+                                                    <input pInputText type="text"   id="txtmiscDtlDesc"
+                                                     name="txtmiscDtlDesc" [(ngModel)]="item.miscDtlDesc" style="width: 100% !important;" [ngModelOptions]="{standalone: true}">
                                                 </td>
-
+                                                
                                             </tr>
                                         </ng-template>
+
+
+
+
+
 
                                     </p-table>
                                 </div>
@@ -846,23 +920,36 @@
 
                             <div class="col-12  btm">
                                 <div class="grid formgrid py-3">
-                                    <div class="field col-12 md:col-6 mb-3">
-                                        <span class="p-float-label">
-                                            <p-autoComplete id="selectedPresentCountry" [minLength]="0"
-                                                [dropdown]="true" [forceSelection]="true" [showClear]="true">
-                                            </p-autoComplete>
-                                            <label for="siblingChildIsLivingWith">child is living with</label>
-                                        </span>
-                                    </div>
+
 
                                     <div class="field col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete id="selectedPresentCountry" [minLength]="0"
-                                                [dropdown]="true" [forceSelection]="true" [showClear]="true">
-                                            </p-autoComplete>
+                                            <p-dropdown id="ChildIsLivingWith" 
+                                            formControlName="selectedChildIsLivingWith"
+                                            [options]="childIsLivingWithList" 
+                                            optionLabel="childIsLivingWithName" 
+                                            [autoDisplayFirst]="false"
+                                            [showClear]="true"
+                                            [filter]="true">
+                                          </p-dropdown>
+                                            <label for="ChildIsLivingWith">Child Is Living With</label>
+                                        </span>
+                                    </div>
+                                
+                                    <div class="field col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <p-dropdown id="siblingTransportation" 
+                                            formControlName="selectedTransportation"
+                                            [options]="transportationList" 
+                                            optionLabel="transportationName" 
+                                            [autoDisplayFirst]="false"
+                                            [showClear]="true"
+                                            [filter]="true">
+                                          </p-dropdown>
                                             <label for="siblingTransportation">Transportation</label>
                                         </span>
                                     </div>
+
 
 
                                     <div class="col-12 md:col-12 mb-3">
@@ -881,8 +968,7 @@
                             </div>
 
                             <div class="col-12">
-                                <button pButton pRipple class="w-full mt-5" type="button" label="CONTINUE"
-                                    (click)="clickNext('tier')"></button>
+                                <button pButton pRipple class="w-full mt-5" type="button" label="CONTINUE"></button>
                             </div>
                         </div>
                     </div>
@@ -901,24 +987,48 @@
                             <div class="col-12 btm">
                                 <h1 class="text-sm m-0 text-color-secondary">DETAILS OF PREVIOUS SCHOOL</h1>
                                 <div class="grid formgrid py-3">
-                                    <div class="col-12 md:col-4 mb-3">
+
+
+                                    <div class=" col-12 md:col-4 mb-3">
                                         <span class="p-float-label">
-                                            <input id="classStudying" style="width: 100%;" pInputText>
+                                            <p-dropdown id="classStudying" 
+                                            formControlName="selectedStudied"
+                                            [options]="studiedList" 
+                                            optionLabel="className"
+                                            [autoDisplayFirst]="false"
+                                            [showClear]="true"
+                                            [filter]="true">
+                                          </p-dropdown>
                                             <label for="classStudying">Class Studying/Studied</label>
                                         </span>
                                     </div>
 
-                                    <div class="col-12 md:col-4 mb-3">
+
+                              
+                                    <div class=" col-12 md:col-4 mb-3">
                                         <span class="p-float-label">
-                                            <input id="mediumOfInstruction" style="width: 100%;" pInputText>
+                                            <p-dropdown id="mediumOfInstruction" 
+                                            formControlName="selectedMediumOfInstruction"
+                                            [options]="MediumOfInstructionList" 
+                                            optionLabel="instruction" 
+                                            [autoDisplayFirst]="false"
+                                            [showClear]="true"
+                                            [filter]="true">
+                                          </p-dropdown>
                                             <label for="mediumOfInstruction">Medium of Instruction</label>
                                         </span>
                                     </div>
 
-                                    <div class="field col-12 md:col-4 mb-3">
+                                    <div class=" col-12 md:col-4 mb-3">
                                         <span class="p-float-label">
-                                            <p-autoComplete id="boardAffiliatedTo" [minLength]="0" [dropdown]="true"
-                                                [forceSelection]="true" [showClear]="true"></p-autoComplete>
+                                            <p-dropdown id="boardAffiliatedTo" 
+                                            formControlName="selectedBoard"
+                                            [options]="boardAffiliatedList" 
+                                            optionLabel="boardName" 
+                                            [autoDisplayFirst]="false"
+                                            [showClear]="true"
+                                            [filter]="true">
+                                          </p-dropdown>
                                             <label for="boardAffiliatedTo">Board Affiliated to</label>
                                         </span>
                                     </div>
@@ -951,13 +1061,13 @@
                                         </span>
                                     </div>
 
-
                                     <div class="field col-12 md:col-6 mb-3">
                                         <span class="p-float-label">
-                                            <input id="dateOfIssue" style="width: 100%;" pInputText>
-                                            <label for="dateOfIssue">Date Of Issue</label>
+                                                <p-calendar id="dateOfIssue"></p-calendar>
+                                                <label for="dateOfIssue">Date Of Issue</label>    
                                         </span>
                                     </div>
+                                    
                                 </div>
                             </div>
 
@@ -1079,7 +1189,18 @@
                                     <div class="p-col-12 p-md-6 mb-3">
                                         <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]" accept="image/*" pTooltip=""></p-fileUpload>
                                     </div>
-                                </div>
+
+                                    <!-- <h1>PARENT'S DECLARATION</h1>
+                                   <p>
+                                    I hereby declare that the above information including the Name of the Candidate,
+                                    Father's/Guardian's Name, Mother's name and Date of Birth furnished by me is correct to the best of my knowledge & belief.
+                                    I promise to abide by the rules and regulations of the school. 
+                                    I understand that fees once paid is neither transferable nor refundable under any circumstances.
+                                    I authorise the school authorities to administer first aid and take the child to the nearest hospital in case of any accidents or emergencies.
+                                    I agree to our child's photograph appearing in any of the School's Brochures or Publications.
+                                    </p>  -->
+
+                                     </div>
 
                         
 
@@ -1229,7 +1350,7 @@
                             <div class="lg:col-8 col-12 py-8 px-4">
                                 <div class="grid col w-full">
                                     <div class=" col-1 lg:col-1 md:col-1" style="line-height: 2em">
-                                        <p-radioButton name="group1" value="Credit" [(ngModel)]="radioButton1"
+                                        <p-radioButton name="group1" value="Credit" 
                                             inputId="credit">
                                         </p-radioButton>
                                     </div>
@@ -1244,7 +1365,7 @@
                                         </div>
                                     </div>
                                     <div class="col-1 lg:col-1 md:col-1" style="line-height: 2em">
-                                        <p-radioButton name="group1" value="Paypal" [(ngModel)]="radioButton1"
+                                        <p-radioButton name="group1" value="Paypal"
                                             inputId="paypal">
                                         </p-radioButton>
                                     </div>
@@ -1284,7 +1405,7 @@
                                     </div>
                                 </div>
                                 <div class="m-3">
-                                    <p-checkbox [(ngModel)]="checked" [binary]="true" labelStyleClass="ml-2 text-base"
+                                    <p-checkbox  [binary]="true" labelStyleClass="ml-2 text-base"
                                         label="Save credit card information for future usage"></p-checkbox>
                                 </div>
                             </div>

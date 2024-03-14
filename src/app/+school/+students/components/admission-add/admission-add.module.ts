@@ -18,6 +18,10 @@ import { TableModule } from 'primeng/table';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
+import { InputMaskModule } from 'primeng/inputmask';
+import { UtilService } from 'src/app/shared/util.service';
+import { MessageService } from 'primeng/api';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 
 @NgModule({
@@ -25,12 +29,11 @@ import { TooltipModule } from 'primeng/tooltip';
     AdmissionAddComponent
   ],
   imports: [
+    FormsModule,
     CommonModule,
     AdmissionAddRoutingModule,
     ReactiveFormsModule,
-
     ButtonModule,
-    FormsModule,
     DropdownModule,
     CalendarModule,
     RadioButtonModule,
@@ -43,7 +46,13 @@ import { TooltipModule } from 'primeng/tooltip';
     TableModule,
     FileUploadModule,
     DialogModule,
-    TooltipModule
+    TooltipModule,
+    InputMaskModule,
+    KeyFilterModule
+  ],
+  providers:[
+    UtilService,
+    MessageService
   ]
 })
 export class AdmissionAddModule { }
