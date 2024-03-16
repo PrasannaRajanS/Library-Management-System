@@ -34,21 +34,17 @@
                         <div class="grid p-fluid">
                             <div class="col-12 md:col-6">
                                 <div class="flex flex-column align-items-center  surface-border p-6">
-                                    <img src="assets/demo/images/avatar/circle/avatar-f-1@2x.png"
-                                        class="w-10rem h-10rem border-circle shadow-4" alt="Asiya Javayant">
+                                    <img [src]="selectedStudentImageURL" pTooltip="Click Here Replace Photo"
+                                        tooltipPosition="right" class="w-10rem h-10rem border-circle shadow-4"
+                                        alt="Asiya Javayant" (click)="FileInput.click()">
                                 </div>
+                                <input type="file" id="avatar" (change)="getSelectedFile($event)" accept='image/*'
+                                    style="display:none" #FileInput />
                                 <div class="card">
 
                                     <h5>Official Info</h5>
 
                                     <div class="grid formgrid">
-
-                                        <div class="col-12 md:col-6 mb-3">
-                                            <span class="p-float-label">
-                                                <input id="RollNo" pInputText formControlName="rollNo">
-                                                <label for="RollNo">Roll No</label>
-                                            </span>
-                                        </div>
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
@@ -59,10 +55,83 @@
 
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="EwsNo" pInputText formControlName="ewsNo">
-                                                <label for="EwsNo">Ews No</label>
+                                                <input id="txtRegistrationNo" pInputText formControlName="rollNo">
+                                                <label for="txtRegistrationNo">Registration No</label>
                                             </span>
                                         </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="txtRollNo" pInputText formControlName="rollNo">
+                                                <label for="txtRollNo">Roll No</label>
+                                            </span>
+                                        </div>
+
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="txtEWISNo" pInputText formControlName="ewsNo">
+                                                <label for="txtEWISNo">EWIS No</label>
+                                            </span>
+                                        </div>
+
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-calendar id="calAcademicYear" view="year" dateFormat="yy"
+                                                    [showIcon]="true" selectionMode="range"></p-calendar>
+                                                <label for="calAcademicYear">Academic Year</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-calendar id="calAdmission Date" [showIcon]="true"
+                                                    [showButtonBar]="true"></p-calendar>
+                                                <label for="calAdmission Date">Admission Date</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-dropdown id="ddlDepartment" [autoDisplayFirst]="false"
+                                                    [showClear]="true">
+                                                </p-dropdown>
+                                                <label for="ddlDepartment">Department</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-dropdown id="ddlShift" [autoDisplayFirst]="false" [showClear]="true">
+                                                </p-dropdown>
+                                                <label for="ddlShift">Shift</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-dropdown id="ddlClass" [autoDisplayFirst]="false" [showClear]="true">
+                                                </p-dropdown>
+                                                <label for="ddlClass">Class</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-dropdown id="ddlSection" [autoDisplayFirst]="false"
+                                                    [showClear]="true">
+                                                </p-dropdown>
+                                                <label for="ddlSection">Section</label>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <h5>Personal Info</h5>
+
+                                    <div class="grid formgrid">
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
@@ -78,10 +147,121 @@
                                             </span>
                                         </div>
 
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-dropdown id="ddlGender" [autoDisplayFirst]="false" [showClear]="true"
+                                                    [options]="genderList" optionLabel="genderName"
+                                                    formControlName="selectedGender">
+                                                </p-dropdown>
+                                                <label for="ddlGender">Gender</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-dropdown id="ddlBloodGroup" [autoDisplayFirst]="false"
+                                                    formControlName="selectedBloodGroup" [options]="bloodGroupList"
+                                                    optionLabel="bloodGroupName" [showClear]="true">
+                                                </p-dropdown>
+                                                <label for="ddlBloodGroup">Blood Group</label>
+                                            </span>
+                                        </div>
+
                                         <div class="col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="gender" pInputText formControlName="gender">
-                                                <label for="gender">Gender</label>
+                                                <p-inputNumber inputId="txtHeight" suffix=" cm"> </p-inputNumber>
+                                                <label for="txtHeight">Height</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-inputNumber inputId="txtWeight" suffix=" kg"> </p-inputNumber>
+                                                <label for="txtWeight">Weight</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="txtBirthPlace" pInputText formControlName="age">
+                                                <label for="txtBirthPlace">Birth Place</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-dropdown id="ddlDifferentlyAbled" [autoDisplayFirst]="false"
+                                                    [showClear]="true">
+                                                </p-dropdown>
+                                                <label for="ddlDifferentlyAbled">Differently Abled</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-dropdown id="ddlCitizionship" [autoDisplayFirst]="false"
+                                                    [showClear]="true">
+                                                </p-dropdown>
+                                                <label for="ddlCitizionship">Citizionship</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-dropdown id="ddlMotherTongue" [autoDisplayFirst]="false"
+                                                    [showClear]="true">
+                                                </p-dropdown>
+                                                <label for="ddlMotherTongue">Mother Tongue</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-dropdown id="ddlSibling" [autoDisplayFirst]="false"
+                                                    [showClear]="true">
+                                                </p-dropdown>
+                                                <label for="ddlSibling">Sibling</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-dropdown id="ddlReligion" [autoDisplayFirst]="false"
+                                                    [showClear]="true">
+                                                </p-dropdown>
+                                                <label for="ddlReligion">Religion</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-dropdown id="ddlCasete" [autoDisplayFirst]="false"
+                                                    [showClear]="true">
+                                                </p-dropdown>
+                                                <label for="ddlCasete">Casete</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <p-dropdown id="ddlSubCasete" [autoDisplayFirst]="false"
+                                                    [showClear]="true">
+                                                </p-dropdown>
+                                                <label for="ddlSubCasete">Sub Casete</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="txtEmail" pInputText formControlName="age">
+                                                <label for="txtEmail">Email</label>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-12 md:col-6 mb-3">
+                                            <span class="p-float-label">
+                                                <input id="txtAlternateEmail" pInputText formControlName="age">
+                                                <label for="txtAlternateEmail">Alternate Email</label>
                                             </span>
                                         </div>
 
@@ -98,6 +278,7 @@
                                                 <label for="age">Age</label>
                                             </span>
                                         </div>
+
                                     </div>
 
                                     <h5>Present Address</h5>
@@ -138,27 +319,23 @@
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-autoComplete id="selectedPresentState"
-                                                    formControlName="selectedPresentState"
-                                                    [suggestions]="filteredStateList"
-                                                    (completeMethod)="filterState($event)" [minLength]="0"
-                                                    [dropdown]="true" [forceSelection]="true"
-                                                    (onSelect)="onSelectState()" field="stateName" [showClear]="true"
-                                                    (onClear)="onClearState()"></p-autoComplete>
-                                                <label for="selectedPresentState">State</label>
+                                                <p-dropdown id="ddlselectedPresentState" [autoDisplayFirst]="false"
+                                                    formControlName="selectedPresentState" [showClear]="true"
+                                                    [filter]="true" pKeyFilter="alpha" [options]="PresentStateList"
+                                                    optionLabel="stateName" (onChange)="onChangeforState($event)">
+                                                </p-dropdown>
+                                                <label for="ddlselectedPresentState">State</label>
                                             </span>
                                         </div>
 
                                         <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <p-autoComplete id="selectedPresentCountry"
-                                                    formControlName="selectedPresentCountry"
-                                                    [suggestions]="filteredCoutryList"
-                                                    (completeMethod)="filterCountry($event)" [minLength]="0"
-                                                    [dropdown]="true" [forceSelection]="true" field="countryName"
-                                                    [showClear]="true"></p-autoComplete>
-
-                                                <label for="selectedPresentCountry">Country</label>
+                                                <p-dropdown id="ddlselectedPresentCountry" [autoDisplayFirst]="false"
+                                                    [showClear]="true" [filter]="true" pKeyFilter="alpha"
+                                                    formControlName="selectedPresentCountry" [options]="PresentCoutryList" 
+                                                    optionLabel="countryName" >
+                                                </p-dropdown>
+                                                <label for="ddlselectedPresentCountry">Country</label>
                                             </span>
                                         </div>
 
@@ -211,18 +388,25 @@
                                             </span>
                                         </div>
 
-                                        <div class="col-12 md:col-6 mb-3">
+                                        <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="permanentState" pInputText formControlName="permanentState">
-                                                <label for="permanentState">State</label>
+                                                <p-dropdown id="ddlselectedpermanentState" [autoDisplayFirst]="false"
+                                                    [options]="PermanentStateList" optionLabel="stateName"
+                                                    [showClear]="true" [filter]="true" pKeyFilter="alpha"
+                                                    formControlName="selectedpermanentState" (onChange)="onChangeforPermanantState($event)">
+                                                </p-dropdown>
+                                                <label for="ddlselectedpermanentState">State</label>
                                             </span>
                                         </div>
 
-                                        <div class="col-12 md:col-6 mb-3">
+                                        <div class="field col-12 md:col-6 mb-3">
                                             <span class="p-float-label">
-                                                <input id="permanentCountry" pInputText
-                                                    formControlName="permanentCountry">
-                                                <label for="permanentCountry">Country</label>
+                                                <p-dropdown id="ddlselectedpermanentCountry" [autoDisplayFirst]="false"
+                                                    [showClear]="true" [filter]="true" pKeyFilter="alpha"
+                                                    [options]="PermanentCoutryList" optionLabel="countryName"
+                                                    formControlName="selectedpermanentCountry">
+                                                </p-dropdown>
+                                                <label for="ddlselectedpermanentCountry">Country</label>
                                             </span>
                                         </div>
 
@@ -247,15 +431,18 @@
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
                                                 <input id="contactPerson1" pInputText formControlName="contactPerson1">
-                                                <label for="contactPerson1">Contact Person 1<span class="mandatory">*</span></label>
+                                                <label for="contactPerson1">Contact Person 1<span
+                                                        class="mandatory">*</span></label>
                                             </span>
-                                            <small id="contactPerson1-help">{{ formError("contactPerson1",StudentForm)}}</small>
+                                            <small id="contactPerson1-help">{{
+                                                formError("contactPerson1",StudentForm)}}</small>
                                         </div>
 
                                         <div class="col-12 md:col-6 mb-3 field">
                                             <span class="p-float-label">
                                                 <input id="mobileNo1" pInputText formControlName="mobileNo1">
-                                                <label for="mobileNo1">Mobile No 1<span class="mandatory">*</span></label>
+                                                <label for="mobileNo1">Mobile No 1<span
+                                                        class="mandatory">*</span></label>
                                             </span>
                                             <small id="mobileNo1-help">{{ formError("mobileNo1",StudentForm)}}</small>
                                         </div>
@@ -274,26 +461,20 @@
                                             </span>
                                         </div>
 
-                                        <div class="col-12 md:col-6 mb-3">
-                                            <span class="p-float-label">
-                                                <p-autoComplete id="mainPageName"
-                                                    (completeMethod)="filterMagePage($event)" [minLength]="0"
-                                                    [dropdown]="true" [forceSelection]="true" field="mainPageName"
-                                                    formControlName="bloodGroup"></p-autoComplete>
-                                                <label for="mainPageName">Blood Group</label>
-                                            </span>
-                                        </div>
-
                                     </div>
 
 
                                     <div class="card">
                                         <h5>Unique Number Info</h5>
                                         <div class="grid formgrid">
-                                            <div class="col-12 md:col-6 mb-3 field">
+
+                                            <div class="field col-12 md:col-6 mb-3">
                                                 <span class="p-float-label">
-                                                    <input id="nationality" pInputText formControlName="nationality">
-                                                    <label for="nationality">Nationality<span class="mandatory">*</span></label>
+                                                    <p-dropdown id="ddlNationality" [autoDisplayFirst]="false"
+                                                        [showClear]="true" formControlName="nationality">
+                                                    </p-dropdown>
+                                                    <label for="ddlNationality">Nationality<span
+                                                            class="mandatory">*</span></label>
                                                 </span>
                                                 <small id="nationality-help">{{
                                                     formError("nationality",StudentForm)}}</small>
@@ -302,53 +483,31 @@
                                             <div class="col-12 md:col-6 mb-3 field">
                                                 <span class="p-float-label">
                                                     <input id="community" pInputText formControlName="community">
-                                                    <label for="community">Community<span class="mandatory">*</span></label>
+                                                    <label for="community">Community<span
+                                                            class="mandatory">*</span></label>
                                                 </span>
                                                 <small id="community-help">{{
                                                     formError("community",StudentForm)}}</small>
 
                                             </div>
 
-
-                                            <div class="col-12 md:col-6 mb-3 field">
-                                                <span class="p-float-label">
-                                                    <input id="PANNo" pInputText formControlName="panNo">
-                                                    <label for="PANNo">PAN No<span class="mandatory">*</span></label>
-                                                </span>
-                                                <small id="PANNo-help">{{ formError("panNo",StudentForm)}}</small>
-
-                                            </div>
-
                                             <div class="col-12 md:col-6 mb-3 field">
                                                 <span class="p-float-label">
                                                     <input id="aadhaarNo" pInputText formControlName="aadhaarNo">
-                                                    <label for="aadhaarNo">Aadhaar No<span class="mandatory">*</span></label>
+                                                    <label for="aadhaarNo">Aadhaar No<span
+                                                            class="mandatory">*</span></label>
                                                 </span>
                                                 <small id="aadhaarNo-help">{{
                                                     formError("aadhaarNo",StudentForm)}}</small>
-
                                             </div>
+
                                             <div class="col-12 md:col-6 mb-3">
                                                 <span class="p-float-label">
-                                                    <input id="UANNo" pInputText formControlName="uanNo">
-                                                    <label for="UANNo">UAN No</label>
+                                                    <input id="txtPANNo" pInputText formControlName="age">
+                                                    <label for="txtPANNo">PAN No</label>
                                                 </span>
-
                                             </div>
-                                            <div class="col-12 md:col-6 mb-3">
-                                                <span class="p-float-label">
-                                                    <input id="ESINo" pInputText formControlName="esiNo">
-                                                    <label for="ESINo">ESI No</label>
-                                                </span>
 
-                                            </div>
-                                            <div class="col-12 md:col-6 mb-3">
-                                                <span class="p-float-label">
-                                                    <input id="EPFNo" pInputText formControlName="epfNo">
-                                                    <label for="EPFNo">EPF No</label>
-                                                </span>
-
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -357,31 +516,981 @@
 
                     </p-tabPanel>
 
-                    <p-tabPanel header="Education" class="line-height-3 m-0">
-
-                    </p-tabPanel>
-
-                    <p-tabPanel header="Work" class="line-height-3 m-0">
-
-                    </p-tabPanel>
-
                     <p-tabPanel header="Family" class="line-height-3 m-0">
 
+                        <div class="grid h-full w-full ">
+
+                            <div class="col-12  lg:col-6 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">FATHER</h1>
+                                <!-- father -->
+                                <div class="grid formgrid py-3">
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="FatherName" pInputText style="width: 100%;"
+                                                formControlName="fatherName">
+                                            <label for="FatherName">Name<span class="mandatory">*</span></label>
+                                        </span>
+                                        <small id="FatherName">{{
+                                            formError("fatherName",StudentForm)}}</small>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="FatherEducationQualification" style="width: 100%;"
+                                                formControlName="fatherEducationQualification">
+                                            <label for="FatherEducationQualification">Education Qualification</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="FatherOccupation" pInputText style="width: 100%;"
+                                                formControlName="fatherOccupation">
+                                            <label for="FatherOccupation">Occupation</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="FatherDesignation" style="width: 100%;"
+                                                formControlName="fatherDesignation">
+                                            <label for="FatherDesignation">Designation</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="FatherOrganizationInstitution" style="width: 100%;"
+                                                formControlName="fatherOrganizationInstitution">
+                                            <label for="FatherOrganizationInstitution">Organization /
+                                                Institution</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="FatherOfficeAddress" style="width: 100%;"
+                                                formControlName="fatherOfficeAddress">
+                                            <label for="FatherOfficeAddress">Office Address</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="FatherResidentialAddress" style="width: 100%;"
+                                                formControlName="fatherResidentialAddress">
+                                            <label for="FatherResidentialAddress">Residential Address</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="FatherAnnualIncome" style="width: 100%;"
+                                                formControlName="fatherAnnualIncome">
+                                            <label for="FatherAnnualIncome">Annual Income</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="FatherMobileNo" style="width: 100%;"
+                                                formControlName="fatherMobileNumber">
+                                            <label for="FatherMobileNo">Mobile No.</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="FatherEmail" style="width: 100%;"
+                                                formControlName="fatherEmail">
+                                            <label for="FatherEmail">E-Mail</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="FatherAadhaarNumber" style="width: 100%;"
+                                                formControlName="fatherAadharNumber">
+                                            <label for="FatherAadhaarNumber">Aadhaar Number</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]"
+                                            accept="image/*"></p-fileUpload>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="col-12  lg:col-6 btm">
+                                <h1 class="text-sm m-0 text-color-secondary">MOTHER</h1>
+                                <!-- mother -->
+                                <div class="grid formgrid py-3">
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="MotherName" pInputText style="width: 100%;"
+                                                formControlName="motherName">
+                                            <label for="MotherName">Name<span class="mandatory">*</span></label>
+                                        </span>
+                                        <small id="FatherName">{{
+                                            formError("motherName",StudentForm)}}</small>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="MotherEducationQualification" style="width: 100%;"
+                                                formControlName="motherEducationQualification">
+                                            <label for="MotherEducationQualification">Education Qualification</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="MotherOccupation" pInputText style="width: 100%;"
+                                                formControlName="motherOccupation">
+                                            <label for="MotherOccupation">Occupation</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="MotherDesignation" style="width: 100%;"
+                                                formControlName="motherDesignation">
+                                            <label for="MotherDesignation">Designation</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="MotherOrganizationInstitution" style="width: 100%;"
+                                                formControlName="motherOrganizationInstitution">
+                                            <label for="MotherOrganizationInstitution">Organization /
+                                                Institution</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="MotherOfficeAddress" style="width: 100%;"
+                                                formControlName="motherOfficeAddress">
+                                            <label for="MotherOfficeAddress">Office Address</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="MotherResidentialAddress" style="width: 100%;"
+                                                formControlName="motherResidentialAddress">
+                                            <label for="MotherResidentialAddress">Residential Address</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="MotherAnnualIncome" style="width: 100%;"
+                                                formControlName="motherAnnualIncome">
+                                            <label for="MotherAnnualIncome">Annual Income</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="MotherMobileNo" style="width: 100%;"
+                                                formControlName="motherMobileNumber">
+                                            <label for="MotherMobileNo">Mobile No.</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="MotherEmail" style="width: 100%;"
+                                                formControlName="motherEmail">
+                                            <label for="MotherEmail">E-Mail</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="MotherAadhaarNumber" style="width: 100%;"
+                                                formControlName="motherAadharNumber">
+                                            <label for="MotherAadhaarNumber">Aadhaar Number</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-6 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]"
+                                            accept="image/*"></p-fileUpload>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12   btm">
+                                <h1 class="text-sm m-0 text-color-secondary">GUARDIAN</h1>
+                                <div class="grid formgrid py-3">
+
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="GuardianName" pInputText style="width: 100%;"
+                                                formControlName="guardianName">
+                                            <label for="GuardianName">Name<span class="mandatory">*</span></label>
+                                        </span>
+                                        <small id="GuardianName">{{
+                                            formError("guardianName",StudentForm)}}</small>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="GuardianEducationQualification" style="width: 100%;"
+                                                formControlName="guardianEducationQualification">
+                                            <label for="GuardianEducationQualification">Education Qualification</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input id="GuardianOccupation" pInputText style="width: 100%;"
+                                                formControlName="guardianOccupation">
+                                            <label for="GuardianOccupation">Occupation</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="GuardianDesignation" style="width: 100%;"
+                                                formControlName="guardianDesignation">
+                                            <label for="GuardianDesignation">Designation</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="GuardianOrganizationInstitution" style="width: 100%;"
+                                                formControlName="guardianOrganizationInstitution">
+                                            <label for="GuardianOrganizationInstitution">Organization /
+                                                Institution</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="GuardianOfficeAddress" style="width: 100%;"
+                                                formControlName="guardianOfficeAddress">
+                                            <label for="GuardianOfficeAddress">Office Address</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="GuardianResidentialAddress" style="width: 100%;"
+                                                formControlName="guardianResidentialAddress">
+                                            <label for="GuardianResidentialAddress">Residential Address</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="GuardianAnnualIncome" style="width: 100%;"
+                                                formControlName="guardianAnnualIncome">
+                                            <label for="GuardianAnnualIncome">Annual Income</label>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="GuardianMobileNo" style="width: 100%;"
+                                                formControlName="guardianMobileNumber">
+                                            <label for="GuardianMobileNo">Mobile No.</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="GuardianEmail" style="width: 100%;"
+                                                formControlName="guardianEmail">
+                                            <label for="GuardianEmail">E-Mail</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <span class="p-float-label">
+                                            <input pInputText id="GuardianAadhaarNumber" style="width: 100%;"
+                                                formControlName="guardianAadharNumber">
+                                            <label for="GuardianAadhaarNumber">Aadhaar Number</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 md:col-3 mb-3">
+                                        <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]"
+                                            accept="image/*"></p-fileUpload>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-12">
+                                <div class="card">
+
+                                    <p-table #dt [value]="filterSibilingsDetailList" [columns]="cols"
+                                        resposiveLayout="scroll" [rows]="10"
+                                        [globalFilterFields]="['miscDtlName','miscDtlDesc']" [rows]="10"
+                                        [paginator]="true" [rowsPerPageOptions]="[10,20,30]"
+                                        [showCurrentPageReport]="true"
+                                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                        [rowHover]="true" dataKey="id">
+                                        <ng-template pTemplate="caption">
+                                            <div
+                                                class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                                                <h4 class="m-0"> </h4>
+                                                <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                                    <i class="pi pi-search"></i>
+                                                    <input pInputText type="text" (input)="onGlobalFilter(dt, $event)"
+                                                        placeholder="Search..." class="w-full sm:w-auto" />
+                                                </span>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th style="width:10% !important" class="text-center">
+                                                    <button pButton pRipple icon="pi pi-plus"
+                                                        class="p-button-rounded p-button-success mr-2"
+                                                        (click)="SibilingsDetailAddRows()"></button>
+                                                </th>
+                                                <th style="width:10% !important" class="text-center">Edit</th>
+                                                <th style="width:5% !important" class="text-center">S.No</th>
+                                                <th style="width:20% !important" class="text-center">Brother /
+                                                    Sister<span class="mandatory">*</span>
+                                                </th>
+                                                <th style="width:10% !important" class="text-center">Age Grade</th>
+                                                <th style="width:25% !important" class="text-center">School Studying In
+                                                </th>
+
+                                            </tr>
+                                        </ng-template>
+
+                                        <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                            <tr>
+
+                                                <td style="width:10% !important" class="text-center">
+                                                    <button pButton pRipple icon="pi pi-trash"
+                                                        class="p-button-rounded p-button-warning"
+                                                        (click)="SibilingsDetailRemoveRows(item,i)"></button>
+                                                </td>
+
+                                                <td style="width:10% !important" class="text-center">
+                                                    <section>
+                                                        <label class="checkbox">
+                                                            <p-checkbox name="chkEdit" id="chkEdit"
+                                                                [(ngModel)]="item.edit" [binary]="true"
+                                                                inputId="binary"></p-checkbox>
+                                                            <i></i>
+                                                        </label>
+                                                    </section>
+                                                </td>
+
+                                                <td style="width:5% !important" class="text-center">{{i+1}}</td>
+
+                                                <td style="width:20% !important" class="text-center">
+                                                    <input pInputText type="text" [disabled]="!item.edit"
+                                                        id="txtbrotherSister" name="txtDescription"
+                                                        [(ngModel)]="item.brotherSister" style="width: 100% !important;"
+                                                        [ngModelOptions]="{standalone: true}">
+                                                </td>
+
+                                                <td style="width:10%; min-width:10rem;">
+                                                    <input pInputText type="text" [disabled]="!item.edit"
+                                                        id="txtageGrade" name="txtDescription"
+                                                        [(ngModel)]="item.ageGrade" style="width: 100% !important;"
+                                                        [ngModelOptions]="{standalone: true}">
+                                                </td>
+
+                                                <td style="width:25%; min-width:10rem;">
+                                                    <input pInputText type="text" [disabled]="!item.edit"
+                                                        id="txtschoolStudyingIn" name="txtDescription"
+                                                        [(ngModel)]="item.schoolStudyingIn"
+                                                        style="width: 100% !important;"
+                                                        [ngModelOptions]="{standalone: true}">
+                                                </td>
+
+                                            </tr>
+                                        </ng-template>
+
+                                    </p-table>
+                                </div>
+
+                            </div>
+                        </div>
                     </p-tabPanel>
 
-                    <p-tabPanel header="Asset" class="line-height-3 m-0">
+                    <p-tabPanel header="Fees" class="line-height-3 m-0">
+
+                        <div class="grid p-fluid m-3">
+
+                            <div class="grid formgrid">
+
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-dropdown id="ddlFeesCategory" [options]="FeesCategory" optionLabel="typeName"
+                                            [autoDisplayFirst]="false" formControlName="selectedFeesCategory"
+                                            [showClear]="true">
+                                        </p-dropdown>
+                                        <label for="ddlFeesCategory">Fees Category</label>
+                                    </span>
+                                </div>
+
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-inputNumber id="AmountDue" mode="currency" inputId="currency-india"
+                                            currency="INR" currencyDisplay="code" locale="en-IN"> </p-inputNumber>
+                                        <label for="AmountDue">Amount Due</label>
+                                    </span>
+                                </div>
+
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-inputNumber id="txtAmountPaid" mode="currency" inputId="currency-india"
+                                            currency="INR" currencyDisplay="code" locale="en-IN"> </p-inputNumber>
+                                        <label for="txtAmountPaid">Amount Paid</label>
+                                    </span>
+                                </div>
+
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-inputNumber id="txtFineAmount" mode="currency" inputId="currency-india"
+                                            currency="INR" currencyDisplay="code" locale="en-IN"> </p-inputNumber>
+                                        <label for="txtFineAmount">Fine Amount</label>
+                                    </span>
+                                </div>
+
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-calendar id="PaymentDate"></p-calendar>
+                                        <label for="PaymentDate">Payment Date</label>
+                                    </span>
+                                </div>
+
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-dropdown id="ddlPaymentMethod" [options]="PaymentMethod"
+                                            optionLabel="methodName" [autoDisplayFirst]="false"
+                                            formControlName="selectedPaymentMethod" [showClear]="true">
+                                        </p-dropdown>
+                                        <label for="ddlPaymentMethod">Payment Method</label>
+                                    </span>
+                                </div>
+
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtTransactionID" pInputText>
+                                        <label for="txtTransactionID">Transaction ID</label>
+                                    </span>
+                                </div>
+
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-dropdown id="ddlFeesStatus" [options]="FeesStatus" optionLabel="statusName"
+                                            [autoDisplayFirst]="false" formControlName="selectedFeesStatus"
+                                            [showClear]="true">
+                                        </p-dropdown>
+                                        <label for="ddlFeesStatus">Fees Status</label>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="grid">
+                            <div class="col-12">
+                                <div class="card px-6 py-6">
+                                    <p-table #dt [value]="items" [columns]="cols" responsiveLayout="scroll" [rows]="10"
+                                        [globalFilterFields]="['applicationName']" [rows]="10" [paginator]="true"
+                                        [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+                                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                        [rowHover]="true" dataKey="id">
+
+
+                                        <ng-template pTemplate="caption">
+                                            <div
+                                                class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                                                <!-- <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openEducationDialog()"></button> -->
+
+                                                <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                                    <i class="pi pi-search"></i>
+                                                    <input id="" pInputText (input)="onGlobalFilter(dt, $event)"
+                                                        placeholder="Search..." class="w-full sm:w-auto" />
+                                                </span>
+                                            </div>
+                                        </ng-template>
+
+
+
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th style="width: 3rem">
+                                                    Sl.No
+                                                </th>
+                                                <th>Fees Category</th>
+                                                <th>Amount Due</th>
+                                                <th>Amount Paid</th>
+                                                <th>Transaction ID</th>
+                                                <th>Fees Status</th>
+                                                <th>Payment Date</th>
+                                                <th>Payment Method</th>
+                                                <th>Fine Amount</th>
+                                            </tr>
+                                        </ng-template>
+
+
+                                    </p-table>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Examination" class="line-height-3 m-0">
 
                     </p-tabPanel>
 
-                    <p-tabPanel header="Benefit" class="line-height-3 m-0">
+                    <p-tabPanel header="Attendance" class="line-height-3 m-0">
+
+                        <div class="grid p-fluid m-3">
+
+                            <div class="grid formgrid">
+
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-inputNumber id="TotalPresent" inputId="percent" suffix="%"
+                                            formControlName="totalPresent"> </p-inputNumber>
+                                        <label for="TotalPresent">Total Present</label>
+                                    </span>
+
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-inputNumber id="TotalLate" inputId="percent" suffix="%"
+                                            formControlName="totalLate"> </p-inputNumber>
+                                        <label for="TotalLate">Total Late</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-inputNumber id="TotalAbsent" inputId="percent" suffix="%"
+                                            formControlName="totalAbsent"> </p-inputNumber>
+                                        <label for="TotalAbsent">Total Absent</label>
+                                    </span>
+
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-inputNumber id="TotalHalfDay" inputId="percent" suffix="%"
+                                            formControlName="totalHalfDay"> </p-inputNumber>
+                                        <label for="TotalHalfDay">Total Half Day</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-inputNumber id="TotalHoliday" inputId="percent" suffix="%"
+                                            formControlName="totalHoliday"> </p-inputNumber>
+                                        <label for="TotalHoliday">Total Holiday</label>
+                                    </span>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="grid">
+                            <div class="col-12">
+                                <div class="card px-6 py-6">
+                                    <p-table #dt [value]="items" [columns]="cols" responsiveLayout="scroll" [rows]="10"
+                                        [globalFilterFields]="['applicationName']" [rows]="10" [paginator]="true"
+                                        [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+                                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                        [rowHover]="true" dataKey="id">
+
+
+                                        <ng-template pTemplate="caption">
+                                            <div
+                                                class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                                                <!-- <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openEducationDialog()"></button> -->
+
+                                                <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                                    <i class="pi pi-search"></i>
+                                                    <input id="" pInputText (input)="onGlobalFilter(dt, $event)"
+                                                        placeholder="Search..." class="w-full sm:w-auto" />
+                                                </span>
+                                                <span class="block mt-2 md:mt-0 p-input-icon-right">
+                                                    <span style="margin-right: 3.5px;">Present : <span
+                                                            style="color: red;">P</span> </span>
+                                                    <span style="margin-right: 3.5px;">Late : <span
+                                                            style="color: red;">L</span> </span>
+                                                    <span style="margin-right: 3.5px;">Absent : <span
+                                                            style="color: red;">A</span> </span>
+                                                    <span style="margin-right: 3.5px;">Holiday : <span
+                                                            style="color: red;">H</span> </span>
+                                                    <span>Half Day : <span style="color: red;">F</span> </span>
+                                                </span>
+                                            </div>
+                                        </ng-template>
+
+
+
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th style="width: 3rem">
+                                                    Date
+                                                </th>
+                                                <th>June</th>
+                                                <th>July</th>
+                                                <th>August</th>
+                                                <th>September</th>
+                                                <th>October</th>
+                                                <th>November</th>
+                                                <th>December</th>
+                                                <th>January</th>
+                                                <th>February</th>
+                                                <th>March</th>
+                                                <th>April</th>
+                                                <th>May</th>
+                                            </tr>
+                                        </ng-template>
+
+
+                                    </p-table>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Documents" class="line-height-3 m-0">
+
+                        <div class="card">
+
+                            <p-table #dt [value]="filterSchoolDetailList" [columns]="cols" resposiveLayout="scroll"
+                                [rows]="10" [globalFilterFields]="['miscDtlName','miscDtlDesc']" [rows]="10"
+                                [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                [rowHover]="true" dataKey="id">
+                                <ng-template pTemplate="caption">
+                                    <div
+                                        class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                                        <h4 class="m-0"> </h4>
+                                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                            <i class="pi pi-search"></i>
+                                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)"
+                                                placeholder="Search..." class="w-full sm:w-auto" />
+                                        </span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="width:10% !important" class="text-center">
+                                            <button pButton pRipple icon="pi pi-plus"
+                                                class="p-button-rounded p-button-success mr-2"
+                                                (click)="SchoolDetailAddRows()"></button>
+                                        </th>
+                                        <th style="width:20% !important" class="text-center">Document Name<span
+                                                class="mandatory">*</span>
+                                        </th>
+                                        <th style="width:20% !important" class="text-center">Upload File</th>
+                                        <th style="width:20% !important" class="text-center">File Name</th>
+                                        <th style="width:10% !important" class="text-center">Remove</th>
+
+                                    </tr>
+                                </ng-template>
+
+                                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                    <tr>
+                                        <td style="width:5% !important" class="text-center">{{i+1}}</td>
+
+                                        <td style="width:20% !important" class="text-center">
+                                            <input pInputText type="text" id="txtName" name="txtDocumentName"
+                                                [(ngModel)]="item.miscDtlName" style="width: 100% !important;"
+                                                [ngModelOptions]="{standalone: true}">
+                                        </td>
+
+                                        <td style="width:20%; min-width:10rem;" class="text-center">
+                                            <p-fileUpload mode="basic" chooseLabel="Upload" name="demo[]"
+                                                accept="image/*" [(ngModel)]="item.miscDtUpload"
+                                                [ngModelOptions]="{standalone: true}"></p-fileUpload>
+                                        </td>
+
+                                        <td style="width:20% !important" class="text-center">
+                                            <input pInputText type="text" [disabled]="!item.miscDtlDesc"
+                                                id="txtbrotherSister" name="txtFileName" [(ngModel)]="item.miscDtlDesc"
+                                                style="width: 100% !important;" [ngModelOptions]="{standalone: true}">
+                                        </td>
+
+                                        <td style="width:10% !important" class="text-center">
+                                            <button pButton pRipple icon="pi pi-trash"
+                                                class="p-button-rounded p-button-warning"
+                                                (click)="SchoolDetailRemoveRows(item,i)"></button>
+                                        </td>
+
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                        </div>
+
+
 
                     </p-tabPanel>
 
-                    <p-tabPanel header="Exit Details" class="line-height-3 m-3">
+                    <p-tabPanel header="Timeline" class="line-height-3 m-3">
 
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Student Behaviour" class="line-height-3 m-3">
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Transport Details" class="line-height-3 m-3">
+
+                        <div class="grid p-fluid m-3">
+                            <div class="grid formgrid">
+
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-dropdown id="ddlModeofTransport" [options]="ModeofTransport"
+                                            optionLabel="modeName" [autoDisplayFirst]="false"
+                                            formControlName="selectedModeofTransport" [showClear]="true">
+                                        </p-dropdown>
+                                        <label for="ddlModeofTransport">Mode of Transport</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtRouteBusNumber" pInputText>
+                                        <label for="txtRouteBusNumber">Route/Bus Number</label>
+                                    </span>
+                                </div>
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtPickupPoint" pInputText>
+                                        <label for="txtPickupPoint">Pickup Point</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtDropoffPoint" pInputText>
+                                        <label for="txtDropoffPoint">Drop-off Point</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtEmergencyContact" pInputText>
+                                        <label for="txtEmergencyContact">Emergency Contact</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtSpecialInstructions" pInputText>
+                                        <label for="txtSpecialInstructions">Special Instructions</label>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Hostel Details" class="line-height-3 m-3">
+
+                        <div class="grid p-fluid m-3">
+                            <div class="grid formgrid">
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtHostelName" pInputText>
+                                        <label for="txtHostelName">Hostel Name</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtRoomNumber" pInputText>
+                                        <label for="txtRoomNumber">Room Number</label>
+                                    </span>
+                                </div>
+
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-calendar id="CheckinDate"></p-calendar>
+                                        <label for="CheckinDate">Check-in Date</label>
+                                    </span>
+                                </div>
+
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-calendar id="CheckoutDate"></p-calendar>
+                                        <label for="CheckoutDate">Check-out Date</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtWardenContact" pInputText>
+                                        <label for="txtWardenContact">Warden Contact</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtemergencyContact" pInputText>
+                                        <label for="txtemergencyContact">Emergency Contact</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtspecialInstructions" pInputText>
+                                        <label for="txtspecialInstructions">Special Instructions</label>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Miscellaneous Details" class="line-height-3 m-3">
+
+                        <div class="grid p-fluid m-3">
+
+                            <div class="grid formgrid">
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtBankAccountNumber" pInputText>
+                                        <label for="txtBankAccountNumber">Bank Account Number</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtBankName" pInputText>
+                                        <label for="txtBankName">Bank Name</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtIFSCCode" pInputText>
+                                        <label for="txtIFSCCode">IFSC Code</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtNationalIdentificationNumber" pInputText>
+                                        <label for="txtNationalIdentificationNumber">National Identification
+                                            Number</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtLocalIdentificationNumber" pInputText>
+                                        <label for="txtLocalIdentificationNumber">Local Identification Number</label>
+                                    </span>
+                                </div>
+
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <p-dropdown id="ddlRTE" [options]="RTE" optionLabel="label"
+                                            [autoDisplayFirst]="false" formControlName="selectedRTE" [showClear]="true">
+                                        </p-dropdown>
+                                        <label for="ddlRTE">RTE</label>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="grid formgrid">
+                                <h1 class="col-12 text-sm m-0 text-color-secondary mb-3">PREVIOUS SCHOOL DETAILS </h1>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="txtclassStudying" pInputText>
+                                        <label for="txtclassStudying">Class Studying/Studied</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="mediumOfInstruction" style="width: 100%;" pInputText>
+                                        <label for="mediumOfInstruction">Medium of Instruction</label>
+                                    </span>
+                                </div>
+
+                                <div class="field col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="boardAffiliatedTo" style="width: 100%;" pInputText>
+                                        <label for="boardAffiliatedTo">Board Affiliated to</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="nameOfTheschool" style="width: 100%;" pInputText>
+                                        <label for="nameOfTheschool">Name of the school</label>
+                                    </span>
+                                </div>
+
+                                <div class="col-12 md:col-3 mb-3">
+                                    <span class="p-float-label">
+                                        <input id="addressOfTheSchool" style="width: 100%;" pInputText>
+                                        <label for="addressOfTheSchool">Address of the School</label>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </p-tabPanel>
 
                 </p-tabView>
+
+                <p-toolbar styleClass="mb-4">
+                    <ng-template pTemplate="left">
+                        <div class="my-2">
+                        </div>
+                    </ng-template>
+
+                    <ng-template pTemplate="right">
+
+                        <button pButton pRipple icon="pi pi-save" class="p-button-success mr-2" (click)="Save()"
+                            [disabled]="!StudentForm.valid">{{buttonText}}</button>
+
+                        <button pButton pRipple label="List" icon="pi pi-align-justify" class="p-button-primary mr-2"
+                            (click)="RedirecttoList()"></button>
+
+                        <button pButton pRipple label="Clear" icon="pi pi-refresh" class="p-button-warning"
+                            (click)="Clear()"></button>
+
+                    </ng-template>
+
+                </p-toolbar>
 
             </div>
         </div>

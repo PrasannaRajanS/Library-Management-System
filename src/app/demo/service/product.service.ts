@@ -5,6 +5,7 @@ import { IInstitution } from 'src/app/+fiscal/services/interfaces/IInstitution';
 
 import { IOrganization } from 'src/app/+fiscal/services/interfaces/IOrganization';
 import { IPeriod } from 'src/app/+school/services/interfaces/IPeriod';
+import { IStudent } from 'src/app/+school/services/interfaces/IStudent';
 
 import { Product } from 'src/app/demo/api/product';
 import { IMisc } from 'src/app/shared/interface/IMisc';
@@ -86,6 +87,14 @@ export class ProductService {
             .toPromise()
             .then(res => res.data as IPeriod[])
             .then(data => data);
+    }
+
+    getAttendance(){
+        return this.http.get<any>('assets/demo/data/Student-Attendance.json')
+        
+        .toPromise()
+        .then(res => res.data as IStudent[])
+        .then(data => data);
     }
 
 }
