@@ -13,6 +13,13 @@ import { CalendarModule } from 'primeng/calendar';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { UtilService } from 'src/app/shared/util.service';
 import { MessageService } from 'primeng/api';
+import { TooltipModule } from 'primeng/tooltip';
+import { FileUploadModule } from 'primeng/fileupload';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { TableModule } from 'primeng/table';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -25,14 +32,21 @@ import { MessageService } from 'primeng/api';
     FormsModule,
     ReactiveFormsModule,
 
-    ToolbarModule,
+    InputTextModule,
     ButtonModule,
+    ToolbarModule,
     ToastModule,
     TabViewModule,
-    InputTextModule,
+    FileUploadModule,
+    InputNumberModule,
+    CheckboxModule,
+    DialogModule,
+    TooltipModule,
+    TableModule, 
 
     CalendarModule,
     AutoCompleteModule,
+    DropdownModule,
   ],
 
   providers: [ UtilService , MessageService ]
